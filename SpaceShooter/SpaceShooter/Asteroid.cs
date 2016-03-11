@@ -17,7 +17,7 @@ namespace SpaceShooter
         {
             HP = 300;
             Position = new Vector2(1024, (float)random.NextDouble() * 768);
-            Velocity = new Vector2(-speed, 0);
+            Velocity = new Vector2(-speed, -speed / 2 + speed * (float)random.NextDouble());
         }
     }
 }
