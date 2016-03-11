@@ -34,6 +34,9 @@ namespace SpaceShooter
             
             foreach (GameObject obj in Objects)
                 obj.Update(gameTime, this);
+            foreach (GameObject obj in Objects)
+                obj.CheckCollisions(this);
+
             Objects.AddRange(spawnStack);
             Objects.RemoveAll(obj => obj.IsDying);
             spawnStack.Clear();

@@ -35,7 +35,13 @@ namespace SpaceShooter
         public virtual void Update(GameTime gameTime, Level level)
         {
             Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
+            if (Position.X < 0 || Position.X > 1024 || Position.Y < 0 || Position.Y > 768)
+                HP = 0;
+        }
 
+        public void CheckCollisions(Level level)
+        {
             foreach (GameObject other in level.Objects)
             {
                 if (other == this || other.Faction == Faction)
@@ -44,12 +50,8 @@ namespace SpaceShooter
                 if ((other.Position - Position).LengthSquared() < HitRadiusSquared)
                 {
                     HP -= 100;
-                    other.HP -= 100;
                 }
             }
-
-            if (Position.X < 0 || Position.X > 1024 || Position.Y < 0 || Position.Y > 768)
-                HP = 0;
         }
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
