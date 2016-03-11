@@ -102,6 +102,7 @@
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlayerShip.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="SpaceShooterGame.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

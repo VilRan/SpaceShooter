@@ -12,19 +12,11 @@ namespace SpaceShooter
     {
 
         public readonly SpaceShooterGame Game;
-
-        public IEnumerable<GameObject> Objects
-        {
-            get
-            {
-                foreach (GameObject obj in objects)
-                    yield return obj;
-            }
-        }
-
+        
         List<GameObject> objects = new List<GameObject>();
         Stack<GameObject> spawnStack = new Stack<GameObject>();
 
+        public IEnumerable<GameObject> Objects { get { return objects; } }
 
         public Level(SpaceShooterGame game)
         {

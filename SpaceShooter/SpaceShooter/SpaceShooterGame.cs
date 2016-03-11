@@ -14,7 +14,7 @@ namespace SpaceShooter
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Level level;
+        Session session;
 
         public SpaceShooterGame()
         {
@@ -45,7 +45,7 @@ namespace SpaceShooter
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             Assets = new AssetManager(Content);
-            level = new Level(this);
+            session = new Session(this);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace SpaceShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            level.Update(gameTime);
+            session.ActiveLevel.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -78,7 +78,7 @@ namespace SpaceShooter
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            level.Draw(gameTime, spriteBatch);
+            session.ActiveLevel.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
