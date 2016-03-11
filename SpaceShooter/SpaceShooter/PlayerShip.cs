@@ -13,7 +13,7 @@ namespace SpaceShooter
     {
         const float maxSpeed = 256;
 
-        double ReloadTimer = 0.0;
+        double reloadTimer = 0.0;
 
         public PlayerShip(Texture2D texture)
             : base(texture)
@@ -25,8 +25,8 @@ namespace SpaceShooter
 
         public override void Update(GameTime gameTime, Level level)
         {
-            if (ReloadTimer > 0)
-                ReloadTimer -= gameTime.ElapsedGameTime.TotalSeconds;
+            if (reloadTimer > 0)
+                reloadTimer -= gameTime.ElapsedGameTime.TotalSeconds;
             Velocity = Vector2.Zero;
 
             KeyboardState keyboard = Keyboard.GetState();
@@ -38,11 +38,11 @@ namespace SpaceShooter
                 Velocity += new Vector2(-maxSpeed, 0);
             if (keyboard.IsKeyDown(Keys.Right))
                 Velocity += new Vector2(maxSpeed, 0);
-            if (keyboard.IsKeyDown(Keys.Space) && ReloadTimer <= 0)
+            if (keyboard.IsKeyDown(Keys.Space) && reloadTimer <= 0)
             {
                 Bullet bullet = new Bullet(level.Game.Assets.BulletTexture, Position);
                 level.SpawnObject(bullet);
-                ReloadTimer += 0.1;
+                reloadTimer += 0.1;
             }
 
             base.Update(gameTime, level);

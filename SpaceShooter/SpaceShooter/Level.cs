@@ -10,10 +10,19 @@ namespace SpaceShooter
 {
     class Level
     {
-        public List<GameObject> Objects = new List<GameObject>();
 
         public readonly SpaceShooterGame Game;
 
+        public IEnumerable<GameObject> Objects
+        {
+            get
+            {
+                foreach (GameObject obj in objects)
+                    yield return obj;
+            }
+        }
+
+        List<GameObject> objects = new List<GameObject>();
         Stack<GameObject> spawnStack = new Stack<GameObject>();
 
 
@@ -21,7 +30,7 @@ namespace SpaceShooter
         {
             Game = game;
             PlayerShip player = new PlayerShip(game.Assets.PlayerShipTexture);
-            Objects.Add(player);
+            objects.Add(player);
         }
 
         public void Update(GameTime gameTime)
@@ -29,22 +38,22 @@ namespace SpaceShooter
             if (Game.Random.Next(25) == 0)
             {
                 Asteroid asteroid = new Asteroid(Game.Assets.AsteroidTexture, Game.Random);
-                Objects.Add(asteroid);
+                objects.Add(asteroid);
             }
             
-            foreach (GameObject obj in Objects)
+            foreach (GameObject obj in objects)
                 obj.Update(gameTime, this);
-            foreach (GameObject obj in Objects)
+            foreach (GameObject obj in objects)
                 obj.CheckCollisions(this);
 
-            Objects.AddRange(spawnStack);
-            Objects.RemoveAll(obj => obj.IsDying);
+            objects.AddRange(spawnStack);
+            objects.RemoveAll(obj => obj.IsDying);
             spawnStack.Clear();
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            foreach (GameObject obj in Objects)
+            foreach (GameObject obj in objects)
                 obj.Draw(gameTime, spriteBatch);
         }
 

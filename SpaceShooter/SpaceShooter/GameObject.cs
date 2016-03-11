@@ -44,7 +44,7 @@ namespace SpaceShooter
         {
             foreach (GameObject other in level.Objects)
             {
-                if (other == this || other.Faction == Faction)
+                if (other.Faction == Faction)
                     continue;
 
                 if ((other.Position - Position).LengthSquared() < HitRadiusSquared)
