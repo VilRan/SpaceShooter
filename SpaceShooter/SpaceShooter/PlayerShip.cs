@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using SpaceShooter.Weapons;
 
 namespace SpaceShooter
 {
@@ -13,7 +14,7 @@ namespace SpaceShooter
     {
         const float maxSpeed = 256;
 
-        double reloadTimer = 0.0;
+        Weapon activeWeapon;
 
         public PlayerShip(Texture2D texture)
             : base(texture)
@@ -21,15 +22,14 @@ namespace SpaceShooter
             HP = 100;
             Position = new Vector2(64, 384);
             Faction = Faction.Player;
+            activeWeapon = new Machinegun();
         }
 
         public override void Update(GameTime gameTime, Level level)
         {
-            if (reloadTimer > 0)
-                reloadTimer -= gameTime.ElapsedGameTime.TotalSeconds;
-            Velocity = Vector2.Zero;
-
             KeyboardState keyboard = Keyboard.GetState();
+
+            Velocity = Vector2.Zero;
             if (keyboard.IsKeyDown(Keys.Up))
                 Velocity += new Vector2(0, -maxSpeed);
             if (keyboard.IsKeyDown(Keys.Down))
@@ -38,12 +38,10 @@ namespace SpaceShooter
                 Velocity += new Vector2(-maxSpeed, 0);
             if (keyboard.IsKeyDown(Keys.Right))
                 Velocity += new Vector2(maxSpeed, 0);
-            if (keyboard.IsKeyDown(Keys.Space) && reloadTimer <= 0)
-            {
-                Bullet bullet = new Bullet(level.Game.Assets.BulletTexture, Position);
-                level.SpawnObject(bullet);
-                reloadTimer += 0.1;
-            }
+
+            activeWeapon.Update(gameTime);
+            if (keyboard.IsKeyDown(Keys.Space) && activeWeapon.CanFire)
+                activeWeapon.Fire(level, Position);
 
             base.Update(gameTime, level);
         }

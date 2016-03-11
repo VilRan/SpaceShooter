@@ -35,7 +35,7 @@ namespace SpaceShooter
 
         public void Update(GameTime gameTime)
         {
-            if (Game.Random.Next(25) == 0)
+            if (Game.Random.Next(100) <= 10)
             {
                 Asteroid asteroid = new Asteroid(Game.Assets.AsteroidTexture, Game.Random);
                 objects.Add(asteroid);

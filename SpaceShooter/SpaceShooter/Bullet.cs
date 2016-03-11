@@ -10,7 +10,7 @@ namespace SpaceShooter
 {
     class Bullet : GameObject
     {
-        const float speed = 512;
+        const float speed = 1024;
 
         public Bullet(Texture2D texture, Vector2 position)
             : base(texture)

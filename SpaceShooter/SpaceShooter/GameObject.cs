@@ -14,7 +14,7 @@ namespace SpaceShooter
         Enemy
     }
 
-    class GameObject
+    abstract class GameObject
     {
         private const int HitRadius = 16;
         private const int HitRadiusSquared = HitRadius * HitRadius;
