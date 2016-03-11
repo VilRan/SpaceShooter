@@ -49,9 +49,14 @@ namespace SpaceShooter
 
                 if ((other.Position - Position).LengthSquared() < HitRadiusSquared)
                 {
-                    HP -= 100;
+                    OnCollision(other);
                 }
             }
+        }
+
+        public virtual void OnCollision(GameObject other)
+        {
+
         }
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

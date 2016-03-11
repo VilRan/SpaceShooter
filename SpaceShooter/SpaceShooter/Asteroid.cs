@@ -19,5 +19,10 @@ namespace SpaceShooter
             Position = new Vector2(1024, (float)random.NextDouble() * 768);
             Velocity = new Vector2(-speed, -speed / 2 + speed * (float)random.NextDouble());
         }
+
+        public override void OnCollision(GameObject other)
+        {
+            other.HP -= 100;
+        }
     }
 }

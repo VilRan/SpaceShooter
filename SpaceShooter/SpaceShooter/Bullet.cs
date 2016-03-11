@@ -15,10 +15,15 @@ namespace SpaceShooter
         public Bullet(Texture2D texture, Vector2 position)
             : base(texture)
         {
-            HP = 100;
+            HP = 10;
             Position = position;
             Velocity = new Vector2(speed, 0);
             Faction = Faction.Player;
+        }
+
+        public override void OnCollision(GameObject other)
+        {
+            other.HP -= 100;
         }
     }
 }
