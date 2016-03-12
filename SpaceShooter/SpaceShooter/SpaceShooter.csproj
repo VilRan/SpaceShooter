@@ -97,10 +97,12 @@
     <Compile Include="AssetManager.cs" />
     <Compile Include="Asteroid.cs" />
     <Compile Include="Bullet.cs" />
+    <Compile Include="DynamicObject.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Particle.cs" />
     <Compile Include="PlayerShip.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="SpaceShooterGame.cs" />
@@ -119,9 +121,10 @@
     <None Include="SpaceShooter_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Asteroid.png" />
-    <Content Include="Assets\Bullet.png" />
-    <Content Include="Assets\Ship.png" />
+    <Content Include="Assets\Textures\Asteroid.png" />
+    <Content Include="Assets\Textures\Bullet.png" />
+    <Content Include="Assets\Textures\Particle.png" />
+    <Content Include="Assets\Textures\Ship.png" />
     <Content Include="MonoGame.Framework.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

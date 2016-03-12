@@ -13,12 +13,14 @@ namespace SpaceShooter
         public Texture2D PlayerShipTexture { private set; get; }
         public Texture2D AsteroidTexture { private set; get; }
         public Texture2D BulletTexture { private set; get; }
+        public Texture2D ParticleTexture { private set; get; }
 
         public AssetManager(ContentManager content)
         {
-            PlayerShipTexture = content.Load<Texture2D>("Ship.png");
-            AsteroidTexture = content.Load<Texture2D>("Asteroid.png");
-            BulletTexture = content.Load<Texture2D>("Bullet.png");
+            PlayerShipTexture = content.Load<Texture2D>("Textures/Ship.png");
+            AsteroidTexture = content.Load<Texture2D>("Textures/Asteroid.png");
+            BulletTexture = content.Load<Texture2D>("Textures/Bullet.png");
+            ParticleTexture = content.Load<Texture2D>("Textures/Particle.png");
         }
     }
 }

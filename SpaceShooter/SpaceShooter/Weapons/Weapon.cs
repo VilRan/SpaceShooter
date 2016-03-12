@@ -12,6 +12,12 @@ namespace SpaceShooter.Weapons
         public abstract bool CanFire { get; }
 
         public abstract void Update(GameTime gameTime);
-        public abstract void Fire(Level level, Vector2 position);
+        public abstract void OnFire(Level level, Vector2 position);
+
+        public void TryFire(Level level, Vector2 position)
+        {
+            if (CanFire)
+                OnFire(level, position);
+        }
     }
 }

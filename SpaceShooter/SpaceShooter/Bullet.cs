@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
-    class Bullet : GameObject
+    class Bullet : DynamicObject
     {
         const float speed = 1024;
 
-        public Bullet(Texture2D texture, Vector2 position)
-            : base(texture)
+        public Bullet(Level level, Vector2 position)
+            : base(level.Game.Assets.BulletTexture, level)
         {
             HP = 10;
             Position = position;
@@ -21,7 +21,7 @@ namespace SpaceShooter
             Faction = Faction.Player;
         }
 
-        public override void OnCollision(GameObject other)
+        public override void OnCollision(DynamicObject other)
         {
             other.HP -= 100;
         }

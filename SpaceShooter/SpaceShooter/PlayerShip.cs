@@ -10,14 +10,14 @@ using SpaceShooter.Weapons;
 
 namespace SpaceShooter
 {
-    class PlayerShip : GameObject
+    class PlayerShip : DynamicObject
     {
         const float maxSpeed = 256;
 
         Weapon activeWeapon;
 
-        public PlayerShip(Texture2D texture)
-            : base(texture)
+        public PlayerShip(Level level)
+            : base(level.Game.Assets.PlayerShipTexture, level)
         {
             HP = 100;
             Position = new Vector2(64, 384);
@@ -25,7 +25,7 @@ namespace SpaceShooter
             activeWeapon = new Machinegun();
         }
 
-        public override void Update(GameTime gameTime, Level level)
+        public override void Update(GameTime gameTime)
         {
             KeyboardState keyboard = Keyboard.GetState();
 
@@ -40,10 +40,10 @@ namespace SpaceShooter
                 Velocity += new Vector2(maxSpeed, 0);
 
             activeWeapon.Update(gameTime);
-            if (keyboard.IsKeyDown(Keys.Space) && activeWeapon.CanFire)
-                activeWeapon.Fire(level, Position);
+            if (keyboard.IsKeyDown(Keys.Space))
+                activeWeapon.TryFire(Level, Position);
 
-            base.Update(gameTime, level);
+            base.Update(gameTime);
         }
     }
 }

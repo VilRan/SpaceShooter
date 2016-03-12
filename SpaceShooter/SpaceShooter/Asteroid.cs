@@ -8,21 +8,42 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
-    class Asteroid : GameObject
+    class Asteroid : DynamicObject
     {
         const float speed = 128;
 
-        public Asteroid(Texture2D texture, Random random)
-            : base(texture)
+        public Asteroid(Level level)
+            : base(level.Game.Assets.AsteroidTexture, level)
         {
+            Random random = Game.Random;
+
             HP = 300;
             Position = new Vector2(1024, (float)random.NextDouble() * 768);
             Velocity = new Vector2(-speed, -speed / 2 + speed * (float)random.NextDouble());
         }
 
-        public override void OnCollision(GameObject other)
+        public override void OnCollision(DynamicObject other)
         {
             other.HP -= 100;
+
+            Random random = Game.Random;
+            int n = random.Next(20, 40);
+            Particle[] particles = new Particle[n];
+            for (int i = 0; i < n; i++)
+            {
+                Particle particle = new Particle(Game.Assets.ParticleTexture);
+
+                particle.Position = other.Position;
+
+                double direction = random.NextDouble() * Math.PI * 2;
+                double speed = random.NextDouble() * 1000;
+                particle.Velocity = new Vector2((float)(Math.Cos(direction) * speed), (float)(Math.Sin(direction) * speed));
+
+                particle.Lifespan = random.NextDouble();
+
+                particles[i] = particle;
+            }
+            Level.SpawnParticles(particles);
         }
     }
 }
