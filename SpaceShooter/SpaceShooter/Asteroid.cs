@@ -43,7 +43,7 @@ namespace SpaceShooter
 
                 particles[i] = particle;
             }
-            Level.SpawnParticles(particles);
+            Level.Particles.AddRange(particles);
         }
     }
 }

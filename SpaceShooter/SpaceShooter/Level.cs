@@ -12,18 +12,16 @@ namespace SpaceShooter
     {
 
         public readonly SpaceShooterGame Game;
-        
-        List<DynamicObject> objects = new List<DynamicObject>();
-        List<Particle> particles = new List<Particle>();
-        Stack<DynamicObject> spawnStack = new Stack<DynamicObject>();
+        public List<DynamicObject> Objects = new List<DynamicObject>();
+        public List<Particle> Particles = new List<Particle>();
 
-        public IEnumerable<DynamicObject> Objects { get { return objects; } }
+        Stack<DynamicObject> spawnStack = new Stack<DynamicObject>();
 
         public Level(SpaceShooterGame game)
         {
             Game = game;
             PlayerShip player = new PlayerShip(this);
-            objects.Add(player);
+            Objects.Add(player);
         }
 
         public void Update(GameTime gameTime)
@@ -31,36 +29,31 @@ namespace SpaceShooter
             if (Game.Random.Next(100) <= 10)
             {
                 Asteroid asteroid = new Asteroid(this);
-                objects.Add(asteroid);
+                Objects.Add(asteroid);
             }
             
-            foreach (DynamicObject obj in objects)
+            foreach (DynamicObject obj in Objects)
                 obj.Update(gameTime);
-            foreach (DynamicObject obj in objects)
-                obj.CheckCollisions();
-
-            objects.AddRange(spawnStack);
-            objects.RemoveAll(obj => obj.IsDying);
+            Objects.AddRange(spawnStack);
             spawnStack.Clear();
+
+            for (int i = 0; i < Objects.Count - 1; i++)
+                Objects[i].CheckCollisions(i + 1);
+            Objects.RemoveAll(obj => obj.IsDying);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            foreach (DynamicObject obj in objects)
+            foreach (DynamicObject obj in Objects)
                 obj.Draw(gameTime, spriteBatch);
-            foreach (Particle particle in particles)
+            foreach (Particle particle in Particles)
                 particle.Draw(gameTime, spriteBatch);
-            particles.RemoveAll(particle => particle.Lifespan <= 0.0);
+            Particles.RemoveAll(particle => particle.Lifespan <= 0.0);
         }
 
         public void SpawnObject(DynamicObject obj)
         {
             spawnStack.Push(obj);
-        }
-
-        public void SpawnParticles(IEnumerable<Particle> particles)
-        {
-            this.particles.AddRange(particles);
         }
     }
 }

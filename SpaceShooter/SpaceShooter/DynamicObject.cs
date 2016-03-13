@@ -41,16 +41,18 @@ namespace SpaceShooter
                 HP = 0;
         }
 
-        public void CheckCollisions()
+        public void CheckCollisions(int startIndex)
         {
-            foreach (DynamicObject other in Level.Objects)
+            for (int i = startIndex; i < Level.Objects.Count; i++)
             {
+                DynamicObject other = Level.Objects[i];
                 if (other.Faction == Faction)
                     continue;
 
                 if ((other.Position - Position).LengthSquared() < HitRadiusSquared)
                 {
                     OnCollision(other);
+                    other.OnCollision(this);
                 }
             }
         }
