@@ -24,7 +24,7 @@ namespace SpaceShooter
         public Faction Faction = Faction.Enemy;
 
         public bool IsDying { get { return HP <= 0; } }
-
+        protected override Color Color { get { return Color.White; } }
         protected SpaceShooterGame Game { get { return Level.Game; } }
 
         public DynamicObject(Texture2D texture, Level level)

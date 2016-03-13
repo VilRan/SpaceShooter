@@ -12,6 +12,8 @@ namespace SpaceShooter
     {
         public double Lifespan;
 
+        protected override Color Color { get { return Color.LightGray; } }
+
         public Particle(Texture2D texture)
             : base(texture)
         {

@@ -16,6 +16,7 @@ namespace SpaceShooter
 
         public Vector2 ScreenPosition { get { return Position - Origin; } }
         public Vector2 Origin { get { return Texture.Bounds.Center.ToVector2(); } }
+        protected abstract Color Color { get; }
 
         public GameObject(Texture2D texture)
         {
@@ -24,7 +25,7 @@ namespace SpaceShooter
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, ScreenPosition, Color.White);
+            spriteBatch.Draw(Texture, ScreenPosition, Color);
         }
     }
 }
