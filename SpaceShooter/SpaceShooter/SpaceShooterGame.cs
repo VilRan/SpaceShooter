@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace SpaceShooter
@@ -15,6 +16,8 @@ namespace SpaceShooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Session session;
+        KeyboardState previousKeyboardState;
+        bool isPaused = false;
 
         public SpaceShooterGame()
         {
@@ -31,6 +34,7 @@ namespace SpaceShooter
         protected override void Initialize()
         {
             Random = new Random();
+            previousKeyboardState = Keyboard.GetState();
 
             base.Initialize();
         }
@@ -64,7 +68,13 @@ namespace SpaceShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            session.ActiveLevel.Update(gameTime);
+            KeyboardState keyboard = Keyboard.GetState();
+            if (keyboard.IsKeyDown(Keys.P) && previousKeyboardState.IsKeyUp(Keys.P))
+                isPaused = !isPaused;
+            previousKeyboardState = keyboard;
+
+            if (!isPaused)
+                session.ActiveLevel.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -78,7 +88,10 @@ namespace SpaceShooter
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            session.ActiveLevel.Draw(gameTime, spriteBatch);
+            if (isPaused)
+                session.ActiveLevel.Draw(new GameTime(), spriteBatch);
+            else
+                session.ActiveLevel.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
