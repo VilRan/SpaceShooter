@@ -8,29 +8,30 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
-    enum Faction
+    public enum Faction
     {
         Player,
         Enemy
     }
 
-    abstract class DynamicObject : GameObject
+    public abstract class DynamicObject : GameObject
     {
         private const int HitRadius = 16;
         private const int HitRadiusSquared = HitRadius * HitRadius;
 
         public readonly Level Level;
-        public Durability Durability = new Durability();
+        public Durability Durability;
         public Faction Faction = Faction.Enemy;
 
         public bool IsDying { get { return Durability.Current <= 0; } }
         protected override Color Color { get { return Color.White; } }
         protected SpaceShooterGame Game { get { return Level.Game; } }
 
-        public DynamicObject(Texture2D texture, Level level)
+        public DynamicObject(Texture2D texture, Level level, Durability durability)
             : base(texture)
         {
             Level = level;
+            Durability = durability;
         }
 
         public virtual void Update(GameTime gameTime)

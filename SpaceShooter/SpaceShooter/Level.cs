@@ -8,20 +8,22 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
-    class Level
+    public class Level
     {
-        public readonly SpaceShooterGame Game;
+        public readonly Session Session;
         public readonly LevelBlueprint Blueprint;
         public List<DynamicObject> Objects = new List<DynamicObject>();
         public List<Particle> Particles = new List<Particle>();
 
         Stack<DynamicObject> spawnStack = new Stack<DynamicObject>();
 
-        public Level(SpaceShooterGame game, LevelBlueprint blueprint)
+        public SpaceShooterGame Game { get { return Session.Game; } }
+
+        public Level(Session session, LevelBlueprint blueprint)
         {
-            Game = game;
+            Session = session;
             Blueprint = blueprint;
-            PlayerShip player = new PlayerShip(this);
+            PlayerShip player = new PlayerShip(this, Session.Player.ShipData);
             Objects.Add(player);
         }
 

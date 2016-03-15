@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
-    class Particle : GameObject
+    public class Particle : GameObject
     {
         public double Lifespan;
 

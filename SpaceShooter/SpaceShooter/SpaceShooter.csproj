@@ -107,6 +107,7 @@
     <Compile Include="Particle.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerShip.cs" />
+    <Compile Include="PlayerShipData.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="SpaceShooterGame.cs" />
     <Compile Include="Level.cs" />
