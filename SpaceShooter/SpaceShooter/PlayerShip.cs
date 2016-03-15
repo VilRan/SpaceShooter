@@ -19,7 +19,7 @@ namespace SpaceShooter
         public PlayerShip(Level level)
             : base(level.Game.Assets.PlayerShipTexture, level)
         {
-            HP = 100;
+            Durability.Both = 100;
             Position = new Vector2(64, 384);
             Faction = Faction.Player;
             activeWeapon = new Machinegun();

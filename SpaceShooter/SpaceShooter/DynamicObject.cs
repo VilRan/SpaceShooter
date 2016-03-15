@@ -20,10 +20,10 @@ namespace SpaceShooter
         private const int HitRadiusSquared = HitRadius * HitRadius;
 
         public readonly Level Level;
-        public float HP;
+        public Durability Durability = new Durability();
         public Faction Faction = Faction.Enemy;
 
-        public bool IsDying { get { return HP <= 0; } }
+        public bool IsDying { get { return Durability.Current <= 0; } }
         protected override Color Color { get { return Color.White; } }
         protected SpaceShooterGame Game { get { return Level.Game; } }
 
@@ -38,7 +38,7 @@ namespace SpaceShooter
             Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
             
             if (Position.X < 0 || Position.X > 1024 || Position.Y < 0 || Position.Y > 768)
-                HP = 0;
+                Durability.Current = 0;
         }
 
         public void CheckCollisions(int startIndex)

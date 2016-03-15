@@ -97,6 +97,7 @@
     <Compile Include="AssetManager.cs" />
     <Compile Include="Asteroid.cs" />
     <Compile Include="Bullet.cs" />
+    <Compile Include="Durability.cs" />
     <Compile Include="DynamicObject.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GamePage.xaml.cs">

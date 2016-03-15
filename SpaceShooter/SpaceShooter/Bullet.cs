@@ -15,7 +15,7 @@ namespace SpaceShooter
         public Bullet(Level level, Vector2 position)
             : base(level.Game.Assets.BulletTexture, level)
         {
-            HP = 10;
+            Durability.Both = 10;
             Position = position;
             Velocity = new Vector2(speed, 0);
             Faction = Faction.Player;
@@ -23,7 +23,7 @@ namespace SpaceShooter
 
         public override void OnCollision(DynamicObject other)
         {
-            other.HP -= 100;
+            other.Durability.Current -= 100;
         }
     }
 }

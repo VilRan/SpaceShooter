@@ -17,14 +17,14 @@ namespace SpaceShooter
         {
             Random random = Game.Random;
 
-            HP = 300;
+            Durability.Both = 300;
             Position = new Vector2(1024, (float)random.NextDouble() * 768);
             Velocity = new Vector2(-speed, -speed / 2 + speed * (float)random.NextDouble());
         }
 
         public override void OnCollision(DynamicObject other)
         {
-            other.HP -= 100;
+            other.Durability.Current -= 100;
 
             Random random = Game.Random;
             int n = random.Next(20, 40);
