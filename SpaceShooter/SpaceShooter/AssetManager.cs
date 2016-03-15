@@ -15,12 +15,16 @@ namespace SpaceShooter
         public Texture2D BulletTexture { private set; get; }
         public Texture2D ParticleTexture { private set; get; }
 
+        public LevelBlueprint TestLevelBlueprint { private set; get; }
+
         public AssetManager(ContentManager content)
         {
             PlayerShipTexture = content.Load<Texture2D>("Textures/Ship.png");
             AsteroidTexture = content.Load<Texture2D>("Textures/Asteroid.png");
             BulletTexture = content.Load<Texture2D>("Textures/Bullet.png");
             ParticleTexture = content.Load<Texture2D>("Textures/Particle.png");
+
+            TestLevelBlueprint = new LevelBlueprint();
         }
     }
 }

@@ -8,14 +8,13 @@ namespace SpaceShooter
 {
     class Session
     {
+        public Player Player = new Player();
         public Level ActiveLevel;
-
-        int Score = 0;
-        int Money = 1000;
+        public int Score = 0;
 
         public Session(SpaceShooterGame game)
         {
-            ActiveLevel = new Level(game);
+            ActiveLevel = new Level(game, game.Assets.TestLevelBlueprint);
         }
     }
 }

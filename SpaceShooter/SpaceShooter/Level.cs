@@ -10,16 +10,17 @@ namespace SpaceShooter
 {
     class Level
     {
-
         public readonly SpaceShooterGame Game;
+        public readonly LevelBlueprint Blueprint;
         public List<DynamicObject> Objects = new List<DynamicObject>();
         public List<Particle> Particles = new List<Particle>();
 
         Stack<DynamicObject> spawnStack = new Stack<DynamicObject>();
 
-        public Level(SpaceShooterGame game)
+        public Level(SpaceShooterGame game, LevelBlueprint blueprint)
         {
             Game = game;
+            Blueprint = blueprint;
             PlayerShip player = new PlayerShip(this);
             Objects.Add(player);
         }
