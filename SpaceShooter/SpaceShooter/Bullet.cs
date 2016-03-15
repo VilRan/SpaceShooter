@@ -13,8 +13,9 @@ namespace SpaceShooter
         const float speed = 1024;
 
         public Bullet(Level level, Vector2 position)
-            : base(level.Game.Assets.BulletTexture, level, new Durability(10))
+            : base(level.Game.Assets.BulletTexture, level)
         {
+            Durability.Both = 10;
             Position = position;
             Velocity = new Vector2(speed, 0);
             Faction = Faction.Player;

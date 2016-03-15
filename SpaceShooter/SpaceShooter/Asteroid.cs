@@ -13,10 +13,11 @@ namespace SpaceShooter
         const float speed = 128;
 
         public Asteroid(Level level)
-            : base(level.Game.Assets.AsteroidTexture, level, new Durability(300))
+            : base(level.Game.Assets.AsteroidTexture, level)
         {
             Random random = Game.Random;
-            
+
+            Durability.Both = 300;
             Position = new Vector2(1024, (float)random.NextDouble() * 768);
             Velocity = new Vector2(-speed, -speed / 2 + speed * (float)random.NextDouble());
         }

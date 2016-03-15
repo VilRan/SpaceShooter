@@ -10,12 +10,12 @@ namespace SpaceShooter
     /// </summary>
     public class SpaceShooterGame : Game
     {
-        public AssetManager Assets { private set; get; }
-        public Random Random { private set; get; }
-        public Session Session { private set; get; }
+        public AssetManager Assets;
+        public Random Random;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Session session;
         KeyboardState previousKeyboardState;
         bool isPaused = false;
 
@@ -49,7 +49,7 @@ namespace SpaceShooter
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             Assets = new AssetManager(Content);
-            Session = new Session(this);
+            session = new Session(this);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace SpaceShooter
             previousKeyboardState = keyboard;
 
             if (!isPaused)
-                Session.ActiveLevel.Update(gameTime);
+                session.ActiveLevel.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -89,9 +89,9 @@ namespace SpaceShooter
 
             spriteBatch.Begin();
             if (isPaused)
-                Session.ActiveLevel.Draw(new GameTime(), spriteBatch);
+                session.ActiveLevel.Draw(new GameTime(), spriteBatch);
             else
-                Session.ActiveLevel.Draw(gameTime, spriteBatch);
+                session.ActiveLevel.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

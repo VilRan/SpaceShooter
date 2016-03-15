@@ -16,9 +16,10 @@ namespace SpaceShooter
 
         Weapon activeWeapon;
 
-        public PlayerShip(Level level, PlayerShipData data)
-            : base(level.Game.Assets.PlayerShipTexture, level, data.Durability)
+        public PlayerShip(Level level)
+            : base(level.Game.Assets.PlayerShipTexture, level)
         {
+            Durability.Both = 100;
             Position = new Vector2(64, 384);
             Faction = Faction.Player;
             activeWeapon = new Machinegun();
