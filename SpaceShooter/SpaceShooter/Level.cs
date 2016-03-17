@@ -15,8 +15,6 @@ namespace SpaceShooter
         public List<DynamicObject> Objects = new List<DynamicObject>();
         public List<Particle> Particles = new List<Particle>();
 
-        Stack<DynamicObject> spawnStack = new Stack<DynamicObject>();
-
         public Level(SpaceShooterGame game, LevelBlueprint blueprint)
         {
             Game = game;
@@ -35,12 +33,15 @@ namespace SpaceShooter
             
             for (int i = 0; i < Objects.Count; i++)
             {
-                Objects[i].CheckCollisions(i + 1);
-                Objects[i].Update(gameTime);
+                DynamicObject obj = Objects[i];
+                obj.CheckCollisions(i + 1);
+                obj.Update(gameTime);
+                if (obj.IsDying)
+                {
+                    Objects.RemoveAt(i);
+                    i--;
+                }
             }
-            Objects.AddRange(spawnStack);
-            Objects.RemoveAll(obj => obj.IsDying);
-            spawnStack.Clear();
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -54,7 +55,7 @@ namespace SpaceShooter
 
         public void SpawnObject(DynamicObject obj)
         {
-            spawnStack.Push(obj);
+            Objects.Add(obj);
         }
     }
 }
