@@ -33,14 +33,14 @@ namespace SpaceShooter
                 Objects.Add(asteroid);
             }
             
-            foreach (DynamicObject obj in Objects)
-                obj.Update(gameTime);
-            Objects.AddRange(spawnStack);
-            spawnStack.Clear();
-
-            for (int i = 0; i < Objects.Count - 1; i++)
+            for (int i = 0; i < Objects.Count; i++)
+            {
                 Objects[i].CheckCollisions(i + 1);
+                Objects[i].Update(gameTime);
+            }
+            Objects.AddRange(spawnStack);
             Objects.RemoveAll(obj => obj.IsDying);
+            spawnStack.Clear();
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
