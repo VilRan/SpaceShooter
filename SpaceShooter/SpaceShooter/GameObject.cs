@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
-    abstract class GameObject
+    public abstract class GameObject
     {
         public Vector2 Position;
         public Vector2 Velocity;

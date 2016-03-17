@@ -10,17 +10,16 @@ using SpaceShooter.Weapons;
 
 namespace SpaceShooter
 {
-    class PlayerShip : DynamicObject
+    public class PlayerShip : DynamicObject
     {
         const float maxSpeed = 256;
 
         Weapon activeWeapon;
 
-        public PlayerShip(Level level)
-            : base(level.Game.Assets.PlayerShipTexture, level)
+        public PlayerShip(AssetManager assets)
+            : base(assets.PlayerShipTexture, null)
         {
             Durability.Both = 100;
-            Position = new Vector2(64, 384);
             Faction = Faction.Player;
             activeWeapon = new Machinegun();
         }

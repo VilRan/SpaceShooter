@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
-    enum Faction
+    public enum Faction
     {
         Player,
         Enemy
     }
 
-    abstract class DynamicObject : GameObject
+    public abstract class DynamicObject : GameObject
     {
         private const int HitRadius = 16;
         private const int HitRadiusSquared = HitRadius * HitRadius;
 
-        public readonly Level Level;
+        public Level Level;
         public Durability Durability = new Durability();
         public Faction Faction = Faction.Enemy;
 

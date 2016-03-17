@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
-    class Player
+    public class Player
     {
-        int money = 1000;
+        public PlayerShip Ship;
+        //int money = 1000;
 
-        public Player()
+        public Player(AssetManager assets)
         {
-
+            Ship = new PlayerShip(assets);
         }
     }
 }

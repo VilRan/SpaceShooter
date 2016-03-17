@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
-    class Level
+    public class Level
     {
         public readonly SpaceShooterGame Game;
         public readonly LevelBlueprint Blueprint;
@@ -19,7 +19,9 @@ namespace SpaceShooter
         {
             Game = game;
             Blueprint = blueprint;
-            PlayerShip player = new PlayerShip(this);
+            PlayerShip player = game.Session.Player.Ship;
+            player.Level = this;
+            player.Position = new Vector2(64, 384);
             Objects.Add(player);
         }
 

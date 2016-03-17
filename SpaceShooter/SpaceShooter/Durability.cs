@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
-    class Durability
+    public class Durability
     {
         public float Current { get { return current; } set { current = Math.Min(value, maximum); } }
         public float Maximum { get { return maximum; } set { maximum = value; Current = current; } }
