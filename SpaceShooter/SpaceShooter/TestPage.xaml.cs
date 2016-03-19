@@ -13,24 +13,25 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SpaceShooter
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class GamePage : Page
+    public sealed partial class TestPage : Page
     {
-		public readonly SpaceShooterGame Game;
-
-		public GamePage()
+        public TestPage()
         {
             this.InitializeComponent();
+        }
 
-			// Create the game.
-			var launchArguments = string.Empty;
-            Game = MonoGame.Framework.XamlGame<SpaceShooterGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            App app = Application.Current as App;
+            Window.Current.Content = app.GamePage;
+            app.GamePage.Game.IsDeactived = false;
         }
     }
 }
