@@ -22,9 +22,14 @@ namespace SpaceShooter
             Velocity = new Vector2(-speed, -speed / 2 + speed * (float)random.NextDouble());
         }
 
-        public override void OnCollision(DynamicObject other)
+        public override void OnCollision(CollisionEventArgs e)
         {
+            DynamicObject other = e.Other;
             other.Durability.Current -= 100;
+
+            Vector2 thisCollisionPosition = Position + Velocity * e.TimeOfCollision;
+            Vector2 otherCollisionPosition = other.Position + other.Velocity * e.TimeOfCollision;
+            Vector2 collisionPosition = (thisCollisionPosition - otherCollisionPosition) * (other.HitRadius / (HitRadius + other.HitRadius)) + otherCollisionPosition;
 
             Random random = Game.Random;
             int n = random.Next(20, 40);
@@ -33,7 +38,7 @@ namespace SpaceShooter
             {
                 Particle particle = new Particle(Game.Assets.ParticleTexture);
 
-                particle.Position = other.Position;
+                particle.Position = collisionPosition;
 
                 double direction = random.NextDouble() * Math.PI * 2;
                 double speed = random.NextDouble() * 1000;

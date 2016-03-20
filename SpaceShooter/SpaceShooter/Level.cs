@@ -36,7 +36,7 @@ namespace SpaceShooter
             for (int i = 0; i < Objects.Count; i++)
             {
                 DynamicObject obj = Objects[i];
-                obj.CheckCollisions(i + 1);
+                obj.CheckCollisions(gameTime, i + 1);
                 obj.Update(gameTime);
                 if (obj.IsDying)
                 {

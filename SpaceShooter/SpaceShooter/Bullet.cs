@@ -11,6 +11,9 @@ namespace SpaceShooter
     class Bullet : DynamicObject
     {
         const float speed = 1024;
+        const float hitRadius = 3f;
+
+        public override float HitRadius { get { return hitRadius; } }
 
         public Bullet(Level level, Vector2 position)
             : base(level.Game.Assets.BulletTexture, level)
@@ -21,9 +24,9 @@ namespace SpaceShooter
             Faction = Faction.Player;
         }
 
-        public override void OnCollision(DynamicObject other)
+        public override void OnCollision(CollisionEventArgs e)
         {
-            other.Durability.Current -= 100;
+            e.Other.Durability.Current -= 100;
         }
     }
 }
