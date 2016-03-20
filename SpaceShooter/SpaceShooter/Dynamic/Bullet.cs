@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceShooter
+namespace SpaceShooter.Dynamic
 {
     class Bullet : DynamicObject
     {

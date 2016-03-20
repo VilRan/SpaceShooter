@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceShooter
+namespace SpaceShooter.Dynamic
 {
     public class Durability
     {
