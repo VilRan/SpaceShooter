@@ -42,7 +42,16 @@ namespace SpaceShooter.Dynamic
             if (keyboard.IsKeyDown(Keys.Space))
                 activeWeapon.TryFire(Level, Position);
 
-            base.Update(gameTime);
+            Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (Position.X < 0)
+                Position.X = 0;
+            if (Position.X > Level.Width)
+                Position.X = Level.Width;
+            if (Position.Y < 0)
+                Position.Y = 0;
+            if (Position.Y > Level.Height)
+                Position.Y = Level.Height;
         }
     }
 }

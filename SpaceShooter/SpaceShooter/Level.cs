@@ -16,6 +16,9 @@ namespace SpaceShooter
         public List<DynamicObject> Objects = new List<DynamicObject>();
         public List<Particle> Particles = new List<Particle>();
 
+        public int Width { get { return 1024; } }
+        public int Height { get { return 768; } }
+
         public Level(SpaceShooterGame game, LevelBlueprint blueprint)
         {
             Game = game;
