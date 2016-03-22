@@ -21,7 +21,7 @@ namespace SpaceShooter.Dynamic
         {
             Durability.Both = 100;
             Faction = Faction.Player;
-            activeWeapon = new Machinegun();
+            activeWeapon = new Shotgun();
         }
 
         public override void Update(UpdateEventArgs e)
@@ -40,7 +40,7 @@ namespace SpaceShooter.Dynamic
 
             activeWeapon.Update(e.GameTime);
             if (keyboard.IsKeyDown(Keys.Space))
-                activeWeapon.TryFire(new FireEventArgs(e.Level, Position));
+                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, e.Level.Game.Random));
 
             Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
 

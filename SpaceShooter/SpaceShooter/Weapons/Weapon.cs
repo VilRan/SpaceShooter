@@ -25,11 +25,13 @@ namespace SpaceShooter.Weapons
     {
         public readonly Level Level;
         public readonly Vector2 Position;
+        public readonly Random Random;
 
-        public FireEventArgs(Level level, Vector2 position)
+        public FireEventArgs(Level level, Vector2 position, Random random)
         {
             Level = level;
             Position = position;
+            Random = random;
         }
     }
 }
