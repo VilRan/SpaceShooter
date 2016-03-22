@@ -15,12 +15,12 @@ namespace SpaceShooter.Dynamic
 
         public override float HitRadius { get { return hitRadius; } }
 
-        public Bullet(AssetManager assets, Vector2 position)
+        public Bullet(AssetManager assets, Vector2 position, Vector2 velocity)
             : base(assets.BulletTexture)
         {
             Durability.Both = 10;
             Position = position;
-            Velocity = new Vector2(speed, 0);
+            Velocity = velocity;
             Faction = Faction.Player;
         }
 

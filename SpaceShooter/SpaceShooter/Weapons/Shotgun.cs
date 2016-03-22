@@ -1,18 +1,18 @@
-﻿using Microsoft.Xna.Framework;
-using SpaceShooter.Dynamic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using SpaceShooter.Dynamic;
 
 namespace SpaceShooter.Weapons
 {
-    class Machinegun : Weapon
+    class Shotgun : Weapon
     {
-        const double firerateDelay = 0.05;
-        const double reloadDelay = 1.0;
-        const int magazineSize = 50;
+        const double firerateDelay = 0.15;
+        const double reloadDelay = 1.25;
+        const int magazineSize = 5;
 
         double reloadTimer = 0.0;
         double firerateTimer = 0.0;
@@ -43,8 +43,15 @@ namespace SpaceShooter.Weapons
 
         public override void OnFire(FireEventArgs e)
         {
-            Bullet bullet = new Bullet(e.Level.Game.Assets, e.Position, new Vector2(1024, 0));
-            e.Level.Objects.Add(bullet);
+            for (int i = 0; i < 25; i++)
+            {
+                Vector2 velocity = new Vector2(1024, 0);
+                Matrix rotation = Matrix.CreateRotationZ((float)(e.Random.NextDouble() * Math.PI / 16 - e.Random.NextDouble() * Math.PI / 16));
+                velocity = Vector2.TransformNormal(velocity, rotation);
+                Bullet bullet = new Bullet(e.Level.Game.Assets, e.Position, velocity);
+                e.Level.Objects.Add(bullet);
+            }
+            
             magazineCount--;
 
             if (magazineCount <= 0)
