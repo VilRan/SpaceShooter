@@ -20,11 +20,11 @@ namespace SpaceShooter
 
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(DrawEventArgs e)
         {
-            Lifespan -= gameTime.ElapsedGameTime.TotalSeconds;
-            Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            base.Draw(gameTime, spriteBatch);
+            Lifespan -= e.GameTime.ElapsedGameTime.TotalSeconds;
+            Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
+            base.Draw(e);
         }
     }
 }

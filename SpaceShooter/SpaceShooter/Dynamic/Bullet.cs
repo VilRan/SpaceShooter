@@ -15,8 +15,8 @@ namespace SpaceShooter.Dynamic
 
         public override float HitRadius { get { return hitRadius; } }
 
-        public Bullet(Level level, Vector2 position)
-            : base(level.Game.Assets.BulletTexture, level)
+        public Bullet(AssetManager assets, Vector2 position)
+            : base(assets.BulletTexture)
         {
             Durability.Both = 10;
             Position = position;

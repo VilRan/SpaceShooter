@@ -17,18 +17,18 @@ namespace SpaceShooter.Dynamic
         Weapon activeWeapon;
 
         public PlayerShip(AssetManager assets)
-            : base(assets.PlayerShipTexture, null)
+            : base(assets.PlayerShipTexture)
         {
             Durability.Both = 100;
             Faction = Faction.Player;
             activeWeapon = new Machinegun();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(UpdateEventArgs e)
         {
             KeyboardState keyboard = Keyboard.GetState();
 
-            Velocity = Vector2.Zero;
+            Velocity = e.Level.Camera.Velocity;
             if (keyboard.IsKeyDown(Keys.Up))
                 Velocity += new Vector2(0, -maxSpeed);
             if (keyboard.IsKeyDown(Keys.Down))
@@ -38,20 +38,20 @@ namespace SpaceShooter.Dynamic
             if (keyboard.IsKeyDown(Keys.Right))
                 Velocity += new Vector2(maxSpeed, 0);
 
-            activeWeapon.Update(gameTime);
+            activeWeapon.Update(e.GameTime);
             if (keyboard.IsKeyDown(Keys.Space))
-                activeWeapon.TryFire(Level, Position);
+                activeWeapon.TryFire(new FireEventArgs(e.Level, Position));
 
-            Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
 
-            if (Position.X < 0)
-                Position.X = 0;
-            if (Position.X > Level.Width)
-                Position.X = Level.Width;
-            if (Position.Y < 0)
-                Position.Y = 0;
-            if (Position.Y > Level.Height)
-                Position.Y = Level.Height;
+            if (Position.X < e.Level.Bounds.Left)
+                Position.X = e.Level.Bounds.Left;
+            if (Position.X > e.Level.Bounds.Right)
+                Position.X = e.Level.Bounds.Right;
+            if (Position.Y < e.Level.Bounds.Top)
+                Position.Y = e.Level.Bounds.Top;
+            if (Position.Y > e.Level.Bounds.Bottom)
+                Position.Y = e.Level.Bounds.Bottom;
         }
     }
 }

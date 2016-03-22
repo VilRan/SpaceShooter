@@ -17,35 +17,33 @@ namespace SpaceShooter.Dynamic
     public abstract class DynamicObject : GameObject
     {
         private const float hitRadius = 12;
-
-        public Level Level;
+        
         public Durability Durability = new Durability();
         public Faction Faction = Faction.Enemy;
 
         public bool IsDying { get { return Durability.Current <= 0; } }
         public virtual float HitRadius { get { return hitRadius; } }
-        protected SpaceShooterGame Game { get { return Level.Game; } }
         protected override Color Color { get { return Color.White; } }
 
-        public DynamicObject(Texture2D texture, Level level)
+        public DynamicObject(Texture2D texture)
             : base(texture)
         {
-            Level = level;
+
         }
 
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(UpdateEventArgs e)
         {
-            Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
             
-            if (Position.X < 0 || Position.X > 1024 || Position.Y < 0 || Position.Y > 768)
+            if (!e.Level.Bounds.Contains(Position))
                 Durability.Current = 0;
         }
 
-        public void CheckCollisions(GameTime gameTime, int startIndex)
+        public void CheckCollisions(GameTime gameTime, Level level, int startIndex)
         {
-            for (int i = startIndex; i < Level.Objects.Count; i++)
+            for (int i = startIndex; i < level.Objects.Count; i++)
             {
-                DynamicObject other = Level.Objects[i];
+                DynamicObject other = level.Objects[i];
                 if (other.Faction == Faction)
                     continue;
 
@@ -57,8 +55,8 @@ namespace SpaceShooter.Dynamic
 
                 if (isCollision)
                 {
-                    OnCollision(new CollisionEventArgs(other, timeOfClosestApproach));
-                    other.OnCollision(new CollisionEventArgs(this, timeOfClosestApproach));
+                    OnCollision(new CollisionEventArgs(level, other, timeOfClosestApproach));
+                    other.OnCollision(new CollisionEventArgs(level, this, timeOfClosestApproach));
                 }
             }
         }
@@ -99,13 +97,27 @@ namespace SpaceShooter.Dynamic
         }
     }
 
+    public class UpdateEventArgs
+    {
+        public readonly Level Level;
+        public readonly GameTime GameTime;
+
+        public UpdateEventArgs(Level level, GameTime gameTime)
+        {
+            Level = level;
+            GameTime = gameTime;
+        }
+    }
+
     public class CollisionEventArgs
     {
+        public readonly Level Level;
         public readonly DynamicObject Other;
         public readonly float TimeOfCollision;
 
-        public CollisionEventArgs(DynamicObject other, float timeOfCollision)
+        public CollisionEventArgs(Level level, DynamicObject other, float timeOfCollision)
         {
+            Level = level;
             Other = other;
             TimeOfCollision = timeOfCollision;
         }

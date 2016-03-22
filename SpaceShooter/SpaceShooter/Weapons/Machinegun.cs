@@ -41,10 +41,10 @@ namespace SpaceShooter.Weapons
             }
         }
 
-        public override void OnFire(Level level, Vector2 position)
+        public override void OnFire(FireEventArgs e)
         {
-            Bullet bullet = new Bullet(level, position);
-            level.SpawnObject(bullet);
+            Bullet bullet = new Bullet(e.Level.Game.Assets, e.Position);
+            e.Level.Objects.Add(bullet);
             magazineCount--;
 
             if (magazineCount <= 0)
