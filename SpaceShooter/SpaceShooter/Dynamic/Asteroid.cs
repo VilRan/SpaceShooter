@@ -11,12 +11,7 @@ namespace SpaceShooter.Dynamic
     class Asteroid : DynamicObject
     {
         public Asteroid(AssetManager assets)
-            : this(assets.AsteroidTexture)
-        {
-        }
-
-        protected Asteroid(Texture2D texture)
-            : base(texture)
+            : base(assets.AsteroidTexture)
         {
             Durability.Both = 300;
         }

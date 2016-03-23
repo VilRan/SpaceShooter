@@ -109,6 +109,11 @@ namespace SpaceShooter.Dynamic
         {
 
         }
+
+        public virtual DynamicObject Clone()
+        {
+            return (DynamicObject)MemberwiseClone();
+        }
     }
 
     public class UpdateEventArgs

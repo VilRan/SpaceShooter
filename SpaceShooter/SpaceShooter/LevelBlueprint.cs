@@ -33,7 +33,7 @@ namespace SpaceShooter
         public IEnumerable<DynamicObject> GetObjects()
         {
             foreach (DynamicObject obj in Objects)
-                yield return obj;
+                yield return obj.Clone();
         }
     }
 }
