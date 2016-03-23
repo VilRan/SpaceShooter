@@ -25,6 +25,7 @@ namespace SpaceShooter
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Assets";
+            IsMouseVisible = true;
         }
 
         /// <summary>

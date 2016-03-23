@@ -31,7 +31,7 @@ namespace SpaceShooter.Dynamic
 
         }
 
-        public bool TryActive(Level level)
+        public bool TryActivate(Level level)
         {
             if (level.PlayArea.Contains(Position))
             {

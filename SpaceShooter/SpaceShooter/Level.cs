@@ -36,7 +36,7 @@ namespace SpaceShooter
             Camera.Update(gameTime);
             
             for (int i = 0; i < Inactive.Count; i++)
-                if (Inactive[i].TryActive(this))
+                if (Inactive[i].TryActivate(this))
                     i--;
 
             for (int i = 0; i < Objects.Count; i++)
