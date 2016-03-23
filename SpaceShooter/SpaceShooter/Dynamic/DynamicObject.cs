@@ -17,9 +17,10 @@ namespace SpaceShooter.Dynamic
     public abstract class DynamicObject : GameObject
     {
         private const float hitRadius = 12;
-        
+
         public Durability Durability = new Durability();
         public Faction Faction = Faction.Enemy;
+        public bool IsActive { private set; get; }
 
         public bool IsDying { get { return Durability.Current <= 0; } }
         public virtual float HitRadius { get { return hitRadius; } }
@@ -28,7 +29,13 @@ namespace SpaceShooter.Dynamic
         public DynamicObject(Texture2D texture)
             : base(texture)
         {
+            IsActive = false;
+        }
 
+        public void TryActive(Level level)
+        {
+            if (level.Bounds.Contains(Position))
+                IsActive = true;
         }
 
         public virtual void Update(UpdateEventArgs e)

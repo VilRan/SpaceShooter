@@ -10,14 +10,10 @@ namespace SpaceShooter.Dynamic
 {
     class Asteroid : DynamicObject
     {
-        const float speed = 128;
-
-        public Asteroid(AssetManager assets, Random random, Level level)
+        public Asteroid(AssetManager assets)
             : base(assets.AsteroidTexture)
         {
             Durability.Both = 300;
-            Position = new Vector2(level.Bounds.Right - 1, (float)random.NextDouble() * 768);
-            Velocity = new Vector2(0, -speed / 2 + speed * (float)random.NextDouble());
         }
 
         public override void OnCollision(CollisionEventArgs e)

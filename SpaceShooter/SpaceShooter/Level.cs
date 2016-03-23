@@ -14,6 +14,7 @@ namespace SpaceShooter
         public readonly SpaceShooterGame Game;
         public readonly LevelBlueprint Blueprint;
         public List<DynamicObject> Objects = new List<DynamicObject>();
+        public List<DynamicObject> Inactive = new List<DynamicObject>();
         public List<Particle> Particles = new List<Particle>();
         public Camera Camera { private set; get; }
 
@@ -29,18 +30,32 @@ namespace SpaceShooter
             player.Position = new Vector2(64, 384);
             Objects.Add(player);
             Camera = new Camera() { Velocity = new Vector2(128, 0) };
+
+            for (int i = 0; i < 10000; i++)
+            {
+                Asteroid test = new Asteroid(Game.Assets);
+                test.Position = new Vector2(1000 + 10 * i, Game.Random.Next(0, Bounds.Bottom));
+                test.Velocity = new Vector2(0, -128 / 2 + 128 * (float)Game.Random.NextDouble());
+                Inactive.Add(test);
+            }
         }
 
         public void Update(GameTime gameTime)
         {
             Camera.Update(gameTime);
-
-            if (Game.Random.Next(100) <= 10)
-            {
-                Asteroid asteroid = new Asteroid(Game.Assets, Game.Random, this);
-                Objects.Add(asteroid);
-            }
             
+            for (int i = 0; i < Inactive.Count; i++)
+            {
+                DynamicObject obj = Inactive[i];
+                obj.TryActive(this);
+                if (obj.IsActive)
+                {
+                    Objects.Add(obj);
+                    Inactive.Remove(obj);
+                    i--;
+                }
+            }
+
             for (int i = 0; i < Objects.Count; i++)
             {
                 DynamicObject obj = Objects[i];
