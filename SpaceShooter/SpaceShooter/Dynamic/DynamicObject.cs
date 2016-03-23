@@ -43,8 +43,11 @@ namespace SpaceShooter.Dynamic
         {
             for (int i = startIndex; i < level.Objects.Count; i++)
             {
+                if (IsDying)
+                    return;
+
                 DynamicObject other = level.Objects[i];
-                if (other.Faction == Faction)
+                if (other.Faction == Faction || other.IsDying)
                     continue;
 
                 bool isCollision = false;
