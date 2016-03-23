@@ -10,47 +10,14 @@ namespace SpaceShooter.Weapons
 {
     class Machinegun : Weapon
     {
-        const double firerateDelay = 0.05;
-        const double reloadDelay = 1.0;
-        const int magazineSize = 50;
-
-        double reloadTimer = 0.0;
-        double firerateTimer = 0.0;
-        int magazineCount = magazineSize;
-
-        public override bool CanFire { get { return firerateTimer <= 0 && magazineCount > 0; } }
-
-        public override void Update(GameTime gameTime)
-        {
-            if (reloadTimer > 0)
-            {
-                reloadTimer -= gameTime.ElapsedGameTime.TotalSeconds;
-                if (reloadTimer <= 0)
-                {
-                    reloadTimer = 0;
-                    magazineCount = magazineSize;
-                }
-            }
-            else if (firerateTimer > 0)
-            {
-                firerateTimer -= gameTime.ElapsedGameTime.TotalSeconds;
-                if (firerateTimer < 0)
-                {
-                    firerateTimer = 0;
-                }
-            }
-        }
+        public override int MagazineSize { get { return 50; } }
+        public override double ReloadDelay { get { return 1.0; } }
+        public override double FirerateDelay { get { return 0.05; } }
 
         public override void OnFire(FireEventArgs e)
         {
             Bullet bullet = new Bullet(e.Level.Game.Assets, e.Position, new Vector2(1024, 0));
             e.Level.Objects.Add(bullet);
-            magazineCount--;
-
-            if (magazineCount <= 0)
-                reloadTimer += reloadDelay;
-            else
-                firerateTimer += firerateDelay;
         }
     }
 }
