@@ -39,11 +39,12 @@ namespace SpaceShooter
                 if (Inactive[i].TryActivate(this))
                     i--;
 
+            UpdateEventArgs updateEventArgs = new UpdateEventArgs(this, gameTime);
             for (int i = 0; i < Objects.Count; i++)
             {
                 DynamicObject obj = Objects[i];
                 obj.CheckCollisions(gameTime, this, i + 1);
-                obj.Update(new UpdateEventArgs(this, gameTime));
+                obj.Update(updateEventArgs);
                 if (obj.IsDying)
                 {
                     Objects.RemoveAt(i);
@@ -54,10 +55,11 @@ namespace SpaceShooter
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            DrawEventArgs drawEventArgs = new DrawEventArgs(this, gameTime, spriteBatch);
             foreach (DynamicObject obj in Objects)
-                obj.Draw(new DrawEventArgs(this, gameTime, spriteBatch));
+                obj.Draw(drawEventArgs);
             foreach (Particle particle in Particles)
-                particle.Draw(new DrawEventArgs(this, gameTime, spriteBatch));
+                particle.Draw(drawEventArgs);
             Particles.RemoveAll(particle => particle.Lifespan <= 0.0);
         }
     }
