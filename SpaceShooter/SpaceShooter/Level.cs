@@ -36,16 +36,8 @@ namespace SpaceShooter
             Camera.Update(gameTime);
             
             for (int i = 0; i < Inactive.Count; i++)
-            {
-                DynamicObject obj = Inactive[i];
-                obj.TryActive(this);
-                if (obj.IsActive)
-                {
-                    Objects.Add(obj);
-                    Inactive.Remove(obj);
+                if (Inactive[i].TryActive(this))
                     i--;
-                }
-            }
 
             for (int i = 0; i < Objects.Count; i++)
             {

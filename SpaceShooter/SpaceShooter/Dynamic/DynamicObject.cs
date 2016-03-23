@@ -20,7 +20,6 @@ namespace SpaceShooter.Dynamic
 
         public Durability Durability = new Durability();
         public Faction Faction = Faction.Enemy;
-        public bool IsActive { private set; get; }
 
         public bool IsDying { get { return Durability.Current <= 0; } }
         public virtual float HitRadius { get { return hitRadius; } }
@@ -29,13 +28,18 @@ namespace SpaceShooter.Dynamic
         public DynamicObject(Texture2D texture)
             : base(texture)
         {
-            IsActive = false;
+
         }
 
-        public void TryActive(Level level)
+        public bool TryActive(Level level)
         {
             if (level.PlayArea.Contains(Position))
-                IsActive = true;
+            {
+                level.Objects.Add(this);
+                level.Inactive.Remove(this);
+                return true;
+            }
+            return false;
         }
 
         public virtual void Update(UpdateEventArgs e)
