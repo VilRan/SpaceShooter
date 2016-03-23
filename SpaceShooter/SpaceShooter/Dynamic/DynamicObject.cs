@@ -34,7 +34,7 @@ namespace SpaceShooter.Dynamic
 
         public void TryActive(Level level)
         {
-            if (level.Bounds.Contains(Position))
+            if (level.PlayArea.Contains(Position))
                 IsActive = true;
         }
 
@@ -42,7 +42,7 @@ namespace SpaceShooter.Dynamic
         {
             Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
             
-            if (!e.Level.Bounds.Contains(Position))
+            if (!e.Level.PlayArea.Contains(Position))
                 Durability.Current = 0;
         }
 

@@ -23,8 +23,11 @@ namespace SpaceShooter
             AsteroidTexture = content.Load<Texture2D>("Textures/Asteroid.png");
             BulletTexture = content.Load<Texture2D>("Textures/Bullet.png");
             ParticleTexture = content.Load<Texture2D>("Textures/Particle.png");
+        }
 
-            TestLevelBlueprint = new LevelBlueprint();
+        public void CreateTestLevel(SpaceShooterGame game)
+        {
+            TestLevelBlueprint = new LevelBlueprint(game);
         }
     }
 }

@@ -51,6 +51,7 @@ namespace SpaceShooter
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             Assets = new AssetManager(Content);
+            Assets.CreateTestLevel(this);
             Session = new Session(this);
             Session.PlayNextLevel();
         }

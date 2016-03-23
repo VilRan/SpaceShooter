@@ -52,14 +52,14 @@ namespace SpaceShooter.Dynamic
 
             Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
 
-            if (Position.X < e.Level.Bounds.Left)
-                Position.X = e.Level.Bounds.Left;
-            if (Position.X > e.Level.Bounds.Right)
-                Position.X = e.Level.Bounds.Right;
-            if (Position.Y < e.Level.Bounds.Top)
-                Position.Y = e.Level.Bounds.Top;
-            if (Position.Y > e.Level.Bounds.Bottom)
-                Position.Y = e.Level.Bounds.Bottom;
+            if (Position.X < e.Level.PlayArea.Left)
+                Position.X = e.Level.PlayArea.Left;
+            if (Position.X > e.Level.PlayArea.Right)
+                Position.X = e.Level.PlayArea.Right;
+            if (Position.Y < e.Level.PlayArea.Top)
+                Position.Y = e.Level.PlayArea.Top;
+            if (Position.Y > e.Level.PlayArea.Bottom)
+                Position.Y = e.Level.PlayArea.Bottom;
         }
     }
 }

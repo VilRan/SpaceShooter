@@ -17,27 +17,18 @@ namespace SpaceShooter
         public List<DynamicObject> Inactive = new List<DynamicObject>();
         public List<Particle> Particles = new List<Particle>();
         public Camera Camera { private set; get; }
-
-        public int Width { get { return 1024; } }
-        public int Height { get { return 768; } }
-        public Rectangle Bounds { get { return new Rectangle((int)Camera.Position.X, (int)Camera.Position.Y, Width, Height); } }
+        
+        public Rectangle PlayArea { get { return Camera.Bounds; } }
 
         public Level(SpaceShooterGame game, LevelBlueprint blueprint)
         {
             Game = game;
             Blueprint = blueprint;
+            Inactive.AddRange(Blueprint.GetObjects());
             PlayerShip player = game.Session.Player.Ship;
             player.Position = new Vector2(64, 384);
             Objects.Add(player);
-            Camera = new Camera() { Velocity = new Vector2(128, 0) };
-
-            for (int i = 0; i < 10000; i++)
-            {
-                Asteroid test = new Asteroid(Game.Assets);
-                test.Position = new Vector2(1000 + 10 * i, Game.Random.Next(0, Bounds.Bottom));
-                test.Velocity = new Vector2(0, -128 / 2 + 128 * (float)Game.Random.NextDouble());
-                Inactive.Add(test);
-            }
+            Camera = new Camera() { Velocity = new Vector2(128, 0), Size = new Vector2(1024, 768) };
         }
 
         public void Update(GameTime gameTime)

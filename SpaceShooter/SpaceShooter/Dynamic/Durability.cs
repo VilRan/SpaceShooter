@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Dynamic
 {
-    public class Durability
+    public struct Durability
     {
         public float Current { get { return current; } set { current = Math.Min(value, maximum); } }
         public float Maximum { get { return maximum; } set { maximum = value; Current = current; } }

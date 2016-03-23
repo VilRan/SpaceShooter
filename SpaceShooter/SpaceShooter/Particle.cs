@@ -22,7 +22,7 @@ namespace SpaceShooter
 
         public override void Draw(DrawEventArgs e)
         {
-            if (!e.Level.Bounds.Contains(Position))
+            if (!e.Level.PlayArea.Contains(Position))
                 Lifespan = 0;
             else
                 Lifespan -= e.GameTime.ElapsedGameTime.TotalSeconds;
