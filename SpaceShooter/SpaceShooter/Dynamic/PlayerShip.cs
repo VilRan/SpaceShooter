@@ -15,13 +15,16 @@ namespace SpaceShooter.Dynamic
         const float maxSpeed = 256;
 
         Weapon activeWeapon;
+        List<Weapon> weapons = new List<Weapon>();
 
         public PlayerShip(AssetManager assets)
             : base(assets.PlayerShipTexture)
         {
             Durability.Both = 100;
             Faction = Faction.Player;
-            activeWeapon = new Shotgun();
+            weapons.Add(new Machinegun());
+            weapons.Add(new Shotgun());
+            activeWeapon = weapons[0];
         }
 
         public override void Update(UpdateEventArgs e)
@@ -41,6 +44,11 @@ namespace SpaceShooter.Dynamic
             activeWeapon.Update(e.GameTime);
             if (keyboard.IsKeyDown(Keys.Space))
                 activeWeapon.TryFire(new FireEventArgs(e.Level, Position, e.Level.Game.Random));
+            if (keyboard.IsKeyDown(Keys.D1))
+                activeWeapon = weapons[0];
+            if (keyboard.IsKeyDown(Keys.D2))
+                activeWeapon = weapons[1];
+
 
             Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
 
