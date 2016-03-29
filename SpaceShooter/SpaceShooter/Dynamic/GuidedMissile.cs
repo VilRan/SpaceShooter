@@ -25,11 +25,21 @@ namespace SpaceShooter.Dynamic
         }
 
         public override void Update(UpdateEventArgs e)
-        {            
-            DynamicObject target = e.Level.Objects.
-                Where(obj => obj.Faction!=Faction).
-                OrderBy(obj => (obj.Position - Position).LengthSquared()).
-                First();
+        {
+            DynamicObject target = null;
+            float nearest = float.MaxValue;
+            foreach(DynamicObject obj in e.Level.Objects)
+            {
+                if (obj.Faction == Faction)
+                    continue;
+                float distance = (obj.Position - Position).LengthSquared();
+                if(distance < nearest)
+                {
+                    target = obj;
+                    nearest = distance;
+                }
+            }
+
             if (target != null)
             {                
                 Vector2? intercept = FindInterceptPoint(Position, Vector2.Zero, target.Position, target.Velocity, speed);
