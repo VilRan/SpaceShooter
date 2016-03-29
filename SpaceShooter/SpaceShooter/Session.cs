@@ -11,18 +11,17 @@ namespace SpaceShooter
         public Player Player;
         public Level ActiveLevel;
         public int Score = 0;
-
-        SpaceShooterGame game;
+        public SpaceShooterGame Game;
 
         public Session(SpaceShooterGame game)
         {
-            this.game = game;
+            this.Game = game;
             Player = new Player(game.Assets);
         }
 
         public void PlayNextLevel()
         {
-            ActiveLevel = new Level(game, game.Assets.TestLevelBlueprint);
+            ActiveLevel = new Level(this, Game.Assets.TestLevelBlueprint);
         }
     }
 }

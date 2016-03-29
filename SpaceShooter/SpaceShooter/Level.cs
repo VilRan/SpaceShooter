@@ -11,7 +11,7 @@ namespace SpaceShooter
 {
     public class Level
     {
-        public readonly SpaceShooterGame Game;
+        public readonly Session Session;
         public readonly LevelBlueprint Blueprint;
         public List<DynamicObject> Objects = new List<DynamicObject>();
         public List<DynamicObject> Inactive = new List<DynamicObject>();
@@ -19,14 +19,15 @@ namespace SpaceShooter
         public Camera Camera { private set; get; }
         
         public Rectangle PlayArea { get { return Camera.Bounds; } }
+        public SpaceShooterGame Game { get { return Session.Game; } }
 
-        public Level(SpaceShooterGame game, LevelBlueprint blueprint)
+        public Level(Session session, LevelBlueprint blueprint)
         {
-            Game = game;
+            Session = session;
             Blueprint = blueprint;
             Inactive.AddRange(Blueprint.GetObjects());
             Camera = new Camera() { Velocity = new Vector2(256, 0), Size = new Vector2(1024, 768) };
-            PlayerShip player = game.Session.Player.Ship;
+            PlayerShip player = Game.Session.Player.Ship;
             player.Position = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Top + PlayArea.Height / 2);
             Objects.Add(player);
         }
