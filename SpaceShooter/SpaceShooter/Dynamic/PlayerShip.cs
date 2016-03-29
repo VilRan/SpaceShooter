@@ -26,6 +26,7 @@ namespace SpaceShooter.Dynamic
             weapons.Add(new Shotgun());
             weapons.Add(new RocketLauncher());
             weapons.Add(new MissileLauncher());
+            weapons.Add(new FlakCannon());
             activeWeapon = weapons[0];
         }
 
@@ -54,6 +55,8 @@ namespace SpaceShooter.Dynamic
                 activeWeapon = weapons[2];
             if (keyboard.IsKeyDown(Keys.D4))
                 activeWeapon = weapons[3];
+            if (keyboard.IsKeyDown(Keys.D5))
+                activeWeapon = weapons[4];
 
 
             Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;

@@ -100,6 +100,8 @@
     <Compile Include="Dynamic\Bullet.cs" />
     <Compile Include="Dynamic\Durability.cs" />
     <Compile Include="Dynamic\DynamicObject.cs" />
+    <Compile Include="Dynamic\FlakCannonShell.cs" />
+    <Compile Include="Dynamic\Fragment.cs" />
     <Compile Include="Dynamic\GuidedMissile.cs" />
     <Compile Include="Dynamic\Rocket.cs" />
     <Compile Include="GameObject.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Weapons\FlakCannon.cs" />
     <Compile Include="Weapons\Machinegun.cs" />
     <Compile Include="Weapons\MissileLauncher.cs" />
     <Compile Include="Weapons\RocketLauncher.cs" />
