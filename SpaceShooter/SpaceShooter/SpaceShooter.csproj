@@ -120,6 +120,7 @@
     <Compile Include="TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Weapons\DualMachinegun.cs" />
     <Compile Include="Weapons\FlakCannon.cs" />
     <Compile Include="Weapons\Machinegun.cs" />
     <Compile Include="Weapons\MissileLauncher.cs" />
