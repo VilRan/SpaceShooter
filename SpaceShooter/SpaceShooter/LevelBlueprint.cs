@@ -19,7 +19,7 @@ namespace SpaceShooter
             Width = 10240;
             Height = 768;
 
-            int testEnemies = 1000;
+            int testEnemies = 50;
             Objects = new DynamicObject[testEnemies];
             for (int i = 0; i < testEnemies; i++)
             {
