@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using SpaceShooter.Dynamic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,13 +65,15 @@ namespace SpaceShooter.Weapons
     {
         public readonly Level Level;
         public readonly Vector2 Position;
+        public readonly DynamicObject Shooter;
 
         public Random Random { get { return Level.Game.Random; } }
 
-        public FireEventArgs(Level level, Vector2 position)
+        public FireEventArgs(Level level, Vector2 position, DynamicObject shooter)
         {
             Level = level;
             Position = position;
+            Shooter = shooter;
         }
     }
 }

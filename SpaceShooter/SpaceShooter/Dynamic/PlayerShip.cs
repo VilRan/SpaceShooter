@@ -45,7 +45,7 @@ namespace SpaceShooter.Dynamic
 
             activeWeapon.Update(e.GameTime);
             if (keyboard.IsKeyDown(Keys.Space))
-                activeWeapon.TryFire(new FireEventArgs(e.Level, Position));
+                activeWeapon.TryFire(new FireEventArgs(e.Level, Position,this));
             if (keyboard.IsKeyDown(Keys.D1))
                 activeWeapon = weapons[0];
             if (keyboard.IsKeyDown(Keys.D2))

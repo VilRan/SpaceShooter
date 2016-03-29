@@ -21,7 +21,7 @@ namespace SpaceShooter.Weapons
                 Vector2 velocity = new Vector2(1024, 0);
                 Matrix rotation = Matrix.CreateRotationZ((float)(e.Random.NextDouble() * Math.PI / 16 - e.Random.NextDouble() * Math.PI / 16));
                 velocity = Vector2.TransformNormal(velocity, rotation);
-                Bullet bullet = new Bullet(e.Level.Game.Assets, e.Position, velocity);
+                Bullet bullet = new Bullet(e.Level.Game.Assets, e.Position, velocity,e.Shooter.Faction);
                 e.Level.Objects.Add(bullet);
             }
         }
