@@ -21,6 +21,7 @@ namespace SpaceShooter
     public class Controller
     {
         Dictionary<Control, Keys[]> controls = new Dictionary<Control, Keys[]>();
+        KeyboardState previousKeyboard;
 
         public Controller()
         {
@@ -39,6 +40,13 @@ namespace SpaceShooter
             controls[Control.Fire][0] = Keys.Space;
             controls[Control.PreviousWeapon][0] = Keys.Q;
             controls[Control.NextWeapon][0] = Keys.E;
+
+            previousKeyboard = Keyboard.GetState();
+        }
+
+        public void Update()
+        {
+            previousKeyboard = Keyboard.GetState();
         }
 
         public bool IsControlDown(Control control)
@@ -51,6 +59,20 @@ namespace SpaceShooter
         {
             KeyboardState keyboard = Keyboard.GetState();
             return controls[control].Any(key => keyboard.IsKeyUp(key));
+        }
+
+        public bool IsControlPressed(Control control)
+        {
+            KeyboardState keyboard = Keyboard.GetState();
+            return controls[control].Any(
+                key => keyboard.IsKeyDown(key) && previousKeyboard.IsKeyUp(key));
+        }
+
+        public bool IsControlReleased(Control control)
+        {
+            KeyboardState keyboard = Keyboard.GetState();
+            return controls[control].Any(
+                key => keyboard.IsKeyUp(key) && previousKeyboard.IsKeyDown(key));
         }
     }
 }

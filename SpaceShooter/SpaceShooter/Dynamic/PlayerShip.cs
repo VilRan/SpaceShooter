@@ -52,6 +52,21 @@ namespace SpaceShooter.Dynamic
             activeWeapon.Update(e.GameTime);
             if (controller.IsControlDown(Control.Fire))
                 activeWeapon.TryFire(new FireEventArgs(e.Level, Position,this));
+            if (controller.IsControlPressed(Control.PreviousWeapon))
+            {
+                int weaponIndex = weapons.IndexOf(activeWeapon) - 1;
+                if (weaponIndex < 0)
+                    weaponIndex = weapons.Count - 1;
+                activeWeapon = weapons[weaponIndex];
+            }
+            if (controller.IsControlPressed(Control.NextWeapon))
+            {
+                int weaponIndex = weapons.IndexOf(activeWeapon) + 1;
+                if (weaponIndex >= weapons.Count)
+                    weaponIndex = 0;
+                activeWeapon = weapons[weaponIndex];
+            }
+
             if (keyboard.IsKeyDown(Keys.D1))
                 activeWeapon = weapons[0];
             if (keyboard.IsKeyDown(Keys.D2))

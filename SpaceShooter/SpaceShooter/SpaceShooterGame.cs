@@ -89,7 +89,10 @@ namespace SpaceShooter
             previousKeyboardState = keyboard;
 
             if (!IsPaused)
+            {
                 Session.ActiveLevel.Update(gameTime);
+                Session.Player.Controller.Update();
+            }
 
             base.Update(gameTime);
         }
