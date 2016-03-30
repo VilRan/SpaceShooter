@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using SpaceShooter.Particles;
 using SpaceShooter.Weapons;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace SpaceShooter.Dynamic
             Particle[] particles = new Particle[n];
             for (int i = 0; i < n; i++)
             {
-                Particle particle = new Particle(game.Assets.ParticleTexture);
+                TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture);
 
                 particle.Position = collisionPosition;
 
