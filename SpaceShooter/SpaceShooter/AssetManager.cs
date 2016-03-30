@@ -14,6 +14,7 @@ namespace SpaceShooter
         public Texture2D AsteroidTexture { private set; get; }
         public Texture2D BulletTexture { private set; get; }
         public Texture2D ParticleTexture { private set; get; }
+        public Texture2D PixelTexture { private set; get; }
 
         public LevelBlueprint TestLevelBlueprint { private set; get; }
 
@@ -23,6 +24,7 @@ namespace SpaceShooter
             AsteroidTexture = content.Load<Texture2D>("Textures/Asteroid.png");
             BulletTexture = content.Load<Texture2D>("Textures/Bullet.png");
             ParticleTexture = content.Load<Texture2D>("Textures/Particle.png");
+            PixelTexture = content.Load<Texture2D>("Textures/Pixel.png");
         }
 
         public void CreateTestLevel(SpaceShooterGame game)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceShooter.Dynamic;
+using SpaceShooter.Particles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +63,7 @@ namespace SpaceShooter
                 obj.Draw(drawEventArgs);
             foreach (Particle particle in Particles)
                 particle.Draw(drawEventArgs);
-            Particles.RemoveAll(particle => particle.Lifespan <= 0.0);
+            Particles.RemoveAll(particle => particle.IsRemoving);
         }
     }
 }
