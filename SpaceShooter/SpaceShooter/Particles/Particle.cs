@@ -6,13 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceShooter
+namespace SpaceShooter.Particles
 {
-    public class Particle : GameObject
+    public abstract class Particle : GameObject
     {
-        public double Lifespan;
-
         protected override Color Color { get { return Color.LightGray; } }
+        public abstract bool IsRemoving { get; }
 
         public Particle(Texture2D texture)
             : base(texture)
@@ -22,10 +21,6 @@ namespace SpaceShooter
 
         public override void Draw(DrawEventArgs e)
         {
-            if (!e.Level.PlayArea.Contains(Position))
-                Lifespan = 0;
-            else
-                Lifespan -= e.GameTime.ElapsedGameTime.TotalSeconds;
             Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
             base.Draw(e);
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceShooter.Dynamic;
+using SpaceShooter.Particles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,14 @@ namespace SpaceShooter
             PlayerShip player = Game.Session.Player.Ship;
             player.Position = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Top + PlayArea.Height / 2);
             Objects.Add(player);
+
+            Random random = Game.Random;
+            for (int i = 0; i < 1000; i++)
+            {
+                BackgroundParticle dust = new BackgroundParticle(Game.Assets.PixelTexture, (float)random.NextDouble());
+                dust.Position = new Vector2(random.Next(PlayArea.Width), random.Next(PlayArea.Height));
+                Particles.Add(dust);
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -62,7 +71,7 @@ namespace SpaceShooter
                 obj.Draw(drawEventArgs);
             foreach (Particle particle in Particles)
                 particle.Draw(drawEventArgs);
-            Particles.RemoveAll(particle => particle.Lifespan <= 0.0);
+            Particles.RemoveAll(particle => particle.IsRemoving);
         }
     }
 }

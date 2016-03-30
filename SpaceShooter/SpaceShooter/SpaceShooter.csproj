@@ -112,7 +112,9 @@
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="LevelBlueprint.cs" />
-    <Compile Include="Particle.cs" />
+    <Compile Include="Particles\BackgroundParticle.cs" />
+    <Compile Include="Particles\Particle.cs" />
+    <Compile Include="Particles\TimedParticle.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Dynamic\PlayerShip.cs" />
     <Compile Include="Session.cs" />
@@ -144,6 +146,7 @@
     <Content Include="Assets\Textures\Asteroid.png" />
     <Content Include="Assets\Textures\Bullet.png" />
     <Content Include="Assets\Textures\Particle.png" />
+    <Content Include="Assets\Textures\Pixel.png" />
     <Content Include="Assets\Textures\Ship.png" />
     <Content Include="Assets\MonoGame.Framework.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
