@@ -21,6 +21,7 @@ namespace SpaceShooter
 
         public void PlayNextLevel()
         {
+            Player.Ship.Durability.Current = Player.Ship.Durability.Maximum;
             ActiveLevel = new Level(this, Game.Assets.TestLevelBlueprint);
         }
     }
