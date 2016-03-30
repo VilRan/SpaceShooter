@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Particles
 {
-    public class Particle : GameObject
+    public abstract class Particle : GameObject
     {
         protected override Color Color { get { return Color.LightGray; } }
-        public virtual bool IsRemoving { get { return false; } }
+        public abstract bool IsRemoving { get; }
 
         public Particle(Texture2D texture)
             : base(texture)

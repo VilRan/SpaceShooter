@@ -111,6 +111,7 @@
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="LevelBlueprint.cs" />
+    <Compile Include="Particles\BackgroundParticle.cs" />
     <Compile Include="Particles\Particle.cs" />
     <Compile Include="Particles\TimedParticle.cs" />
     <Compile Include="Player.cs" />
