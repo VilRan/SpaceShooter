@@ -11,9 +11,22 @@ namespace SpaceShooter.Dynamic
 {
     class Fighter : DynamicObject
     {
+        enum FighterAiState
+        {
+            Wander,
+            Rockets,
+            Machinegun
+        }
+
         Weapon activeWeapon;
         List<Weapon> weapons = new List<Weapon>();
-        double shootingTimer = 1;
+
+        const float RocketUseDistance = 400f;
+        const float MachinegunUseDistance = 300f;
+        const float Hysteresis = 15f;
+
+        FighterAiState fighterState = FighterAiState.Wander;
+
         public Fighter(AssetManager assets)
             : base(assets.AsteroidTexture)
         {
@@ -22,24 +35,59 @@ namespace SpaceShooter.Dynamic
 
             weapons.Add(new Machinegun());
             weapons.Add(new RocketLauncher());
-            activeWeapon = weapons[1];
+            activeWeapon = weapons[0];
 
-            activeWeapon.MagazineSize = 5;
-            activeWeapon.MagazineCount = 5;
+            activeWeapon.MagazineSize = 3;
+            activeWeapon.MagazineCount = 3;
         }
         public override void Update(UpdateEventArgs e)
         {
             Vector2 shootingDirection = e.Level.Session.Player.Ship.Position - Position;
             shootingDirection.Normalize();
 
-            if(shootingTimer > 0)
+            float rocketUseThreshold = RocketUseDistance;
+            float machinegunUseThreshold = MachinegunUseDistance;
+
+            if (fighterState == FighterAiState.Wander)
             {
-                shootingTimer -= e.GameTime.ElapsedGameTime.TotalSeconds;
+                Velocity = new Vector2(-1, 0);
+
+                rocketUseThreshold -= Hysteresis / 2;
+            }
+            else if (fighterState == FighterAiState.Rockets)
+            {
+                activeWeapon = weapons[1];
+                activeWeapon.Update(e.GameTime);
+                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, shootingDirection, this));
+
+                Velocity = new Vector2(128, 0);
+
+                rocketUseThreshold += Hysteresis / 2;
+                machinegunUseThreshold -= Hysteresis / 2;
+            }
+            else if (fighterState == FighterAiState.Machinegun)
+            {
+                activeWeapon = weapons[0];
+                activeWeapon.Update(e.GameTime);
+                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, shootingDirection, this));
+
+                Velocity = new Vector2(128, 0);
+
+                machinegunUseThreshold += Hysteresis / 2;
+            }
+
+            float distanceFromPlayer = Vector2.Distance(Position, e.Level.Session.Player.Ship.Position);
+            if (distanceFromPlayer > rocketUseThreshold)
+            {
+                fighterState = FighterAiState.Wander;
+            }
+            else if (distanceFromPlayer > machinegunUseThreshold)
+            {
+                fighterState = FighterAiState.Rockets;
             }
             else
             {
-                activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, shootingDirection, this));
+                fighterState = FighterAiState.Machinegun;
             }
 
             base.Update(e);

@@ -22,7 +22,7 @@ namespace SpaceShooter.Dynamic
             : base(assets.PlayerShipTexture)
         {
             this.player = player;
-            Durability.Both = 1000;
+            Durability.Both = 2000;
             Faction = Faction.Player;
             weapons.Add(new Machinegun());
             weapons.Add(new Shotgun());

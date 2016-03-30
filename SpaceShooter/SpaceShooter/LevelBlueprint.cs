@@ -29,7 +29,7 @@ namespace SpaceShooter
                 Objects[i] = test;
             }
 */
-            int testFighters = 70;
+            int testFighters = 10;
             Objects = new DynamicObject[testFighters];
             for (int i = 0; i < testFighters; i++)
             {

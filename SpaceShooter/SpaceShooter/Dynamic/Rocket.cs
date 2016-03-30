@@ -55,7 +55,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Durability.Current -= 500;
+            e.Other.Durability.Current -= 200;
         }
     }
 }
