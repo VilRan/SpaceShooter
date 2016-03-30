@@ -15,7 +15,9 @@ namespace SpaceShooter
         public Texture2D Texture;
         
         public Vector2 Origin { get { return Texture.Bounds.Center.ToVector2(); } }
+        public abstract ObjectCategory Category { get; }
         protected abstract Color Color { get; }
+
 
         public GameObject(Texture2D texture)
         {
@@ -41,5 +43,12 @@ namespace SpaceShooter
             GameTime = gameTime;
             SpriteBatch = spriteBatch;
         }
+    }
+
+    public enum ObjectCategory
+    {
+        Particle,
+        Projectile,
+        Ship
     }
 }

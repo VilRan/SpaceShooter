@@ -18,6 +18,8 @@ namespace SpaceShooter.Dynamic
         Weapon activeWeapon;
         List<Weapon> weapons = new List<Weapon>();
 
+        public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
+
         public PlayerShip(AssetManager assets, Player player)
             : base(assets.PlayerShipTexture)
         {

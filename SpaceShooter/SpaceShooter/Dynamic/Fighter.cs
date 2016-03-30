@@ -24,8 +24,9 @@ namespace SpaceShooter.Dynamic
         const float RocketUseDistance = 400f;
         const float MachinegunUseDistance = 300f;
         const float Hysteresis = 15f;
-
         FighterAiState fighterState = FighterAiState.Wander;
+
+        public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
 
         public Fighter(AssetManager assets)
             : base(assets.AsteroidTexture)
@@ -40,6 +41,7 @@ namespace SpaceShooter.Dynamic
             activeWeapon.MagazineSize = 3;
             activeWeapon.MagazineCount = 3;
         }
+
         public override void Update(UpdateEventArgs e)
         {
             Vector2 shootingDirection = e.Level.Session.Player.Ship.Position - Position;

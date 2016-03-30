@@ -11,6 +11,8 @@ namespace SpaceShooter.Dynamic
 {
     class Asteroid : DynamicObject
     {
+        public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
+
         public Asteroid(AssetManager assets)
             : base(assets.AsteroidTexture)
         {

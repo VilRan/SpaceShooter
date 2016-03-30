@@ -14,6 +14,7 @@ namespace SpaceShooter.Particles
         public double Lifespan = 1;
 
         public override bool IsRemoving { get { return Lifespan <= 0; } }
+        public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         protected override Color Color { get { return _Color; } }
 
         public TimedParticle(Texture2D texture)
