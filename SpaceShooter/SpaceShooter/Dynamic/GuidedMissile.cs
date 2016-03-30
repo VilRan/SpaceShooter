@@ -13,6 +13,7 @@ namespace SpaceShooter.Dynamic
         const float hitRadius = 3f;
 
         public override float HitRadius { get { return hitRadius; } }
+        public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         const float speed = 1024;
 
         public GuidedMissile(AssetManager assets, Vector2 position, Vector2 velocity)
@@ -30,7 +31,7 @@ namespace SpaceShooter.Dynamic
             float nearest = float.MaxValue;
             foreach(DynamicObject obj in e.Level.Objects)
             {
-                if (obj.Faction == Faction)
+                if (obj.Faction == Faction || obj.Category != ObjectCategory.Ship)
                     continue;
                 float distance = (obj.Position - Position).LengthSquared();
                 if(distance < nearest)
@@ -42,7 +43,7 @@ namespace SpaceShooter.Dynamic
 
             if (target != null)
             {                
-                Vector2? intercept = FindInterceptPoint(Position, Vector2.Zero, target.Position, target.Velocity, speed);
+                Vector2? intercept = VectorUtility.FindInterceptPoint(Position, Vector2.Zero, target.Position, target.Velocity, speed);
                 if(intercept != null)
                 {
                     Vector2 direction = intercept.Value - Position;                    
@@ -60,22 +61,6 @@ namespace SpaceShooter.Dynamic
         public override void OnCollision(CollisionEventArgs e)
         {
             e.Other.Durability.Current -= 500;
-        }
-
-        public static Vector2? FindInterceptPoint(Vector2 shooterPosition, Vector2 shooterVelocity, Vector2 targetPosition, Vector2 targetVelocity, float projectileSpeed)
-        {
-            Vector2 relativePosition = targetPosition - shooterPosition;
-            Vector2 relativeVelocity = targetVelocity - shooterVelocity;
-            float a = projectileSpeed * projectileSpeed - relativeVelocity.LengthSquared();
-            float b = -2 * Vector2.Dot(relativeVelocity, relativePosition);
-            float c = -relativePosition.LengthSquared();
-            float d = b * b - 4 * a * c;
-            if (d > 0)
-            {
-                float result = (b + (float)Math.Sqrt(d)) / (2 * a);
-                return targetPosition + result * relativeVelocity;
-            }
-            return null;
         }
     }
 }

@@ -14,6 +14,9 @@ namespace SpaceShooter.Dynamic
         Weapon activeWeapon;
         List<Weapon> weapons = new List<Weapon>();
         double shootingTimer = 1;
+
+        public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
+
         public Fighter(AssetManager assets)
             : base(assets.AsteroidTexture)
         {
@@ -22,11 +25,12 @@ namespace SpaceShooter.Dynamic
 
             weapons.Add(new Machinegun());
             weapons.Add(new RocketLauncher());
-            activeWeapon = weapons[1];
+            activeWeapon = weapons[0];
 
             activeWeapon.MagazineSize = 5;
             activeWeapon.MagazineCount = 5;
         }
+
         public override void Update(UpdateEventArgs e)
         {
             Vector2 shootingDirection = e.Level.Session.Player.Ship.Position - Position;

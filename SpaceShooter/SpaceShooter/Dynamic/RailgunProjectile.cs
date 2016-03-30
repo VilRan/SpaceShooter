@@ -13,6 +13,7 @@ namespace SpaceShooter.Dynamic
         const float hitRadius = 64f;
 
         public override float HitRadius { get { return hitRadius; } }
+        public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
 
         public RailgunProjectile(AssetManager assets, Vector2 position, Vector2 velocity)
             : base(assets.BulletTexture)

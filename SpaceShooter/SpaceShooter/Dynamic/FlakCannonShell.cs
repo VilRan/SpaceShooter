@@ -12,6 +12,7 @@ namespace SpaceShooter.Dynamic
     {
         double flyingTime = 0.6;
 
+        public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         protected override Color Color { get { return Color.LightGray; } }
 
         public FlakCannonShell(AssetManager assets, Vector2 position, Vector2 velocity)

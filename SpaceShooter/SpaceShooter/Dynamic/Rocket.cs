@@ -14,6 +14,7 @@ namespace SpaceShooter.Dynamic
         const float hitRadius = 3f;
 
         public override float HitRadius { get { return hitRadius; } }
+        public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         double boostTimer = 0.2;
         static Vector2 maxVelocity = new Vector2(2048, 0);
 
