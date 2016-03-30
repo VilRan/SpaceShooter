@@ -31,38 +31,20 @@ namespace SpaceShooter.Dynamic
             }
             else
             {
-                SpaceShooterGame game = e.Level.Game;
-
-                Random random = game.Random;
-                int n = random.Next(20, 40);
-                for (int i = 0; i < n; i++)
-                {
-                    Vector2 velocity = new Vector2(512, 0);
-                    Matrix rotation = Matrix.CreateRotationZ((float)(random.NextDouble() * Math.PI * 2));
-
-                    velocity = Vector2.TransformNormal(velocity, rotation);
-
-                    Fragment fragment = new Fragment(game.Assets, Position, velocity);
-                    fragment.Lifespan = random.NextDouble();
-                    e.Level.Objects.Add(fragment);
-
-                    Durability.Current = 0;
-                }
+                Durability.Current = 0;
             }
             base.Update(e);
         }
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            SpaceShooterGame game = e.Level.Game;
-
             DynamicObject other = e.Other;
             other.Durability.Current -= 1;
+        }
 
-            Vector2 thisCollisionPosition = Position + Velocity * e.TimeOfCollision;
-            Vector2 otherCollisionPosition = other.Position + other.Velocity * e.TimeOfCollision;
-            Vector2 collisionPosition = (thisCollisionPosition - otherCollisionPosition) * (other.HitRadius / (HitRadius + other.HitRadius)) + otherCollisionPosition;
-
+        public override void OnDeath(DeathEventArgs e)
+        {
+            SpaceShooterGame game = e.Level.Game;
             Random random = game.Random;
             int n = random.Next(20, 40);
             for (int i = 0; i < n; i++)
@@ -72,7 +54,7 @@ namespace SpaceShooter.Dynamic
 
                 velocity = Vector2.TransformNormal(velocity, rotation);
 
-                Fragment fragment = new Fragment(game.Assets, collisionPosition, velocity);
+                Fragment fragment = new Fragment(game.Assets, Position, velocity);
                 fragment.Lifespan = random.NextDouble();
                 e.Level.Objects.Add(fragment);
             }

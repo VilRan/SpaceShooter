@@ -48,6 +48,7 @@ namespace SpaceShooter
                 obj.Update(updateEventArgs);
                 if (obj.IsDying)
                 {
+                    obj.OnDeath(new DeathEventArgs(this));
                     Objects.RemoveAt(i);
                     i--;
                 }

@@ -110,6 +110,11 @@ namespace SpaceShooter.Dynamic
 
         }
 
+        public virtual void OnDeath(DeathEventArgs e)
+        {
+
+        }
+
         public virtual DynamicObject Clone()
         {
             return (DynamicObject)MemberwiseClone();
@@ -139,6 +144,16 @@ namespace SpaceShooter.Dynamic
             Level = level;
             Other = other;
             TimeOfCollision = timeOfCollision;
+        }
+    }
+
+    public class DeathEventArgs
+    {
+        public readonly Level Level;
+
+        public DeathEventArgs(Level level)
+        {
+            Level = level;
         }
     }
 }
