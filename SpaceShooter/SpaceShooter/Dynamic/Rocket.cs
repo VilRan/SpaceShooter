@@ -18,13 +18,13 @@ namespace SpaceShooter.Dynamic
         static Vector2 maxVelocity = new Vector2(2048, 0);
 
 
-        public Rocket(AssetManager assets, Vector2 position, Vector2 velocity)
+        public Rocket(AssetManager assets, Vector2 position, Vector2 velocity, Faction faction)
             : base(assets.BulletTexture)
         {
             Durability.Both = 10;
             Position = position;
             Velocity = velocity;
-            Faction = Faction.Player;
+            Faction = faction;
         }
 
         public override void Update(UpdateEventArgs e)
@@ -35,7 +35,8 @@ namespace SpaceShooter.Dynamic
             }
             else 
             {
-                Velocity += acceleration * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
+                Vector2 direction = Vector2.Normalize(Velocity);
+                Velocity += direction * 2048 * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
                 if (Velocity.LengthSquared() > maxVelocity.LengthSquared())
                     Velocity = maxVelocity;
                 else

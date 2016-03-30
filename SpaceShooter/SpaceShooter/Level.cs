@@ -27,7 +27,7 @@ namespace SpaceShooter
             Session = session;
             Blueprint = blueprint;
             Inactive.AddRange(Blueprint.GetObjects());
-            Camera = new Camera() { Velocity = new Vector2(256, 0), Size = new Vector2(1024, 768) };
+            Camera = new Camera() { Velocity = new Vector2(128, 0), Size = new Vector2(1024, 768) };
             PlayerShip player = Game.Session.Player.Ship;
             player.Position = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Top + PlayArea.Height / 2);
             Objects.Add(player);
