@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,11 @@ namespace SpaceShooter.Particles
 {
     class TimedParticle : Particle
     {
+        public Color _Color = Color.White;
         public double Lifespan = 1;
 
         public override bool IsRemoving { get { return Lifespan <= 0; } }
+        protected override Color Color { get { return _Color; } }
 
         public TimedParticle(Texture2D texture)
             : base(texture)

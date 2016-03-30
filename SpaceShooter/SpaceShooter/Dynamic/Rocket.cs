@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-
+using SpaceShooter.Particles;
 
 namespace SpaceShooter.Dynamic
 {
@@ -38,6 +38,14 @@ namespace SpaceShooter.Dynamic
                 Velocity += acceleration * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
                 if (Velocity.LengthSquared() > maxVelocity.LengthSquared())
                     Velocity = maxVelocity;
+                else
+                {
+                    TimedParticle trail = new TimedParticle(e.Level.Game.Assets.ParticleTexture);
+                    trail.Position = Position;
+                    trail.Lifespan = 1.0;
+                    trail._Color = Color.Red;
+                    e.Level.Particles.Add(trail);
+                }
             }
             
 
