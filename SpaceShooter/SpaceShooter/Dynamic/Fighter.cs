@@ -23,6 +23,9 @@ namespace SpaceShooter.Dynamic
             weapons.Add(new Machinegun());
             weapons.Add(new RocketLauncher());
             activeWeapon = weapons[0];
+
+            activeWeapon.MagazineSize = 5;
+            activeWeapon.MagazineCount = 5;
         }
         public override void Update(UpdateEventArgs e)
         {
@@ -32,7 +35,8 @@ namespace SpaceShooter.Dynamic
             }
             else
             {
-                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, this));
+                activeWeapon.Update(e.GameTime);
+                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, new Vector2(-1,0), this));
             }
 
             base.Update(e);

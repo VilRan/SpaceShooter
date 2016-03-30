@@ -10,9 +10,15 @@ namespace SpaceShooter.Weapons
 {
     class RocketLauncher : Weapon
     {
-        public override int MagazineSize { get { return 5; } }
+        //public override int MagazineSize { get { return 5; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.5; } }
+
+        public RocketLauncher()
+            : base(5)
+        {
+            
+        }
 
         public override void OnFire(FireEventArgs e)
         {

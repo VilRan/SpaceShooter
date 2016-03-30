@@ -10,9 +10,15 @@ namespace SpaceShooter.Weapons
 {
     class FlakCannon : Weapon
     {
-        public override int MagazineSize { get { return 50; } }
+        //public override int MagazineSize { get { return 50; } }
         public override double ReloadDelay { get { return 2; } }
         public override double FirerateDelay { get { return 0.35; } }
+
+        public FlakCannon()
+            : base(50)
+        {
+            
+        }
 
         public override void OnFire(FireEventArgs e)
         {

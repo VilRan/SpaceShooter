@@ -10,9 +10,15 @@ namespace SpaceShooter.Weapons
 {
     class Railgun : Weapon
     {
-        public override int MagazineSize { get { return 1; } }
+        //public override int MagazineSize { get { return 1; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.05; } }
+
+        public Railgun()
+            : base(1)
+        {
+            
+        }
 
         public override void OnFire(FireEventArgs e)
         {

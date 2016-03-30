@@ -10,9 +10,15 @@ namespace SpaceShooter.Weapons
 {
     class DualMachinegun : Weapon
     {
-        public override int MagazineSize { get { return 50; } }
+        //public override int MagazineSize { get { return 50; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.05; } }
+
+        public DualMachinegun()
+            :base(50)
+        {
+            
+        }
 
         public override void OnFire(FireEventArgs e)
         {

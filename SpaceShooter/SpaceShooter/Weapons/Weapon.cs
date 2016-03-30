@@ -12,16 +12,18 @@ namespace SpaceShooter.Weapons
     {
         double reloadTimer = 0.0;
         double firerateTimer = 0.0;
-        int magazineCount;
+        public int MagazineCount;
+        public int MagazineSize;
 
-        public abstract int MagazineSize { get; }
+        //public int MagazineSize { get{return _MagazineSize; } }
         public abstract double ReloadDelay { get; }
         public abstract double FirerateDelay { get; }
-        public bool CanFire { get { return firerateTimer <= 0 && magazineCount > 0; } }
+        public bool CanFire { get { return firerateTimer <= 0 && MagazineCount > 0; } }
 
-        public Weapon()
+        public Weapon(int magazineSize)
         {
-            magazineCount = MagazineSize;
+            MagazineSize = magazineSize;
+            MagazineCount = MagazineSize;
         }
 
         public abstract void OnFire(FireEventArgs e);
@@ -34,7 +36,7 @@ namespace SpaceShooter.Weapons
                 if (reloadTimer <= 0)
                 {
                     reloadTimer = 0;
-                    magazineCount = MagazineSize;
+                    MagazineCount = MagazineSize;
                 }
             }
             else if (firerateTimer > 0)
@@ -52,8 +54,8 @@ namespace SpaceShooter.Weapons
             if (CanFire)
             {
                 OnFire(e);
-                magazineCount--;
-                if (magazineCount <= 0)
+                MagazineCount--;
+                if (MagazineCount <= 0)
                     reloadTimer += ReloadDelay;
                 else
                     firerateTimer += FirerateDelay;
@@ -65,14 +67,16 @@ namespace SpaceShooter.Weapons
     {
         public readonly Level Level;
         public readonly Vector2 Position;
+        public readonly Vector2 Direction;
         public readonly DynamicObject Shooter;
 
         public Random Random { get { return Level.Game.Random; } }
 
-        public FireEventArgs(Level level, Vector2 position, DynamicObject shooter)
+        public FireEventArgs(Level level, Vector2 position, Vector2 direction, DynamicObject shooter)
         {
             Level = level;
             Position = position;
+            Direction = direction;
             Shooter = shooter;
         }
     }

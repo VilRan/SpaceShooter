@@ -51,7 +51,7 @@ namespace SpaceShooter.Dynamic
 
             activeWeapon.Update(e.GameTime);
             if (controller.IsControlDown(Control.Fire))
-                activeWeapon.TryFire(new FireEventArgs(e.Level, Position,this));
+                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, new Vector2(1,0), this));
             if (controller.IsControlPressed(Control.PreviousWeapon))
             {
                 int weaponIndex = weapons.IndexOf(activeWeapon) - 1;

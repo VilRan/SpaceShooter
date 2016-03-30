@@ -10,13 +10,19 @@ namespace SpaceShooter.Weapons
 {
     class Machinegun : Weapon
     {
-        public override int MagazineSize { get { return 50; } }
+        //public override int MagazineSize { get { return 50; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.05; } }
 
+        public Machinegun()
+            : base(50)
+        {
+            
+        }
+
         public override void OnFire(FireEventArgs e)
         {
-            Bullet bullet = new Bullet(e.Level.Game.Assets, e.Position, new Vector2(1024, 0),e.Shooter.Faction);
+            Bullet bullet = new Bullet(e.Level.Game.Assets, e.Position, e.Direction * 1024, e.Shooter.Faction);
             e.Level.Objects.Add(bullet);
         }
     }
