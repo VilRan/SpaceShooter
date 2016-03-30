@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="AssetManager.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Dynamic\Asteroid.cs" />
     <Compile Include="Dynamic\Bullet.cs" />
     <Compile Include="Dynamic\Durability.cs" />

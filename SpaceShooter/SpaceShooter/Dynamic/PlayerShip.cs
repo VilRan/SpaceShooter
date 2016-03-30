@@ -14,12 +14,14 @@ namespace SpaceShooter.Dynamic
     {
         const float maxSpeed = 256;
 
+        readonly Player player;
         Weapon activeWeapon;
         List<Weapon> weapons = new List<Weapon>();
 
-        public PlayerShip(AssetManager assets)
+        public PlayerShip(AssetManager assets, Player player)
             : base(assets.PlayerShipTexture)
         {
+            this.player = player;
             Durability.Both = 100;
             Faction = Faction.Player;
             weapons.Add(new Machinegun());
@@ -34,20 +36,21 @@ namespace SpaceShooter.Dynamic
 
         public override void Update(UpdateEventArgs e)
         {
+            Controller controller = player.Controller;
             KeyboardState keyboard = Keyboard.GetState();
 
             Velocity = e.Level.Camera.Velocity;
-            if (keyboard.IsKeyDown(Keys.Up))
+            if (controller.IsControlDown(Control.MoveUp))
                 Velocity += new Vector2(0, -maxSpeed);
-            if (keyboard.IsKeyDown(Keys.Down))
+            if (controller.IsControlDown(Control.MoveDown))
                 Velocity += new Vector2(0, maxSpeed);
-            if (keyboard.IsKeyDown(Keys.Left))
+            if (controller.IsControlDown(Control.MoveLeft))
                 Velocity += new Vector2(-maxSpeed, 0);
-            if (keyboard.IsKeyDown(Keys.Right))
+            if (controller.IsControlDown(Control.MoveRight))
                 Velocity += new Vector2(maxSpeed, 0);
 
             activeWeapon.Update(e.GameTime);
-            if (keyboard.IsKeyDown(Keys.Space))
+            if (controller.IsControlDown(Control.Fire))
                 activeWeapon.TryFire(new FireEventArgs(e.Level, Position,this));
             if (keyboard.IsKeyDown(Keys.D1))
                 activeWeapon = weapons[0];
