@@ -29,6 +29,9 @@ namespace SpaceShooter.Dynamic
         }
         public override void Update(UpdateEventArgs e)
         {
+            Vector2 shootingDirection = e.Level.Session.Player.Ship.Position - Position;
+            shootingDirection.Normalize();
+
             if(shootingTimer > 0)
             {
                 shootingTimer -= e.GameTime.ElapsedGameTime.TotalSeconds;
@@ -36,7 +39,7 @@ namespace SpaceShooter.Dynamic
             else
             {
                 activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, new Vector2(-1,0), this));
+                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, shootingDirection, this));
             }
 
             base.Update(e);
