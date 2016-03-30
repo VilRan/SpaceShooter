@@ -22,7 +22,7 @@ namespace SpaceShooter.Dynamic
 
             weapons.Add(new Machinegun());
             weapons.Add(new RocketLauncher());
-            activeWeapon = weapons[0];
+            activeWeapon = weapons[1];
 
             activeWeapon.MagazineSize = 5;
             activeWeapon.MagazineCount = 5;
