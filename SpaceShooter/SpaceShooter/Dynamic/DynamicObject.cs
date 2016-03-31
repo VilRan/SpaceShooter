@@ -77,9 +77,16 @@ namespace SpaceShooter.Dynamic
 
         public void FindClosestApproach(DynamicObject other, out float timeOfClosestApproach, out bool isCollision)
         {
-            Vector2 positionDelta = Position - other.Position;
             Vector2 velocityDelta = Velocity - other.Velocity;
             float a = Vector2.Dot(velocityDelta, velocityDelta);
+            if (a == 0)
+            {
+                timeOfClosestApproach = float.NaN;
+                isCollision = false;
+                return;
+            }
+
+            Vector2 positionDelta = Position - other.Position;
             float b = 2 * Vector2.Dot(positionDelta, velocityDelta);
             float c = Vector2.Dot(positionDelta, positionDelta) - (HitRadius + other.HitRadius) * (HitRadius + other.HitRadius);
             float discriminant = b * b - 4 * a * c;

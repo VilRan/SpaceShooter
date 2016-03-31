@@ -96,5 +96,10 @@ namespace SpaceShooter.Dynamic
             if (Position.Y > e.Level.PlayArea.Bottom)
                 Position.Y = e.Level.PlayArea.Bottom;
         }
+
+        public override void OnCollision(CollisionEventArgs e)
+        {
+            base.OnCollision(e);
+        }
     }
 }
