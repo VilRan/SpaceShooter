@@ -99,7 +99,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            base.OnCollision(e);
+            e.Other.Durability.Current -= 1000;
         }
     }
 }
