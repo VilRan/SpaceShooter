@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 
 namespace SpaceShooter
@@ -11,6 +12,8 @@ namespace SpaceShooter
     /// </summary>
     public class SpaceShooterGame : Game
     {
+        public static Rectangle InternalResolution { get { return new Rectangle(0, 0, 1920, 1080); } }
+
         public AssetManager Assets { private set; get; }
         public Session Session { private set; get; }
         public Random Random { private set; get; }
@@ -18,6 +21,7 @@ namespace SpaceShooter
         public bool IsDeactived = false;
 
         GraphicsDeviceManager graphics;
+        RenderTarget2D renderTarget;
         SpriteBatch spriteBatch;
         KeyboardState previousKeyboardState;
 
@@ -37,6 +41,7 @@ namespace SpaceShooter
         protected override void Initialize()
         {
             Random = new Random();
+            renderTarget = new RenderTarget2D(GraphicsDevice, InternalResolution.Width, InternalResolution.Height);
             previousKeyboardState = Keyboard.GetState();
 
             base.Initialize();
@@ -82,6 +87,15 @@ namespace SpaceShooter
                 Windows.UI.Xaml.Window.Current.Content = new TestPage();
                 IsDeactived = true;
             }
+            if (keyboard.IsKeyDown(Keys.F) && previousKeyboardState.IsKeyUp(Keys.F))
+            {
+                ApplicationView view = ApplicationView.GetForCurrentView();
+                if (view.IsFullScreenMode)
+                    view.ExitFullScreenMode();
+                else
+                    view.TryEnterFullScreenMode();
+
+            }
             if (keyboard.IsKeyDown(Keys.P) && previousKeyboardState.IsKeyUp(Keys.P))
                 IsPaused = !IsPaused;
             if (keyboard.IsKeyDown(Keys.N) && previousKeyboardState.IsKeyUp(Keys.N))
@@ -107,12 +121,20 @@ namespace SpaceShooter
                 return;
 
             GraphicsDevice.Clear(Color.Black);
-
+            GraphicsDevice.SetRenderTarget(renderTarget);
             spriteBatch.Begin();
             if (IsPaused)
                 Session.ActiveLevel.Draw(new GameTime(), spriteBatch);
             else
                 Session.ActiveLevel.Draw(gameTime, spriteBatch);
+            spriteBatch.End();
+
+            GraphicsDevice.SetRenderTarget(null);
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, SamplerState.AnisotropicClamp);
+            float widthRatio = Window.ClientBounds.Width / (float)InternalResolution.Width;
+            float heightRatio = Window.ClientBounds.Height / (float)InternalResolution.Height;
+            float scale = Math.Min(widthRatio, heightRatio);
+            spriteBatch.Draw(renderTarget, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             spriteBatch.End();
 
             base.Draw(gameTime);

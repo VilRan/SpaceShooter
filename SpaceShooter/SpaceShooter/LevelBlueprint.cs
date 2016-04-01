@@ -17,14 +17,14 @@ namespace SpaceShooter
         public LevelBlueprint(SpaceShooterGame game)
         {
             Width = 10240;
-            Height = 768;
+            Height = SpaceShooterGame.InternalResolution.Height;
 
             int testEnemies = 1000;
             Objects = new DynamicObject[testEnemies];
             for (int i = 0; i < testEnemies; i++)
             {
                 Asteroid test = new Asteroid(game.Assets);
-                test.Position = new Vector2(1000 + ((float)Width / testEnemies) * i, game.Random.Next(0, Height));
+                test.Position = new Vector2(SpaceShooterGame.InternalResolution.Width + ((float)Width / testEnemies) * i, game.Random.Next(0, Height));
                 test.Velocity = new Vector2(0, -128 / 2 + 128 * (float)game.Random.NextDouble());
                 Objects[i] = test;
             }
