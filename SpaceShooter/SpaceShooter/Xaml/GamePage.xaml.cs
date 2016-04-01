@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -20,9 +21,13 @@ namespace SpaceShooter
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class GamePage : Page
+    public sealed partial class GamePage : Page, INotifyPropertyChanged
     {
 		public readonly SpaceShooterGame Game;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public double HealthbarValue { get { return 100 * Game.Session.Player.Ship.CurrentDurability / Game.Session.Player.Ship.MaximumDurability; } }
 
 		public GamePage()
         {
@@ -31,6 +36,12 @@ namespace SpaceShooter
 			// Create the game.
 			var launchArguments = string.Empty;
             Game = MonoGame.Framework.XamlGame<SpaceShooterGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+        }
+
+        public void NotifyPropertyChange(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

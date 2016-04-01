@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using SpaceShooter.Weapons;
+using Windows.UI.Xaml;
 
 namespace SpaceShooter.Dynamic
 {
@@ -21,10 +22,9 @@ namespace SpaceShooter.Dynamic
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
 
         public PlayerShip(AssetManager assets, Player player)
-            : base(assets.PlayerShipTexture)
+            : base(assets.PlayerShipTexture, 2000)
         {
             this.player = player;
-            Durability.Both = 2000;
             Faction = Faction.Player;
             weapons.Add(new Machinegun());
             weapons.Add(new Shotgun());
@@ -99,7 +99,13 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Durability.Current -= 1000;
+            e.Other.Damage(new DamageEventArgs(e.Level, 1000));
+        }
+
+        public override void Damage(DamageEventArgs e)
+        {
+            base.Damage(e);
+            (Application.Current as App).GamePage.NotifyPropertyChange("HealthbarValue");
         }
     }
 }

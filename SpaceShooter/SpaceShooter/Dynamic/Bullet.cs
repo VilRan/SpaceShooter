@@ -17,9 +17,8 @@ namespace SpaceShooter.Dynamic
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
 
         public Bullet(AssetManager assets, Vector2 position, Vector2 velocity, Faction faction)
-            : base(assets.BulletTexture)
+            : base(assets.BulletTexture, 10)
         {
-            Durability.Both = 10;
             Position = position;
             Velocity = velocity;
             Faction = faction;
@@ -27,7 +26,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Durability.Current -= 100;
+            e.Other.Damage(new DamageEventArgs(e.Level, 100));
         }
     }
 }

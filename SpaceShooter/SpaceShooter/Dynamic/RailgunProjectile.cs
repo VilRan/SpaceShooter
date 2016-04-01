@@ -16,9 +16,8 @@ namespace SpaceShooter.Dynamic
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
 
         public RailgunProjectile(AssetManager assets, Vector2 position, Vector2 velocity)
-            : base(assets.BulletTexture)
+            : base(assets.BulletTexture, 2000)
         {
-            Durability.Both = 2000;
             Position = position;
             Velocity = velocity;
             Faction = Faction.Player;
@@ -26,7 +25,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Durability.Current -= 2000;
+            e.Other.Damage(new DamageEventArgs(e.Level, 2000));
         }
     }
 }

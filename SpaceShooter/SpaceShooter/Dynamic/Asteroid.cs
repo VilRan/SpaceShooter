@@ -14,9 +14,9 @@ namespace SpaceShooter.Dynamic
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
 
         public Asteroid(AssetManager assets)
-            : base(assets.AsteroidTexture)
+            : base(assets.AsteroidTexture, 1000)
         {
-            Durability.Both = 1000;
+
         }
 
         public override void OnCollision(CollisionEventArgs e)
@@ -24,7 +24,7 @@ namespace SpaceShooter.Dynamic
             SpaceShooterGame game = e.Level.Game;
 
             DynamicObject other = e.Other;
-            other.Durability.Current -= 100;
+            other.Damage(new DamageEventArgs(e.Level, 100));
 
             Vector2 thisCollisionPosition = Position + Velocity * e.TimeOfCollision;
             Vector2 otherCollisionPosition = other.Position + other.Velocity * e.TimeOfCollision;

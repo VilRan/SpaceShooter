@@ -14,5 +14,11 @@ namespace SpaceShooter.Dynamic
 
         float current;
         float maximum;
+
+        public Durability(float maximum)
+        {
+            this.maximum = maximum;
+            current = maximum;
+        }
     }
 }

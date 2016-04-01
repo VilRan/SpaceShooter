@@ -18,28 +18,34 @@ namespace SpaceShooter.Dynamic
     {
         private const float hitRadius = 12;
 
-        public Durability Durability = new Durability();
+        Durability durability;
         public Faction Faction = Faction.Enemy;
 
-        public bool IsDying { get { return Durability.Current <= 0; } }
+        public double CurrentDurability { get { return durability.Current; } }
+        public double MaximumDurability { get { return durability.Maximum; } }
+        public bool IsDying { get { return durability.Current <= 0; } }
         public virtual float HitRadius { get { return hitRadius; } }
         protected override Color Color { get { return Color.White; } }
 
-        public DynamicObject(Texture2D texture)
+        public DynamicObject(Texture2D texture, float durability)
             : base(texture)
+        {
+            this.durability = new Durability(durability);
+        }
+
+        public virtual void OnCollision(CollisionEventArgs e)
         {
 
         }
 
-        public bool TryActivate(Level level)
+        public virtual void OnDeath(DeathEventArgs e)
         {
-            if (level.PlayArea.Contains(Position))
-            {
-                level.Objects.Add(this);
-                level.Inactive.Remove(this);
-                return true;
-            }
-            return false;
+
+        }
+
+        public virtual DynamicObject Clone()
+        {
+            return (DynamicObject)MemberwiseClone();
         }
 
         public virtual void Update(UpdateEventArgs e)
@@ -47,9 +53,9 @@ namespace SpaceShooter.Dynamic
             Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
             
             if (!e.Level.PlayArea.Contains(Position))
-                Durability.Current = 0;
+                Die();
         }
-
+        
         public void CheckCollisions(GameTime gameTime, Level level, int startIndex)
         {
             for (int i = startIndex; i < level.Objects.Count; i++)
@@ -111,20 +117,31 @@ namespace SpaceShooter.Dynamic
             if (timeOfClosestApproach < 0)
                 timeOfClosestApproach = 0;
         }
-
-        public virtual void OnCollision(CollisionEventArgs e)
+        
+        public bool TryActivate(Level level)
         {
-
+            if (level.PlayArea.Contains(Position))
+            {
+                level.Objects.Add(this);
+                level.Inactive.Remove(this);
+                return true;
+            }
+            return false;
         }
 
-        public virtual void OnDeath(DeathEventArgs e)
+        public virtual void Repair(float amount)
         {
-
+            durability.Current += amount;
         }
 
-        public virtual DynamicObject Clone()
+        public virtual void Damage(DamageEventArgs e)
         {
-            return (DynamicObject)MemberwiseClone();
+            durability.Current -= e.DamageAmount;
+        }
+
+        public void Die()
+        {
+            durability.Current = 0;
         }
     }
 
@@ -151,6 +168,18 @@ namespace SpaceShooter.Dynamic
             Level = level;
             Other = other;
             TimeOfCollision = timeOfCollision;
+        }
+    }
+
+    public class DamageEventArgs
+    {
+        public readonly Level Level;
+        public readonly float DamageAmount;
+
+        public DamageEventArgs(Level level, float damageAmount)
+        {
+            Level = level;
+            DamageAmount = damageAmount;
         }
     }
 
