@@ -20,11 +20,11 @@ namespace SpaceShooter
 
         public AssetManager(ContentManager content)
         {
-            PlayerShipTexture = content.Load<Texture2D>("Textures/Ship.png");
-            AsteroidTexture = content.Load<Texture2D>("Textures/Asteroid.png");
-            BulletTexture = content.Load<Texture2D>("Textures/Bullet.png");
-            ParticleTexture = content.Load<Texture2D>("Textures/Particle.png");
-            PixelTexture = content.Load<Texture2D>("Textures/Pixel.png");
+            PlayerShipTexture = content.Load<Texture2D>("Textures/Ship");
+            AsteroidTexture = content.Load<Texture2D>("Textures/Asteroid");
+            BulletTexture = content.Load<Texture2D>("Textures/Bullet");
+            ParticleTexture = content.Load<Texture2D>("Textures/Particle");
+            PixelTexture = content.Load<Texture2D>("Textures/Pixel");
         }
 
         public void CreateTestLevel(SpaceShooterGame game)

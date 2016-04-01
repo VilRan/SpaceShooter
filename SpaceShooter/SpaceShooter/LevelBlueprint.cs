@@ -18,8 +18,8 @@ namespace SpaceShooter
         {
             Width = 10240;
             Height = 768;
-/*
-            int testEnemies = 100;
+
+            int testEnemies = 1000;
             Objects = new DynamicObject[testEnemies];
             for (int i = 0; i < testEnemies; i++)
             {
@@ -28,7 +28,7 @@ namespace SpaceShooter
                 test.Velocity = new Vector2(0, -128 / 2 + 128 * (float)game.Random.NextDouble());
                 Objects[i] = test;
             }
-*/
+            /*
             int testFighters = 10;
             Objects = new DynamicObject[testFighters];
             for (int i = 0; i < testFighters; i++)
@@ -38,6 +38,7 @@ namespace SpaceShooter
                 test.Velocity = new Vector2(-1, 0);
                 Objects[i] = test;
             }
+            */
         }
 
         public IEnumerable<DynamicObject> GetObjects()

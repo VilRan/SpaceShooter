@@ -135,6 +135,11 @@
     <Compile Include="Weapons\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Textures\Asteroid.xnb" />
+    <Content Include="Assets\Textures\Bullet.xnb" />
+    <Content Include="Assets\Textures\Particle.xnb" />
+    <Content Include="Assets\Textures\Pixel.xnb" />
+    <Content Include="Assets\Textures\Ship.xnb" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -144,11 +149,11 @@
     <None Include="SpaceShooter_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Textures\Asteroid.png" />
-    <Content Include="Assets\Textures\Bullet.png" />
-    <Content Include="Assets\Textures\Particle.png" />
-    <Content Include="Assets\Textures\Pixel.png" />
-    <Content Include="Assets\Textures\Ship.png" />
+    <None Include="Assets\Textures\Asteroid.png" />
+    <None Include="Assets\Textures\Bullet.png" />
+    <None Include="Assets\Textures\Particle.png" />
+    <None Include="Assets\Textures\Pixel.png" />
+    <None Include="Assets\Textures\Ship.png" />
     <Content Include="Assets\MonoGame.Framework.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -181,7 +186,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
+    <MonoGameContentReference Include="Assets\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
