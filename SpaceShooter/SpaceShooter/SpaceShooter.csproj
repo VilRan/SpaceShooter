@@ -108,7 +108,7 @@
     <Compile Include="Dynamic\RailgunProjectile.cs" />
     <Compile Include="Dynamic\Rocket.cs" />
     <Compile Include="GameObject.cs" />
-    <Compile Include="GamePage.xaml.cs">
+    <Compile Include="Xaml\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="LevelBlueprint.cs" />
@@ -121,7 +121,7 @@
     <Compile Include="SpaceShooterGame.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestPage.xaml.cs">
+    <Compile Include="Xaml\TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="VectorUtility.cs" />
@@ -193,11 +193,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="GamePage.xaml">
+    <Page Include="Xaml\GamePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="TestPage.xaml">
+    <Page Include="Xaml\TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

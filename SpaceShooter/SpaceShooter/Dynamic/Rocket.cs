@@ -42,10 +42,12 @@ namespace SpaceShooter.Dynamic
                     Velocity = maxVelocity;
                 else
                 {
-                    TimedParticle trail = new TimedParticle(e.Level.Game.Assets.ParticleTexture);
+                    Random random = e.Level.Game.Random;
+                    double trailLifespan = 0.25 + 0.25 * random.NextDouble();
+                    TimedParticle trail = new TimedParticle(e.Level.Game.Assets.ParticleTexture, trailLifespan);
                     trail.Position = Position;
-                    trail.Lifespan = 1.0;
-                    trail._Color = Color.Red;
+                    trail.Velocity = VectorUtility.CreateRandom(random, 32);
+                    trail.StartColor = Color.OrangeRed;
                     e.Level.Particles.Add(trail);
                 }
             }
@@ -56,7 +58,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Durability.Current -= 200;
+            e.Other.Durability.Current -= 500;
         }
     }
 }

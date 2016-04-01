@@ -10,25 +10,32 @@ namespace SpaceShooter.Particles
 {
     class TimedParticle : Particle
     {
-        public Color _Color = Color.White;
-        public double Lifespan = 1;
+        public Color StartColor = Color.White;
+        public Color EndColor = Color.TransparentBlack;
+        Color color;
+        double lifespan;
+        double life;
 
-        public override bool IsRemoving { get { return Lifespan <= 0; } }
+        public override bool IsRemoving { get { return life <= 0; } }
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
-        protected override Color Color { get { return _Color; } }
+        protected override Color Color { get { return color; } }
 
-        public TimedParticle(Texture2D texture)
+        public TimedParticle(Texture2D texture, double lifespan)
             : base(texture)
         {
-
+            this.lifespan = lifespan;
+            life = lifespan;
         }
 
         public override void Draw(DrawEventArgs e)
         {
             if (!e.Level.PlayArea.Contains(Position))
-                Lifespan = 0;
+                life = 0;
             else
-                Lifespan -= e.GameTime.ElapsedGameTime.TotalSeconds;
+                life -= e.GameTime.ElapsedGameTime.TotalSeconds;
+
+            color = Color.Lerp(EndColor, StartColor, (float)(life / lifespan));
+
             base.Draw(e);
         }
     }

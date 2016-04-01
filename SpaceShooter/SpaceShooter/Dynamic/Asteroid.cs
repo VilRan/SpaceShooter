@@ -16,7 +16,7 @@ namespace SpaceShooter.Dynamic
         public Asteroid(AssetManager assets)
             : base(assets.AsteroidTexture)
         {
-            Durability.Both = 300;
+            Durability.Both = 1000;
         }
 
         public override void OnCollision(CollisionEventArgs e)
@@ -35,15 +35,11 @@ namespace SpaceShooter.Dynamic
             Particle[] particles = new Particle[n];
             for (int i = 0; i < n; i++)
             {
-                TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture);
+                double lifespan = random.NextDouble();
+                TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, lifespan);
 
                 particle.Position = collisionPosition;
-
-                double direction = random.NextDouble() * Math.PI * 2;
-                double speed = random.NextDouble() * 1000;
-                particle.Velocity = new Vector2((float)(Math.Cos(direction) * speed), (float)(Math.Sin(direction) * speed));
-
-                particle.Lifespan = random.NextDouble();
+                particle.Velocity = VectorUtility.CreateRandom(random, 1000);
 
                 particles[i] = particle;
             }

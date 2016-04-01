@@ -111,15 +111,14 @@ namespace SpaceShooter.Dynamic
             Particle[] particles = new Particle[n];
             for (int i = 0; i < n; i++)
             {
-                TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture);
+                double particleLifespan = random.NextDouble();
+                TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, particleLifespan);
 
                 particle.Position = collisionPosition;
 
                 double direction = random.NextDouble() * Math.PI * 2;
                 double speed = random.NextDouble() * 1000;
                 particle.Velocity = new Vector2((float)(Math.Cos(direction) * speed), (float)(Math.Sin(direction) * speed));
-
-                particle.Lifespan = random.NextDouble();
 
                 particles[i] = particle;
             }
