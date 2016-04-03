@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -24,10 +25,23 @@ namespace SpaceShooter
     public sealed partial class GamePage : Page, INotifyPropertyChanged
     {
 		public readonly SpaceShooterGame Game;
+        double healthbarValue = 100;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public double HealthbarValue { get { return 100 * Game.Session.Player.Ship.CurrentDurability / Game.Session.Player.Ship.MaximumDurability; } }
+        public double HealthbarValue
+        {
+            get
+            {
+                return healthbarValue;
+            }
+
+            set
+            {
+                healthbarValue = value;
+                NotifyPropertyChanged();
+            }
+        }
 
 		public GamePage()
         {
@@ -38,7 +52,7 @@ namespace SpaceShooter
             Game = MonoGame.Framework.XamlGame<SpaceShooterGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
         }
 
-        public void NotifyPropertyChange(string propertyName)
+        void NotifyPropertyChanged([CallerMemberName]string propertyName = null)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));

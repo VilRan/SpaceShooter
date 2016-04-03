@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <SwapChainPanel x:Name="swapChainPanel" >
-        <ProgressBar HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="256" Value="{Binding HealthbarValue, UpdateSourceTrigger=PropertyChanged}"/>
+        <ProgressBar HorizontalAlignment="Left" Height="32" Margin="16" VerticalAlignment="Bottom" Width="256" Value="{x:Bind HealthbarValue, Mode=OneWay}"/>
     </SwapChainPanel>
 
 </Page>

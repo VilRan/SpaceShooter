@@ -105,7 +105,7 @@ namespace SpaceShooter.Dynamic
         public override void Damage(DamageEventArgs e)
         {
             base.Damage(e);
-            (Application.Current as App).GamePage.NotifyPropertyChange("HealthbarValue");
+            (Application.Current as App).GamePage.HealthbarValue = 100 * CurrentDurability / MaximumDurability;
         }
     }
 }
