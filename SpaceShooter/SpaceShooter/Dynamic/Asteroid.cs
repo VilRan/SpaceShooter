@@ -24,7 +24,7 @@ namespace SpaceShooter.Dynamic
             SpaceShooterGame game = e.Level.Game;
 
             DynamicObject other = e.Other;
-            other.Damage(new DamageEventArgs(e.Level, 100));
+            other.Damage(new DamageEventArgs(e, 100));
 
             Vector2 thisCollisionPosition = Position + Velocity * e.TimeOfCollision;
             Vector2 otherCollisionPosition = other.Position + other.Velocity * e.TimeOfCollision;

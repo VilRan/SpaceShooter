@@ -176,9 +176,9 @@ namespace SpaceShooter.Dynamic
         public readonly Level Level;
         public readonly float DamageAmount;
 
-        public DamageEventArgs(Level level, float damageAmount)
+        public DamageEventArgs(CollisionEventArgs collision, float damageAmount)
         {
-            Level = level;
+            Level = collision.Level;
             DamageAmount = damageAmount;
         }
     }

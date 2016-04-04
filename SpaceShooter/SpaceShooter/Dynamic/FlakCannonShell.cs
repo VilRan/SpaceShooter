@@ -39,7 +39,7 @@ namespace SpaceShooter.Dynamic
         public override void OnCollision(CollisionEventArgs e)
         {
             DynamicObject other = e.Other;
-            other.Damage(new DamageEventArgs(e.Level, 1));
+            other.Damage(new DamageEventArgs(e, 1));
         }
 
         public override void OnDeath(DeathEventArgs e)
