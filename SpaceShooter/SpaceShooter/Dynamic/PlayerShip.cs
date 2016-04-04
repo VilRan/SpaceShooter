@@ -14,6 +14,8 @@ namespace SpaceShooter.Dynamic
     public class PlayerShip : DynamicObject
     {
         const float maxSpeed = 256;
+        const float durability = 2000;
+        const float collisionDamage = 1000;
 
         readonly Player player;
         Weapon activeWeapon;
@@ -22,7 +24,7 @@ namespace SpaceShooter.Dynamic
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
 
         public PlayerShip(AssetManager assets, Player player)
-            : base(assets.PlayerShipTexture, 2000)
+            : base(assets.PlayerShipTexture, durability)
         {
             this.player = player;
             Faction = Faction.Player;
@@ -99,7 +101,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Damage(new DamageEventArgs(e, 1000));
+            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
         }
 
         public override void Damage(DamageEventArgs e)

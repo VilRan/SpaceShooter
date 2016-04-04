@@ -10,13 +10,14 @@ namespace SpaceShooter.Dynamic
 {
     class Bullet : Projectile
     {
-        const float speed = 1024;
         const float hitRadius = 3f;
+        const float durability = 10f;
+        const float collisionDamage = 100;
 
         public override float HitRadius { get { return hitRadius; } }
 
         public Bullet(AssetManager assets, Vector2 position, Vector2 velocity, Faction faction)
-            : base(assets.BulletTexture, 10)
+            : base(assets.BulletTexture, durability)
         {
             Position = position;
             Velocity = velocity;
@@ -25,7 +26,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Damage(new DamageEventArgs(e, 100));
+            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
         }
     }
 }

@@ -10,22 +10,26 @@ namespace SpaceShooter.Weapons
 {
     class Shotgun : Weapon
     {
-        //public override int MagazineSize { get { return 5; } }
+        const float shotSpeed = 1024;
+        const float shotSpread = (float)(Math.PI / 8);
+        const int shotNumber = 25;
+        const int magazineSize = 5;
+        
         public override double ReloadDelay { get { return 1.25; } }
         public override double FirerateDelay { get { return 0.5; } }
 
         public Shotgun()
-            :base(5)
+            :base(magazineSize)
         {
             
         }
 
         public override void OnFire(FireEventArgs e)
         {
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i < shotNumber; i++)
             {
-                Vector2 velocity = new Vector2(1024, 0);
-                Matrix rotation = Matrix.CreateRotationZ((float)(e.Random.NextDouble() * Math.PI / 8 - e.Random.NextDouble() * Math.PI / 8));
+                Vector2 velocity = new Vector2(shotSpeed, 0);
+                Matrix rotation = Matrix.CreateRotationZ((float)(e.Random.NextDouble() * shotSpread - e.Random.NextDouble() * shotSpread));
                 velocity = Vector2.TransformNormal(velocity, rotation);
                 Bullet bullet = new Bullet(e.Level.Game.Assets, e.Position, velocity,e.Shooter.Faction);
                 e.Level.Objects.Add(bullet);

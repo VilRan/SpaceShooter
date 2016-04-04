@@ -11,12 +11,14 @@ namespace SpaceShooter.Dynamic
     class RailgunProjectile : Projectile
     {
         const float hitRadius = 64f;
+        const float durability = 2000;
+        const float collisionDamage = 2000;
 
         public override float HitRadius { get { return hitRadius; } }
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
 
         public RailgunProjectile(AssetManager assets, Vector2 position, Vector2 velocity)
-            : base(assets.BulletTexture, 2000)
+            : base(assets.BulletTexture, durability)
         {
             Position = position;
             Velocity = velocity;
@@ -25,7 +27,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Damage(new DamageEventArgs(e, 2000));
+            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
         }
     }
 }

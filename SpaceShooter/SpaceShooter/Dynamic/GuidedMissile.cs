@@ -11,13 +11,15 @@ namespace SpaceShooter.Dynamic
     class GuidedMissile : Projectile
     {
         const float hitRadius = 3f;
+        const float durability = 10;
+        const float collisionDamage = 500;
 
         public override float HitRadius { get { return hitRadius; } }
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         const float speed = 1024;
 
         public GuidedMissile(AssetManager assets, Vector2 position, Vector2 velocity)
-            : base(assets.BulletTexture, 10)
+            : base(assets.BulletTexture, durability)
         {
             Position = position;
             Velocity = velocity;
@@ -59,7 +61,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Damage(new DamageEventArgs(e, 500));
+            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
         }
     }
 }

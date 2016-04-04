@@ -10,19 +10,21 @@ namespace SpaceShooter.Weapons
 {
     class Railgun : Weapon
     {
-        //public override int MagazineSize { get { return 1; } }
+        const float bulletSpeed = 4096;
+        const int magazineSize = 1;
+        
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.05; } }
 
         public Railgun()
-            : base(1)
+            : base(magazineSize)
         {
             
         }
 
         public override void OnFire(FireEventArgs e)
         {
-            RailgunProjectile projectile = new RailgunProjectile(e.Level.Game.Assets, e.Position, new Vector2(4096, 0));
+            RailgunProjectile projectile = new RailgunProjectile(e.Level.Game.Assets, e.Position, new Vector2(bulletSpeed, 0));
             e.Level.Objects.Add(projectile);
         }
     }

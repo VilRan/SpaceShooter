@@ -11,10 +11,13 @@ namespace SpaceShooter.Dynamic
 {
     class Asteroid : DynamicObject
     {
+        const float durability = 1000;
+        const float collisionDamage = 100;
+
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
 
         public Asteroid(AssetManager assets)
-            : base(assets.AsteroidTexture, 1000)
+            : base(assets.AsteroidTexture, durability)
         {
 
         }
@@ -24,7 +27,7 @@ namespace SpaceShooter.Dynamic
             SpaceShooterGame game = e.Level.Game;
 
             DynamicObject other = e.Other;
-            other.Damage(new DamageEventArgs(e, 100));
+            other.Damage(new DamageEventArgs(e, collisionDamage));
 
             Vector2 thisCollisionPosition = Position + Velocity * e.TimeOfCollision;
             Vector2 otherCollisionPosition = other.Position + other.Velocity * e.TimeOfCollision;

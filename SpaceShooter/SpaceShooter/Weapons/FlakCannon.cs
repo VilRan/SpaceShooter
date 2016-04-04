@@ -10,19 +10,21 @@ namespace SpaceShooter.Weapons
 {
     class FlakCannon : Weapon
     {
-        //public override int MagazineSize { get { return 50; } }
+        const float bulletSpeed = 1024;
+        const int magazineSize = 50;
+        
         public override double ReloadDelay { get { return 2; } }
         public override double FirerateDelay { get { return 0.35; } }
 
         public FlakCannon()
-            : base(50)
+            : base(magazineSize)
         {
             
         }
 
         public override void OnFire(FireEventArgs e)
         {
-            FlakCannonShell shell = new FlakCannonShell(e.Level.Game.Assets, e.Position, new Vector2(1024, 0));
+            FlakCannonShell shell = new FlakCannonShell(e.Level.Game.Assets, e.Position, new Vector2(bulletSpeed, 0));
             e.Level.Objects.Add(shell);
         }
     }

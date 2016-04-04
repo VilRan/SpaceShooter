@@ -14,6 +14,8 @@ namespace SpaceShooter.Dynamic
         const float maxVelocity = 2048f;
         const float maxVelocitySquared = maxVelocity * maxVelocity;
         const float hitRadius = 3f;
+        const float durability = 10;
+        const float collisionDamage = 500;
 
         public override float HitRadius { get { return hitRadius; } }
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
@@ -21,7 +23,7 @@ namespace SpaceShooter.Dynamic
 
 
         public Rocket(AssetManager assets, Vector2 position, Vector2 velocity, Faction faction)
-            : base(assets.BulletTexture, 10)
+            : base(assets.BulletTexture, durability)
         {
             Position = position;
             Velocity = velocity;
@@ -58,7 +60,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Damage(new DamageEventArgs(e, 500));
+            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
         }
     }
 }

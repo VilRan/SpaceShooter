@@ -10,19 +10,21 @@ namespace SpaceShooter.Weapons
 {
     class RocketLauncher : Weapon
     {
-        //public override int MagazineSize { get { return 5; } }
+        const float launchSpeed = 512;
+        const int magazineSize = 3;
+        
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.3; } }
 
         public RocketLauncher()
-            : base(3)
+            : base(magazineSize)
         {
             
         }
 
         public override void OnFire(FireEventArgs e)
         {
-            Rocket rocket = new Rocket(e.Level.Game.Assets, e.Position, e.Direction * 512, e.Shooter.Faction);
+            Rocket rocket = new Rocket(e.Level.Game.Assets, e.Position, e.Direction * launchSpeed, e.Shooter.Faction);
             e.Level.Objects.Add(rocket);
         }
     }

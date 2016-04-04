@@ -18,12 +18,12 @@ namespace SpaceShooter.Dynamic
             Machinegun
         }
 
-        Weapon activeWeapon;
-        List<Weapon> weapons = new List<Weapon>();
-
         const float RocketUseDistance = 400f;
         const float MachinegunUseDistance = 300f;
         const float Hysteresis = 15f;
+
+        Weapon activeWeapon;
+        List<Weapon> weapons = new List<Weapon>();
         FighterAiState fighterState = FighterAiState.Wander;
 
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }

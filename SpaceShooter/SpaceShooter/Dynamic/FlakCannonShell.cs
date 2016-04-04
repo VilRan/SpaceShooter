@@ -10,12 +10,15 @@ namespace SpaceShooter.Dynamic
 {
     class FlakCannonShell : Projectile
     {
+        const float durability = 10;
+        const float collisionDamage = 1;
+
         double flyingTime = 0.6;
         
         protected override Color Color { get { return Color.LightGray; } }
 
         public FlakCannonShell(AssetManager assets, Vector2 position, Vector2 velocity)
-            : base(assets.BulletTexture, 10)
+            : base(assets.BulletTexture, durability)
         {
             Position = position;
             Velocity = velocity;
@@ -38,7 +41,7 @@ namespace SpaceShooter.Dynamic
         public override void OnCollision(CollisionEventArgs e)
         {
             DynamicObject other = e.Other;
-            other.Damage(new DamageEventArgs(e, 1));
+            other.Damage(new DamageEventArgs(e, collisionDamage));
         }
 
         public override void OnDeath(DeathEventArgs e)

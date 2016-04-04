@@ -9,14 +9,16 @@ namespace SpaceShooter.Dynamic
 {
     class Fragment : Projectile
     {
-        public double Lifespan;
-
         const float hitRadius = 3f;
+        const float durability = 10;
+        const float collisionDamage = 100;
 
+        public double Lifespan;
+        
         public override float HitRadius { get { return hitRadius; } }
 
         public Fragment(AssetManager assets, Vector2 position, Vector2 velocity)
-            : base(assets.BulletTexture, 10)
+            : base(assets.BulletTexture, durability)
         {
             Position = position;
             Velocity = velocity;
@@ -34,7 +36,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Damage(new DamageEventArgs(e, 100));
+            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
         }
     }
 }
