@@ -35,7 +35,7 @@ namespace SpaceShooter
             Random random = Game.Random;
             for (int i = 0; i < 1000; i++)
             {
-                BackgroundParticle dust = new BackgroundParticle(Game.Assets.PixelTexture, random);
+                BackgroundParticle dust = new DustParticle(Game.Assets.PixelTexture, random);
                 dust.Position = new Vector2(random.Next(PlayArea.Width), random.Next(PlayArea.Height));
                 Particles.Add(dust);
             }

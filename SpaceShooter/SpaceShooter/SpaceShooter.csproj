@@ -109,6 +109,7 @@
     <Compile Include="Dynamic\RailgunProjectile.cs" />
     <Compile Include="Dynamic\Rocket.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Particles\DustParticle.cs" />
     <Compile Include="Xaml\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>

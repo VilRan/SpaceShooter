@@ -10,26 +10,20 @@ namespace SpaceShooter.Particles
 {
     class BackgroundParticle : Particle
     {
-        Color color;
         float distance;
 
         public override bool IsRemoving { get { return false; } }
         public override ObjectCategory Category { get { return ObjectCategory.Particle; } }
-        protected override Color Color { get { return color; } }
 
-        public BackgroundParticle(Texture2D texture, Random random)
+        public BackgroundParticle(Texture2D texture, float distance)
             : base (texture)
         {
-            distance = (float)random.NextDouble();
-            float brightness = (float)random.NextDouble();
-            color = new Color(brightness, brightness, brightness);
+            this.distance = distance;
         }
 
         public override void Draw(DrawEventArgs e)
         {
             Velocity = e.Level.Camera.Velocity * distance;
-            if (Position.X < e.Level.PlayArea.Left)
-                Position.X = e.Level.PlayArea.Right;
             base.Draw(e);
         }
     }
