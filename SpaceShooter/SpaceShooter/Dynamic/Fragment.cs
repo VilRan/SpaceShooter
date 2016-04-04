@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Dynamic
 {
-    class Fragment : DynamicObject
+    class Fragment : Projectile
     {
         public double Lifespan;
 
         const float hitRadius = 3f;
 
         public override float HitRadius { get { return hitRadius; } }
-        public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
 
         public Fragment(AssetManager assets, Vector2 position, Vector2 velocity)
             : base(assets.BulletTexture, 10)

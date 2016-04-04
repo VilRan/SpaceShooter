@@ -8,15 +8,16 @@ using SpaceShooter.Particles;
 
 namespace SpaceShooter.Dynamic
 {
-    class Rocket : DynamicObject
+    class Rocket : Projectile
     {
-        static Vector2 acceleration = new Vector2(2048, 0);
+        const float acceleration = 2048f;
+        const float maxVelocity = 2048f;
+        const float maxVelocitySquared = maxVelocity * maxVelocity;
         const float hitRadius = 3f;
 
         public override float HitRadius { get { return hitRadius; } }
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         double boostTimer = 0.2;
-        static Vector2 maxVelocity = new Vector2(2048, 0);
 
 
         public Rocket(AssetManager assets, Vector2 position, Vector2 velocity, Faction faction)
@@ -36,9 +37,9 @@ namespace SpaceShooter.Dynamic
             else 
             {
                 Vector2 direction = Vector2.Normalize(Velocity);
-                Velocity += direction * 2048 * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
-                if (Velocity.LengthSquared() > maxVelocity.LengthSquared())
-                    Velocity = maxVelocity;
+                Velocity += direction * acceleration * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
+                if (Velocity.LengthSquared() > maxVelocitySquared)
+                    Velocity = direction * maxVelocity;
                 else
                 {
                     Random random = e.Level.Game.Random;

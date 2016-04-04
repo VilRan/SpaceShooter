@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace SpaceShooter.Dynamic
 {
-    class GuidedMissile : DynamicObject
+    class GuidedMissile : Projectile
     {
         const float hitRadius = 3f;
 

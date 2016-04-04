@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Dynamic
 {
-    class RailgunProjectile : DynamicObject
+    class RailgunProjectile : Projectile
     {
         const float hitRadius = 64f;
 
