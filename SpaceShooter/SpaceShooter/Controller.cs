@@ -16,6 +16,14 @@ namespace SpaceShooter
         Fire,
         PreviousWeapon,
         NextWeapon,
+        Weapon1,
+        Weapon2,
+        Weapon3,
+        Weapon4,
+        Weapon5,
+        Weapon6,
+        Weapon7,
+        Weapon8,
     }
 
     public class Controller
@@ -40,6 +48,14 @@ namespace SpaceShooter
             controls[Control.Fire][0] = Keys.Space;
             controls[Control.PreviousWeapon][0] = Keys.Q;
             controls[Control.NextWeapon][0] = Keys.E;
+            controls[Control.Weapon1][0] = Keys.D1;
+            controls[Control.Weapon2][0] = Keys.D2;
+            controls[Control.Weapon3][0] = Keys.D3;
+            controls[Control.Weapon4][0] = Keys.D4;
+            controls[Control.Weapon5][0] = Keys.D5;
+            controls[Control.Weapon6][0] = Keys.D6;
+            controls[Control.Weapon7][0] = Keys.D7;
+            controls[Control.Weapon8][0] = Keys.D8;
 
             previousKeyboard = Keyboard.GetState();
         }

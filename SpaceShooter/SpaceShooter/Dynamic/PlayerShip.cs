@@ -71,19 +71,19 @@ namespace SpaceShooter.Dynamic
                 activeWeapon = weapons[weaponIndex];
             }
 
-            if (keyboard.IsKeyDown(Keys.D1))
+            if (controller.IsControlPressed(Control.Weapon1))
                 activeWeapon = weapons[0];
-            if (keyboard.IsKeyDown(Keys.D2))
+            else if (controller.IsControlPressed(Control.Weapon2))
                 activeWeapon = weapons[1];
-            if (keyboard.IsKeyDown(Keys.D3))
+            else if (controller.IsControlPressed(Control.Weapon3))
                 activeWeapon = weapons[2];
-            if (keyboard.IsKeyDown(Keys.D4))
+            else if (controller.IsControlPressed(Control.Weapon4))
                 activeWeapon = weapons[3];
-            if (keyboard.IsKeyDown(Keys.D5))
+            else if (controller.IsControlPressed(Control.Weapon5))
                 activeWeapon = weapons[4];
-            if (keyboard.IsKeyDown(Keys.D6))
+            else if (controller.IsControlPressed(Control.Weapon6))
                 activeWeapon = weapons[5];
-            if (keyboard.IsKeyDown(Keys.D7))
+            else if (controller.IsControlPressed(Control.Weapon7))
                 activeWeapon = weapons[6];
 
 
