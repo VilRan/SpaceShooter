@@ -110,6 +110,7 @@
     <Compile Include="Dynamic\Rocket.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Particles\DustParticle.cs" />
+    <Compile Include="Wall.cs" />
     <Compile Include="Xaml\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
@@ -160,6 +161,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Assets\MonoGame.Framework.xml" />
+    <Content Include="Assets\Textures\Tile.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

@@ -16,6 +16,7 @@ namespace SpaceShooter
         public readonly LevelBlueprint Blueprint;
         public List<DynamicObject> Objects = new List<DynamicObject>();
         public List<DynamicObject> Inactive = new List<DynamicObject>();
+        public List<Wall> Walls = new List<Wall>();
         public List<Particle> Particles = new List<Particle>();
         public Camera Camera { private set; get; }
         
@@ -32,10 +33,17 @@ namespace SpaceShooter
             player.Position = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Top + PlayArea.Height / 2);
             Objects.Add(player);
 
+            for (int y = 0; y < 640; y += 32)
+            {
+                var wall = new Wall(Game.Assets);
+                wall.Position = new Vector2(1024, y);
+                Walls.Add(wall);
+            }
+
             Random random = Game.Random;
             for (int i = 0; i < 1000; i++)
             {
-                BackgroundParticle dust = new DustParticle(Game.Assets.PixelTexture, random);
+                var dust = new DustParticle(Game.Assets.PixelTexture, random);
                 dust.Position = new Vector2(random.Next(PlayArea.Width), random.Next(PlayArea.Height));
                 Particles.Add(dust);
             }
@@ -67,10 +75,12 @@ namespace SpaceShooter
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             DrawEventArgs drawEventArgs = new DrawEventArgs(this, gameTime, spriteBatch);
-            foreach (DynamicObject obj in Objects)
-                obj.Draw(drawEventArgs);
+            foreach (Wall wall in Walls)
+                wall.Draw(drawEventArgs);
             foreach (Particle particle in Particles)
                 particle.Draw(drawEventArgs);
+            foreach (DynamicObject obj in Objects)
+                obj.Draw(drawEventArgs);
             Particles.RemoveAll(particle => particle.IsRemoving);
         }
     }

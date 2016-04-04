@@ -47,6 +47,7 @@ namespace SpaceShooter
 
     public enum ObjectCategory
     {
+        Tile,
         Particle,
         Projectile,
         Ship

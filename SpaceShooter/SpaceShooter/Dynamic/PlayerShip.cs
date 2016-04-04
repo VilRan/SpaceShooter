@@ -97,6 +97,14 @@ namespace SpaceShooter.Dynamic
                 Position.Y = e.Level.PlayArea.Top;
             if (Position.Y > e.Level.PlayArea.Bottom)
                 Position.Y = e.Level.PlayArea.Bottom;
+
+            foreach (Wall wall in e.Level.Walls)
+            {
+                if ((wall.Position - Position).LengthSquared() < HitRadius)
+                {
+                    Die();
+                }
+            }
         }
 
         public override void OnCollision(CollisionEventArgs e)
