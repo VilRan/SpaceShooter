@@ -140,9 +140,13 @@
   <ItemGroup>
     <Content Include="Assets\Textures\Asteroid.xnb" />
     <Content Include="Assets\Textures\Bullet.xnb" />
+    <Content Include="Assets\Textures\EarthTransparent.png" />
     <Content Include="Assets\Textures\Particle.xnb" />
     <Content Include="Assets\Textures\Pixel.xnb" />
     <Content Include="Assets\Textures\Ship.xnb" />
+    <None Include="Assets\Music\SpaceShooterBoss.ogg" />
+    <None Include="Assets\Music\SpaceShootermain.ogg" />
+    <None Include="Assets\Music\SpaceShooterRelax.ogg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
