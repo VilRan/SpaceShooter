@@ -14,13 +14,16 @@ namespace SpaceShooter.Dynamic
         enum FighterAiState
         {
             Wander,
-            Rockets,
-            Machinegun
+            Alert,
+            Chase,
+            Catch
         }
 
-        const float RocketUseDistance = 400f;
-        const float MachinegunUseDistance = 300f;
-        const float Hysteresis = 15f;
+        const float maxSpeed = 256;
+        const float alertDistance = 900f;
+        const float chaseDistance = 700f;
+        const float catchDistance = 5f;
+        const float hysteresis = 15f;
 
         Weapon activeWeapon;
         List<Weapon> weapons = new List<Weapon>();
@@ -43,52 +46,74 @@ namespace SpaceShooter.Dynamic
 
         public override void Update(UpdateEventArgs e)
         {
+            Vector2 closeFightPosition = e.Level.Session.Player.Ship.Position + new Vector2(200, 0);
+
             Vector2 shootingDirection = e.Level.Session.Player.Ship.Position - Position;
             shootingDirection.Normalize();
 
-            float rocketUseThreshold = RocketUseDistance;
-            float machinegunUseThreshold = MachinegunUseDistance;
+            Vector2 chasingDirection = closeFightPosition - Position;
+            chasingDirection.Normalize();
+
+            float alertThreshold = alertDistance;
+            float chaseThreshold = chaseDistance;
+            float catchThreshold = catchDistance;
 
             if (fighterState == FighterAiState.Wander)
             {
                 Velocity = new Vector2(-1, 0);
 
-                rocketUseThreshold -= Hysteresis / 2;
+                alertThreshold -= hysteresis / 2 * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (fighterState == FighterAiState.Rockets)
+            else if (fighterState == FighterAiState.Alert)
             {
                 activeWeapon = weapons[1];
                 activeWeapon.Update(e.GameTime);
                 activeWeapon.TryFire(new FireEventArgs(e.Level, Position, shootingDirection, this));
-
-                Velocity = new Vector2(128, 0);
-
-                rocketUseThreshold += Hysteresis / 2;
-                machinegunUseThreshold -= Hysteresis / 2;
+                
+                alertThreshold += hysteresis / 2 * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
+                chaseThreshold -= hysteresis / 2 * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
+                catchThreshold -= hysteresis / 2 * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (fighterState == FighterAiState.Machinegun)
+            else if (fighterState == FighterAiState.Chase)
             {
+                /*
                 activeWeapon = weapons[0];
                 activeWeapon.Update(e.GameTime);
                 activeWeapon.TryFire(new FireEventArgs(e.Level, Position, shootingDirection, this));
+                                
+                */
+                Position += chasingDirection * (float)e.GameTime.ElapsedGameTime.TotalSeconds * maxSpeed;
 
+                chaseThreshold += hysteresis / 2 * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
+                catchThreshold -= hysteresis / 2 * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else if (fighterState == FighterAiState.Catch)
+            {
+                activeWeapon = weapons[0];
+                activeWeapon.Update(e.GameTime);
+                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, new Vector2(-1, 0), this));
+                                
                 Velocity = new Vector2(128, 0);
 
-                machinegunUseThreshold += Hysteresis / 2;
+                catchThreshold += hysteresis / 2 * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            float distanceFromPlayer = Vector2.Distance(Position, e.Level.Session.Player.Ship.Position);
-            if (distanceFromPlayer > rocketUseThreshold)
+            float distanceFromPlayer = Vector2.Distance(Position, closeFightPosition);
+            if (distanceFromPlayer > alertThreshold)
             {
                 fighterState = FighterAiState.Wander;
             }
-            else if (distanceFromPlayer > machinegunUseThreshold)
+            else if (distanceFromPlayer > chaseThreshold)
             {
-                fighterState = FighterAiState.Rockets;
+                fighterState = FighterAiState.Alert;
+            }
+            else if (distanceFromPlayer > catchThreshold)
+            {
+                fighterState = FighterAiState.Chase;
             }
             else
             {
-                fighterState = FighterAiState.Machinegun;
+                fighterState = FighterAiState.Catch;
             }
 
             base.Update(e);
