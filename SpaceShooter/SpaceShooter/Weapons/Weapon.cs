@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Weapons
 {
-    abstract class Weapon
+    public abstract class Weapon
     {
         double reloadTimer = 0.0;
         double firerateTimer = 0.0;

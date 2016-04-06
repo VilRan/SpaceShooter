@@ -9,13 +9,15 @@ namespace SpaceShooter
     public class Session
     {
         public Player Player;
+        public Shop Shop;
         public Level ActiveLevel;
         public int Score = 0;
         public SpaceShooterGame Game;
 
         public Session(SpaceShooterGame game)
         {
-            this.Game = game;
+            Game = game;
+            Shop = new Shop();
             Player = new Player(game.Assets);
         }
 

@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="SpaceShooter.Xaml.ShopPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SpaceShooter.Xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:SpaceShooter"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <GridView Name="items" ItemsSource="{x:Bind Shop.Items}" Margin="32" Grid.Row="1" Grid.Column="1" Background="#FF82CEDE" 
+                       CanDragItems="True" AllowDrop="True" DragItemsStarting="items_DragItemsStarting" Drop="items_Drop" DragOver="items_DragOver">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="data:ShopItem">
+                        <StackPanel Margin="8">
+                            <TextBlock Text="{x:Bind Weapon}"/>
+                            <TextBlock Text="{x:Bind Price}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+
+            <GridView Name="inventory" ItemsSource="{x:Bind Shop.Inventory}" Margin="32" Grid.Row="2" Grid.Column="1" Background="#FF82CEDE" 
+                      CanDragItems="True" AllowDrop="True" Drop="inventory_Drop" DragItemsStarting="inventory_DragItemsStarting" DragOver="inventory_DragOver">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="data:ShopItem">
+                        <StackPanel Margin="8">
+                            <TextBlock Text="{x:Bind Weapon}"/>
+                            <TextBlock Text="{x:Bind Price}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </Grid>
+    </Grid>
+</Page>

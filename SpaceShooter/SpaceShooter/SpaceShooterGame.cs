@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SpaceShooter.Xaml;
 using System;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -84,7 +85,7 @@ namespace SpaceShooter
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Escape) && previousKeyboardState.IsKeyUp(Keys.Escape))
             {
-                Windows.UI.Xaml.Window.Current.Content = new TestPage();
+                Windows.UI.Xaml.Window.Current.Content = new ShopPage();
                 IsDeactived = true;
             }
             if (keyboard.IsKeyDown(Keys.F) && previousKeyboardState.IsKeyUp(Keys.F))
