@@ -12,7 +12,8 @@ namespace SpaceShooter.Weapons
     {
         const float bulletSpeed = 1024;
         const int magazineSize = 50;
-        
+
+        public override string Name { get { return "Flak Cannon"; } }
         public override double ReloadDelay { get { return 2; } }
         public override double FirerateDelay { get { return 0.35; } }
 

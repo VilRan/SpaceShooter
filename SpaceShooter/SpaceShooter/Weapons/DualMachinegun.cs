@@ -14,6 +14,7 @@ namespace SpaceShooter.Weapons
         const float bulletOffset = 20;
         const int magazineSize = 50;
         
+        public override string Name { get { return "Dual Machinegun"; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.05; } }
 

@@ -44,26 +44,22 @@ namespace SpaceShooter.Xaml
 
         private void items_Drop(object sender, DragEventArgs e)
         {
-
-            if (draggedItem != null && !items.Items.Contains(draggedItem))
+            if (draggedItem != null && !shop.Items.Contains(draggedItem))
             {
                 Shop.Items.Add(draggedItem);
                 Shop.Inventory.Remove(draggedItem);
                 draggedItem = null;
             }
-
         }
 
         private void inventory_Drop(object sender, DragEventArgs e)
         {
-            
             if (draggedItem != null && !inventory.Items.Contains(draggedItem))
             {
                 Shop.Inventory.Add(draggedItem);
                 Shop.Items.Remove(draggedItem);
                 draggedItem = null;
             }
-            
         }
 
         private void items_DragOver(object sender, DragEventArgs e)
@@ -75,6 +71,5 @@ namespace SpaceShooter.Xaml
         {
             e.AcceptedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Move;
         }
-
     }
 }

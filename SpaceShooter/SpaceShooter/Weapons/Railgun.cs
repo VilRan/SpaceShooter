@@ -12,7 +12,8 @@ namespace SpaceShooter.Weapons
     {
         const float bulletSpeed = 4096;
         const int magazineSize = 1;
-        
+
+        public override string Name { get { return "Railgun"; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.05; } }
 

@@ -14,7 +14,8 @@ namespace SpaceShooter.Weapons
         const float shotSpread = (float)(Math.PI / 8);
         const int shotNumber = 25;
         const int magazineSize = 5;
-        
+
+        public override string Name { get { return "Shotgun"; } }
         public override double ReloadDelay { get { return 1.25; } }
         public override double FirerateDelay { get { return 0.5; } }
 

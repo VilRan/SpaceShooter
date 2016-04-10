@@ -12,7 +12,8 @@ namespace SpaceShooter.Weapons
     {
         const float launchSpeed = 512;
         const int magazineSize = 3;
-        
+
+        public override string Name { get { return "Rocket Launcher"; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.3; } }
 

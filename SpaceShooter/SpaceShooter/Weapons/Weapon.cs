@@ -14,8 +14,8 @@ namespace SpaceShooter.Weapons
         double firerateTimer = 0.0;
         public int MagazineCount;
         public int MagazineSize;
-
-        //public int MagazineSize { get{return _MagazineSize; } }
+        
+        public abstract string Name { get; }
         public abstract double ReloadDelay { get; }
         public abstract double FirerateDelay { get; }
         public bool CanFire { get { return firerateTimer <= 0 && MagazineCount > 0; } }

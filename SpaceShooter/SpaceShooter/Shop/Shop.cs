@@ -16,7 +16,12 @@ namespace SpaceShooter
         public Shop()
         {
             Items.Add(new ShopItem(new Machinegun(), 50));
-            Items.Add(new ShopItem(new RocketLauncher(), 60));
+            Items.Add(new ShopItem(new Shotgun(), 100));
+            Items.Add(new ShopItem(new RocketLauncher(), 100));
+            Items.Add(new ShopItem(new FlakCannon(), 100));
+            Items.Add(new ShopItem(new DualMachinegun(), 100));
+            Items.Add(new ShopItem(new MissileLauncher(), 150));
+            Items.Add(new ShopItem(new Railgun(), 250));
         }
     }
     

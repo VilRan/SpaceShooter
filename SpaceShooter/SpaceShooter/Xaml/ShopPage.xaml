@@ -22,12 +22,12 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <GridView Name="items" ItemsSource="{x:Bind Shop.Items}" Margin="32" Grid.Row="1" Grid.Column="1" Background="#FF82CEDE" 
+            <GridView x:Name="shop" ItemsSource="{x:Bind Shop.Items}" Margin="32" Grid.Row="1" Grid.Column="1" Background="#FF82CEDE" 
                        CanDragItems="True" AllowDrop="True" DragItemsStarting="items_DragItemsStarting" Drop="items_Drop" DragOver="items_DragOver">
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="data:ShopItem">
                         <StackPanel Margin="8">
-                            <TextBlock Text="{x:Bind Weapon}"/>
+                            <TextBlock Text="{x:Bind Weapon.Name}"/>
                             <TextBlock Text="{x:Bind Price}"/>
                         </StackPanel>
                     </DataTemplate>
@@ -39,7 +39,7 @@
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="data:ShopItem">
                         <StackPanel Margin="8">
-                            <TextBlock Text="{x:Bind Weapon}"/>
+                            <TextBlock Text="{x:Bind Weapon.Name}"/>
                             <TextBlock Text="{x:Bind Price}"/>
                         </StackPanel>
                     </DataTemplate>
