@@ -87,7 +87,7 @@ namespace SpaceShooter.Dynamic
                 activeWeapon = weapons[6];
 
 
-            Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
+            Position += Velocity * (float)e.ElapsedSeconds;
 
             if (Position.X < Level.PlayArea.Left)
                 Position.X = Level.PlayArea.Left;

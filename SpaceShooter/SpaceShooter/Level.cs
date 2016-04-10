@@ -27,10 +27,26 @@ namespace SpaceShooter
             Session = session;
             Camera = new Camera() { Velocity = new Vector2(128, 0), Size = new Vector2(SpaceShooterGame.InternalResolution.Width, SpaceShooterGame.InternalResolution.Height) };
 
-            PlayerShip player = Game.Session.Player.Ship;
-            player.Level = this;
-            player.Position = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Top + PlayArea.Height / 2);
-            Objects.Add(player);
+            if (Session.Players.Count > 1)
+            {
+                Vector2 playerStartTop = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Height / 4);
+                Vector2 playerStartBottom = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Height - PlayArea.Height / 4);
+                Vector2 playerStartStep = (playerStartBottom - playerStartTop) / (Game.Session.Players.Count - 1);
+                for (int i = 0; i < Session.Players.Count; i++)
+                {
+                    Player player = Session.Players[i];
+                    player.Ship.Level = this;
+                    player.Ship.Position = playerStartTop + playerStartStep * i;
+                    Objects.Add(player.Ship);
+                }
+            }
+            else
+            {
+                Player player = Session.Players[0];
+                player.Ship.Level = this;
+                player.Ship.Position = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Height / 2);
+                Objects.Add(player.Ship);
+            }
             
             Inactive.AddRange(blueprint.SpawnObjects(this));
 

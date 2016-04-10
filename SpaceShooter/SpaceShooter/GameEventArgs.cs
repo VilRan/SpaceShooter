@@ -27,6 +27,8 @@ namespace SpaceShooter
     {
         public readonly GameTime GameTime;
 
+        public double ElapsedSeconds { get { return GameTime.ElapsedGameTime.TotalSeconds; } }
+
         public UpdateEventArgs(GameTime gameTime)
         {
             GameTime = gameTime;

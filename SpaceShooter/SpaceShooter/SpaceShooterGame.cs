@@ -106,7 +106,8 @@ namespace SpaceShooter
             if (!IsPaused)
             {
                 Session.ActiveLevel.Update(gameTime);
-                Session.Player.Controller.Update();
+                foreach (Player player in Session.Players)
+                    player.Controller.Update();
             }
 
             base.Update(gameTime);

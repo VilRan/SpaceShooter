@@ -16,17 +16,17 @@ namespace SpaceShooter.Dynamic
 
     public abstract class DynamicObject : GameObject
     {
-        private const float hitRadius = 12;
+        const float hitRadius = 12;
 
         public Level Level;
         public Faction Faction = Faction.Enemy;
         Durability durability;
 
         public virtual Vector2 AbsoluteVelocity { get { return Velocity; } }
+        public virtual float HitRadius { get { return hitRadius; } }
         public double CurrentDurability { get { return durability.Current; } }
         public double MaximumDurability { get { return durability.Maximum; } }
         public bool IsDying { get { return durability.Current <= 0; } }
-        public virtual float HitRadius { get { return hitRadius; } }
         protected override Color Color { get { return Color.White; } }
 
         public DynamicObject(Texture2D texture, Level level, float durability)
@@ -53,7 +53,7 @@ namespace SpaceShooter.Dynamic
         */
         public virtual void Update(UpdateEventArgs e)
         {
-            Position += AbsoluteVelocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
+            Position += AbsoluteVelocity * (float)e.ElapsedSeconds;
             
             if (!Level.PlayArea.Contains(Position))
                 Die();

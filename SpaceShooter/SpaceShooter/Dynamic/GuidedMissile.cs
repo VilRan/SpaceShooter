@@ -14,6 +14,7 @@ namespace SpaceShooter.Dynamic
         const float durability = 10;
         const float collisionDamage = 500;
 
+        public override Vector2 AbsoluteVelocity { get { return Velocity; } }
         public override float HitRadius { get { return hitRadius; } }
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         const float speed = 1024;

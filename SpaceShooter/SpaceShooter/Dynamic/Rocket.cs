@@ -34,12 +34,12 @@ namespace SpaceShooter.Dynamic
         {
             if (boostTimer > 0)
             {
-                boostTimer -= e.GameTime.ElapsedGameTime.TotalSeconds;
+                boostTimer -= e.ElapsedSeconds;
             }
             else 
             {
                 Vector2 direction = Vector2.Normalize(Velocity);
-                Velocity += direction * acceleration * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
+                Velocity += direction * acceleration * (float)e.ElapsedSeconds;
                 if (Velocity.LengthSquared() > maxVelocitySquared)
                     Velocity = direction * maxVelocity;
                 else

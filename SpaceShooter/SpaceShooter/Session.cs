@@ -9,7 +9,7 @@ namespace SpaceShooter
     public class Session
     {
         public Difficulty Difficulty;
-        public Player Player;
+        public List<Player> Players = new List<Player>();
         public Shop Shop;
         public Level ActiveLevel;
         public int Score = 0;
@@ -20,12 +20,18 @@ namespace SpaceShooter
             Difficulty = difficulty;
             Game = game;
             Shop = new Shop();
-            Player = new Player(game.Assets);
+
+            for (int i = 0; i < 2; i++)
+            {
+                Player player = new Player(game.Assets);
+                Players.Add(player);
+            }
         }
 
         public void PlayNextLevel()
         {
-            Player.Ship.Repair(10000);
+            foreach (Player player in Players)
+                player.Ship.Repair(10000);
             ActiveLevel = new Level(this, Game.Assets.TestLevelBlueprint);
         }
     }

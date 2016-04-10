@@ -29,7 +29,7 @@ namespace SpaceShooter.Dynamic
         {
             if (flyingTime > 0)
             {
-                flyingTime -= e.GameTime.ElapsedGameTime.TotalSeconds;
+                flyingTime -= e.ElapsedSeconds;
             }
             else
             {

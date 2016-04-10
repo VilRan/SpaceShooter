@@ -29,7 +29,7 @@ namespace SpaceShooter.Dynamic
         {
             if (Lifespan <= 0)
                 Die();
-            Lifespan -= e.GameTime.ElapsedGameTime.TotalSeconds;
+            Lifespan -= e.ElapsedSeconds;
 
             base.Update(e);
         }
