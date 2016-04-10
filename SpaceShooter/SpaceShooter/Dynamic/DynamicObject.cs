@@ -133,12 +133,12 @@ namespace SpaceShooter.Dynamic
                 timeOfClosestApproach = 0;
         }
         
-        public bool TryActivate(Level level)
+        public bool TryActivate()
         {
-            if (level.PlayArea.Contains(Position))
+            if (Level.PlayArea.Contains(Position))
             {
-                level.Objects.Add(this);
-                level.Inactive.Remove(this);
+                Level.Objects.Add(this);
+                Level.Inactive.Remove(this);
                 return true;
             }
             return false;
