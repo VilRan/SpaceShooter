@@ -109,3 +109,9 @@
 /processorParam:Quality=Best
 /build:Music/Something.ogg
 
+#begin Sounds/Shot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Shot.wav
+

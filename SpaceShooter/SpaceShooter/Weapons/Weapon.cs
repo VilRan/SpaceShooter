@@ -71,6 +71,7 @@ namespace SpaceShooter.Weapons
         public readonly DynamicObject Shooter;
 
         public Random Random { get { return Level.Game.Random; } }
+        public AssetManager Assets { get { return Level.Game.Assets; } }
 
         public FireEventArgs(Level level, Vector2 position, Vector2 direction, DynamicObject shooter)
         {

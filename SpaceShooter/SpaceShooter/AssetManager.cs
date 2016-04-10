@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System;
@@ -24,6 +25,8 @@ namespace SpaceShooter
         public Song RelaxMusic { private set; get; }
         public Song BossMusic { private set; get; }
 
+        public SoundEffect ShotSound { private set; get; }
+
         public LevelBlueprint TestLevelBlueprint { private set; get; }
 
         public AssetManager(ContentManager content)
@@ -40,6 +43,8 @@ namespace SpaceShooter
             SomethingMusic = content.Load<Song>("Music/Something");
             RelaxMusic = content.Load<Song>("Music/Relax");
             BossMusic = content.Load<Song>("Music/Boss");
+
+            ShotSound = content.Load<SoundEffect>("Sounds/Shot");
         }
 
         public void CreateTestLevel(SpaceShooterGame game)

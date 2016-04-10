@@ -151,6 +151,7 @@
     <Content Include="Assets\Music\Main.wma" />
     <Content Include="Assets\Music\Relax.wma" />
     <Content Include="Assets\Music\Something.wma" />
+    <Content Include="Assets\Sounds\Shot.wav" />
     <Content Include="Assets\Textures\Asteroid.xnb" />
     <Content Include="Assets\Textures\Bullet.xnb" />
     <Content Include="Assets\Textures\EarthTransparent.png" />
@@ -166,6 +167,7 @@
     <Content Include="Assets\Music\Relax.xnb" />
     <None Include="Assets\Music\Something.ogg" />
     <Content Include="Assets\Music\Something.xnb" />
+    <Content Include="Assets\Sounds\Shot.xnb" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>

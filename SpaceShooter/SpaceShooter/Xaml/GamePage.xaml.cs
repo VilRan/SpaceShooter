@@ -53,7 +53,7 @@ namespace SpaceShooter
             Game = MonoGame.Framework.XamlGame<SpaceShooterGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
             MediaPlayer.Play(Game.Assets.SomethingMusic);
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.IsMuted = true;
+            MediaPlayer.IsMuted = false;
         }
 
         void NotifyPropertyChanged([CallerMemberName]string propertyName = null)
