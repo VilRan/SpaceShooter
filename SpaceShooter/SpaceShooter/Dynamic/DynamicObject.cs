@@ -67,7 +67,7 @@ namespace SpaceShooter.Dynamic
                     return;
 
                 DynamicObject other = Level.Objects[i];
-                if (other.Faction == Faction || other.IsDying)
+                if (!CanCollideWith(other))
                     continue;
 
                 bool isCollision = false;
@@ -82,6 +82,17 @@ namespace SpaceShooter.Dynamic
                     other.OnCollision(new CollisionEventArgs(this, timeOfClosestApproach));
                 }
             }
+        }
+
+        bool CanCollideWith(DynamicObject other)
+        {
+            if (other.IsDying)
+                return false;
+            if (other.Faction == Faction)
+                return false;
+            if (Category == ObjectCategory.Projectile && other.Category == ObjectCategory.Projectile)
+                return false;
+            return true;
         }
 
         public void FindClosestApproach(DynamicObject other, out float timeOfClosestApproach, out bool isCollision)

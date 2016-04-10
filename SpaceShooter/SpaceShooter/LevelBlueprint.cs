@@ -29,7 +29,7 @@ namespace SpaceShooter
                 Objects[i] = test;
             }
             */
-            int testFighters = 10;
+            int testFighters = 100;
             for (int i = 0; i < testFighters; i++)
             {
                 Vector2 position = new Vector2(1000 + ((float)Width / testFighters) * i, game.Random.Next(0, Height));
