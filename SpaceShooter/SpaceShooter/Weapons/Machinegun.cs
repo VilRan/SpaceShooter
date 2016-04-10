@@ -30,7 +30,7 @@ namespace SpaceShooter.Weapons
             e.Level.Objects.Add(bullet);
             
             SoundEffectInstance sound = e.Assets.ShotSound.CreateInstance();
-            sound.Volume = (float)(0.5 + 0.5 * e.Random.NextDouble());
+            sound.Volume = 0.25f * (float)(0.5 + 0.5 * e.Random.NextDouble());
             sound.Play();
         }
     }

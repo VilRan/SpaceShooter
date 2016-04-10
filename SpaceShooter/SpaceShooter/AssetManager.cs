@@ -26,6 +26,7 @@ namespace SpaceShooter
         public Song BossMusic { private set; get; }
 
         public SoundEffect ShotSound { private set; get; }
+        public SoundEffect ExplosionSound { private set; get; }
 
         public LevelBlueprint TestLevelBlueprint { private set; get; }
 
@@ -45,6 +46,7 @@ namespace SpaceShooter
             BossMusic = content.Load<Song>("Music/Boss");
 
             ShotSound = content.Load<SoundEffect>("Sounds/Shot");
+            ExplosionSound = content.Load<SoundEffect>("Sounds/Explosion");
         }
 
         public void CreateTestLevel(SpaceShooterGame game)

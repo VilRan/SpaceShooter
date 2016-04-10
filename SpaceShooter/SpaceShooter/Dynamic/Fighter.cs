@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using SpaceShooter.Particles;
 using SpaceShooter.Weapons;
 using System;
@@ -153,6 +154,14 @@ namespace SpaceShooter.Dynamic
                 particles[i] = particle;
             }
             Level.Particles.AddRange(particles);
+        }
+
+        public override void OnDeath(DeathEventArgs e)
+        {
+            base.OnDeath(e);
+            SoundEffectInstance sound = Level.Game.Assets.ExplosionSound.CreateInstance();
+            sound.Volume = (float)(0.5 + 0.5 * Level.Game.Random.NextDouble());
+            sound.Play();
         }
     }
 }

@@ -151,7 +151,9 @@
     <Content Include="Assets\Music\Main.wma" />
     <Content Include="Assets\Music\Relax.wma" />
     <Content Include="Assets\Music\Something.wma" />
-    <Content Include="Assets\Sounds\Shot.wav" />
+    <Content Include="Assets\Sounds\Explosion.xnb" />
+    <None Include="Assets\Sounds\Shot.wav" />
+    <None Include="Assets\Sounds\Explosion.wav" />
     <Content Include="Assets\Textures\Asteroid.xnb" />
     <Content Include="Assets\Textures\Bullet.xnb" />
     <Content Include="Assets\Textures\EarthTransparent.png" />

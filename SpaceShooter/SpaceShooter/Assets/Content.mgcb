@@ -115,3 +115,9 @@
 /processorParam:Quality=Best
 /build:Sounds/Shot.wav
 
+#begin Sounds/Explosion.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Explosion.wav
+
