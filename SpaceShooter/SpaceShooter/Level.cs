@@ -57,6 +57,10 @@ namespace SpaceShooter
                 Walls.Add(wall);
             }
 
+            var earth = new BackgroundParticle(Game.Assets.EarthTexture, 0.9f);
+            earth.Position = new Vector2(PlayArea.Width / 3, PlayArea.Height * 3 / 4);
+            Particles.Add(earth);
+
             Random random = Game.Random;
             for (int i = 0; i < 1000; i++)
             {
@@ -92,10 +96,10 @@ namespace SpaceShooter
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             DrawEventArgs drawEventArgs = new DrawEventArgs(this, gameTime, spriteBatch);
-            foreach (Wall wall in Walls)
-                wall.Draw(drawEventArgs);
             foreach (Particle particle in Particles)
                 particle.Draw(drawEventArgs);
+            foreach (Wall wall in Walls)
+                wall.Draw(drawEventArgs);
             foreach (DynamicObject obj in Objects)
                 obj.Draw(drawEventArgs);
             Particles.RemoveAll(particle => particle.IsRemoving);

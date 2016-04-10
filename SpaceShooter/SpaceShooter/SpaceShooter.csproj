@@ -156,6 +156,7 @@
     <None Include="Assets\Music\SpaceShooterBoss.ogg" />
     <None Include="Assets\Music\SpaceShootermain.ogg" />
     <None Include="Assets\Music\SpaceShooterRelax.ogg" />
+    <Content Include="Assets\Textures\EarthTransparent.xnb" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
