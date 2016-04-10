@@ -27,6 +27,7 @@ namespace SpaceShooter.Dynamic
         public double CurrentDurability { get { return durability.Current; } }
         public double MaximumDurability { get { return durability.Maximum; } }
         public bool IsDying { get { return durability.Current <= 0; } }
+        protected virtual Rectangle PlayArea { get { return Level.PlayArea; } }
         protected override Color Color { get { return Color.White; } }
 
         public DynamicObject(Texture2D texture, Level level, float durability)
@@ -55,7 +56,7 @@ namespace SpaceShooter.Dynamic
         {
             Position += AbsoluteVelocity * (float)e.ElapsedSeconds;
             
-            if (!Level.PlayArea.Contains(Position))
+            if (!PlayArea.Contains(Position))
                 Die();
         }
         

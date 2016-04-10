@@ -13,11 +13,14 @@ namespace SpaceShooter.Dynamic
         const float hitRadius = 3f;
         const float durability = 10;
         const float collisionDamage = 500;
+        const float speed = 1024;
 
         public override Vector2 AbsoluteVelocity { get { return Velocity; } }
         public override float HitRadius { get { return hitRadius; } }
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
-        const float speed = 1024;
+        protected override Rectangle PlayArea { get
+            { return new Rectangle(base.PlayArea.Left - base.PlayArea.Width / 2, base.PlayArea.Top - base.PlayArea.Height / 2, base.PlayArea.Width * 2, base.PlayArea.Height * 2); }
+        }
 
         public GuidedMissile(Level level, Vector2 position, Vector2 velocity)
             : base(level.Game.Assets.BulletTexture, level, durability)
