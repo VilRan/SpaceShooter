@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using SpaceShooter.Dynamic;
 using System;
 using System.Collections.Generic;
@@ -27,8 +28,10 @@ namespace SpaceShooter.Weapons
         {
             Bullet bullet = new Bullet(e.Level, e.Position, e.Direction * bulletSpeed, e.Shooter.Faction);
             e.Level.Objects.Add(bullet);
-
-            e.Assets.ShotSound.CreateInstance().Play();
+            
+            SoundEffectInstance sound = e.Assets.ShotSound.CreateInstance();
+            sound.Volume = (float)(0.5 + 0.5 * e.Random.NextDouble());
+            sound.Play();
         }
     }
 }
