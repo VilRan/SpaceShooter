@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Media;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -50,6 +51,9 @@ namespace SpaceShooter
 			// Create the game.
 			var launchArguments = string.Empty;
             Game = MonoGame.Framework.XamlGame<SpaceShooterGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+            MediaPlayer.Play(Game.Assets.SomethingMusic);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.IsMuted = true;
         }
 
         void NotifyPropertyChanged([CallerMemberName]string propertyName = null)

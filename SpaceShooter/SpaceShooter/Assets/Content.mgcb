@@ -85,3 +85,27 @@
 /processorParam:TextureFormat=Color
 /build:Textures/EarthTransparent.png
 
+#begin Music/Boss.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/Boss.ogg
+
+#begin Music/Main.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/Main.ogg
+
+#begin Music/Relax.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/Relax.ogg
+
+#begin Music/Something.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/Something.ogg
+
