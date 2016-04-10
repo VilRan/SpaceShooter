@@ -112,6 +112,7 @@
     <Compile Include="Dynamic\Rocket.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Particles\DustParticle.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Shop\Shop.cs" />
     <Compile Include="Shop\ShopItem.cs" />
     <Compile Include="Spawn.cs" />

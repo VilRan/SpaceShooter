@@ -14,10 +14,10 @@ namespace SpaceShooter
         public List<ShopItem> Inventory = new List<ShopItem>();
         //int money = 1000;
 
-        public Player(AssetManager assets)
+        public Player(AssetManager assets, Controller controller)
         {
             Ship = new PlayerShip(assets, this);
-            Controller = new Controller();
+            Controller = controller;
         }
     }
 }

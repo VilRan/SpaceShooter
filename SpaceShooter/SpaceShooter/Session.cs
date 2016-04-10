@@ -20,12 +20,9 @@ namespace SpaceShooter
             Difficulty = difficulty;
             Game = game;
             Shop = new Shop();
-
-            for (int i = 0; i < 2; i++)
-            {
-                Player player = new Player(game.Assets);
-                Players.Add(player);
-            }
+            
+            Players.Add(new Player(game.Assets, game.Settings.Keyboard1));
+            Players.Add(new Player(game.Assets, game.Settings.Keyboard2));
         }
 
         public void PlayNextLevel()

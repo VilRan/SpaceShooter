@@ -15,6 +15,7 @@ namespace SpaceShooter
     {
         public static Rectangle InternalResolution { get { return new Rectangle(0, 0, 1920, 1080); } }
 
+        public Settings Settings { private set; get; }
         public AssetManager Assets { private set; get; }
         public Session Session { private set; get; }
         public Random Random { private set; get; }
@@ -41,6 +42,7 @@ namespace SpaceShooter
         /// </summary>
         protected override void Initialize()
         {
+            Settings = new Settings();
             Random = new Random();
             renderTarget = new RenderTarget2D(GraphicsDevice, InternalResolution.Width, InternalResolution.Height);
             previousKeyboardState = Keyboard.GetState();
