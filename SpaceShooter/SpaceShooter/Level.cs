@@ -13,7 +13,6 @@ namespace SpaceShooter
     public class Level
     {
         public readonly Session Session;
-        public readonly LevelBlueprint Blueprint;
         public List<DynamicObject> Objects = new List<DynamicObject>();
         public List<DynamicObject> Inactive = new List<DynamicObject>();
         public List<Wall> Walls = new List<Wall>();
@@ -26,12 +25,14 @@ namespace SpaceShooter
         public Level(Session session, LevelBlueprint blueprint)
         {
             Session = session;
-            Blueprint = blueprint;
-            Inactive.AddRange(Blueprint.GetObjects());
             Camera = new Camera() { Velocity = new Vector2(128, 0), Size = new Vector2(SpaceShooterGame.InternalResolution.Width, SpaceShooterGame.InternalResolution.Height) };
+
             PlayerShip player = Game.Session.Player.Ship;
+            player.Level = this;
             player.Position = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Top + PlayArea.Height / 2);
             Objects.Add(player);
+            
+            Inactive.AddRange(blueprint.SpawnObjects(this));
 
             for (int y = 0; y < 640; y += 32)
             {
@@ -57,15 +58,15 @@ namespace SpaceShooter
                 if (Inactive[i].TryActivate(this))
                     i--;
 
-            UpdateEventArgs updateEventArgs = new UpdateEventArgs(this, gameTime);
+            UpdateEventArgs updateEventArgs = new UpdateEventArgs(gameTime);
             for (int i = 0; i < Objects.Count; i++)
             {
                 DynamicObject obj = Objects[i];
-                obj.CheckCollisions(gameTime, this, i + 1);
+                obj.CheckCollisions(gameTime, i + 1);
                 obj.Update(updateEventArgs);
                 if (obj.IsDying)
                 {
-                    obj.OnDeath(new DeathEventArgs(this));
+                    obj.OnDeath(new DeathEventArgs());
                     Objects.RemoveAt(i);
                     i--;
                 }

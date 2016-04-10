@@ -24,7 +24,7 @@ namespace SpaceShooter.Weapons
 
         public override void OnFire(FireEventArgs e)
         {
-            RailgunProjectile projectile = new RailgunProjectile(e.Level.Game.Assets, e.Position, new Vector2(bulletSpeed, 0));
+            RailgunProjectile projectile = new RailgunProjectile(e.Level, e.Position, new Vector2(bulletSpeed, 0));
             e.Level.Objects.Add(projectile);
         }
     }

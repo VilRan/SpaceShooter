@@ -18,18 +18,21 @@ namespace SpaceShooter.Dynamic
     {
         private const float hitRadius = 12;
 
-        Durability durability;
+        public Level Level;
         public Faction Faction = Faction.Enemy;
+        Durability durability;
 
+        public virtual Vector2 AbsoluteVelocity { get { return Velocity; } }
         public double CurrentDurability { get { return durability.Current; } }
         public double MaximumDurability { get { return durability.Maximum; } }
         public bool IsDying { get { return durability.Current <= 0; } }
         public virtual float HitRadius { get { return hitRadius; } }
         protected override Color Color { get { return Color.White; } }
 
-        public DynamicObject(Texture2D texture, float durability)
+        public DynamicObject(Texture2D texture, Level level, float durability)
             : base(texture)
         {
+            Level = level;
             this.durability = new Durability(durability);
         }
 
@@ -42,28 +45,28 @@ namespace SpaceShooter.Dynamic
         {
 
         }
-
+        /*
         public virtual DynamicObject Clone()
         {
             return (DynamicObject)MemberwiseClone();
         }
-
+        */
         public virtual void Update(UpdateEventArgs e)
         {
-            Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
+            Position += AbsoluteVelocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
             
-            if (!e.Level.PlayArea.Contains(Position))
+            if (!Level.PlayArea.Contains(Position))
                 Die();
         }
         
-        public void CheckCollisions(GameTime gameTime, Level level, int startIndex)
+        public void CheckCollisions(GameTime gameTime, int startIndex)
         {
-            for (int i = startIndex; i < level.Objects.Count; i++)
+            for (int i = startIndex; i < Level.Objects.Count; i++)
             {
                 if (IsDying)
                     return;
 
-                DynamicObject other = level.Objects[i];
+                DynamicObject other = Level.Objects[i];
                 if (other.Faction == Faction || other.IsDying)
                     continue;
 
@@ -75,15 +78,15 @@ namespace SpaceShooter.Dynamic
 
                 if (isCollision)
                 {
-                    OnCollision(new CollisionEventArgs(level, other, timeOfClosestApproach));
-                    other.OnCollision(new CollisionEventArgs(level, this, timeOfClosestApproach));
+                    OnCollision(new CollisionEventArgs(other, timeOfClosestApproach));
+                    other.OnCollision(new CollisionEventArgs(this, timeOfClosestApproach));
                 }
             }
         }
 
         public void FindClosestApproach(DynamicObject other, out float timeOfClosestApproach, out bool isCollision)
         {
-            Vector2 relativeVelocity = Velocity - other.Velocity;
+            Vector2 relativeVelocity = AbsoluteVelocity - other.AbsoluteVelocity;
             float a = Vector2.Dot(relativeVelocity, relativeVelocity);
             if (a == 0)
             {
@@ -142,54 +145,6 @@ namespace SpaceShooter.Dynamic
         public void Die()
         {
             durability.Current = 0;
-        }
-    }
-
-    public class UpdateEventArgs
-    {
-        public readonly Level Level;
-        public readonly GameTime GameTime;
-
-        public UpdateEventArgs(Level level, GameTime gameTime)
-        {
-            Level = level;
-            GameTime = gameTime;
-        }
-    }
-
-    public class CollisionEventArgs
-    {
-        public readonly Level Level;
-        public readonly DynamicObject Other;
-        public readonly float TimeOfCollision;
-
-        public CollisionEventArgs(Level level, DynamicObject other, float timeOfCollision)
-        {
-            Level = level;
-            Other = other;
-            TimeOfCollision = timeOfCollision;
-        }
-    }
-
-    public class DamageEventArgs
-    {
-        public readonly Level Level;
-        public readonly float DamageAmount;
-
-        public DamageEventArgs(CollisionEventArgs collision, float damageAmount)
-        {
-            Level = collision.Level;
-            DamageAmount = damageAmount;
-        }
-    }
-
-    public class DeathEventArgs
-    {
-        public readonly Level Level;
-
-        public DeathEventArgs(Level level)
-        {
-            Level = level;
         }
     }
 }

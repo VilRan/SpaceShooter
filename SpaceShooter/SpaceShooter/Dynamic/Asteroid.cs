@@ -16,15 +16,15 @@ namespace SpaceShooter.Dynamic
 
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
 
-        public Asteroid(AssetManager assets)
-            : base(assets.AsteroidTexture, durability)
+        public Asteroid(Level level)
+            : base(level.Game.Assets.AsteroidTexture, level, durability)
         {
 
         }
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            SpaceShooterGame game = e.Level.Game;
+            SpaceShooterGame game = Level.Game;
 
             DynamicObject other = e.Other;
             other.Damage(new DamageEventArgs(e, collisionDamage));
@@ -46,7 +46,7 @@ namespace SpaceShooter.Dynamic
 
                 particles[i] = particle;
             }
-            e.Level.Particles.AddRange(particles);
+            Level.Particles.AddRange(particles);
         }
     }
 }

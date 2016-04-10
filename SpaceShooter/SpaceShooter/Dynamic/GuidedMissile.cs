@@ -18,8 +18,8 @@ namespace SpaceShooter.Dynamic
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         const float speed = 1024;
 
-        public GuidedMissile(AssetManager assets, Vector2 position, Vector2 velocity)
-            : base(assets.BulletTexture, durability)
+        public GuidedMissile(Level level, Vector2 position, Vector2 velocity)
+            : base(level.Game.Assets.BulletTexture, level, durability)
         {
             Position = position;
             Velocity = velocity;
@@ -30,7 +30,7 @@ namespace SpaceShooter.Dynamic
         {
             DynamicObject target = null;
             float nearest = float.MaxValue;
-            foreach(DynamicObject obj in e.Level.Objects)
+            foreach(DynamicObject obj in Level.Objects)
             {
                 if (obj.Faction == Faction || obj.Category != ObjectCategory.Ship)
                     continue;

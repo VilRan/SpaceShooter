@@ -24,7 +24,7 @@ namespace SpaceShooter.Weapons
 
         public override void OnFire(FireEventArgs e)
         {
-            Rocket rocket = new Rocket(e.Level.Game.Assets, e.Position, e.Direction * launchSpeed, e.Shooter.Faction);
+            Rocket rocket = new Rocket(e.Level, e.Position, e.Direction * launchSpeed, e.Shooter.Faction);
             e.Level.Objects.Add(rocket);
         }
     }

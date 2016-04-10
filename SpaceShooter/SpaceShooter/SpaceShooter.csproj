@@ -97,10 +97,12 @@
     <Compile Include="AssetManager.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="Difficulty.cs" />
     <Compile Include="Dynamic\Asteroid.cs" />
     <Compile Include="Dynamic\Bullet.cs" />
     <Compile Include="Dynamic\Durability.cs" />
     <Compile Include="Dynamic\DynamicObject.cs" />
+    <Compile Include="GameEventArgs.cs" />
     <Compile Include="Dynamic\Fighter.cs" />
     <Compile Include="Dynamic\FlakCannonShell.cs" />
     <Compile Include="Dynamic\Fragment.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Particles\DustParticle.cs" />
     <Compile Include="Shop\Shop.cs" />
     <Compile Include="Shop\ShopItem.cs" />
+    <Compile Include="Spawn.cs" />
     <Compile Include="Wall.cs" />
     <Compile Include="Xaml\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>

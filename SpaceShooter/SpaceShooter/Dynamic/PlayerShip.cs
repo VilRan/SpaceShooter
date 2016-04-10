@@ -24,7 +24,7 @@ namespace SpaceShooter.Dynamic
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
 
         public PlayerShip(AssetManager assets, Player player)
-            : base(assets.PlayerShipTexture, durability)
+            : base(assets.PlayerShipTexture, null, durability)
         {
             this.player = player;
             Faction = Faction.Player;
@@ -43,7 +43,7 @@ namespace SpaceShooter.Dynamic
             Controller controller = player.Controller;
             KeyboardState keyboard = Keyboard.GetState();
 
-            Velocity = e.Level.Camera.Velocity;
+            Velocity = Level.Camera.Velocity;
             if (controller.IsControlDown(Control.MoveUp))
                 Velocity += new Vector2(0, -maxSpeed);
             if (controller.IsControlDown(Control.MoveDown))
@@ -55,7 +55,7 @@ namespace SpaceShooter.Dynamic
 
             activeWeapon.Update(e.GameTime);
             if (controller.IsControlDown(Control.Fire))
-                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, new Vector2(1,0), this));
+                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(1,0), this));
             if (controller.IsControlPressed(Control.PreviousWeapon))
             {
                 int weaponIndex = weapons.IndexOf(activeWeapon) - 1;
@@ -89,16 +89,16 @@ namespace SpaceShooter.Dynamic
 
             Position += Velocity * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
 
-            if (Position.X < e.Level.PlayArea.Left)
-                Position.X = e.Level.PlayArea.Left;
-            if (Position.X > e.Level.PlayArea.Right)
-                Position.X = e.Level.PlayArea.Right;
-            if (Position.Y < e.Level.PlayArea.Top)
-                Position.Y = e.Level.PlayArea.Top;
-            if (Position.Y > e.Level.PlayArea.Bottom)
-                Position.Y = e.Level.PlayArea.Bottom;
+            if (Position.X < Level.PlayArea.Left)
+                Position.X = Level.PlayArea.Left;
+            if (Position.X > Level.PlayArea.Right)
+                Position.X = Level.PlayArea.Right;
+            if (Position.Y < Level.PlayArea.Top)
+                Position.Y = Level.PlayArea.Top;
+            if (Position.Y > Level.PlayArea.Bottom)
+                Position.Y = Level.PlayArea.Bottom;
 
-            foreach (Wall wall in e.Level.Walls)
+            foreach (Wall wall in Level.Walls)
             {
                 if ((wall.Position - Position).LengthSquared() < HitRadius)
                 {

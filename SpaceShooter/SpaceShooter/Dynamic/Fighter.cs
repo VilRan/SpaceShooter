@@ -31,8 +31,8 @@ namespace SpaceShooter.Dynamic
 
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
 
-        public Fighter(AssetManager assets)
-            : base(assets.AsteroidTexture, 500)
+        public Fighter(Level level)
+            : base(level.Game.Assets.AsteroidTexture, level, 500)
         {
             Faction = Faction.Enemy;
 
@@ -46,9 +46,9 @@ namespace SpaceShooter.Dynamic
 
         public override void Update(UpdateEventArgs e)
         {
-            Vector2 closeFightPosition = e.Level.Session.Player.Ship.Position + new Vector2(200, 0);
+            Vector2 closeFightPosition = Level.Session.Player.Ship.Position + new Vector2(200, 0);
 
-            Vector2 shootingDirection = e.Level.Session.Player.Ship.Position - Position;
+            Vector2 shootingDirection = Level.Session.Player.Ship.Position - Position;
             shootingDirection.Normalize();
 
             Vector2 chasingDirection = closeFightPosition - Position;
@@ -68,7 +68,7 @@ namespace SpaceShooter.Dynamic
             {
                 activeWeapon = weapons[1];
                 activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, shootingDirection, this));
+                activeWeapon.TryFire(new FireEventArgs(Level, Position, shootingDirection, this));
                 
                 alertThreshold += hysteresis / 2 * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
                 chaseThreshold -= hysteresis / 2 * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
@@ -91,7 +91,7 @@ namespace SpaceShooter.Dynamic
             {
                 activeWeapon = weapons[0];
                 activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, new Vector2(-1, 0), this));
+                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
                                 
                 Velocity = new Vector2(128, 0);
 
@@ -121,7 +121,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            SpaceShooterGame game = e.Level.Game;
+            SpaceShooterGame game = Level.Game;
 
             DynamicObject other = e.Other;
             other.Damage(new DamageEventArgs(e, 100));
@@ -146,7 +146,7 @@ namespace SpaceShooter.Dynamic
 
                 particles[i] = particle;
             }
-            e.Level.Particles.AddRange(particles);
+            Level.Particles.AddRange(particles);
         }
     }
 }

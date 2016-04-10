@@ -4,25 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace SpaceShooter.Dynamic
 {
     public class Projectile : DynamicObject
     {
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
+        public override Vector2 AbsoluteVelocity { get { return Velocity + Level.Camera.Velocity; } }
 
-        public Projectile(Texture2D texture, float durability)
-            : base(texture, durability)
+        public Projectile(Texture2D texture, Level level, float durability)
+            : base(texture, level, durability)
         {
 
-        }
-
-        public override void Update(UpdateEventArgs e)
-        {
-            Position += (Velocity + e.Level.Camera.Velocity) * (float)e.GameTime.ElapsedGameTime.TotalSeconds;
-
-            if (!e.Level.PlayArea.Contains(Position))
-                Die();
         }
     }
 }

@@ -59,7 +59,7 @@ namespace SpaceShooter
             
             Assets = new AssetManager(Content);
             Assets.CreateTestLevel(this);
-            Session = new Session(this);
+            Session = new Session(this, Difficulty.Nightmare);
             Session.PlayNextLevel();
         }
 

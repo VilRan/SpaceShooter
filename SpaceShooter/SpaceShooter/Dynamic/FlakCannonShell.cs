@@ -17,8 +17,8 @@ namespace SpaceShooter.Dynamic
         
         protected override Color Color { get { return Color.LightGray; } }
 
-        public FlakCannonShell(AssetManager assets, Vector2 position, Vector2 velocity)
-            : base(assets.BulletTexture, durability)
+        public FlakCannonShell(Level level, Vector2 position, Vector2 velocity)
+            : base(level.Game.Assets.BulletTexture, level, durability)
         {
             Position = position;
             Velocity = velocity;
@@ -46,7 +46,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnDeath(DeathEventArgs e)
         {
-            SpaceShooterGame game = e.Level.Game;
+            SpaceShooterGame game = Level.Game;
             Random random = game.Random;
             int n = random.Next(20, 40);
             for (int i = 0; i < n; i++)
@@ -56,9 +56,9 @@ namespace SpaceShooter.Dynamic
 
                 velocity = Vector2.TransformNormal(velocity, rotation);
 
-                Fragment fragment = new Fragment(game.Assets, Position, velocity);
+                Fragment fragment = new Fragment(Level, Position, velocity);
                 fragment.Lifespan = random.NextDouble();
-                e.Level.Objects.Add(fragment);
+                Level.Objects.Add(fragment);
             }
         }
     }

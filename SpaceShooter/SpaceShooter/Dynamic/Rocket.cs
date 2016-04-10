@@ -22,8 +22,8 @@ namespace SpaceShooter.Dynamic
         double boostTimer = 0.2;
 
 
-        public Rocket(AssetManager assets, Vector2 position, Vector2 velocity, Faction faction)
-            : base(assets.BulletTexture, durability)
+        public Rocket(Level level, Vector2 position, Vector2 velocity, Faction faction)
+            : base(level.Game.Assets.BulletTexture, level, durability)
         {
             Position = position;
             Velocity = velocity;
@@ -44,13 +44,13 @@ namespace SpaceShooter.Dynamic
                     Velocity = direction * maxVelocity;
                 else
                 {
-                    Random random = e.Level.Game.Random;
+                    Random random = Level.Game.Random;
                     double trailLifespan = 0.25 + 0.25 * random.NextDouble();
-                    TimedParticle trail = new TimedParticle(e.Level.Game.Assets.ParticleTexture, trailLifespan);
+                    TimedParticle trail = new TimedParticle(Level.Game.Assets.ParticleTexture, trailLifespan);
                     trail.Position = Position;
                     trail.Velocity = VectorUtility.CreateRandom(random, 32);
                     trail.StartColor = Color.OrangeRed;
-                    e.Level.Particles.Add(trail);
+                    Level.Particles.Add(trail);
                 }
             }
             

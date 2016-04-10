@@ -24,7 +24,7 @@ namespace SpaceShooter.Weapons
 
         public override void OnFire(FireEventArgs e)
         {
-            GuidedMissile missile = new GuidedMissile(e.Level.Game.Assets, e.Position, new Vector2(launchSpeed, 0));
+            GuidedMissile missile = new GuidedMissile(e.Level, e.Position, new Vector2(launchSpeed, 0));
             e.Level.Objects.Add(missile);
         }
     }

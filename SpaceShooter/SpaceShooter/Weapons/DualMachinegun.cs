@@ -27,10 +27,10 @@ namespace SpaceShooter.Weapons
         {
             Vector2 firingPosition = new Vector2(0, bulletOffset);
 
-            Bullet firstBullet = new Bullet(e.Level.Game.Assets, e.Position - firingPosition, new Vector2(bulletSpeed, 0),e.Shooter.Faction);
+            Bullet firstBullet = new Bullet(e.Level, e.Position - firingPosition, new Vector2(bulletSpeed, 0),e.Shooter.Faction);
             e.Level.Objects.Add(firstBullet);
 
-            Bullet secondBullet = new Bullet(e.Level.Game.Assets, e.Position + firingPosition, new Vector2(bulletSpeed, 0),e.Shooter.Faction);
+            Bullet secondBullet = new Bullet(e.Level, e.Position + firingPosition, new Vector2(bulletSpeed, 0),e.Shooter.Faction);
             e.Level.Objects.Add(secondBullet);
         }
     }

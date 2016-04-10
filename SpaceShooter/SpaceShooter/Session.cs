@@ -8,14 +8,16 @@ namespace SpaceShooter
 {
     public class Session
     {
+        public Difficulty Difficulty;
         public Player Player;
         public Shop Shop;
         public Level ActiveLevel;
         public int Score = 0;
         public SpaceShooterGame Game;
 
-        public Session(SpaceShooterGame game)
+        public Session(SpaceShooterGame game, Difficulty difficulty)
         {
+            Difficulty = difficulty;
             Game = game;
             Shop = new Shop();
             Player = new Player(game.Assets);

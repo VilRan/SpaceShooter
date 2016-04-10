@@ -17,8 +17,8 @@ namespace SpaceShooter.Dynamic
         
         public override float HitRadius { get { return hitRadius; } }
 
-        public Fragment(AssetManager assets, Vector2 position, Vector2 velocity)
-            : base(assets.BulletTexture, durability)
+        public Fragment(Level level, Vector2 position, Vector2 velocity)
+            : base(level.Game.Assets.BulletTexture, level, durability)
         {
             Position = position;
             Velocity = velocity;

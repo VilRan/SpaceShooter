@@ -31,20 +31,6 @@ namespace SpaceShooter
         }
     }
 
-    public class DrawEventArgs
-    {
-        public readonly Level Level;
-        public readonly GameTime GameTime;
-        public readonly SpriteBatch SpriteBatch;
-
-        public DrawEventArgs(Level level, GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            Level = level;
-            GameTime = gameTime;
-            SpriteBatch = spriteBatch;
-        }
-    }
-
     public enum ObjectCategory
     {
         Tile,

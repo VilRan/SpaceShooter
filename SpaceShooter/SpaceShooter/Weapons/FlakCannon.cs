@@ -24,7 +24,7 @@ namespace SpaceShooter.Weapons
 
         public override void OnFire(FireEventArgs e)
         {
-            FlakCannonShell shell = new FlakCannonShell(e.Level.Game.Assets, e.Position, new Vector2(bulletSpeed, 0));
+            FlakCannonShell shell = new FlakCannonShell(e.Level, e.Position, new Vector2(bulletSpeed, 0));
             e.Level.Objects.Add(shell);
         }
     }
