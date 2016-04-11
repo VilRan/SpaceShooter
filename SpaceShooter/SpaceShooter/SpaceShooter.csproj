@@ -114,7 +114,7 @@
     <Compile Include="Particles\DustParticle.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Shop\Shop.cs" />
-    <Compile Include="Shop\ShopItem.cs" />
+    <Compile Include="Shop\InventoryItem.cs" />
     <Compile Include="Spawn.cs" />
     <Compile Include="Wall.cs" />
     <Compile Include="Xaml\GamePage.xaml.cs">

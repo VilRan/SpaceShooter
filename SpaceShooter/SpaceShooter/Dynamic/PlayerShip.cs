@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using SpaceShooter.Weapons;
 using Windows.UI.Xaml;
+using System.Collections.ObjectModel;
 
 namespace SpaceShooter.Dynamic
 {
@@ -17,9 +18,9 @@ namespace SpaceShooter.Dynamic
         const float durability = 2000;
         const float collisionDamage = 1000;
 
+        public ObservableCollection<InventoryItem> WeaponSlots = new ObservableCollection<InventoryItem>();
+        InventoryItem activeWeaponSlot;
         readonly Player player;
-        Weapon activeWeapon;
-        List<Weapon> weapons = new List<Weapon>();
         bool isInvincible = false;
 
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
@@ -39,14 +40,8 @@ namespace SpaceShooter.Dynamic
         {
             this.player = player;
             Faction = Faction.Player;
-            weapons.Add(new Machinegun());
-            weapons.Add(new Shotgun());
-            weapons.Add(new RocketLauncher());
-            weapons.Add(new MissileLauncher());
-            weapons.Add(new FlakCannon());
-            weapons.Add(new Railgun());
-            weapons.Add(new DualMachinegun());
-            activeWeapon = weapons[0];
+            WeaponSlots.Add(new InventoryItem(new Machinegun(), 50));
+            activeWeaponSlot = WeaponSlots[0];
         }
 
         public override void Update(UpdateEventArgs e)
@@ -64,38 +59,38 @@ namespace SpaceShooter.Dynamic
             if (controller.IsControlDown(Control.MoveRight))
                 Velocity += new Vector2(maxSpeed, 0);
 
-            activeWeapon.Update(e.GameTime);
+            activeWeaponSlot.Weapon.Update(e.GameTime);
             if (controller.IsControlDown(Control.Fire))
-                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(1,0), this));
+                activeWeaponSlot.Weapon.TryFire(new FireEventArgs(Level, Position, new Vector2(1,0), this));
             if (controller.IsControlPressed(Control.PreviousWeapon))
             {
-                int weaponIndex = weapons.IndexOf(activeWeapon) - 1;
+                int weaponIndex = WeaponSlots.IndexOf(activeWeaponSlot) - 1;
                 if (weaponIndex < 0)
-                    weaponIndex = weapons.Count - 1;
-                activeWeapon = weapons[weaponIndex];
+                    weaponIndex = WeaponSlots.Count - 1;
+                activeWeaponSlot = WeaponSlots[weaponIndex];
             }
             if (controller.IsControlPressed(Control.NextWeapon))
             {
-                int weaponIndex = weapons.IndexOf(activeWeapon) + 1;
-                if (weaponIndex >= weapons.Count)
+                int weaponIndex = WeaponSlots.IndexOf(activeWeaponSlot) + 1;
+                if (weaponIndex >= WeaponSlots.Count)
                     weaponIndex = 0;
-                activeWeapon = weapons[weaponIndex];
+                activeWeaponSlot = WeaponSlots[weaponIndex];
             }
 
             if (controller.IsControlPressed(Control.Weapon1))
-                activeWeapon = weapons[0];
-            else if (controller.IsControlPressed(Control.Weapon2))
-                activeWeapon = weapons[1];
-            else if (controller.IsControlPressed(Control.Weapon3))
-                activeWeapon = weapons[2];
-            else if (controller.IsControlPressed(Control.Weapon4))
-                activeWeapon = weapons[3];
-            else if (controller.IsControlPressed(Control.Weapon5))
-                activeWeapon = weapons[4];
-            else if (controller.IsControlPressed(Control.Weapon6))
-                activeWeapon = weapons[5];
-            else if (controller.IsControlPressed(Control.Weapon7))
-                activeWeapon = weapons[6];
+                activeWeaponSlot = WeaponSlots[0];
+            else if (WeaponSlots.Count > 1 && controller.IsControlPressed(Control.Weapon2))
+                activeWeaponSlot = WeaponSlots[1];
+            else if (WeaponSlots.Count > 2 && controller.IsControlPressed(Control.Weapon3))
+                activeWeaponSlot = WeaponSlots[2];
+            else if (WeaponSlots.Count > 3 && controller.IsControlPressed(Control.Weapon4))
+                activeWeaponSlot = WeaponSlots[3];
+            else if (WeaponSlots.Count > 4 && controller.IsControlPressed(Control.Weapon5))
+                activeWeaponSlot = WeaponSlots[4];
+            else if (WeaponSlots.Count > 5 && controller.IsControlPressed(Control.Weapon6))
+                activeWeaponSlot = WeaponSlots[5];
+            else if (WeaponSlots.Count > 6 && controller.IsControlPressed(Control.Weapon7))
+                activeWeaponSlot = WeaponSlots[6];
 
             if (keyboard.IsKeyDown(Keys.I))
                 isInvincible = true;
