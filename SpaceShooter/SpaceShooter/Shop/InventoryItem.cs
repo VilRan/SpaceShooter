@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
-    public class ShopItem
+    public class InventoryItem
     {
         public Weapon Weapon;
         public double Price;
 
-        public ShopItem(Weapon weapon, double price)
+        public InventoryItem(Weapon weapon, double price)
         {
             Weapon = weapon;
             Price = price;

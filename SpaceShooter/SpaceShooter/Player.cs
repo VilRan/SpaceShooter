@@ -11,7 +11,7 @@ namespace SpaceShooter
     {
         public PlayerShip Ship;
         public Controller Controller;
-        public List<ShopItem> Inventory = new List<ShopItem>();
+        public List<InventoryItem> Inventory = new List<InventoryItem>();
         //int money = 1000;
 
         public Player(AssetManager assets, Controller controller)
