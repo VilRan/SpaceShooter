@@ -68,7 +68,7 @@ namespace SpaceShooter.Dynamic
 
             if (aiState == FighterAiState.Wander)
             {
-                Velocity = new Vector2(-1, 0);
+                Velocity = new Vector2(0, 0);
 
                 alertThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
             }
@@ -99,8 +99,8 @@ namespace SpaceShooter.Dynamic
                 activeWeapon = weapons[0];
                 activeWeapon.Update(e.GameTime);
                 activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
-                                
-                Velocity = new Vector2(128, 0);
+
+                Velocity = Level.Camera.Velocity;
 
                 catchThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
             }
