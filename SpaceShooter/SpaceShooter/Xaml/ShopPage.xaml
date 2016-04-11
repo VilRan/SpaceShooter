@@ -25,7 +25,7 @@
             <GridView x:Name="shop" ItemsSource="{x:Bind Shop.Items}" Margin="32" Grid.Row="1" Grid.Column="1" Background="#FF82CEDE" 
                        CanDragItems="True" AllowDrop="True" DragItemsStarting="items_DragItemsStarting" Drop="items_Drop" DragOver="items_DragOver">
                 <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="data:ShopItem">
+                    <DataTemplate x:DataType="data:InventoryItem">
                         <StackPanel Margin="8">
                             <TextBlock Text="{x:Bind Weapon.Name}"/>
                             <TextBlock Text="{x:Bind Price}"/>
@@ -37,7 +37,7 @@
             <GridView Name="inventory" ItemsSource="{x:Bind Shop.Inventory}" Margin="32" Grid.Row="2" Grid.Column="1" Background="#FF82CEDE" 
                       CanDragItems="True" AllowDrop="True" Drop="inventory_Drop" DragItemsStarting="inventory_DragItemsStarting" DragOver="inventory_DragOver">
                 <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="data:ShopItem">
+                    <DataTemplate x:DataType="data:InventoryItem">
                         <StackPanel Margin="8">
                             <TextBlock Text="{x:Bind Weapon.Name}"/>
                             <TextBlock Text="{x:Bind Price}"/>
@@ -45,6 +45,19 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
+
+            <GridView Name="weapons" ItemsSource="{x:Bind Weapons}" Margin="32" Grid.Row="3" Grid.Column="1" Background="#FF82CEDE" 
+                      CanDragItems="True" AllowDrop="True" Drop="weapons_Drop" DragItemsStarting="weapons_DragItemsStarting" DragOver="weapons_DragOver">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="data:InventoryItem">
+                        <StackPanel Margin="8">
+                            <TextBlock Text="{x:Bind Weapon.Name}"/>
+                            <TextBlock Text="{x:Bind Price}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+            <Button x:Name="button" Content="Back" Grid.Column="2" HorizontalAlignment="Left" Margin="70,32,0,0" Grid.Row="3" VerticalAlignment="Top" Click="button_Click"/>
         </Grid>
     </Grid>
 </Page>

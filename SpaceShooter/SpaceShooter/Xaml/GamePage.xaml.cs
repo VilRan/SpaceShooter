@@ -51,6 +51,7 @@ namespace SpaceShooter
 			// Create the game.
 			var launchArguments = string.Empty;
             Game = MonoGame.Framework.XamlGame<SpaceShooterGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+            Game.IsDeactived = true;
             MediaPlayer.Play(Game.Assets.SomethingMusic);
             MediaPlayer.IsRepeating = true;
             MediaPlayer.IsMuted = false;

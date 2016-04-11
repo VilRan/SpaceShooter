@@ -25,6 +25,7 @@ namespace SpaceShooter
     /// </summary>
     sealed partial class App : Application
     {
+        public MainMenu MainMenu;
         public GamePage GamePage;
 
         /// <summary>
@@ -79,7 +80,10 @@ namespace SpaceShooter
                 // parameter
                 //rootFrame.Navigate(typeof(ShopPage), e.Arguments);
                 GamePage = new GamePage();
-                Window.Current.Content = GamePage;
+                
+                MainMenu = new MainMenu();
+                Window.Current.Content = MainMenu;
+
                 Window.Current.Activate();
             }
             // Ensure the current window is active
