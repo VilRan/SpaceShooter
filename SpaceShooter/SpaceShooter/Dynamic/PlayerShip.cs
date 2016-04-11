@@ -20,8 +20,19 @@ namespace SpaceShooter.Dynamic
         readonly Player player;
         Weapon activeWeapon;
         List<Weapon> weapons = new List<Weapon>();
+        bool isInvincible = false;
 
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
+        protected override Color Color
+        {
+            get
+            {
+                if (!isInvincible)
+                    return base.Color;
+                else
+                    return Color.Yellow;
+            }
+        }
 
         public PlayerShip(AssetManager assets, Player player)
             : base(assets.PlayerShipTexture, null, durability)
@@ -86,6 +97,10 @@ namespace SpaceShooter.Dynamic
             else if (controller.IsControlPressed(Control.Weapon7))
                 activeWeapon = weapons[6];
 
+            if (keyboard.IsKeyDown(Keys.I))
+                isInvincible = true;
+            else if (keyboard.IsKeyDown(Keys.U))
+                isInvincible = false;
 
             Position += Velocity * (float)e.ElapsedSeconds;
 
@@ -114,8 +129,11 @@ namespace SpaceShooter.Dynamic
 
         public override void Damage(DamageEventArgs e)
         {
-            base.Damage(e);
-            (Application.Current as App).GamePage.HealthbarValue = 100 * CurrentDurability / MaximumDurability;
+            if (!isInvincible)
+            {
+                base.Damage(e);
+                (Application.Current as App).GamePage.HealthbarValue = 100 * CurrentDurability / MaximumDurability;
+            }
         }
     }
 }
