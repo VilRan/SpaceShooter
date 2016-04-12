@@ -43,5 +43,11 @@ namespace SpaceShooter.Xaml
             Window.Current.Content = (Application.Current as App).GamePage;
             (Application.Current as App).GamePage.Game.IsDeactived = false;
         }
+
+        private void scoresButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            this.Frame.Navigate(typeof(MainMenu));
+        }
     }
 }

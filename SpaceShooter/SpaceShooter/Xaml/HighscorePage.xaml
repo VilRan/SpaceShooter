@@ -11,8 +11,7 @@
         <Grid Margin="350,120,351,120">
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Highscore" Height="75" FontFamily="Showcard Gothic" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,38,10,367" Width="559" TextAlignment="Center"/>
             <TextBlock x:Name="ScoreBlock" TextWrapping="Wrap" Margin="0,113,0,88"/>
-            <Button x:Name="button1" Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="400,416,0,0"/>
-            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="175" Margin="0,416,0,0"/>
+            <Button x:Name="backToMainMenuButton" Content="Back to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Center" Width="175" Margin="193,406,0,10" Click="backToMainMenuButton_Click"/>
         </Grid>
 
     </Grid>
