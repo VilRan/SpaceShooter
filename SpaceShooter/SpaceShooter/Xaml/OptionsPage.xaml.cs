@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -20,11 +22,37 @@ namespace SpaceShooter.Xaml
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class OptionsPage : Page
+    public sealed partial class OptionsPage : Page, INotifyPropertyChanged
     {
+        public Settings Settings { get { return App.Current.GamePage.Game.Settings; }}
+
+        public double MasterVolume { get { return Settings.MasterVolume * 100; } set { Settings.MasterVolume = (float)value / 100; NotifyPropertyChanged(); } }
+
+        public double MusicVolume { get { return Settings.MusicVolume * 100; } set { Settings.MusicVolume = (float)value / 100; NotifyPropertyChanged(); } }
+
+        public double SoundVolume { get { return Settings.SoundVolume * 100; } set { Settings.SoundVolume = (float)value / 100; NotifyPropertyChanged(); } }
+
         public OptionsPage()
         {
             this.InitializeComponent();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void backToMainMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window.Current.Content = App.Current.MainMenu;
+        }
+
+        private void masterVolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+
+        }
+
+        void NotifyPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

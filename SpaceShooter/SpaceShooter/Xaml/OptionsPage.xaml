@@ -20,12 +20,15 @@
             </Grid.RowDefinitions>
             <TextBlock x:Name="OptionsTitle" TextWrapping="Wrap" Text="Options" Height="103" FontFamily="Showcard Gothic" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,10,280" Width="569" TextAlignment="Center" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
 
-            <Button x:Name="button1" Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="243,23,0,0" Grid.Row="2" Grid.Column="1"/>
-            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="175" Margin="0,23,0,0" Grid.Row="2" Grid.ColumnSpan="2"/>
+            <Button x:Name="button1" Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="243,56,10,0" Grid.Row="2" Grid.Column="1"/>
+            <Button x:Name="backToMainMenuButton" Content="Back To Main Menu" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="147" Margin="0,56,0,0" Grid.Row="2" Click="backToMainMenuButton_Click"/>
             <StackPanel HorizontalAlignment="Left" Height="265" Margin="10,10,0,0" VerticalAlignment="Top" Width="251" Grid.Row="1" Grid.Column="1">
-                <Slider x:Name="slider"/>
-                <Slider x:Name="slider1"/>
-                <Slider x:Name="slider1_Copy"/>
+                <Slider x:Name="masterVolumeSlider" Header="Master Volume" Width="200"
+                        Value="{x:Bind MasterVolume, Mode=TwoWay}"/>
+                <Slider x:Name="musicVolumeSlider" Header="Music Volume" Width="200"
+                        Value="{x:Bind MusicVolume, Mode=TwoWay}"/>
+                <Slider x:Name="soundEffectSlider" Header="Sound Effects Volume" Width="200"
+                        Value="{x:Bind SoundVolume, Mode=TwoWay}"/>
                 <ComboBox x:Name="comboBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <ComboBox x:Name="comboBox1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Button x:Name="button2" Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>

@@ -30,14 +30,7 @@ namespace SpaceShooter.Xaml
 
         private void backToMainMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame == null) return;
-
-            if (rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-            }
+            Window.Current.Content = App.Current.MainMenu;
         }
     }
 }

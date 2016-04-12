@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,9 @@ namespace SpaceShooter
     {
         public Controller Keyboard1 = new Controller();
         public Controller Keyboard2 = new Controller();
+        public float MasterVolume = 1;
+        public float MusicVolume { get { return MediaPlayer.Volume; } set { MediaPlayer.Volume = value; } }
+        public float SoundVolume = 1;
 
         public Settings()
         {
