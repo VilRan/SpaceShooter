@@ -8,14 +8,14 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Margin="350,120,351,120">
+        <Grid Margin="0,0,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="3*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Highscore" Height="75" FontFamily="Showcard Gothic" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Width="559" TextAlignment="Center"/>
-            <TextBlock x:Name="ScoreBlock" TextWrapping="Wrap" Margin="0,0,0,0" Grid.Row="1"/>
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Highscore" Height="75" FontFamily="Showcard Gothic" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" TextAlignment="Center" Grid.Row="0"/>
+            <TextBlock x:Name="ScoreBlock" TextWrapping="Wrap" Margin="0,0,0,0" Width="500" Grid.Row="1"/>
             <Button x:Name="backToMainMenuButton" Content="Back to Main Menu" HorizontalAlignment="Center" VerticalAlignment="Center" Width="175" Margin="0,0,0,0" Click="backToMainMenuButton_Click" Grid.Row="2"/>
         </Grid>
     </Grid>
