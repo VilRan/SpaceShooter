@@ -55,8 +55,13 @@ namespace SpaceShooter.Xaml
 
         private void scoresButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            this.Frame.Navigate(typeof(MainMenu));
+
+            Window.Current.Content = new HighscorePage();
+        }
+
+        private void optionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window.Current.Content = new OptionsPage();
         }
     }
 }
