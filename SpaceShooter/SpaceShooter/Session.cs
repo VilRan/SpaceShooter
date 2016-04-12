@@ -25,7 +25,7 @@ namespace SpaceShooter
             Players.Add(new Player(game.Assets, game.Settings.Keyboard2));
         }
 
-        public void PlayNextLevel()
+        public void StartNextLevel()
         {
             foreach (Player player in Players)
                 player.Ship.Repair(10000);

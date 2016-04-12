@@ -28,6 +28,8 @@ namespace SpaceShooter
         public MainMenu MainMenu;
         public GamePage GamePage;
 
+        new public static App Current { get { return (App)Application.Current; } }
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
