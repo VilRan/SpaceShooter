@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -53,6 +54,20 @@ namespace SpaceShooter.Xaml
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void screenModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (((ComboBoxItem)e.AddedItems.First()).Name == "fullscreenItem")
+            {
+                ApplicationView view = ApplicationView.GetForCurrentView();
+                view.TryEnterFullScreenMode();
+            }
+            else if (((ComboBoxItem)e.AddedItems.First()).Name == "windowedItem")
+            {
+                ApplicationView view = ApplicationView.GetForCurrentView();
+                view.ExitFullScreenMode();
+            }
         }
     }
 }

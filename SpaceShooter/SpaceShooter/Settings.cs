@@ -16,6 +16,7 @@ namespace SpaceShooter
         public float MusicVolume { get { return MediaPlayer.Volume; } set { MediaPlayer.Volume = value; } }
         public float SoundVolume = 1;
 
+
         public Settings()
         {
             Keyboard1.Mappings[Control.MoveUp][0] = Keys.Up;

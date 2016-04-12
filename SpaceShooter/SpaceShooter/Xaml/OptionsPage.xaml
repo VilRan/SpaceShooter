@@ -10,28 +10,30 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid Margin="350,120,351,120">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="157*"/>
-                <ColumnDefinition Width="422*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="36*"/>
-                <RowDefinition Height="95*"/>
-                <RowDefinition Height="29*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="OptionsTitle" TextWrapping="Wrap" Text="Options" Height="103" FontFamily="Showcard Gothic" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,10,280" Width="569" TextAlignment="Center" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="OptionsTitle" TextWrapping="Wrap" Text="Options" Height="103" FontFamily="Showcard Gothic" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Width="569" TextAlignment="Center" Grid.Column="1"/>
 
-            <Button x:Name="button1" Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="243,56,10,0" Grid.Row="2" Grid.Column="1"/>
-            <Button x:Name="backToMainMenuButton" Content="Back To Main Menu" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="147" Margin="0,56,0,0" Grid.Row="2" Click="backToMainMenuButton_Click"/>
-            <StackPanel HorizontalAlignment="Left" Height="265" Margin="10,10,0,0" VerticalAlignment="Top" Width="251" Grid.Row="1" Grid.Column="1">
-                <Slider x:Name="masterVolumeSlider" Header="Master Volume" Width="200"
+            <Button x:Name="button1" Content="Button" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Row="2" Grid.Column="1"/>
+            <Button x:Name="backToMainMenuButton" Content="Back To Main Menu" HorizontalAlignment="Left" VerticalAlignment="Center" Width="147" Margin="0,0,0,0" Grid.Row="2" Grid.Column="1" Click="backToMainMenuButton_Click"/>
+            <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1">
+                <Slider x:Name="masterVolumeSlider" Header="Master Volume:" Width="200"
                         Value="{x:Bind MasterVolume, Mode=TwoWay}"/>
-                <Slider x:Name="musicVolumeSlider" Header="Music Volume" Width="200"
+                <Slider x:Name="musicVolumeSlider" Header="Music Volume:" Width="200"
                         Value="{x:Bind MusicVolume, Mode=TwoWay}"/>
-                <Slider x:Name="soundEffectSlider" Header="Sound Effects Volume" Width="200"
+                <Slider x:Name="soundEffectSlider" Header="Sound Effects Volume:" Width="200"
                         Value="{x:Bind SoundVolume, Mode=TwoWay}"/>
-                <ComboBox x:Name="comboBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                <ComboBox x:Name="comboBox1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                <Button x:Name="button2" Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <ComboBox x:Name="screenModeComboBox" Header="Display Mode:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="screenModeComboBox_SelectionChanged">
+                    <ComboBoxItem x:Name="fullscreenItem" Content="Fullscreen"/>
+                    <ComboBoxItem x:Name="windowedItem" Content="Windowed"/>
+                </ComboBox>
             </StackPanel>
         </Grid>
 
