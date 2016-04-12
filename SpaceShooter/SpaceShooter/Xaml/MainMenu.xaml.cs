@@ -28,9 +28,13 @@ namespace SpaceShooter.Xaml
             this.InitializeComponent();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void continueButton_Click(object sender, RoutedEventArgs e)
         {
+            GamePage gamePage = App.Current.GamePage;
+            Window.Current.Content = gamePage;
 
+            SpaceShooterGame game = gamePage.Game;
+            game.IsDeactived = false;
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)
@@ -40,8 +44,13 @@ namespace SpaceShooter.Xaml
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = (Application.Current as App).GamePage;
-            (Application.Current as App).GamePage.Game.IsDeactived = false;
+            GamePage gamePage = App.Current.GamePage;
+            Window.Current.Content = gamePage;
+
+            SpaceShooterGame game = gamePage.Game;
+            game.StartNewSession(Difficulty.Nightmare);
+            game.Session.StartNextLevel();
+            game.IsDeactived = false;
         }
     }
 }

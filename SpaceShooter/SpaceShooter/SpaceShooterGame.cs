@@ -34,6 +34,11 @@ namespace SpaceShooter
             IsMouseVisible = true;
         }
 
+        public void StartNewSession(Difficulty difficulty)
+        {
+            Session = new Session(this, difficulty);
+        }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -61,8 +66,8 @@ namespace SpaceShooter
             
             Assets = new AssetManager(Content);
             Assets.CreateTestLevel(this);
-            Session = new Session(this, Difficulty.Nightmare);
-            Session.PlayNextLevel();
+            //Session = new Session(this, Difficulty.Nightmare);
+            //Session.PlayNextLevel();
         }
 
         /// <summary>
@@ -81,13 +86,13 @@ namespace SpaceShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (IsDeactived)
+            if (Session == null || IsDeactived)
                 return;
 
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Escape) && previousKeyboardState.IsKeyUp(Keys.Escape))
             {
-                Windows.UI.Xaml.Window.Current.Content = new ShopPage();
+                Windows.UI.Xaml.Window.Current.Content = App.Current.MainMenu;
                 IsDeactived = true;
             }
             if (keyboard.IsKeyDown(Keys.F) && previousKeyboardState.IsKeyUp(Keys.F))
@@ -102,7 +107,7 @@ namespace SpaceShooter
             if (keyboard.IsKeyDown(Keys.P) && previousKeyboardState.IsKeyUp(Keys.P))
                 IsPaused = !IsPaused;
             if (keyboard.IsKeyDown(Keys.N) && previousKeyboardState.IsKeyUp(Keys.N))
-                Session.PlayNextLevel();
+                Session.StartNextLevel();
             previousKeyboardState = keyboard;
 
             if (!IsPaused)
@@ -121,7 +126,7 @@ namespace SpaceShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            if (IsDeactived)
+            if (Session == null || IsDeactived)
                 return;
 
             GraphicsDevice.Clear(Color.Black);
