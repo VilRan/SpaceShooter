@@ -95,6 +95,15 @@ namespace SpaceShooter
                 Windows.UI.Xaml.Window.Current.Content = new MainMenu();
                 IsDeactived = true;
             }
+            if (keyboard.IsKeyDown(Keys.F11) && previousKeyboardState.IsKeyUp(Keys.F11))
+            {
+                ApplicationView view = ApplicationView.GetForCurrentView();
+                if (view.IsFullScreenMode)
+                    view.ExitFullScreenMode();
+                else
+                    view.TryEnterFullScreenMode();
+
+            }
             if (keyboard.IsKeyDown(Keys.P) && previousKeyboardState.IsKeyUp(Keys.P))
                 IsPaused = !IsPaused;
             if (keyboard.IsKeyDown(Keys.N) && previousKeyboardState.IsKeyUp(Keys.N))
