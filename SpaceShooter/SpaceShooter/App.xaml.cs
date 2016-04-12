@@ -25,7 +25,6 @@ namespace SpaceShooter
     /// </summary>
     sealed partial class App : Application
     {
-        public MainMenu MainMenu;
         public GamePage GamePage;
 
         new public static App Current { get { return (App)Application.Current; } }
@@ -82,9 +81,7 @@ namespace SpaceShooter
                 // parameter
                 //rootFrame.Navigate(typeof(ShopPage), e.Arguments);
                 GamePage = new GamePage();
-                
-                MainMenu = new MainMenu();
-                Window.Current.Content = MainMenu;
+                Window.Current.Content = new MainMenu();
 
                 Window.Current.Activate();
             }

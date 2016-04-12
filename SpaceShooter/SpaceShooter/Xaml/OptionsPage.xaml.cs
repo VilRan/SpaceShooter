@@ -41,7 +41,7 @@ namespace SpaceShooter.Xaml
 
         private void backToMainMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = App.Current.MainMenu;
+            Window.Current.Content = new MainMenu();
         }
 
         private void masterVolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)

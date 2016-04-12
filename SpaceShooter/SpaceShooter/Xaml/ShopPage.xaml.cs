@@ -107,7 +107,7 @@ namespace SpaceShooter.Xaml
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = App.Current.MainMenu;
+            Window.Current.Content = new MainMenu();
         }
     }
 }

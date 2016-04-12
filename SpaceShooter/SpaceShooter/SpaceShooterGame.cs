@@ -92,7 +92,7 @@ namespace SpaceShooter
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Escape) && previousKeyboardState.IsKeyUp(Keys.Escape))
             {
-                Windows.UI.Xaml.Window.Current.Content = App.Current.MainMenu;
+                Windows.UI.Xaml.Window.Current.Content = new MainMenu();
                 IsDeactived = true;
             }
             if (keyboard.IsKeyDown(Keys.F) && previousKeyboardState.IsKeyUp(Keys.F))
