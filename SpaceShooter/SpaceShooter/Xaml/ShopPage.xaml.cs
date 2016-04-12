@@ -97,11 +97,17 @@ namespace SpaceShooter.Xaml
             e.AcceptedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Move;
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void continueButton_Click(object sender, RoutedEventArgs e)
         {
-            App app = Application.Current as App;
-            Window.Current.Content = app.GamePage;
-            app.GamePage.Game.IsDeactived = false;
+            Window.Current.Content = App.Current.GamePage;
+            SpaceShooterGame game = App.Current.GamePage.Game;
+            game.Session.StartNextLevel();
+            game.IsDeactived = false;
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window.Current.Content = App.Current.MainMenu;
         }
     }
 }

@@ -57,7 +57,8 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
-            <Button x:Name="button" Content="Back" Grid.Column="2" HorizontalAlignment="Left" Margin="70,32,0,0" Grid.Row="3" VerticalAlignment="Top" Click="button_Click"/>
+            <Button x:Name="continueButton" Content="Continue" Grid.Column="2" HorizontalAlignment="Left" Margin="70,32,0,0" Grid.Row="3" VerticalAlignment="Top" Click="continueButton_Click"/>
+            <Button x:Name="backButton" Content="Back" Grid.Column="0" HorizontalAlignment="Left" Margin="70,32,0,0" Grid.Row="3" VerticalAlignment="Top" Click="backButton_Click"/>
         </Grid>
     </Grid>
 </Page>
