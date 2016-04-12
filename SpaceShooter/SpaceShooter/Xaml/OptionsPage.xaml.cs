@@ -36,6 +36,17 @@ namespace SpaceShooter.Xaml
         public OptionsPage()
         {
             this.InitializeComponent();
+
+            ApplicationView view = ApplicationView.GetForCurrentView();
+            if (view.IsFullScreenMode)
+            {
+                screenModeComboBox.SelectedItem = screenModeComboBox.Items.Where(item => ((ComboBoxItem)item).Name == "fullscreenItem").First();
+            }
+            else
+            {
+                screenModeComboBox.SelectedItem = screenModeComboBox.Items.Where(item => ((ComboBoxItem)item).Name == "windowedItem").First();
+            }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
