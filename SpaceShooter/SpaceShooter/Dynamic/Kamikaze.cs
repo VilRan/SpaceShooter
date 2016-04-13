@@ -78,7 +78,7 @@ namespace SpaceShooter.Dynamic
             }
             else if (aiState == KamikazeAiState.Chase)
             {
-                Position += chasingDirection * (float)e.ElapsedSeconds * maxSpeed;
+                Velocity = chasingDirection * maxSpeed + Level.Camera.Velocity;
 
                 chaseThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
                 catchThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
@@ -86,7 +86,6 @@ namespace SpaceShooter.Dynamic
             else if (aiState == KamikazeAiState.Catch)
             {
                 Die();
-                Fragment.Emit(Level, Faction, Position, 40, 80);
 
                 catchThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
             }
@@ -121,6 +120,7 @@ namespace SpaceShooter.Dynamic
         public override void OnDeath(DeathEventArgs e)
         {
             base.OnDeath(e);
+            Fragment.Emit(Level, Faction, Position, 40, 80);
             SoundEffectInstance sound = Level.Game.Assets.ExplosionSound.CreateInstance();
             sound.Volume = (float)(0.5 + 0.5 * Level.Game.Random.NextDouble());
             sound.Play();

@@ -21,11 +21,13 @@ namespace SpaceShooter.Dynamic
         public Level Level;
         public Faction Faction = Faction.Enemy;
         Durability durability;
+        bool isRemoving = false;
 
         public virtual Vector2 AbsoluteVelocity { get { return Velocity; } }
         public virtual float HitRadius { get { return hitRadius; } }
         public double CurrentDurability { get { return durability.Current; } }
         public double MaximumDurability { get { return durability.Maximum; } }
+        public bool IsRemoving { get { return isRemoving || IsDying; } }
         public bool IsDying { get { return durability.Current <= 0; } }
         protected virtual Rectangle PlayArea { get { return new Rectangle(Level.PlayArea.Left - 32, Level.PlayArea.Top - 32, Level.PlayArea.Width + 64, Level.PlayArea.Height + 64); } }
         protected override Color Color { get { return Color.White; } }
@@ -50,9 +52,9 @@ namespace SpaceShooter.Dynamic
         public virtual void Update(UpdateEventArgs e)
         {
             Position += AbsoluteVelocity * (float)e.ElapsedSeconds;
-            
+
             if (!PlayArea.Contains(Position))
-                Die();
+                Remove();
         }
         
         public void CheckCollisions(GameTime gameTime, int startIndex)
@@ -152,6 +154,11 @@ namespace SpaceShooter.Dynamic
         public void Die()
         {
             durability.Current = 0;
+        }
+
+        public void Remove()
+        {
+            isRemoving = true;
         }
     }
 }

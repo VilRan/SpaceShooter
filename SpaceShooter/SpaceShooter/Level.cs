@@ -77,9 +77,10 @@ namespace SpaceShooter
                 DynamicObject obj = Objects[i];
                 obj.CheckCollisions(gameTime, i + 1);
                 obj.Update(updateEventArgs);
-                if (obj.IsDying)
+                if (obj.IsRemoving)
                 {
-                    obj.OnDeath(new DeathEventArgs());
+                    if (obj.IsDying)
+                         obj.OnDeath(new DeathEventArgs());
                     Objects.RemoveAt(i);
                     i--;
                 }
