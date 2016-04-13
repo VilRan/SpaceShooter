@@ -40,10 +40,8 @@ namespace SpaceShooter.Dynamic
             {
                 double lifespan = random.NextDouble();
                 TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, lifespan);
-
                 particle.Position = collisionPosition;
                 particle.Velocity = VectorUtility.CreateRandom(random, 1000);
-
                 particles[i] = particle;
             }
             Level.Particles.AddRange(particles);

@@ -145,13 +145,8 @@ namespace SpaceShooter.Dynamic
             {
                 double particleLifespan = random.NextDouble();
                 TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, particleLifespan);
-
                 particle.Position = collisionPosition;
-
-                double direction = random.NextDouble() * Math.PI * 2;
-                double speed = random.NextDouble() * 1000;
-                particle.Velocity = new Vector2((float)(Math.Cos(direction) * speed), (float)(Math.Sin(direction) * speed));
-
+                particle.Velocity = VectorUtility.CreateRandom(random, 1000);
                 particles[i] = particle;
             }
             Level.Particles.AddRange(particles);
