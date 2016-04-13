@@ -198,10 +198,10 @@
     <None Include="Assets\Textures\Particle.png" />
     <None Include="Assets\Textures\Pixel.png" />
     <None Include="Assets\Textures\Ship.png" />
-    <Content Include="Assets\MonoGame.Framework.dll">
+    <Content Include="Assets\DLLs\MonoGame.Framework.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Assets\MonoGame.Framework.xml" />
+    <None Include="Assets\DLLs\MonoGame.Framework.xml" />
     <Content Include="Assets\Textures\Tile.png" />
     <Content Include="Assets\Xml\KeyBindings.xml" />
     <Content Include="Assets\Xml\TestLevel.xml" />
@@ -213,22 +213,22 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="Assets\SharpDX.Direct2D1.dll">
+    <Content Include="Assets\DLLs\SharpDX.Direct2D1.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\SharpDX.Direct3D11.dll">
+    <Content Include="Assets\DLLs\SharpDX.Direct3D11.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\SharpDX.dll">
+    <Content Include="Assets\DLLs\SharpDX.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\SharpDX.DXGI.dll">
+    <Content Include="Assets\DLLs\SharpDX.DXGI.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\SharpDX.MediaFoundation.dll">
+    <Content Include="Assets\DLLs\SharpDX.MediaFoundation.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\SharpDX.XAudio2.dll">
+    <Content Include="Assets\DLLs\SharpDX.XAudio2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
