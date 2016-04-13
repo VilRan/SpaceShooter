@@ -85,24 +85,8 @@ namespace SpaceShooter.Dynamic
             }
             else if (aiState == KamikazeAiState.Catch)
             {
-                SpaceShooterGame game = Level.Game;
-                Random random = game.Random;
-
                 Die();
-
-                int n = random.Next(40, 80);
-                for (int i = 0; i < n; i++)
-                {
-                    Vector2 velocity = new Vector2(512, 0);
-                    Matrix rotation = Matrix.CreateRotationZ((float)(random.NextDouble() * Math.PI * 2));
-
-                    velocity = Vector2.TransformNormal(velocity, rotation);
-
-                    Fragment fragment = new Fragment(Level, Position, velocity, Faction.Enemy);
-                    fragment.Lifespan = random.NextDouble();
-                    Level.Objects.Add(fragment);
-                }
-
+                Fragment.Emit(Level, Faction, Position, 40, 80);
 
                 catchThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
             }

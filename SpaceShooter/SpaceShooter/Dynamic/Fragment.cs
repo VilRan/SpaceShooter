@@ -17,12 +17,13 @@ namespace SpaceShooter.Dynamic
 
         public override float HitRadius { get { return hitRadius; } }
 
-        public Fragment(Level level, Vector2 position, Vector2 velocity, Faction faction)
+        public Fragment(Level level, Vector2 position, Vector2 velocity, Faction faction, double lifespan)
             : base(level.Game.Assets.BulletTexture, level, durability)
         {
             Position = position;
             Velocity = velocity;
             Faction = faction;
+            Lifespan = lifespan;
         }
 
         public override void Update(UpdateEventArgs e)
@@ -37,6 +38,22 @@ namespace SpaceShooter.Dynamic
         public override void OnCollision(CollisionEventArgs e)
         {
             e.Other.Damage(new DamageEventArgs(e, collisionDamage));
+        }
+
+        public static void Emit(Level level, Faction faction, Vector2 position, int minCount, int maxCount)
+        {
+            SpaceShooterGame game = level.Game;
+            Random random = game.Random;
+            int n = random.Next(minCount, maxCount + 1);
+            Fragment[] fragments = new Fragment[n];
+            for (int i = 0; i < n; i++)
+            {
+                double lifespan = random.NextDouble();
+                Vector2 velocity = VectorUtility.CreateRandom(random, 512, 512);
+                Fragment fragment = new Fragment(level, position, velocity, faction, lifespan);
+                fragments[i] = fragment;
+            }
+            level.Objects.AddRange(fragments);
         }
     }
 }

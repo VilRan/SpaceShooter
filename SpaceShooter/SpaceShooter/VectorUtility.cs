@@ -11,8 +11,8 @@ namespace SpaceShooter
     {
         public static Vector2 CreateRandom(Random random, float maxLength, float minLength = 0, float maxAngle = MathHelper.TwoPi, float minAngle = 0)
         {
-            double angle = minAngle + maxAngle * random.NextDouble();
-            double length = minLength + maxLength * random.NextDouble();
+            double angle = minAngle + (maxAngle - minAngle) * random.NextDouble();
+            double length = minLength + (maxLength - minLength) * random.NextDouble();
             return new Vector2((float)(Math.Cos(angle) * length), (float)(Math.Sin(angle) * length));
         }
 
