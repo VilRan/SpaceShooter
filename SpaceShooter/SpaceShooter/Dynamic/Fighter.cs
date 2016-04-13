@@ -27,7 +27,7 @@ namespace SpaceShooter.Dynamic
         const float hysteresis = 15f;
 
         Weapon activeWeapon;
-        List<Weapon> weapons = new List<Weapon>();
+        //List<Weapon> weapons = new List<Weapon>();
         FighterAiState aiState = FighterAiState.Wander;
 
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
@@ -36,10 +36,12 @@ namespace SpaceShooter.Dynamic
             : base(level.Game.Assets.AsteroidTexture, level, 500)
         {
             Faction = Faction.Enemy;
-
+            /*
             weapons.Add(new Machinegun());
             weapons.Add(new RocketLauncher());
             activeWeapon = weapons[0];
+            */
+            activeWeapon = new Machinegun();
 
             activeWeapon.MagazineSize = 3;
             activeWeapon.MagazineCount = 3;
@@ -74,10 +76,10 @@ namespace SpaceShooter.Dynamic
             }
             else if (aiState == FighterAiState.Alert)
             {
-                activeWeapon = weapons[1];
+                //activeWeapon = weapons[0];
                 activeWeapon.Update(e.GameTime);
                 activeWeapon.TryFire(new FireEventArgs(Level, Position, shootingDirection, this));
-                
+
                 alertThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
                 chaseThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
                 catchThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
@@ -96,7 +98,7 @@ namespace SpaceShooter.Dynamic
             }
             else if (aiState == FighterAiState.Catch)
             {
-                activeWeapon = weapons[0];
+                //activeWeapon = weapons[0];
                 activeWeapon.Update(e.GameTime);
                 activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
 
@@ -124,7 +126,7 @@ namespace SpaceShooter.Dynamic
             }
 
             base.Update(e);
-        }   
+        }
 
         public override void OnCollision(CollisionEventArgs e)
         {
