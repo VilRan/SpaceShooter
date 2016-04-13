@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace SpaceShooter
     {
         public Dictionary<string, Controller> Controllers = new Dictionary<string, Controller>();
         public float MasterVolume = 1;
-        public float MusicVolume { get { return MediaPlayer.Volume; } set { MediaPlayer.Volume = value; } }
-        public float SoundVolume = 1;
+        public float MusicVolume { get { return MediaPlayer.Volume; } set { MediaPlayer.Volume = value * MasterVolume; } }
+        public float SoundVolume { get { return SoundEffect.MasterVolume; } set { SoundEffect.MasterVolume = value * MasterVolume; } }
 
 
         public Settings()
