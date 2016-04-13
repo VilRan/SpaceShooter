@@ -29,6 +29,7 @@ namespace SpaceShooter
                 Objects[i] = test;
             }
             */
+            /*
             int testFighters = 100;
             for (int i = 0; i < testFighters; i++)
             {
@@ -36,7 +37,15 @@ namespace SpaceShooter
                 FighterSpawn spawn = new FighterSpawn(Difficulty.Casual, position);
                 Spawns.Add(spawn);
             }
-            
+            */
+            int testKamikazes = 20;
+            for (int i = 0; i < testKamikazes; i++)
+            {
+                Vector2 position = new Vector2(1000 + ((float)Width / testKamikazes) * i, game.Random.Next(0, Height));
+                KamikazeSpawn spawn = new KamikazeSpawn(Difficulty.Casual, position);
+                Spawns.Add(spawn);
+            }
+
         }
 
         public IEnumerable<DynamicObject> SpawnObjects(Level level)

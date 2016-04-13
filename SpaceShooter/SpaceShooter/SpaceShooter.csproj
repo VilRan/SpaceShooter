@@ -103,6 +103,7 @@
     <Compile Include="Dynamic\Bullet.cs" />
     <Compile Include="Dynamic\Durability.cs" />
     <Compile Include="Dynamic\DynamicObject.cs" />
+    <Compile Include="Dynamic\Kamikaze.cs" />
     <Compile Include="GameEventArgs.cs" />
     <Compile Include="Dynamic\Fighter.cs" />
     <Compile Include="Dynamic\FlakCannonShell.cs" />

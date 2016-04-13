@@ -14,15 +14,15 @@ namespace SpaceShooter.Dynamic
         const float collisionDamage = 100;
 
         public double Lifespan;
-        
+
         public override float HitRadius { get { return hitRadius; } }
 
-        public Fragment(Level level, Vector2 position, Vector2 velocity)
+        public Fragment(Level level, Vector2 position, Vector2 velocity, Faction faction)
             : base(level.Game.Assets.BulletTexture, level, durability)
         {
             Position = position;
             Velocity = velocity;
-            Faction = Faction.Player;
+            Faction = faction;
         }
 
         public override void Update(UpdateEventArgs e)

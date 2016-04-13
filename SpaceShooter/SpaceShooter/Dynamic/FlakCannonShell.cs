@@ -14,7 +14,7 @@ namespace SpaceShooter.Dynamic
         const float collisionDamage = 1;
 
         double flyingTime = 0.6;
-        
+
         protected override Color Color { get { return Color.LightGray; } }
 
         public FlakCannonShell(Level level, Vector2 position, Vector2 velocity)
@@ -48,7 +48,7 @@ namespace SpaceShooter.Dynamic
         {
             SpaceShooterGame game = Level.Game;
             Random random = game.Random;
-            int n = random.Next(20, 40);
+            int n = random.Next(40, 80);
             for (int i = 0; i < n; i++)
             {
                 Vector2 velocity = new Vector2(512, 0);
@@ -56,7 +56,7 @@ namespace SpaceShooter.Dynamic
 
                 velocity = Vector2.TransformNormal(velocity, rotation);
 
-                Fragment fragment = new Fragment(Level, Position, velocity);
+                Fragment fragment = new Fragment(Level, Position, velocity, Faction.Player);
                 fragment.Lifespan = random.NextDouble();
                 Level.Objects.Add(fragment);
             }
