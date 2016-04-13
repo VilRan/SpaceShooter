@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace SpaceShooter
 {
-    public enum Control
+    public enum Action
     {
         Invalid,
         MoveUp,
@@ -29,16 +30,31 @@ namespace SpaceShooter
 
     public class Controller
     {
-        public Dictionary<Control, Keys[]> Mappings = new Dictionary<Control, Keys[]>();
+        public Dictionary<Action, List<Keys>> Bindings = new Dictionary<Action, List<Keys>>();
         KeyboardState previousKeyboard;
 
-        public Controller()
+        public Controller(XmlElement xml)
         {
-            foreach (Control control in Enum.GetValues(typeof(Control)))
+            foreach (Action action in Enum.GetValues(typeof(Action)))
+                Bindings.Add(action, new List<Keys>());
+
+            foreach (XmlElement action in xml.ChildNodes.OfType<XmlElement>())
             {
-                Mappings.Add(control, new Keys[2]);
+                string actionID = action.GetAttribute("ID");
+                Action actionType = Action.Invalid;
+                Enum.TryParse(actionID, out actionType);
+                if (actionType != Action.Invalid)
+                {
+                    foreach (XmlElement key in action.ChildNodes.OfType<XmlElement>())
+                    {
+                        int keyID;
+                        if (int.TryParse(key.GetAttribute("ID"), out keyID))
+                        {
+                            Bindings[actionType].Add((Keys)keyID);
+                        }
+                    }
+                }
             }
-            previousKeyboard = Keyboard.GetState();
         }
 
         public void Update()
@@ -46,29 +62,29 @@ namespace SpaceShooter
             previousKeyboard = Keyboard.GetState();
         }
 
-        public bool IsControlDown(Control control)
+        public bool IsControlDown(Action control)
         {
             KeyboardState keyboard = Keyboard.GetState();
-            return Mappings[control].Any(key => keyboard.IsKeyDown(key));
+            return Bindings[control].Any(key => keyboard.IsKeyDown(key));
         }
 
-        public bool IsControlUp(Control control)
+        public bool IsControlUp(Action control)
         {
             KeyboardState keyboard = Keyboard.GetState();
-            return Mappings[control].Any(key => keyboard.IsKeyUp(key));
+            return Bindings[control].Any(key => keyboard.IsKeyUp(key));
         }
 
-        public bool IsControlPressed(Control control)
+        public bool IsControlPressed(Action control)
         {
             KeyboardState keyboard = Keyboard.GetState();
-            return Mappings[control].Any(
+            return Bindings[control].Any(
                 key => keyboard.IsKeyDown(key) && previousKeyboard.IsKeyUp(key));
         }
 
-        public bool IsControlReleased(Control control)
+        public bool IsControlReleased(Action control)
         {
             KeyboardState keyboard = Keyboard.GetState();
-            return Mappings[control].Any(
+            return Bindings[control].Any(
                 key => keyboard.IsKeyUp(key) && previousKeyboard.IsKeyDown(key));
         }
     }

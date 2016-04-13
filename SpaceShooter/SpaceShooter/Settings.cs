@@ -33,31 +33,10 @@ namespace SpaceShooter
             var xmlDocument = new XmlDocument();
             xmlDocument.Load(stream);
 
-            foreach (XmlElement set in xmlDocument.DocumentElement.ChildNodes.OfType<XmlElement>())
+            foreach (XmlElement controllerElement in xmlDocument.DocumentElement.ChildNodes.OfType<XmlElement>())
             {
-                string setID = set.GetAttribute("ID");
-                Controller controller = new Controller();
-                Controllers.Add(setID, controller);
-
-                foreach (XmlElement action in set.ChildNodes.OfType<XmlElement>())
-                {
-                    string actionID = action.GetAttribute("ID");
-                    Control actionType = Control.Invalid;
-                    Enum.TryParse(actionID, out actionType);
-                    if (actionType != Control.Invalid)
-                    {
-                        int i = 0;
-                        foreach (XmlElement key in action.ChildNodes.OfType<XmlElement>())
-                        {
-                            int keyID;
-                            if (int.TryParse(key.GetAttribute("ID"), out keyID))
-                            {
-                                controller.Mappings[actionType][i] = (Keys)keyID;
-                            }
-                            i++;
-                        }
-                    }
-                }
+                string controllerID = controllerElement.GetAttribute("ID");
+                Controllers.Add(controllerID, new Controller(controllerElement));
             }
         }
     }

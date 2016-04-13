@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KeyBindings>
-  <Set ID="Keyboard1">
+  <Controller ID="Keyboard1">
     <Action ID="MoveUp">
       <Key ID="38"/>
       <Key ID="104"/>
@@ -51,9 +51,9 @@
     <Action ID="Weapon8">
       <Key ID="56"/>
     </Action>
-  </Set>
+  </Controller>
 
-  <Set ID="Keyboard2">
+  <Controller ID="Keyboard2">
     <Action ID="MoveUp">
       <Key ID="87"/>
     </Action>
@@ -75,5 +75,21 @@
     <Action ID="NextWeapon">
       <Key ID="69"/>
     </Action>
-  </Set>
+    <Action ID="Weapon1">
+    </Action>
+    <Action ID="Weapon2">
+    </Action>
+    <Action ID="Weapon3">
+    </Action>
+    <Action ID="Weapon4">
+    </Action>
+    <Action ID="Weapon5">
+    </Action>
+    <Action ID="Weapon6">
+    </Action>
+    <Action ID="Weapon7">
+    </Action>
+    <Action ID="Weapon8">
+    </Action>
+  </Controller>
 </KeyBindings>

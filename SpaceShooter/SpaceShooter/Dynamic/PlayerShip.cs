@@ -50,44 +50,44 @@ namespace SpaceShooter.Dynamic
             KeyboardState keyboard = Keyboard.GetState();
 
             Velocity = Level.Camera.Velocity;
-            if (controller.IsControlDown(Control.MoveUp))
+            if (controller.IsControlDown(Action.MoveUp))
                 Velocity += new Vector2(0, -maxSpeed);
-            if (controller.IsControlDown(Control.MoveDown))
+            if (controller.IsControlDown(Action.MoveDown))
                 Velocity += new Vector2(0, maxSpeed);
-            if (controller.IsControlDown(Control.MoveLeft))
+            if (controller.IsControlDown(Action.MoveLeft))
                 Velocity += new Vector2(-maxSpeed, 0);
-            if (controller.IsControlDown(Control.MoveRight))
+            if (controller.IsControlDown(Action.MoveRight))
                 Velocity += new Vector2(maxSpeed, 0);
 
             activeWeapon.Update(e.GameTime);
-            if (controller.IsControlDown(Control.Fire))
+            if (controller.IsControlDown(Action.Fire))
                 activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(1,0), this));
-            if (controller.IsControlPressed(Control.PreviousWeapon))
+            if (controller.IsControlPressed(Action.PreviousWeapon))
             {
                 activeWeaponIndex--;
                 if (activeWeaponIndex < 0)
                     activeWeaponIndex = WeaponSlots.Count - 1;
             }
-            if (controller.IsControlPressed(Control.NextWeapon))
+            if (controller.IsControlPressed(Action.NextWeapon))
             {
                 activeWeaponIndex++;
                 if (activeWeaponIndex >= WeaponSlots.Count)
                     activeWeaponIndex = 0;
             }
 
-            if (controller.IsControlPressed(Control.Weapon1))
+            if (controller.IsControlPressed(Action.Weapon1))
                 activeWeaponIndex = 0;
-            else if (WeaponSlots.Count > 1 && controller.IsControlPressed(Control.Weapon2))
+            else if (WeaponSlots.Count > 1 && controller.IsControlPressed(Action.Weapon2))
                 activeWeaponIndex = 1;
-            else if (WeaponSlots.Count > 2 && controller.IsControlPressed(Control.Weapon3))
+            else if (WeaponSlots.Count > 2 && controller.IsControlPressed(Action.Weapon3))
                 activeWeaponIndex = 2;
-            else if (WeaponSlots.Count > 3 && controller.IsControlPressed(Control.Weapon4))
+            else if (WeaponSlots.Count > 3 && controller.IsControlPressed(Action.Weapon4))
                 activeWeaponIndex = 3;
-            else if (WeaponSlots.Count > 4 && controller.IsControlPressed(Control.Weapon5))
+            else if (WeaponSlots.Count > 4 && controller.IsControlPressed(Action.Weapon5))
                 activeWeaponIndex = 4;
-            else if (WeaponSlots.Count > 5 && controller.IsControlPressed(Control.Weapon6))
+            else if (WeaponSlots.Count > 5 && controller.IsControlPressed(Action.Weapon6))
                 activeWeaponIndex = 5;
-            else if (WeaponSlots.Count > 6 && controller.IsControlPressed(Control.Weapon7))
+            else if (WeaponSlots.Count > 6 && controller.IsControlPressed(Action.Weapon7))
                 activeWeaponIndex = 6;
 
             if (keyboard.IsKeyDown(Keys.I))
