@@ -4,9 +4,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using Windows.ApplicationModel;
+using Windows.Storage;
 
 namespace SpaceShooter
 {
@@ -47,11 +52,25 @@ namespace SpaceShooter
 
             ShotSound = content.Load<SoundEffect>("Sounds/Shot");
             ExplosionSound = content.Load<SoundEffect>("Sounds/Explosion");
-        }
 
+            Task loadLevelsTask = Task.Run(() => loadLevels());
+            Task.WaitAll(loadLevelsTask);
+        }
+        /*
         public void CreateTestLevel(SpaceShooterGame game)
         {
             TestLevelBlueprint = new LevelBlueprint(game);
+        }
+        */
+
+        async void loadLevels()
+        {
+            var storageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Xml/TestLevel.xml"));
+            var stream = await storageFile.OpenStreamForReadAsync();
+            var xmlDocument = new XmlDocument();
+            xmlDocument.Load(stream);
+
+            TestLevelBlueprint = new LevelBlueprint(xmlDocument.DocumentElement);
         }
     }
 }

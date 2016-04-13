@@ -22,6 +22,21 @@ namespace SpaceShooter
         public abstract DynamicObject CreateObject(Level level);
     }
 
+    public class AsteroidSpawn : Spawn
+    {
+        public AsteroidSpawn(Difficulty difficulty, Vector2 position)
+            : base(difficulty, position)
+        {
+        }
+
+        public override DynamicObject CreateObject(Level level)
+        {
+            Asteroid asteroid = new Asteroid(level);
+            asteroid.Position = Position;
+            return asteroid;
+        }
+    }
+
     public class FighterSpawn : Spawn
     {
         public FighterSpawn(Difficulty difficulty, Vector2 position)

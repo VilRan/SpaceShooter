@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace SpaceShooter
 {
@@ -14,6 +15,36 @@ namespace SpaceShooter
         public readonly int Height;
         public List<Spawn> Spawns = new List<Spawn>();
 
+        public LevelBlueprint(XmlElement xml)
+        {
+            foreach (XmlElement spawn in xml)
+            {
+                Difficulty difficulty = (Difficulty)int.Parse(spawn.GetAttribute("Difficulty"));
+
+                string[] positionStrings = spawn.GetAttribute("Position").Split(',');
+                int x = int.Parse(positionStrings[0]);
+                int y = int.Parse(positionStrings[1]);
+                Vector2 position = new Vector2(x, y);
+
+                string spawnType = spawn.GetAttribute("Type");
+                switch (spawnType)
+                {
+                    case "Asteroid":
+                        Spawns.Add(new AsteroidSpawn(difficulty, position));
+                        break;
+                    case "Fighter":
+                        Spawns.Add(new FighterSpawn(difficulty, position));
+                        break;
+                    case "Kamikaze":
+                        Spawns.Add(new KamikazeSpawn(difficulty, position));
+                        break;
+                    case "Minelayer":
+                        Spawns.Add(new MinelayerSpawn(difficulty, position));
+                        break;
+                }
+            }
+        }
+        /*
         public LevelBlueprint(SpaceShooterGame game)
         {
             Width = 10240;
@@ -46,7 +77,7 @@ namespace SpaceShooter
                 KamikazeSpawn spawn = new KamikazeSpawn(Difficulty.Casual, position);
                 Spawns.Add(spawn);
             }
-            */
+            *//*
             int testMinelayers = 20;
             for (int i = 0; i < testMinelayers; i++)
             {
@@ -55,7 +86,7 @@ namespace SpaceShooter
                 Spawns.Add(spawn);
             }
         }
-
+        */
         public IEnumerable<DynamicObject> SpawnObjects(Level level)
         {
             Difficulty difficulty = level.Session.Difficulty;

@@ -50,13 +50,6 @@ namespace SpaceShooter
             
             Inactive.AddRange(blueprint.SpawnObjects(this));
 
-            for (int y = 0; y < 640; y += 32)
-            {
-                var wall = new Wall(Game.Assets);
-                wall.Position = new Vector2(1024, y);
-                Walls.Add(wall);
-            }
-
             var earth = new BackgroundParticle(Game.Assets.EarthTexture, 0.9f);
             earth.Position = new Vector2(PlayArea.Width / 3, PlayArea.Height * 3 / 4);
             Particles.Add(earth);

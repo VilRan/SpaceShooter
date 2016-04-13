@@ -204,6 +204,7 @@
     <None Include="Assets\MonoGame.Framework.xml" />
     <Content Include="Assets\Textures\Tile.png" />
     <Content Include="Assets\Xml\KeyBindings.xml" />
+    <Content Include="Assets\Xml\TestLevel.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
