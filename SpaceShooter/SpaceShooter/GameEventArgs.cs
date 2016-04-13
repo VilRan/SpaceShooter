@@ -47,6 +47,7 @@ namespace SpaceShooter
 
         public CollisionEventArgs(DynamicObject collider, DynamicObject other, float timeOfCollision)
         {
+            Collider = collider;
             Other = other;
             TimeOfCollision = timeOfCollision;
         }
