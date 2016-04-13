@@ -53,4 +53,20 @@ namespace SpaceShooter
             return kamikaze;
         }
     }
+
+    public class MinelayerSpawn : Spawn
+    {
+        public MinelayerSpawn(Difficulty difficulty, Vector2 position)
+            : base(difficulty, position)
+        {
+
+        }
+
+        public override DynamicObject CreateObject(Level level)
+        {
+            Minelayer minelayer = new Minelayer(level);
+            minelayer.Position = Position;
+            return minelayer;
+        }
+    }
 }

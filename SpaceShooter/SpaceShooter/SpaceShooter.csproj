@@ -105,6 +105,7 @@
     <Compile Include="Dynamic\DynamicObject.cs" />
     <Compile Include="Dynamic\Kamikaze.cs" />
     <Compile Include="Dynamic\Mine.cs" />
+    <Compile Include="Dynamic\Minelayer.cs" />
     <Compile Include="GameEventArgs.cs" />
     <Compile Include="Dynamic\Fighter.cs" />
     <Compile Include="Dynamic\FlakCannonShell.cs" />
