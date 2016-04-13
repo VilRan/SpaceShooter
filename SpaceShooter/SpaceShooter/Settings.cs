@@ -16,9 +16,13 @@ namespace SpaceShooter
     public class Settings
     {
         public Dictionary<string, Controller> Controllers = new Dictionary<string, Controller>();
-        public float MasterVolume = 1;
-        public float MusicVolume { get { return MediaPlayer.Volume; } set { MediaPlayer.Volume = value * MasterVolume; } }
-        public float SoundVolume { get { return SoundEffect.MasterVolume; } set { SoundEffect.MasterVolume = value * MasterVolume; } }
+        float masterVolume = 1;
+        float musicVolume = 1;
+        float soundVolume = 1;
+
+        public float MasterVolume { get { return masterVolume; } set { masterVolume = value; MusicVolume = musicVolume; SoundVolume = soundVolume; } }
+        public float MusicVolume { get { return musicVolume; } set { musicVolume = value; MediaPlayer.Volume = musicVolume * MasterVolume; } }
+        public float SoundVolume { get { return soundVolume; } set { soundVolume = value; SoundEffect.MasterVolume = soundVolume * MasterVolume; } }
 
 
         public Settings()
