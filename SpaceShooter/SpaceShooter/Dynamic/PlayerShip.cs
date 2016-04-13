@@ -24,6 +24,7 @@ namespace SpaceShooter.Dynamic
         bool isInvincible = false;
 
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
+        protected override Rectangle PlayArea { get { return Level.PlayArea; } }
         protected override Color Color
         {
             get
@@ -97,14 +98,14 @@ namespace SpaceShooter.Dynamic
 
             Position += Velocity * (float)e.ElapsedSeconds;
 
-            if (Position.X < Level.PlayArea.Left)
-                Position.X = Level.PlayArea.Left;
-            if (Position.X > Level.PlayArea.Right)
-                Position.X = Level.PlayArea.Right;
-            if (Position.Y < Level.PlayArea.Top)
-                Position.Y = Level.PlayArea.Top;
-            if (Position.Y > Level.PlayArea.Bottom)
-                Position.Y = Level.PlayArea.Bottom;
+            if (Position.X < PlayArea.Left)
+                Position.X = PlayArea.Left;
+            if (Position.X > PlayArea.Right)
+                Position.X = PlayArea.Right;
+            if (Position.Y < PlayArea.Top)
+                Position.Y = PlayArea.Top;
+            if (Position.Y > PlayArea.Bottom)
+                Position.Y = PlayArea.Bottom;
 
             foreach (Wall wall in Level.Walls)
             {

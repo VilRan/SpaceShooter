@@ -46,12 +46,7 @@ namespace SpaceShooter.Dynamic
         {
 
         }
-        /*
-        public virtual DynamicObject Clone()
-        {
-            return (DynamicObject)MemberwiseClone();
-        }
-        */
+
         public virtual void Update(UpdateEventArgs e)
         {
             Position += AbsoluteVelocity * (float)e.ElapsedSeconds;
@@ -79,8 +74,8 @@ namespace SpaceShooter.Dynamic
 
                 if (isCollision)
                 {
-                    OnCollision(new CollisionEventArgs(other, timeOfClosestApproach));
-                    other.OnCollision(new CollisionEventArgs(this, timeOfClosestApproach));
+                    OnCollision(new CollisionEventArgs(this, other, timeOfClosestApproach));
+                    other.OnCollision(new CollisionEventArgs(other, this, timeOfClosestApproach));
                 }
             }
         }

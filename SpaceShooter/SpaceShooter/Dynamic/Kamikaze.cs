@@ -25,6 +25,7 @@ namespace SpaceShooter.Dynamic
         const float chaseDistance = 700f;
         const float catchDistance = 25f;
         const float hysteresis = 15f;
+        const float collisionDamage = 100;
 
         Weapon activeWeapon;
         KamikazeAiState aiState = KamikazeAiState.Wander;
@@ -129,27 +130,8 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            SpaceShooterGame game = Level.Game;
-
-            DynamicObject other = e.Other;
-            other.Damage(new DamageEventArgs(e, 100));
-
-            Vector2 thisCollisionPosition = Position + Velocity * e.TimeOfCollision;
-            Vector2 otherCollisionPosition = other.Position + other.Velocity * e.TimeOfCollision;
-            Vector2 collisionPosition = (thisCollisionPosition - otherCollisionPosition) * (other.HitRadius / (HitRadius + other.HitRadius)) + otherCollisionPosition;
-
-            Random random = game.Random;
-            int n = random.Next(20, 40);
-            Particle[] particles = new Particle[n];
-            for (int i = 0; i < n; i++)
-            {
-                double particleLifespan = random.NextDouble();
-                TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, particleLifespan);
-                particle.Position = collisionPosition;
-                particle.Velocity = VectorUtility.CreateRandom(random, 1000);
-                particles[i] = particle;
-            }
-            Level.Particles.AddRange(particles);
+            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
+            TimedParticle.Emit(Level, e.CollisionPosition, 20, 40);
         }
 
         public override void OnDeath(DeathEventArgs e)
