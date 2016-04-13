@@ -120,6 +120,7 @@
     <Compile Include="Shop\InventoryItem.cs" />
     <Compile Include="Spawn.cs" />
     <Compile Include="Wall.cs" />
+    <Compile Include="Weapons\MineLauncher.cs" />
     <Compile Include="Xaml\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
