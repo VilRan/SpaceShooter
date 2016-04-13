@@ -103,6 +103,9 @@
     <Compile Include="Dynamic\Bullet.cs" />
     <Compile Include="Dynamic\Durability.cs" />
     <Compile Include="Dynamic\DynamicObject.cs" />
+    <Compile Include="Dynamic\Kamikaze.cs" />
+    <Compile Include="Dynamic\Mine.cs" />
+    <Compile Include="Dynamic\Minelayer.cs" />
     <Compile Include="GameEventArgs.cs" />
     <Compile Include="Dynamic\Fighter.cs" />
     <Compile Include="Dynamic\FlakCannonShell.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="Shop\InventoryItem.cs" />
     <Compile Include="Spawn.cs" />
     <Compile Include="Wall.cs" />
+    <Compile Include="Weapons\MineLauncher.cs" />
     <Compile Include="Xaml\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>

@@ -10,41 +10,33 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Dynamic
 {
-    class Fighter : DynamicObject
+    class Minelayer : DynamicObject
     {
-        enum FighterAiState
+        enum MinelayerAiState
         {
             Wander,
-            Alert,
-            Chase,
-            Catch
+            Alert
         }
 
         const float maxSpeed = 256;
-        const float alertDistance = 900f;
-        const float chaseDistance = 700f;
-        const float catchDistance = 5f;
+        const float alertDistance = 700f;
         const float hysteresis = 15f;
 
         Weapon activeWeapon;
-        //List<Weapon> weapons = new List<Weapon>();
-        FighterAiState aiState = FighterAiState.Wander;
+
+        MinelayerAiState aiState = MinelayerAiState.Wander;
 
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
 
-        public Fighter(Level level)
+        public Minelayer(Level level)
             : base(level.Game.Assets.AsteroidTexture, level, 500)
         {
             Faction = Faction.Enemy;
-            /*
-            weapons.Add(new Machinegun());
-            weapons.Add(new RocketLauncher());
-            activeWeapon = weapons[0];
-            */
-            activeWeapon = new Machinegun();
 
-            activeWeapon.MagazineSize = 3;
-            activeWeapon.MagazineCount = 3;
+            activeWeapon = new MineLauncher();
+
+            activeWeapon.MagazineSize = 1;
+            activeWeapon.MagazineCount = 1;
         }
 
         public override void Update(UpdateEventArgs e)
@@ -56,73 +48,30 @@ namespace SpaceShooter.Dynamic
             if (nearestPlayer == null)
                 return;
 
-            Vector2 closeFightPosition = nearestPlayer.Ship.Position + new Vector2(200, 0);
-
-            Vector2 shootingDirection = nearestPlayer.Ship.Position - Position;
-            shootingDirection.Normalize();
-
-            Vector2 chasingDirection = closeFightPosition - Position;
-            chasingDirection.Normalize();
-
             float alertThreshold = alertDistance;
-            float chaseThreshold = chaseDistance;
-            float catchThreshold = catchDistance;
 
-            if (aiState == FighterAiState.Wander)
+            if (aiState == MinelayerAiState.Wander)
             {
-                Velocity = new Vector2(0, 0);
+                Velocity = new Vector2(64, 0);
 
                 alertThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
             }
-            else if (aiState == FighterAiState.Alert)
+            else if (aiState == MinelayerAiState.Alert)
             {
-                //activeWeapon = weapons[0];
                 activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(Level, Position, shootingDirection, this));
+                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(0, 0), this));
 
                 alertThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
-                chaseThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
-                catchThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
-            }
-            else if (aiState == FighterAiState.Chase)
-            {
-                /*
-                activeWeapon = weapons[0];
-                activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, shootingDirection, this));
-                */
-                Position += chasingDirection * (float)e.ElapsedSeconds * maxSpeed;
-
-                chaseThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
-                catchThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
-            }
-            else if (aiState == FighterAiState.Catch)
-            {
-                //activeWeapon = weapons[0];
-                activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
-
-                Velocity = Level.Camera.Velocity;
-
-                catchThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
             }
 
-            float distanceFromPlayer = Vector2.Distance(Position, closeFightPosition);
+            float distanceFromPlayer = Vector2.Distance(Position, nearestPlayer.Ship.Position);
             if (distanceFromPlayer > alertThreshold)
             {
-                aiState = FighterAiState.Wander;
-            }
-            else if (distanceFromPlayer > chaseThreshold)
-            {
-                aiState = FighterAiState.Alert;
-            }
-            else if (distanceFromPlayer > catchThreshold)
-            {
-                aiState = FighterAiState.Chase;
+                aiState = MinelayerAiState.Wander;
             }
             else
             {
-                aiState = FighterAiState.Catch;
+                aiState = MinelayerAiState.Alert;
             }
 
             base.Update(e);

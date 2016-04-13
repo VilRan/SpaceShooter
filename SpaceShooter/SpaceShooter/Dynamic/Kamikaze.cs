@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Dynamic
 {
-    class Fighter : DynamicObject
+    class Kamikaze : DynamicObject
     {
-        enum FighterAiState
+        enum KamikazeAiState
         {
             Wander,
             Alert,
@@ -23,24 +23,18 @@ namespace SpaceShooter.Dynamic
         const float maxSpeed = 256;
         const float alertDistance = 900f;
         const float chaseDistance = 700f;
-        const float catchDistance = 5f;
+        const float catchDistance = 25f;
         const float hysteresis = 15f;
 
         Weapon activeWeapon;
-        //List<Weapon> weapons = new List<Weapon>();
-        FighterAiState aiState = FighterAiState.Wander;
+        KamikazeAiState aiState = KamikazeAiState.Wander;
 
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
 
-        public Fighter(Level level)
+        public Kamikaze(Level level)
             : base(level.Game.Assets.AsteroidTexture, level, 500)
         {
             Faction = Faction.Enemy;
-            /*
-            weapons.Add(new Machinegun());
-            weapons.Add(new RocketLauncher());
-            activeWeapon = weapons[0];
-            */
             activeWeapon = new Machinegun();
 
             activeWeapon.MagazineSize = 3;
@@ -56,27 +50,24 @@ namespace SpaceShooter.Dynamic
             if (nearestPlayer == null)
                 return;
 
-            Vector2 closeFightPosition = nearestPlayer.Ship.Position + new Vector2(200, 0);
-
             Vector2 shootingDirection = nearestPlayer.Ship.Position - Position;
             shootingDirection.Normalize();
 
-            Vector2 chasingDirection = closeFightPosition - Position;
+            Vector2 chasingDirection = nearestPlayer.Ship.Position - Position;
             chasingDirection.Normalize();
 
             float alertThreshold = alertDistance;
             float chaseThreshold = chaseDistance;
             float catchThreshold = catchDistance;
 
-            if (aiState == FighterAiState.Wander)
+            if (aiState == KamikazeAiState.Wander)
             {
                 Velocity = new Vector2(0, 0);
 
                 alertThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
             }
-            else if (aiState == FighterAiState.Alert)
+            else if (aiState == KamikazeAiState.Alert)
             {
-                //activeWeapon = weapons[0];
                 activeWeapon.Update(e.GameTime);
                 activeWeapon.TryFire(new FireEventArgs(Level, Position, shootingDirection, this));
 
@@ -84,45 +75,53 @@ namespace SpaceShooter.Dynamic
                 chaseThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
                 catchThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
             }
-            else if (aiState == FighterAiState.Chase)
+            else if (aiState == KamikazeAiState.Chase)
             {
-                /*
-                activeWeapon = weapons[0];
-                activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, shootingDirection, this));
-                */
                 Position += chasingDirection * (float)e.ElapsedSeconds * maxSpeed;
 
                 chaseThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
                 catchThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
             }
-            else if (aiState == FighterAiState.Catch)
+            else if (aiState == KamikazeAiState.Catch)
             {
-                //activeWeapon = weapons[0];
-                activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
+                SpaceShooterGame game = Level.Game;
+                Random random = game.Random;
 
-                Velocity = Level.Camera.Velocity;
+                Die();
+
+                int n = random.Next(40, 80);
+                for (int i = 0; i < n; i++)
+                {
+                    Vector2 velocity = new Vector2(512, 0);
+                    Matrix rotation = Matrix.CreateRotationZ((float)(random.NextDouble() * Math.PI * 2));
+
+                    velocity = Vector2.TransformNormal(velocity, rotation);
+
+                    Fragment fragment = new Fragment(Level, Position, velocity, Faction.Enemy);
+                    fragment.Lifespan = random.NextDouble();
+                    Level.Objects.Add(fragment);
+                }
+
 
                 catchThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
             }
 
-            float distanceFromPlayer = Vector2.Distance(Position, closeFightPosition);
+            float distanceFromPlayer = Vector2.Distance(Position, nearestPlayer.Ship.Position);
             if (distanceFromPlayer > alertThreshold)
             {
-                aiState = FighterAiState.Wander;
+                aiState = KamikazeAiState.Wander;
             }
             else if (distanceFromPlayer > chaseThreshold)
             {
-                aiState = FighterAiState.Alert;
+                aiState = KamikazeAiState.Alert;
             }
             else if (distanceFromPlayer > catchThreshold)
             {
-                aiState = FighterAiState.Chase;
+                aiState = KamikazeAiState.Chase;
             }
             else
             {
-                aiState = FighterAiState.Catch;
+                aiState = KamikazeAiState.Catch;
             }
 
             base.Update(e);

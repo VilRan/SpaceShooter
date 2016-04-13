@@ -8,44 +8,26 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Dynamic
 {
-    class FlakCannonShell : Projectile
+    class Mine : Projectile
     {
-        const float durability = 10;
-        const float collisionDamage = 1;
+        const float hitRadius = 35f;
+        const float durability = 10f;
+        const float collisionDamage = 10;
 
-        double flyingTime = 0.6;
+        public override float HitRadius { get { return hitRadius; } }
 
-        protected override Color Color { get { return Color.LightGray; } }
-
-        public FlakCannonShell(Level level, Vector2 position, Vector2 velocity)
+        public Mine(Level level, Vector2 position, Vector2 velocity, Faction faction)
             : base(level.Game.Assets.BulletTexture, level, durability)
         {
             Position = position;
             Velocity = velocity;
-            Faction = Faction.Player;
-        }
-
-        public override void Update(UpdateEventArgs e)
-        {
-            if (flyingTime > 0)
-            {
-                flyingTime -= e.ElapsedSeconds;
-            }
-            else
-            {
-                Die();
-            }
-            base.Update(e);
+            Faction = faction;
         }
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            DynamicObject other = e.Other;
-            other.Damage(new DamageEventArgs(e, collisionDamage));
-        }
+            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
 
-        public override void OnDeath(DeathEventArgs e)
-        {
             SpaceShooterGame game = Level.Game;
             Random random = game.Random;
             int n = random.Next(40, 80);
@@ -56,7 +38,7 @@ namespace SpaceShooter.Dynamic
 
                 velocity = Vector2.TransformNormal(velocity, rotation);
 
-                Fragment fragment = new Fragment(Level, Position, velocity, Faction.Player);
+                Fragment fragment = new Fragment(Level, Position, velocity, Faction.Enemy);
                 fragment.Lifespan = random.NextDouble();
                 Level.Objects.Add(fragment);
             }
