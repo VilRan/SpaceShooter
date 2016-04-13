@@ -51,14 +51,21 @@ namespace SpaceShooter.Dynamic
             KeyboardState keyboard = Keyboard.GetState();
 
             Velocity = Level.Camera.Velocity;
+            Vector2 thrust = Vector2.Zero;
             if (controller.IsControlDown(Action.MoveUp))
-                Velocity += new Vector2(0, -maxSpeed);
+                thrust += new Vector2(0, -1);
             if (controller.IsControlDown(Action.MoveDown))
-                Velocity += new Vector2(0, maxSpeed);
+                thrust += new Vector2(0, 1);
             if (controller.IsControlDown(Action.MoveLeft))
-                Velocity += new Vector2(-maxSpeed, 0);
+                thrust += new Vector2(-1, 0);
             if (controller.IsControlDown(Action.MoveRight))
-                Velocity += new Vector2(maxSpeed, 0);
+                thrust += new Vector2(1, 0);
+            if (thrust != Vector2.Zero)
+            {
+                thrust.Normalize();
+                thrust *= maxSpeed;
+                Velocity += thrust;
+            }
 
             activeWeapon.Update(e.GameTime);
             if (controller.IsControlDown(Action.Fire))

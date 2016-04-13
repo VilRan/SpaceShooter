@@ -78,7 +78,7 @@ namespace SpaceShooter.Dynamic
             }
             else if (aiState == KamikazeAiState.Chase)
             {
-                Velocity = chasingDirection * maxSpeed + Level.Camera.Velocity;
+                RelativeVelocity = chasingDirection * maxSpeed;
 
                 chaseThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
                 catchThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;

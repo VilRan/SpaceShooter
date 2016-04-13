@@ -48,8 +48,8 @@ namespace SpaceShooter.Dynamic
             Fragment[] fragments = new Fragment[n];
             for (int i = 0; i < n; i++)
             {
-                double lifespan = random.NextDouble();
-                Vector2 velocity = VectorUtility.CreateRandom(random, 512, 512);
+                double lifespan = 0.25 + 0.25 * random.NextDouble();
+                Vector2 velocity = VectorUtility.CreateRandom(random, 1024, 1024);
                 Fragment fragment = new Fragment(level, position, velocity, faction, lifespan);
                 fragments[i] = fragment;
             }

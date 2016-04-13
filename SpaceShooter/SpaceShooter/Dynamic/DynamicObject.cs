@@ -23,6 +23,7 @@ namespace SpaceShooter.Dynamic
         Durability durability;
         bool isRemoving = false;
 
+        public virtual Vector2 RelativeVelocity { get { return Velocity - Level.Camera.Velocity; } set { Velocity = value + Level.Camera.Velocity; } }
         public virtual Vector2 AbsoluteVelocity { get { return Velocity; } }
         public virtual float HitRadius { get { return hitRadius; } }
         public double CurrentDurability { get { return durability.Current; } }
