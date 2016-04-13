@@ -128,5 +128,17 @@ namespace SpaceShooter.Dynamic
                 (Application.Current as App).GamePage.HealthbarValue = 100 * CurrentDurability / MaximumDurability;
             }
         }
+
+        public bool TryRemoveWeapon(InventoryItem weapon)
+        {
+            if (WeaponSlots.Count > 1 && WeaponSlots.Contains(weapon))
+            {
+                WeaponSlots.Remove(weapon);
+                if (activeWeaponIndex <= WeaponSlots.Count)
+                    activeWeaponIndex = WeaponSlots.Count - 1;
+                return true;
+            }
+            return false;
+        }
     }
 }

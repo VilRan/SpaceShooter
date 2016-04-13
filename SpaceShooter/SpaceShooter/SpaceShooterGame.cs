@@ -100,6 +100,11 @@ namespace SpaceShooter
                 else
                     view.TryEnterFullScreenMode();
             }
+            if (keyboard.IsKeyDown(Keys.O) && previousKeyboardState.IsKeyUp(Keys.O))
+            {
+                Windows.UI.Xaml.Window.Current.Content = new ShopPage();
+                IsDeactived = true;
+            }
             if (keyboard.IsKeyDown(Keys.P) && previousKeyboardState.IsKeyUp(Keys.P))
                 IsPaused = !IsPaused;
             previousKeyboardState = keyboard;

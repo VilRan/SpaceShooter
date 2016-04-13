@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using SpaceShooter;
 using System.Collections.ObjectModel;
+using SpaceShooter.Dynamic;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,8 +27,10 @@ namespace SpaceShooter.Xaml
     {
         InventoryItem draggedItem = null;
 
+        public Player Player { get { return App.Current.GamePage.Game.Session.Players[0]; } }
+        public PlayerShip Ship { get { return Player.Ship; } }
         public Shop Shop { get { return (Application.Current as App).GamePage.Game.Session.Shop; } }
-        public ObservableCollection<InventoryItem> Weapons { get { return (Application.Current as App).GamePage.Game.Session.Players[0].Ship.WeaponSlots; } }
+        public ObservableCollection<InventoryItem> Weapons { get { return Ship.WeaponSlots; } }
 
         public ShopPage()
         {
@@ -46,7 +49,10 @@ namespace SpaceShooter.Xaml
 
         private void weapons_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
-            draggedItem = e.Items[0] as InventoryItem;
+            if (Weapons.Count <= 1)
+                e.Cancel = true;
+            else
+                draggedItem = e.Items[0] as InventoryItem;
         }
 
         private void items_Drop(object sender, DragEventArgs e)
@@ -55,7 +61,7 @@ namespace SpaceShooter.Xaml
             {
                 Shop.Inventory.Remove(draggedItem);
                 Shop.Items.Add(draggedItem);
-                Weapons.Remove(draggedItem);
+                Ship.TryRemoveWeapon(draggedItem);
                 draggedItem = null;
             }
         }
@@ -66,7 +72,7 @@ namespace SpaceShooter.Xaml
             {
                 Shop.Inventory.Add(draggedItem);
                 Shop.Items.Remove(draggedItem);
-                Weapons.Remove(draggedItem);
+                Ship.TryRemoveWeapon(draggedItem);
                 draggedItem = null;
             }
         }
