@@ -21,8 +21,8 @@ namespace SpaceShooter
             Game = game;
             Shop = new Shop();
             
-            Players.Add(new Player(game.Assets, game.Settings.Keyboard1));
-            Players.Add(new Player(game.Assets, game.Settings.Keyboard2));
+            Players.Add(new Player(game.Assets, game.Settings.Controllers["Keyboard1"]));
+            Players.Add(new Player(game.Assets, game.Settings.Controllers["Keyboard2"]));
         }
 
         public void StartNextLevel()

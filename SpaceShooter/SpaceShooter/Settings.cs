@@ -2,16 +2,19 @@
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using Windows.ApplicationModel;
+using Windows.Storage;
 
 namespace SpaceShooter
 {
     public class Settings
     {
-        public Controller Keyboard1 = new Controller();
-        public Controller Keyboard2 = new Controller();
+        public Dictionary<string, Controller> Controllers = new Dictionary<string, Controller>();
         public float MasterVolume = 1;
         public float MusicVolume { get { return MediaPlayer.Volume; } set { MediaPlayer.Volume = value; } }
         public float SoundVolume = 1;
@@ -19,42 +22,43 @@ namespace SpaceShooter
 
         public Settings()
         {
-            Keyboard1.Mappings[Control.MoveUp][0] = Keys.Up;
-            Keyboard1.Mappings[Control.MoveDown][0] = Keys.Down;
-            Keyboard1.Mappings[Control.MoveLeft][0] = Keys.Left;
-            Keyboard1.Mappings[Control.MoveRight][0] = Keys.Right;
-            Keyboard1.Mappings[Control.Fire][0] = Keys.Space;
-            Keyboard1.Mappings[Control.MoveUp][1] = Keys.NumPad8;
-            Keyboard1.Mappings[Control.MoveDown][1] = Keys.NumPad2;
-            Keyboard1.Mappings[Control.MoveLeft][1] = Keys.NumPad4;
-            Keyboard1.Mappings[Control.MoveRight][1] = Keys.NumPad6;
-            Keyboard1.Mappings[Control.Fire][1] = Keys.Enter;
-            Keyboard1.Mappings[Control.PreviousWeapon][1] = Keys.NumPad7;
-            Keyboard1.Mappings[Control.NextWeapon][1] = Keys.NumPad9;
-            Keyboard1.Mappings[Control.Weapon1][0] = Keys.D1;
-            Keyboard1.Mappings[Control.Weapon2][0] = Keys.D2;
-            Keyboard1.Mappings[Control.Weapon3][0] = Keys.D3;
-            Keyboard1.Mappings[Control.Weapon4][0] = Keys.D4;
-            Keyboard1.Mappings[Control.Weapon5][0] = Keys.D5;
-            Keyboard1.Mappings[Control.Weapon6][0] = Keys.D6;
-            Keyboard1.Mappings[Control.Weapon7][0] = Keys.D7;
-            Keyboard1.Mappings[Control.Weapon8][0] = Keys.D8;
-            
-            Keyboard2.Mappings[Control.MoveUp][0] = Keys.W;
-            Keyboard2.Mappings[Control.MoveDown][0] = Keys.S;
-            Keyboard2.Mappings[Control.MoveLeft][0] = Keys.A;
-            Keyboard2.Mappings[Control.MoveRight][0] = Keys.D;
-            Keyboard2.Mappings[Control.Fire][0] = Keys.LeftControl;
-            Keyboard2.Mappings[Control.PreviousWeapon][0] = Keys.Q;
-            Keyboard2.Mappings[Control.NextWeapon][0] = Keys.E;
-            Keyboard2.Mappings[Control.Weapon1][0] = Keys.D1;
-            Keyboard2.Mappings[Control.Weapon2][0] = Keys.D2;
-            Keyboard2.Mappings[Control.Weapon3][0] = Keys.D3;
-            Keyboard2.Mappings[Control.Weapon4][0] = Keys.D4;
-            Keyboard2.Mappings[Control.Weapon5][0] = Keys.D5;
-            Keyboard2.Mappings[Control.Weapon6][0] = Keys.D6;
-            Keyboard2.Mappings[Control.Weapon7][0] = Keys.D7;
-            Keyboard2.Mappings[Control.Weapon8][0] = Keys.D8;
+            Task loadKeyBindingsTask = Task.Run(() => loadKeyBindings());
+            Task.WaitAll(loadKeyBindingsTask);
+        }
+
+        async void loadKeyBindings()
+        {
+            var storageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Xml/KeyBindings.xml"));
+            var stream = await storageFile.OpenStreamForReadAsync();
+            var xmlDocument = new XmlDocument();
+            xmlDocument.Load(stream);
+
+            foreach (XmlElement set in xmlDocument.DocumentElement.ChildNodes.OfType<XmlElement>())
+            {
+                string setID = set.GetAttribute("ID");
+                Controller controller = new Controller();
+                Controllers.Add(setID, controller);
+
+                foreach (XmlElement action in set.ChildNodes.OfType<XmlElement>())
+                {
+                    string actionID = action.GetAttribute("ID");
+                    Control actionType = Control.Invalid;
+                    Enum.TryParse(actionID, out actionType);
+                    if (actionType != Control.Invalid)
+                    {
+                        int i = 0;
+                        foreach (XmlElement key in action.ChildNodes.OfType<XmlElement>())
+                        {
+                            int keyID;
+                            if (int.TryParse(key.GetAttribute("ID"), out keyID))
+                            {
+                                controller.Mappings[actionType][i] = (Keys)keyID;
+                            }
+                            i++;
+                        }
+                    }
+                }
+            }
         }
     }
 }

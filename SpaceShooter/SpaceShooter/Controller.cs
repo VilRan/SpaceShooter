@@ -9,6 +9,7 @@ namespace SpaceShooter
 {
     public enum Control
     {
+        Invalid,
         MoveUp,
         MoveDown,
         MoveLeft,

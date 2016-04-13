@@ -86,9 +86,6 @@ namespace SpaceShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (Session == null || IsDeactived)
-                return;
-
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Escape) && previousKeyboardState.IsKeyUp(Keys.Escape))
             {
@@ -102,15 +99,12 @@ namespace SpaceShooter
                     view.ExitFullScreenMode();
                 else
                     view.TryEnterFullScreenMode();
-
             }
             if (keyboard.IsKeyDown(Keys.P) && previousKeyboardState.IsKeyUp(Keys.P))
                 IsPaused = !IsPaused;
-            if (keyboard.IsKeyDown(Keys.N) && previousKeyboardState.IsKeyUp(Keys.N))
-                Session.StartNextLevel();
             previousKeyboardState = keyboard;
-
-            if (!IsPaused)
+            
+            if (Session != null && !IsDeactived && !IsPaused)
             {
                 Session.ActiveLevel.Update(gameTime);
                 foreach (Player player in Session.Players)

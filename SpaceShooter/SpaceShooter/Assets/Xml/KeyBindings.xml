@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KeyBindings>
+  <Set ID="Keyboard1">
+    <Action ID="MoveUp">
+      <Key ID="38"/>
+      <Key ID="104"/>
+    </Action>
+    <Action ID="MoveDown">
+      <Key ID="40"/>
+      <Key ID="98"/>
+    </Action>
+    <Action ID="MoveLeft">
+      <Key ID="37"/>
+      <Key ID="100"/>
+    </Action>
+    <Action ID="MoveRight">
+      <Key ID="39"/>
+      <Key ID="102"/>
+    </Action>
+    <Action ID="Fire">
+      <Key ID="32"/>
+      <Key ID="13"/>
+    </Action>
+    <Action ID="PreviousWeapon">
+      <Key ID="103"/>
+    </Action>
+    <Action ID="NextWeapon">
+      <Key ID="105"/>
+    </Action>
+    <Action ID="Weapon1">
+      <Key ID="49"/>
+    </Action>
+    <Action ID="Weapon2">
+      <Key ID="50"/>
+    </Action>
+    <Action ID="Weapon3">
+      <Key ID="51"/>
+    </Action>
+    <Action ID="Weapon4">
+      <Key ID="52"/>
+    </Action>
+    <Action ID="Weapon5">
+      <Key ID="53"/>
+    </Action>
+    <Action ID="Weapon6">
+      <Key ID="54"/>
+    </Action>
+    <Action ID="Weapon7">
+      <Key ID="55"/>
+    </Action>
+    <Action ID="Weapon8">
+      <Key ID="56"/>
+    </Action>
+  </Set>
+
+  <Set ID="Keyboard2">
+    <Action ID="MoveUp">
+      <Key ID="87"/>
+    </Action>
+    <Action ID="MoveDown">
+      <Key ID="83"/>
+    </Action>
+    <Action ID="MoveLeft">
+      <Key ID="65"/>
+    </Action>
+    <Action ID="MoveRight">
+      <Key ID="68"/>
+    </Action>
+    <Action ID="Fire">
+      <Key ID="162"/>
+    </Action>
+    <Action ID="PreviousWeapon">
+      <Key ID="81"/>
+    </Action>
+    <Action ID="NextWeapon">
+      <Key ID="69"/>
+    </Action>
+  </Set>
+</KeyBindings>
