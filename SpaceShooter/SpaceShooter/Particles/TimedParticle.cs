@@ -39,21 +39,23 @@ namespace SpaceShooter.Particles
             base.Draw(e);
         }
 
-        public static void Emit(Level level, Vector2 position, int minCount, int maxCount)
+        public static void Emit(Level level, Vector2 position, Color startColor, double minimumLifespan, double maximumLifespan, float maxSpeed)
         {
             SpaceShooterGame game = level.Game;
             Random random = game.Random;
-            int n = random.Next(minCount, maxCount + 1);
-            Particle[] particles = new Particle[n];
+            double particleLifespan = minimumLifespan + (maximumLifespan - minimumLifespan) * random.NextDouble();
+            TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, particleLifespan);
+            particle.Position = position;
+            particle.Velocity = VectorUtility.CreateRandom(random, maxSpeed);
+            particle.StartColor = startColor;
+            level.Particles.Add(particle);
+        }
+
+        public static void Emit(Level level, Vector2 position, Color startColor, double minimumLifespan, double maximumLifespan, float maxSpeed, int minCount, int maxCount)
+        {
+            int n = level.Game.Random.Next(minCount, maxCount + 1);
             for (int i = 0; i < n; i++)
-            {
-                double particleLifespan = random.NextDouble();
-                TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, particleLifespan);
-                particle.Position = position;
-                particle.Velocity = VectorUtility.CreateRandom(random, 1000);
-                particles[i] = particle;
-            }
-            level.Particles.AddRange(particles);
+                Emit(level, position, startColor, minimumLifespan, maximumLifespan, maxSpeed);
         }
     }
 }

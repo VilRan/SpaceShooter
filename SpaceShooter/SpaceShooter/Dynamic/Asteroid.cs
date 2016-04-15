@@ -25,7 +25,7 @@ namespace SpaceShooter.Dynamic
         public override void OnCollision(CollisionEventArgs e)
         {
             e.Other.Damage(new DamageEventArgs(e, collisionDamage));
-            TimedParticle.Emit(Level, e.CollisionPosition, 20, 40);
+            TimedParticle.Emit(Level, e.CollisionPosition, Color.White, 0.25, 1.0, 1024, 20, 40);
         }
     }
 }

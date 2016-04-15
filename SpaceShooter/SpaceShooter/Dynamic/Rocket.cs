@@ -43,15 +43,7 @@ namespace SpaceShooter.Dynamic
                 if (Velocity.LengthSquared() > maxVelocitySquared)
                     Velocity = direction * maxVelocity;
                 else
-                {
-                    Random random = Level.Game.Random;
-                    double trailLifespan = 0.25 + 0.25 * random.NextDouble();
-                    TimedParticle trail = new TimedParticle(Level.Game.Assets.ParticleTexture, trailLifespan);
-                    trail.Position = Position;
-                    trail.Velocity = VectorUtility.CreateRandom(random, 32);
-                    trail.StartColor = Color.OrangeRed;
-                    Level.Particles.Add(trail);
-                }
+                    TimedParticle.Emit(Level, Position, Color.OrangeRed, 0.25, 0.5, 32);
             }
             
 
