@@ -29,7 +29,7 @@ namespace SpaceShooter.Xaml
 
         public Player Player { get { return App.Current.GamePage.Game.Session.Players[0]; } }
         public PlayerShip Ship { get { return Player.Ship; } }
-        public Shop Shop { get { return (Application.Current as App).GamePage.Game.Session.Shop; } }
+        public Shop Shop { get { return Player.Shop; } }
         public ObservableCollection<InventoryItem> Weapons { get { return Ship.WeaponSlots; } }
 
         public ShopPage()

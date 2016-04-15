@@ -10,7 +10,6 @@ namespace SpaceShooter
     {
         public Difficulty Difficulty;
         public List<Player> Players = new List<Player>();
-        public Shop Shop;
         public Level ActiveLevel;
         public int Score = 0;
         public SpaceShooterGame Game;
@@ -19,7 +18,6 @@ namespace SpaceShooter
         {
             Difficulty = difficulty;
             Game = game;
-            Shop = new Shop();
             
             Players.Add(new Player(game.Assets, game.Settings.Controllers["Keyboard1"]));
             Players.Add(new Player(game.Assets, game.Settings.Controllers["Keyboard2"]));
