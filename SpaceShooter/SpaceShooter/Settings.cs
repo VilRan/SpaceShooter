@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Windows.ApplicationModel;
 using Windows.Storage;
+using Windows.UI.ViewManagement;
 
 namespace SpaceShooter
 {
@@ -27,21 +28,37 @@ namespace SpaceShooter
 
         public Settings()
         {
-            Task loadKeyBindingsTask = Task.Run(() => loadKeyBindings());
-            Task.WaitAll(loadKeyBindingsTask);
+            Task loadTask = Task.Run(() => load());
+            Task.WaitAll(loadTask);
         }
 
-        async void loadKeyBindings()
+        async void load()
         {
-            var storageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Xml/KeyBindings.xml"));
+            var storageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Xml/Settings.xml"));
             var stream = await storageFile.OpenStreamForReadAsync();
             var xmlDocument = new XmlDocument();
             xmlDocument.Load(stream);
 
-            foreach (XmlElement controllerElement in xmlDocument.DocumentElement.ChildNodes.OfType<XmlElement>())
+            foreach (XmlElement setting in xmlDocument.DocumentElement.ChildNodes.OfType<XmlElement>())
             {
-                string controllerID = controllerElement.GetAttribute("ID");
-                Controllers.Add(controllerID, new Controller(controllerElement));
+                switch (setting.Name)
+                {
+                    case "Display":
+                        string mode = setting.GetAttribute("Mode");
+                        if (mode == "Fullscreen")
+                            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
+                        else
+                            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+                        break;
+
+                    case "KeyBindings":
+                        foreach (XmlElement controller in setting.ChildNodes.OfType<XmlElement>())
+                        {
+                            string controllerID = controller.GetAttribute("ID");
+                            Controllers.Add(controllerID, new Controller(controller));
+                        }
+                        break;
+                }
             }
         }
     }

@@ -115,6 +115,8 @@
     <Compile Include="Dynamic\RailgunProjectile.cs" />
     <Compile Include="Dynamic\Rocket.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="GameState.cs" />
+    <Compile Include="LevelEditor.cs" />
     <Compile Include="Particles\DustParticle.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Shop\Shop.cs" />
@@ -171,6 +173,7 @@
     <Content Include="Assets\Textures\Asteroid.xnb" />
     <Content Include="Assets\Textures\Bullet.xnb" />
     <Content Include="Assets\Textures\EarthTransparent.png" />
+    <Content Include="Assets\Textures\Grid.png" />
     <Content Include="Assets\Textures\Particle.xnb" />
     <Content Include="Assets\Textures\Pixel.xnb" />
     <Content Include="Assets\Textures\Ship.xnb" />
@@ -203,7 +206,7 @@
     </Content>
     <None Include="Assets\DLLs\MonoGame.Framework.xml" />
     <Content Include="Assets\Textures\Tile.png" />
-    <Content Include="Assets\Xml\KeyBindings.xml" />
+    <Content Include="Assets\Xml\Settings.xml" />
     <Content Include="Assets\Xml\TestLevel.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

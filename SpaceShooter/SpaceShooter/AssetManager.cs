@@ -24,6 +24,7 @@ namespace SpaceShooter
         public Texture2D PixelTexture { private set; get; }
         public Texture2D TileTexture { private set; get; }
         public Texture2D EarthTexture { private set; get; }
+        public Texture2D GridTexture { private set; get; }
 
         public Song MainMusic { private set; get; }
         public Song SomethingMusic { private set; get; }
@@ -44,6 +45,7 @@ namespace SpaceShooter
             PixelTexture = content.Load<Texture2D>("Textures/Pixel");
             TileTexture = content.Load<Texture2D>("Textures/Tile.png");
             EarthTexture = content.Load<Texture2D>("Textures/EarthTransparent.png");
+            GridTexture = content.Load<Texture2D>("Textures/Grid.png");
 
             MainMusic = content.Load<Song>("Music/Main");
             SomethingMusic = content.Load<Song>("Music/Something");

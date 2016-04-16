@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Level Width="10240" Height="1080">
-  <Spawn Difficulty="0" Position="1500, 250" Type="Asteroid"/>
-  <Spawn Difficulty="0" Position="1500, 500" Type="Asteroid"/>
-  <Spawn Difficulty="0" Position="1500, 750" Type="Asteroid"/>
-  <Spawn Difficulty="0" Position="1500, 1000" Type="Asteroid"/>
-  <Spawn Difficulty="0" Position="2000, 250" Type="Fighter"/>
-  <Spawn Difficulty="0" Position="2000, 500" Type="Fighter"/>
-  <Spawn Difficulty="0" Position="2000, 750" Type="Fighter"/>
-  <Spawn Difficulty="0" Position="2000, 1000" Type="Fighter"/>
-  <Spawn Difficulty="0" Position="2500, 250" Type="Kamikaze" />
-  <Spawn Difficulty="0" Position="2500, 500" Type="Kamikaze" />
-  <Spawn Difficulty="0" Position="2500, 750" Type="Kamikaze" />
-  <Spawn Difficulty="0" Position="2500, 1000" Type="Kamikaze" />
-  <Spawn Difficulty="0" Position="3000, 250" Type="Minelayer" />
-  <Spawn Difficulty="0" Position="3000, 500" Type="Minelayer" />
-  <Spawn Difficulty="0" Position="3000, 750" Type="Minelayer" />
-  <Spawn Difficulty="0" Position="3000, 1000" Type="Minelayer" />
+  <Spawn Difficulty="0" X="1500" Y="250" Type="Asteroid"/>
+  <Spawn Difficulty="0" X="1500" Y="500" Type="Asteroid"/>
+  <Spawn Difficulty="0" X="1500" Y="750" Type="Asteroid"/>
+  <Spawn Difficulty="0" X="1500" Y="1000" Type="Asteroid"/>
+  <Spawn Difficulty="0" X="2000" Y="250" Type="Fighter"/>
+  <Spawn Difficulty="0" X="2000" Y="500" Type="Fighter"/>
+  <Spawn Difficulty="0" X="2000" Y="750" Type="Fighter"/>
+  <Spawn Difficulty="0" X="2000" Y="1000" Type="Fighter"/>
+  <Spawn Difficulty="0" X="2500" Y="250" Type="Kamikaze" />
+  <Spawn Difficulty="0" X="2500" Y="500" Type="Kamikaze" />
+  <Spawn Difficulty="0" X="2500" Y="750" Type="Kamikaze" />
+  <Spawn Difficulty="0" X="2500" Y="1000" Type="Kamikaze" />
+  <Spawn Difficulty="0" X="3000" Y="250" Type="Minelayer" />
+  <Spawn Difficulty="0" X="3000" Y="500" Type="Minelayer" />
+  <Spawn Difficulty="0" X="3000" Y="750" Type="Minelayer" />
+  <Spawn Difficulty="0" X="3000" Y="1000" Type="Minelayer" />
 </Level>

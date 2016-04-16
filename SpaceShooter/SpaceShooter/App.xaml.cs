@@ -8,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -79,14 +80,14 @@ namespace SpaceShooter
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                //rootFrame.Navigate(typeof(ShopPage), e.Arguments);
                 GamePage = new GamePage();
                 Window.Current.Content = new MainMenu();
-
-                Window.Current.Activate();
             }
             // Ensure the current window is active
             Window.Current.Activate();
+
+            if (ApplicationView.PreferredLaunchWindowingMode == ApplicationViewWindowingMode.FullScreen)
+                ToggleFullscreen();
         }
 
         /// <summary>
@@ -111,6 +112,15 @@ namespace SpaceShooter
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        public static void ToggleFullscreen()
+        {
+            ApplicationView view = ApplicationView.GetForCurrentView();
+            if (view.IsFullScreenMode)
+                view.ExitFullScreenMode();
+            else
+                view.TryEnterFullScreenMode();
         }
     }
 }

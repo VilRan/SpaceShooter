@@ -13,11 +13,11 @@ namespace SpaceShooter
     /// </summary>
     public class SpaceShooterGame : Game
     {
-        public static Rectangle InternalResolution { get { return new Rectangle(0, 0, 1920, 1080); } }
-
+        public GameState State;
         public Settings Settings { private set; get; }
         public AssetManager Assets { private set; get; }
         public Session Session { private set; get; }
+        public LevelEditor Editor { private set; get; }
         public Random Random { private set; get; }
         public bool IsPaused = false;
         public bool IsDeactived = false;
@@ -26,6 +26,10 @@ namespace SpaceShooter
         RenderTarget2D renderTarget;
         SpriteBatch spriteBatch;
         KeyboardState previousKeyboardState;
+
+        public static Rectangle InternalResolution { get { return new Rectangle(0, 0, 1920, 1080); } }
+        public float WidthScale { get { return Window.ClientBounds.Width / (float)InternalResolution.Width; } }
+        public float HeightScale { get { return Window.ClientBounds.Height / (float)InternalResolution.Height; } }
 
         public SpaceShooterGame()
         {
@@ -49,6 +53,7 @@ namespace SpaceShooter
         {
             Settings = new Settings();
             Random = new Random();
+            Editor = new LevelEditor(new LevelBlueprint(10240, 1080));
             renderTarget = new RenderTarget2D(GraphicsDevice, InternalResolution.Width, InternalResolution.Height);
             previousKeyboardState = Keyboard.GetState();
 
@@ -65,9 +70,6 @@ namespace SpaceShooter
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             Assets = new AssetManager(Content);
-            //Assets.CreateTestLevel(this);
-            //Session = new Session(this, Difficulty.Nightmare);
-            //Session.PlayNextLevel();
         }
 
         /// <summary>
@@ -94,11 +96,13 @@ namespace SpaceShooter
             }
             if (keyboard.IsKeyDown(Keys.F11) && previousKeyboardState.IsKeyUp(Keys.F11))
             {
-                ApplicationView view = ApplicationView.GetForCurrentView();
-                if (view.IsFullScreenMode)
-                    view.ExitFullScreenMode();
-                else
-                    view.TryEnterFullScreenMode();
+                ToggleFullscreen();
+            }
+            if (keyboard.IsKeyDown(Keys.E) && previousKeyboardState.IsKeyUp(Keys.E))
+            {
+                Windows.UI.Xaml.Window.Current.Content = App.Current.GamePage;
+                State = new EditorGameState(this);
+                IsDeactived = false;
             }
             if (keyboard.IsKeyDown(Keys.O) && previousKeyboardState.IsKeyUp(Keys.O))
             {
@@ -108,13 +112,9 @@ namespace SpaceShooter
             if (keyboard.IsKeyDown(Keys.P) && previousKeyboardState.IsKeyUp(Keys.P))
                 IsPaused = !IsPaused;
             previousKeyboardState = keyboard;
-            
-            if (Session != null && !IsDeactived && !IsPaused)
-            {
-                Session.ActiveLevel.Update(gameTime);
-                foreach (Player player in Session.Players)
-                    player.Controller.Update();
-            }
+
+            if (!IsDeactived && State != null)
+                State.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -125,27 +125,28 @@ namespace SpaceShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            if (Session == null || IsDeactived)
+            if (IsDeactived || State == null)
                 return;
 
             GraphicsDevice.Clear(Color.Black);
             GraphicsDevice.SetRenderTarget(renderTarget);
-            spriteBatch.Begin();
-            if (IsPaused)
-                Session.ActiveLevel.Draw(new GameTime(), spriteBatch);
-            else
-                Session.ActiveLevel.Draw(gameTime, spriteBatch);
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap);
+            State.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
             GraphicsDevice.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, SamplerState.AnisotropicClamp);
-            float widthRatio = Window.ClientBounds.Width / (float)InternalResolution.Width;
-            float heightRatio = Window.ClientBounds.Height / (float)InternalResolution.Height;
-            float scale = Math.Min(widthRatio, heightRatio);
+            float scale = Math.Min(WidthScale, HeightScale);
             spriteBatch.Draw(renderTarget, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        void ToggleFullscreen()
+        {
+            App.ToggleFullscreen();
         }
     }
 }

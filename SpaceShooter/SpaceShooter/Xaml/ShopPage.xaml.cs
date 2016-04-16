@@ -108,6 +108,7 @@ namespace SpaceShooter.Xaml
             Window.Current.Content = App.Current.GamePage;
             SpaceShooterGame game = App.Current.GamePage.Game;
             game.Session.StartNextLevel();
+            game.State = new LevelGameState(game);
             game.IsDeactived = false;
         }
 
