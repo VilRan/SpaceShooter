@@ -17,11 +17,12 @@ namespace SpaceShooter.Dynamic
         const float durability = 10;
         const float collisionDamage = 500;
 
-        public override float HitRadius { get { return hitRadius; } }
-        public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         double boostTimer = 0.2;
 
-
+        public override float HitRadius { get { return hitRadius; } }
+        public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
+        protected override float CollisionDamage { get { return collisionDamage; } }
+        
         public Rocket(Level level, Vector2 position, Vector2 velocity, Faction faction)
             : base(level.Game.Assets.BulletTexture, level, durability)
         {
@@ -48,11 +49,6 @@ namespace SpaceShooter.Dynamic
             
 
             base.Update(e);
-        }
-
-        public override void OnCollision(CollisionEventArgs e)
-        {
-            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
         }
     }
 }

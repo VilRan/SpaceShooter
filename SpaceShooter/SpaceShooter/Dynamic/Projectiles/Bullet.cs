@@ -15,6 +15,7 @@ namespace SpaceShooter.Dynamic
         const float collisionDamage = 100;
 
         public override float HitRadius { get { return hitRadius; } }
+        protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Bullet(Level level, Vector2 position, Vector2 velocity, Faction faction)
             : base(level.Game.Assets.BulletTexture, level, durability)
@@ -22,11 +23,6 @@ namespace SpaceShooter.Dynamic
             Position = position;
             Velocity = velocity;
             Faction = faction;
-        }
-
-        public override void OnCollision(CollisionEventArgs e)
-        {
-            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
         }
     }
 }

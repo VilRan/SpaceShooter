@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace SpaceShooter.Dynamic
 {
-    public class Projectile : DynamicObject
+    public abstract class Projectile : DynamicObject
     {
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         public override Vector2 RelativeVelocity { get { return Velocity; } set { Velocity = value - Level.Camera.Velocity; } }

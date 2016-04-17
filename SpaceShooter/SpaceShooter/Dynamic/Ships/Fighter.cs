@@ -27,11 +27,12 @@ namespace SpaceShooter.Dynamic
         const float hysteresis = 15f;
         const float collisionDamage = 100;
 
-        Weapon activeWeapon;
+        Weapon weapon;
         //List<Weapon> weapons = new List<Weapon>();
         FighterAiState aiState = FighterAiState.Wander;
 
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
+        protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Fighter(Level level)
             : base(level.Game.Assets.AsteroidTexture, level, 500)
@@ -42,10 +43,10 @@ namespace SpaceShooter.Dynamic
             weapons.Add(new RocketLauncher());
             activeWeapon = weapons[0];
             */
-            activeWeapon = new Machinegun();
+            weapon = new Machinegun();
 
-            activeWeapon.MagazineSize = 3;
-            activeWeapon.MagazineCount = 3;
+            weapon.MagazineSize = 3;
+            weapon.MagazineCount = 3;
         }
 
         public override void Update(UpdateEventArgs e)
@@ -78,8 +79,8 @@ namespace SpaceShooter.Dynamic
             else if (aiState == FighterAiState.Alert)
             {
                 //activeWeapon = weapons[0];
-                activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(Level, Position, shootingDirection, this));
+                weapon.Update(e.GameTime);
+                weapon.TryFire(new FireEventArgs(Level, Position, shootingDirection, this));
 
                 alertThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
                 chaseThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
@@ -100,8 +101,8 @@ namespace SpaceShooter.Dynamic
             else if (aiState == FighterAiState.Catch)
             {
                 //activeWeapon = weapons[0];
-                activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
+                weapon.Update(e.GameTime);
+                weapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
 
                 Velocity = Level.Camera.Velocity;
 
@@ -131,7 +132,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
+            base.OnCollision(e);
             TimedParticle.Emit(Level, e.CollisionPosition, Color.White, 0.25, 1.0, 1024, 20, 40);
         }
 

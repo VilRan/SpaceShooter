@@ -32,6 +32,7 @@ namespace SpaceShooter.Dynamic
         public bool IsDying { get { return durability.Current <= 0; } }
         protected virtual Rectangle PlayArea { get { return new Rectangle(Level.PlayArea.Left - 32, Level.PlayArea.Top - 32, Level.PlayArea.Width + 64, Level.PlayArea.Height + 64); } }
         protected override Color Color { get { return Color.White; } }
+        protected abstract float CollisionDamage { get; }
 
         public DynamicObject(Texture2D texture, Level level, float durability)
             : base(texture)
@@ -42,7 +43,7 @@ namespace SpaceShooter.Dynamic
 
         public virtual void OnCollision(CollisionEventArgs e)
         {
-
+            e.Other.Damage(new DamageEventArgs(e, CollisionDamage));
         }
 
         public virtual void OnDeath(DeathEventArgs e)

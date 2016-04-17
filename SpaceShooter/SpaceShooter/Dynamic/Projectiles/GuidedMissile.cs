@@ -21,6 +21,7 @@ namespace SpaceShooter.Dynamic
         protected override Rectangle PlayArea { get
             { return new Rectangle(base.PlayArea.Left - base.PlayArea.Width / 2, base.PlayArea.Top - base.PlayArea.Height / 2, base.PlayArea.Width * 2, base.PlayArea.Height * 2); }
         }
+        protected override float CollisionDamage { get { return collisionDamage; } }
 
         public GuidedMissile(Level level, Vector2 position, Vector2 velocity)
             : base(level.Game.Assets.BulletTexture, level, durability)
@@ -61,11 +62,6 @@ namespace SpaceShooter.Dynamic
             }            
 
             base.Update(e);
-        }
-
-        public override void OnCollision(CollisionEventArgs e)
-        {
-            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
         }
     }
 }

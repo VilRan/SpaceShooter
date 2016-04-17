@@ -31,6 +31,7 @@ namespace SpaceShooter.Dynamic
         KamikazeAiState aiState = KamikazeAiState.Wander;
 
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
+        protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Kamikaze(Level level)
             : base(level.Game.Assets.AsteroidTexture, level, 500)
@@ -113,7 +114,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
+            base.OnCollision(e);
             TimedParticle.Emit(Level, e.CollisionPosition, Color.White, 0.25, 1.0, 1024, 20, 40);
         }
 

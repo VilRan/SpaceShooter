@@ -16,6 +16,7 @@ namespace SpaceShooter.Dynamic
         public double Lifespan;
 
         public override float HitRadius { get { return hitRadius; } }
+        protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Fragment(Level level, Vector2 position, Vector2 velocity, Faction faction, double lifespan)
             : base(level.Game.Assets.BulletTexture, level, durability)
@@ -33,11 +34,6 @@ namespace SpaceShooter.Dynamic
             Lifespan -= e.ElapsedSeconds;
 
             base.Update(e);
-        }
-
-        public override void OnCollision(CollisionEventArgs e)
-        {
-            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
         }
 
         public static void Emit(Level level, Faction faction, Vector2 position, int minCount, int maxCount)

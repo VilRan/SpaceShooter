@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using SpaceShooter.Weapons;
 using Windows.UI.Xaml;
 using System.Collections.ObjectModel;
+using SpaceShooter.Particles;
 
 namespace SpaceShooter.Dynamic
 {
@@ -35,6 +36,7 @@ namespace SpaceShooter.Dynamic
                     return Color.Yellow;
             }
         }
+        protected override float CollisionDamage { get { return collisionDamage; } }
         Weapon activeWeapon { get { return WeaponSlots[activeWeaponIndex].Weapon; } }
 
         public PlayerShip(AssetManager assets, Player player)
@@ -125,7 +127,8 @@ namespace SpaceShooter.Dynamic
 
         public override void OnCollision(CollisionEventArgs e)
         {
-            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
+            base.OnCollision(e);
+            TimedParticle.Emit(Level, e.CollisionPosition, Color.White, 0.25, 1.0, 1024, 20, 40);
         }
 
         public override void Damage(DamageEventArgs e)

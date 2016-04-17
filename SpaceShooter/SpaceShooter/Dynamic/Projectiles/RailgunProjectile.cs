@@ -16,6 +16,7 @@ namespace SpaceShooter.Dynamic
 
         public override float HitRadius { get { return hitRadius; } }
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
+        protected override float CollisionDamage { get { return collisionDamage; } }
 
         public RailgunProjectile(Level level, Vector2 position, Vector2 velocity)
             : base(level.Game.Assets.BulletTexture, level, durability)
@@ -23,11 +24,6 @@ namespace SpaceShooter.Dynamic
             Position = position;
             Velocity = velocity;
             Faction = Faction.Player;
-        }
-
-        public override void OnCollision(CollisionEventArgs e)
-        {
-            e.Other.Damage(new DamageEventArgs(e, collisionDamage));
         }
     }
 }
