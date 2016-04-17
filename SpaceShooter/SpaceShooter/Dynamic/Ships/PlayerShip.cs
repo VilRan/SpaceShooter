@@ -11,9 +11,9 @@ using Windows.UI.Xaml;
 using System.Collections.ObjectModel;
 using SpaceShooter.Particles;
 
-namespace SpaceShooter.Dynamic
+namespace SpaceShooter.Dynamic.Ships
 {
-    public class PlayerShip : DynamicObject
+    public class PlayerShip : Ship
     {
         const float maxSpeed = 256;
         const float durability = 2000;
@@ -23,8 +23,7 @@ namespace SpaceShooter.Dynamic
         int activeWeaponIndex = 0;
         readonly Player player;
         bool isInvincible = false;
-
-        public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
+        
         protected override Rectangle PlayArea { get { return Level.PlayArea; } }
         protected override Color Color
         {

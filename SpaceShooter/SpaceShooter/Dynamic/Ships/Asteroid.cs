@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceShooter.Dynamic.Ships;
 using SpaceShooter.Particles;
 using System;
 using System.Collections.Generic;
@@ -7,14 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceShooter.Dynamic
+namespace SpaceShooter.Dynamic.Ships
 {
-    class Asteroid : DynamicObject
+    class Asteroid : Ship
     {
         const float durability = 1000;
         const float collisionDamage = 100;
 
-        public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Asteroid(Level level)

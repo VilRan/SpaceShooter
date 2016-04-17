@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceShooter.Dynamic
+namespace SpaceShooter.Dynamic.Ships
 {
-    class Fighter : DynamicObject
+    class Fighter : Ship
     {
         enum FighterAiState
         {
@@ -30,8 +30,7 @@ namespace SpaceShooter.Dynamic
         Weapon weapon;
         //List<Weapon> weapons = new List<Weapon>();
         FighterAiState aiState = FighterAiState.Wander;
-
-        public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
+        
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Fighter(Level level)

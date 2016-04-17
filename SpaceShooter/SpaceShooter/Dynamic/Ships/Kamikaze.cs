@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceShooter.Dynamic
+namespace SpaceShooter.Dynamic.Ships
 {
-    class Kamikaze : DynamicObject
+    class Kamikaze : Ship
     {
         enum KamikazeAiState
         {
@@ -29,8 +29,7 @@ namespace SpaceShooter.Dynamic
 
         Weapon activeWeapon;
         KamikazeAiState aiState = KamikazeAiState.Wander;
-
-        public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
+        
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Kamikaze(Level level)

@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceShooter.Dynamic
+namespace SpaceShooter.Dynamic.Ships
 {
-    class Minelayer : DynamicObject
+    class Minelayer : Ship
     {
         enum MinelayerAiState
         {
@@ -26,8 +26,7 @@ namespace SpaceShooter.Dynamic
         Weapon activeWeapon;
 
         MinelayerAiState aiState = MinelayerAiState.Wander;
-
-        public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
+        
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Minelayer(Level level)
