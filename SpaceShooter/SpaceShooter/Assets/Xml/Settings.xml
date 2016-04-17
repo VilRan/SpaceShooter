@@ -20,18 +20,22 @@
       <Action ID="MoveUp">
         <Key ID="38"/>
         <Key ID="104"/>
+        <Key ID="87"/>
       </Action>
       <Action ID="MoveDown">
         <Key ID="40"/>
         <Key ID="98"/>
+        <Key ID="83"/>
       </Action>
       <Action ID="MoveLeft">
         <Key ID="37"/>
         <Key ID="100"/>
+        <Key ID="65"/>
       </Action>
       <Action ID="MoveRight">
         <Key ID="39"/>
         <Key ID="102"/>
+        <Key ID="68"/>
       </Action>
     </Controller>
     
