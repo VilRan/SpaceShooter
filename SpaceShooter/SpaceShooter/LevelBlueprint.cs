@@ -37,16 +37,16 @@ namespace SpaceShooter
                 string spawnType = spawn.GetAttribute("Type");
                 switch (spawnType)
                 {
-                    case "Asteroid":
+                    case AsteroidSpawn.String:
                         Spawns.Add(new AsteroidSpawn(difficulty, position));
                         break;
-                    case "Fighter":
+                    case FighterSpawn.String:
                         Spawns.Add(new FighterSpawn(difficulty, position));
                         break;
-                    case "Kamikaze":
+                    case KamikazeSpawn.String:
                         Spawns.Add(new KamikazeSpawn(difficulty, position));
                         break;
-                    case "Minelayer":
+                    case MinelayerSpawn.String:
                         Spawns.Add(new MinelayerSpawn(difficulty, position));
                         break;
                 }
@@ -66,6 +66,22 @@ namespace SpaceShooter
         }
 
         public async void SaveToFile(string name)
+        {
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile storageFile = await storageFolder.CreateFileAsync(name + ".xml", CreationCollisionOption.ReplaceExisting);
+            using (IRandomAccessStream fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                Stream stream = fileStream.AsStreamForWrite();
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Encoding = new UTF8Encoding(false);
+                settings.Indent = true;
+                settings.IndentChars = "\t";
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                    generateXml().WriteTo(writer);
+            }
+        }
+
+        XmlDocument generateXml()
         {
             XmlDocument xml = new XmlDocument();
             XmlElement level = xml.CreateElement("Level");
@@ -94,18 +110,7 @@ namespace SpaceShooter
                 level.AppendChild(spawnXml);
             }
 
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            StorageFile storageFile = await storageFolder.CreateFileAsync(name + ".xml", CreationCollisionOption.ReplaceExisting);
-            using (IRandomAccessStream fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
-            {
-                Stream stream = fileStream.AsStreamForWrite();
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Encoding = new UTF8Encoding(false);
-                settings.Indent = true;
-                settings.IndentChars = "\t";
-                using (XmlWriter writer = XmlWriter.Create(stream, settings))
-                    xml.WriteTo(writer);
-            }
+            return xml;
         }
     }
 }

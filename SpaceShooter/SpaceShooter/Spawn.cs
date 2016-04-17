@@ -24,7 +24,9 @@ namespace SpaceShooter
 
     public class AsteroidSpawn : Spawn
     {
-        public override string ObjectName { get { return "Asteroid"; } }
+        public const string String = "Asteroid";
+
+        public override string ObjectName { get { return String; } }
 
         public AsteroidSpawn(Difficulty difficulty, Vector2 position)
             : base(difficulty, position)
@@ -46,7 +48,9 @@ namespace SpaceShooter
 
     public class FighterSpawn : Spawn
     {
-        public override string ObjectName { get { return "Fighter"; } }
+        public const string String = "Fighter";
+
+        public override string ObjectName { get { return String; } }
 
         public FighterSpawn(Difficulty difficulty, Vector2 position)
             : base(difficulty, position)
@@ -69,7 +73,9 @@ namespace SpaceShooter
 
     public class KamikazeSpawn : Spawn
     {
-        public override string ObjectName { get { return "Kamikaze"; } }
+        public const string String = "Kamikaze";
+
+        public override string ObjectName { get { return String; } }
 
         public KamikazeSpawn(Difficulty difficulty, Vector2 position)
             : base(difficulty, position)
@@ -92,7 +98,9 @@ namespace SpaceShooter
 
     public class MinelayerSpawn : Spawn
     {
-        public override string ObjectName { get { return "Minelayer"; } }
+        public const string String = "Minelayer";
+
+        public override string ObjectName { get { return String; } }
 
         public MinelayerSpawn(Difficulty difficulty, Vector2 position)
             : base(difficulty, position)
