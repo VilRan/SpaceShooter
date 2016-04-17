@@ -98,7 +98,7 @@
     <Compile Include="AssetManager.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Controller.cs" />
-    <Compile Include="Difficulty.cs" />
+    <Compile Include="Session\Difficulty.cs" />
     <Compile Include="Dynamic\Ships\Asteroid.cs" />
     <Compile Include="Dynamic\Projectiles\Bullet.cs" />
     <Compile Include="Dynamic\Durability.cs" />
@@ -119,8 +119,8 @@
     <Compile Include="LevelEditor.cs" />
     <Compile Include="Particles\DustParticle.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="Shop\Shop.cs" />
-    <Compile Include="Shop\InventoryItem.cs" />
+    <Compile Include="Session\Shop.cs" />
+    <Compile Include="Session\InventoryItem.cs" />
     <Compile Include="Spawn.cs" />
     <Compile Include="Wall.cs" />
     <Compile Include="Weapons\MineLauncher.cs" />
@@ -131,9 +131,9 @@
     <Compile Include="Particles\BackgroundParticle.cs" />
     <Compile Include="Particles\Particle.cs" />
     <Compile Include="Particles\TimedParticle.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Session\Player.cs" />
     <Compile Include="Dynamic\Ships\PlayerShip.cs" />
-    <Compile Include="Session.cs" />
+    <Compile Include="Session\Session.cs" />
     <Compile Include="SpaceShooterGame.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
