@@ -52,49 +52,7 @@ namespace SpaceShooter
                 }
             }
         }
-        /*
-        public LevelBlueprint(SpaceShooterGame game)
-        {
-            Width = 10240;
-            Height = SpaceShooterGame.InternalResolution.Height;
-            /*
-            int testEnemies = 1000;
-            Objects = new DynamicObject[testEnemies];
-            for (int i = 0; i < testEnemies; i++)
-            {
-                Asteroid test = new Asteroid(null);
-                test.Position = new Vector2(SpaceShooterGame.InternalResolution.Width + ((float)Width / testEnemies) * i, game.Random.Next(0, Height));
-                test.Velocity = new Vector2(0, -128 / 2 + 128 * (float)game.Random.NextDouble());
-                Objects[i] = test;
-            }
-            */
-            /*
-            int testFighters = 100;
-            for (int i = 0; i < testFighters; i++)
-            {
-                Vector2 position = new Vector2(1000 + ((float)Width / testFighters) * i, game.Random.Next(0, Height));
-                FighterSpawn spawn = new FighterSpawn(Difficulty.Casual, position);
-                Spawns.Add(spawn);
-            }
-            */
-            /*
-            int testKamikazes = 20;
-            for (int i = 0; i < testKamikazes; i++)
-            {
-                Vector2 position = new Vector2(1000 + ((float)Width / testKamikazes) * i, game.Random.Next(0, Height));
-                KamikazeSpawn spawn = new KamikazeSpawn(Difficulty.Casual, position);
-                Spawns.Add(spawn);
-            }
-            *//*
-            int testMinelayers = 20;
-            for (int i = 0; i < testMinelayers; i++)
-            {
-                Vector2 position = new Vector2(1000 + ((float)Width / testMinelayers) * i, game.Random.Next(0, Height));
-                MinelayerSpawn spawn = new MinelayerSpawn(Difficulty.Casual, position);
-                Spawns.Add(spawn);
-            }
-        }
-        */
+
         public IEnumerable<DynamicObject> SpawnObjects(Level level)
         {
             Difficulty difficulty = level.Session.Difficulty;
@@ -114,7 +72,7 @@ namespace SpaceShooter
             XmlAttribute width = xml.CreateAttribute("Width");
             width.Value = "" + Width;
             XmlAttribute height = xml.CreateAttribute("Height");
-            width.Value = "" + Height;
+            height.Value = "" + Height;
             level.Attributes.Append(width);
             level.Attributes.Append(height);
             xml.AppendChild(level);

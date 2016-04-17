@@ -34,7 +34,7 @@ namespace SpaceShooter
 
             if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton == ButtonState.Released)
                 blueprint.Spawns.Add(new FighterSpawn(Difficulty.Casual, mouse.Position.ToVector2() + camera.Position));
-            if (keyboard.IsKeyDown(Keys.S) && previousKeyboard.IsKeyUp(Keys.S))
+            if (keyboard.IsKeyDown(Keys.F) && previousKeyboard.IsKeyUp(Keys.F))
                 blueprint.SaveToFile("EditorLevel");
 
             camera.Velocity = Vector2.Zero;
