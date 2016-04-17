@@ -26,17 +26,23 @@ namespace SpaceShooter
         Weapon6,
         Weapon7,
         Weapon8,
+        Pause,
+        MainMenu,
+        Fullscreen,
+        Editor,
     }
 
     public class Controller
     {
-        public Dictionary<Action, List<Keys>> Bindings = new Dictionary<Action, List<Keys>>();
+        public List<Keys>[] Bindings;
         KeyboardState previousKeyboard;
 
         public Controller(XmlElement xml)
         {
-            foreach (Action action in Enum.GetValues(typeof(Action)))
-                Bindings.Add(action, new List<Keys>());
+            int numberOfUniqueActions = Enum.GetValues(typeof(Action)).Length;
+            Bindings = new List<Keys>[numberOfUniqueActions];
+            for (int index = 0; index < numberOfUniqueActions; index++)
+                Bindings[index] = new List<Keys>();
 
             foreach (XmlElement action in xml.ChildNodes.OfType<XmlElement>())
             {
@@ -50,7 +56,7 @@ namespace SpaceShooter
                         int keyID;
                         if (int.TryParse(key.GetAttribute("ID"), out keyID))
                         {
-                            Bindings[actionType].Add((Keys)keyID);
+                            Bindings[(int)actionType].Add((Keys)keyID);
                         }
                     }
                 }
@@ -65,26 +71,26 @@ namespace SpaceShooter
         public bool IsControlDown(Action control)
         {
             KeyboardState keyboard = Keyboard.GetState();
-            return Bindings[control].Any(key => keyboard.IsKeyDown(key));
+            return Bindings[(int)control].Any(key => keyboard.IsKeyDown(key));
         }
 
         public bool IsControlUp(Action control)
         {
             KeyboardState keyboard = Keyboard.GetState();
-            return Bindings[control].Any(key => keyboard.IsKeyUp(key));
+            return Bindings[(int)control].Any(key => keyboard.IsKeyUp(key));
         }
 
         public bool IsControlPressed(Action control)
         {
             KeyboardState keyboard = Keyboard.GetState();
-            return Bindings[control].Any(
+            return Bindings[(int)control].Any(
                 key => keyboard.IsKeyDown(key) && previousKeyboard.IsKeyUp(key));
         }
 
         public bool IsControlReleased(Action control)
         {
             KeyboardState keyboard = Keyboard.GetState();
-            return Bindings[control].Any(
+            return Bindings[(int)control].Any(
                 key => keyboard.IsKeyUp(key) && previousKeyboard.IsKeyDown(key));
         }
     }

@@ -1,7 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
   <Display Mode="Fullscreen"/>
+  
   <KeyBindings>
+    
+    <Controller ID="General">
+      <Action ID="Pause">
+        <Key ID="80"/>
+      </Action>
+      <Action ID="MainMenu">
+        <Key ID="27"/>
+      </Action>
+      <Action ID="Fullscreen">
+        <Key ID="122"/>
+      </Action>
+      <Action ID="Editor">
+        <Key ID="69"/>
+      </Action>
+    </Controller>
+    
     <Controller ID="Keyboard1">
       <Action ID="MoveUp">
         <Key ID="38"/>
@@ -77,22 +94,8 @@
       <Action ID="NextWeapon">
         <Key ID="69"/>
       </Action>
-      <Action ID="Weapon1">
-      </Action>
-      <Action ID="Weapon2">
-      </Action>
-      <Action ID="Weapon3">
-      </Action>
-      <Action ID="Weapon4">
-      </Action>
-      <Action ID="Weapon5">
-      </Action>
-      <Action ID="Weapon6">
-      </Action>
-      <Action ID="Weapon7">
-      </Action>
-      <Action ID="Weapon8">
-      </Action>
     </Controller>
+  
   </KeyBindings>
+
 </Settings>

@@ -25,7 +25,6 @@ namespace SpaceShooter
         GraphicsDeviceManager graphics;
         RenderTarget2D renderTarget;
         SpriteBatch spriteBatch;
-        KeyboardState previousKeyboardState;
 
         public static Rectangle InternalResolution { get { return new Rectangle(0, 0, 1920, 1080); } }
         public float WidthScale { get { return Window.ClientBounds.Width / (float)InternalResolution.Width; } }
@@ -55,7 +54,6 @@ namespace SpaceShooter
             Random = new Random();
             Editor = new LevelEditor(new LevelBlueprint(10240, 1080));
             renderTarget = new RenderTarget2D(GraphicsDevice, InternalResolution.Width, InternalResolution.Height);
-            previousKeyboardState = Keyboard.GetState();
 
             base.Initialize();
         }
@@ -88,30 +86,27 @@ namespace SpaceShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            KeyboardState keyboard = Keyboard.GetState();
-            if (keyboard.IsKeyDown(Keys.Escape) && previousKeyboardState.IsKeyUp(Keys.Escape))
+            Controller controller = Settings.Controllers["General"];
+            if (controller.IsControlPressed(Action.MainMenu))
             {
                 Windows.UI.Xaml.Window.Current.Content = new MainMenu();
                 IsDeactived = true;
             }
-            if (keyboard.IsKeyDown(Keys.F11) && previousKeyboardState.IsKeyUp(Keys.F11))
+            if (controller.IsControlPressed(Action.Fullscreen))
             {
                 ToggleFullscreen();
             }
-            if (keyboard.IsKeyDown(Keys.E) && previousKeyboardState.IsKeyUp(Keys.E))
+            if (controller.IsControlPressed(Action.Editor))
             {
                 Windows.UI.Xaml.Window.Current.Content = App.Current.GamePage;
                 State = new EditorGameState(this);
                 IsDeactived = false;
             }
-            if (keyboard.IsKeyDown(Keys.O) && previousKeyboardState.IsKeyUp(Keys.O))
+            if (controller.IsControlPressed(Action.Pause))
             {
-                Windows.UI.Xaml.Window.Current.Content = new ShopPage();
-                IsDeactived = true;
-            }
-            if (keyboard.IsKeyDown(Keys.P) && previousKeyboardState.IsKeyUp(Keys.P))
                 IsPaused = !IsPaused;
-            previousKeyboardState = keyboard;
+            }
+            controller.Update();
 
             if (!IsDeactived && State != null)
                 State.Update(gameTime);
