@@ -8,12 +8,6 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Dynamic
 {
-    public enum Faction
-    {
-        Player,
-        Enemy
-    }
-
     public abstract class DynamicObject : GameObject
     {
         const float hitRadius = 12;
@@ -90,44 +84,7 @@ namespace SpaceShooter.Dynamic
                 return false;
             return true;
         }
-        /*
-        public void FindClosestApproach(DynamicObject other, out float timeOfClosestApproach, out bool isCollision)
-        {
-            Vector2 relativeVelocity = AbsoluteVelocity - other.AbsoluteVelocity;
-            float a = Vector2.Dot(relativeVelocity, relativeVelocity);
-            if (a == 0)
-            {
-                timeOfClosestApproach = float.NaN;
-                isCollision = false;
-                return;
-            }
 
-            Vector2 relativePosition = Position - other.Position;
-            float b = 2 * Vector2.Dot(relativePosition, relativeVelocity);
-            float c = Vector2.Dot(relativePosition, relativePosition) - (HitRadius + other.HitRadius) * (HitRadius + other.HitRadius);
-            float discriminant = b * b - 4 * a * c;
-            
-            if (discriminant < 0)
-            {
-                timeOfClosestApproach = -b / (2 * a);
-                isCollision = false;
-            }
-            else
-            {
-                float time1 = (-b + (float)Math.Sqrt(discriminant)) / (2 * a);
-                float time2 = (-b - (float)Math.Sqrt(discriminant)) / (2 * a);
-                timeOfClosestApproach = Math.Min(time1, time2);
-                
-                if (timeOfClosestApproach < 0)
-                    isCollision = false;
-                else
-                    isCollision = true;
-            }
-            
-            if (timeOfClosestApproach < 0)
-                timeOfClosestApproach = 0;
-        }
-        */
         public bool TryActivate()
         {
             if (Level.PlayArea.Contains(Position))
@@ -158,5 +115,11 @@ namespace SpaceShooter.Dynamic
         {
             isRemoving = true;
         }
+    }
+
+    public enum Faction
+    {
+        Player,
+        Enemy
     }
 }

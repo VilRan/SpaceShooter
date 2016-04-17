@@ -31,12 +31,12 @@ namespace SpaceShooter
 
         public override void Update(GameTime gameTime)
         {
-            game.Editor.Update();
+            game.Editor.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            game.Editor.Draw(spriteBatch, game);
+            game.Editor.Draw(spriteBatch);
         }
     }
 

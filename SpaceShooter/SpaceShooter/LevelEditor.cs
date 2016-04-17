@@ -11,47 +11,71 @@ namespace SpaceShooter
 {
     public class LevelEditor
     {
+        SpaceShooterGame game;
         LevelBlueprint blueprint;
         Camera camera;
         MouseState previousMouse;
         KeyboardState previousKeyboard;
 
-        public LevelEditor(LevelBlueprint blueprint)
+        public LevelEditor(SpaceShooterGame game, LevelBlueprint blueprint)
         {
+            this.game = game;
             this.blueprint = blueprint;
-            camera = new Camera();
+            camera = new Camera(Vector2.Zero, SpaceShooterGame.InternalResolution.Size.ToVector2(), Vector2.Zero);
             previousMouse = Mouse.GetState();
             previousKeyboard = Keyboard.GetState();
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             MouseState mouse = Mouse.GetState();
             KeyboardState keyboard = Keyboard.GetState();
+            Controller controller = game.Settings.Controllers["General"];
 
             if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton == ButtonState.Released)
-                blueprint.Spawns.Add(new FighterSpawn(Difficulty.Casual, mouse.Position.ToVector2()));
+                blueprint.Spawns.Add(new FighterSpawn(Difficulty.Casual, mouse.Position.ToVector2() + camera.Position));
             if (keyboard.IsKeyDown(Keys.S) && previousKeyboard.IsKeyUp(Keys.S))
                 blueprint.SaveToFile("EditorLevel");
+
+            camera.Velocity = Vector2.Zero;
+            if (controller.IsControlDown(Action.MoveLeft))
+                camera.Velocity += new Vector2(-256, 0);
+            if (controller.IsControlDown(Action.MoveRight))
+                camera.Velocity += new Vector2(256, 0);
+            if (controller.IsControlDown(Action.MoveUp))
+                camera.Velocity += new Vector2(0, -256);
+            if (controller.IsControlDown(Action.MoveDown))
+                camera.Velocity += new Vector2(0, 256);
+            camera.Update(gameTime);
 
             previousMouse = mouse;
             previousKeyboard = keyboard;
         }
 
-        public void Draw(SpriteBatch spriteBatch, SpaceShooterGame game)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.AnisotropicWrap);
-            spriteBatch.Draw(game.Assets.GridTexture, SpaceShooterGame.InternalResolution, SpaceShooterGame.InternalResolution, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0);
-            spriteBatch.End();
+            DrawGrid(spriteBatch);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.AnisotropicClamp);
             foreach (Spawn spawn in blueprint.Spawns)
             {
                 Texture2D texture = spawn.GetTexture(game.Assets);
                 Vector2 origin = texture.Bounds.Center.ToVector2();
-                Vector2 position = spawn.Position - origin + camera.Position;
+                Vector2 position = spawn.Position - origin - camera.Position;
                 spriteBatch.Draw(spawn.GetTexture(game.Assets), position, Color.White);
             }
+            spriteBatch.End();
+        }
+
+        public void DrawGrid(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.AnisotropicWrap);
+            int gridMinX = (int)-camera.Position.X % 32;
+            int gridMinY = (int)-camera.Position.Y % 32;
+            int gridMaxX = (int)camera.Size.X + 32;
+            int gridMaxY = (int)camera.Size.Y + 32;
+            Rectangle gridDestination = new Rectangle(gridMinX, gridMinY, gridMaxX, gridMaxY);
+            spriteBatch.Draw(game.Assets.GridTexture, gridDestination, SpaceShooterGame.InternalResolution, Color.White * 0.5f, 0f, Vector2.Zero, SpriteEffects.None, 0);
             spriteBatch.End();
         }
     }

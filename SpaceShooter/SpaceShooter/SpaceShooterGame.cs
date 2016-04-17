@@ -52,7 +52,7 @@ namespace SpaceShooter
         {
             Settings = new Settings();
             Random = new Random();
-            Editor = new LevelEditor(new LevelBlueprint(10240, 1080));
+            Editor = new LevelEditor(this, new LevelBlueprint(10240, 1080));
             renderTarget = new RenderTarget2D(GraphicsDevice, InternalResolution.Width, InternalResolution.Height);
 
             base.Initialize();
@@ -106,11 +106,11 @@ namespace SpaceShooter
             {
                 IsPaused = !IsPaused;
             }
-            controller.Update();
 
             if (!IsDeactived && State != null)
                 State.Update(gameTime);
 
+            controller.Update();
             base.Update(gameTime);
         }
 

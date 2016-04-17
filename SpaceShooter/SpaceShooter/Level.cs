@@ -25,7 +25,7 @@ namespace SpaceShooter
         public Level(Session session, LevelBlueprint blueprint)
         {
             Session = session;
-            Camera = new Camera() { Velocity = new Vector2(128, 0), Size = new Vector2(SpaceShooterGame.InternalResolution.Width, SpaceShooterGame.InternalResolution.Height) };
+            Camera = new Camera(Vector2.Zero, SpaceShooterGame.InternalResolution.Size.ToVector2(), new Vector2(128, 0));
 
             if (Session.Players.Count > 1)
             {
