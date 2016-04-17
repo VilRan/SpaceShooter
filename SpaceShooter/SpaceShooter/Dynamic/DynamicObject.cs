@@ -30,9 +30,10 @@ namespace SpaceShooter.Dynamic
         public double MaximumDurability { get { return durability.Maximum; } }
         public bool IsRemoving { get { return isRemoving || IsDying; } }
         public bool IsDying { get { return durability.Current <= 0; } }
+        protected abstract float CollisionDamage { get; }
         protected virtual Rectangle PlayArea { get { return new Rectangle(Level.PlayArea.Left - 32, Level.PlayArea.Top - 32, Level.PlayArea.Width + 64, Level.PlayArea.Height + 64); } }
         protected override Color Color { get { return Color.White; } }
-        protected abstract float CollisionDamage { get; }
+        protected CircleCollider Collider { get { return new CircleCollider(Position, AbsoluteVelocity, HitRadius); } }
 
         public DynamicObject(Texture2D texture, Level level, float durability)
             : base(texture)
@@ -70,16 +71,11 @@ namespace SpaceShooter.Dynamic
                 if (!CanCollideWith(other))
                     continue;
 
-                bool isCollision = false;
-                float timeOfClosestApproach;
-                FindClosestApproach(other, out timeOfClosestApproach, out isCollision);
-                if (timeOfClosestApproach > gameTime.ElapsedGameTime.TotalSeconds)
-                    isCollision = false;
-
-                if (isCollision)
+                float timeOfCollision;
+                if (Collider.FindCollision(other.Collider, (float)gameTime.ElapsedGameTime.TotalSeconds, out timeOfCollision))
                 {
-                    OnCollision(new CollisionEventArgs(this, other, timeOfClosestApproach));
-                    other.OnCollision(new CollisionEventArgs(other, this, timeOfClosestApproach));
+                    OnCollision(new CollisionEventArgs(this, other, timeOfCollision));
+                    other.OnCollision(new CollisionEventArgs(other, this, timeOfCollision));
                 }
             }
         }
@@ -94,7 +90,7 @@ namespace SpaceShooter.Dynamic
                 return false;
             return true;
         }
-
+        /*
         public void FindClosestApproach(DynamicObject other, out float timeOfClosestApproach, out bool isCollision)
         {
             Vector2 relativeVelocity = AbsoluteVelocity - other.AbsoluteVelocity;
@@ -131,7 +127,7 @@ namespace SpaceShooter.Dynamic
             if (timeOfClosestApproach < 0)
                 timeOfClosestApproach = 0;
         }
-        
+        */
         public bool TryActivate()
         {
             if (Level.PlayArea.Contains(Position))

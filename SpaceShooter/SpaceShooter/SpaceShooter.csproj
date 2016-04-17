@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="AssetManager.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="CircleCollider.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Dynamic\Ships\Ship.cs" />
     <Compile Include="Session\Difficulty.cs" />

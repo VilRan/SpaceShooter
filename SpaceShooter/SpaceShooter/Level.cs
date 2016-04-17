@@ -89,6 +89,8 @@ namespace SpaceShooter
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.AnisotropicClamp);
+
             DrawEventArgs drawEventArgs = new DrawEventArgs(this, gameTime, spriteBatch);
             foreach (Particle particle in Particles)
                 particle.Draw(drawEventArgs);
@@ -97,6 +99,8 @@ namespace SpaceShooter
             foreach (DynamicObject obj in Objects)
                 obj.Draw(drawEventArgs);
             Particles.RemoveAll(particle => particle.IsRemoving);
+
+            spriteBatch.End();
         }
     }
 }

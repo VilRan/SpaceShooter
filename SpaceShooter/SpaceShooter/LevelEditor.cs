@@ -32,7 +32,7 @@ namespace SpaceShooter
             if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton == ButtonState.Released)
                 blueprint.Spawns.Add(new FighterSpawn(Difficulty.Casual, mouse.Position.ToVector2()));
             if (keyboard.IsKeyDown(Keys.S) && previousKeyboard.IsKeyUp(Keys.S))
-                blueprint.SaveToFile("EditorLevelLevel");
+                blueprint.SaveToFile("EditorLevel");
 
             previousMouse = mouse;
             previousKeyboard = keyboard;
@@ -40,8 +40,11 @@ namespace SpaceShooter
 
         public void Draw(SpriteBatch spriteBatch, SpaceShooterGame game)
         {
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.AnisotropicWrap);
             spriteBatch.Draw(game.Assets.GridTexture, SpaceShooterGame.InternalResolution, SpaceShooterGame.InternalResolution, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0);
+            spriteBatch.End();
 
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.AnisotropicClamp);
             foreach (Spawn spawn in blueprint.Spawns)
             {
                 Texture2D texture = spawn.GetTexture(game.Assets);
@@ -49,6 +52,7 @@ namespace SpaceShooter
                 Vector2 position = spawn.Position - origin + camera.Position;
                 spriteBatch.Draw(spawn.GetTexture(game.Assets), position, Color.White);
             }
+            spriteBatch.End();
         }
     }
 }

@@ -125,10 +125,7 @@ namespace SpaceShooter
 
             GraphicsDevice.Clear(Color.Black);
             GraphicsDevice.SetRenderTarget(renderTarget);
-
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap);
             State.Draw(gameTime, spriteBatch);
-            spriteBatch.End();
 
             GraphicsDevice.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, SamplerState.AnisotropicClamp);
