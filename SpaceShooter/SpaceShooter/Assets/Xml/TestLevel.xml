@@ -16,4 +16,5 @@
   <Spawn Difficulty="0" X="3000" Y="500" Type="Minelayer" />
   <Spawn Difficulty="0" X="3000" Y="750" Type="Minelayer" />
   <Spawn Difficulty="0" X="3000" Y="1000" Type="Minelayer" />
+  <Spawn Difficulty="0" X="4000" Y="500" Type="Acefighter" />
 </Level>

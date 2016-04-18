@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceShooter.Dynamic;
 using SpaceShooter.Dynamic.Ships;
@@ -119,5 +120,31 @@ namespace SpaceShooter
         {
             return assets.AsteroidTexture;
         }
+    }
+
+    public class AceFighterSpawn : Spawn
+    {
+        public const string String = "Acefighter";
+
+        public override string ObjectName { get { return String; } }
+
+        public AceFighterSpawn(Difficulty difficulty, Vector2 position)
+            : base(difficulty, position)
+        {
+
+        }
+
+        public override DynamicObject CreateObject(Level level)
+        {
+            AceFighter acefighter = new AceFighter(level);
+            acefighter.Position = Position;
+            return acefighter;
+        }
+
+        public override Texture2D GetTexture(AssetManager assets)
+        {
+            return assets.AsteroidTexture;
+        }
+
     }
 }

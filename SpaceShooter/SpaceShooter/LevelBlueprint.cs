@@ -49,6 +49,9 @@ namespace SpaceShooter
                     case MinelayerSpawn.String:
                         Spawns.Add(new MinelayerSpawn(difficulty, position));
                         break;
+                    case AceFighterSpawn.String:
+                        Spawns.Add(new AceFighterSpawn(difficulty, position));
+                        break;
                 }
             }
         }
