@@ -49,11 +49,11 @@ namespace SpaceShooter
             }
             
             Inactive.AddRange(blueprint.SpawnObjects(this));
-            /*
+            
             for (int x = 512; x < 2000; x += 32)
             {
                 Walls.Add(new Wall(Game.Assets) { Position = new Vector2(x, 128) });
-            }*/
+            }
             for (int y = 0; y < 640; y += 32)
             {
                 Walls.Add(new Wall(Game.Assets) { Position = new Vector2(1000, y) });
