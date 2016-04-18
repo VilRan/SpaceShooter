@@ -19,5 +19,21 @@ namespace SpaceShooter.Dynamic
         {
 
         }
+
+        public override void Update(UpdateEventArgs e)
+        {
+            foreach (Wall wall in Level.Walls)
+            {
+                float timeOfCollision;
+                if (Collider.FindCollision(wall.Collider, (float)e.ElapsedSeconds, out timeOfCollision))
+                {
+                    //Position += Velocity * timeOfCollision;
+                    Die();
+                    break;
+                }
+            }
+
+            base.Update(e);
+        }
     }
 }

@@ -66,6 +66,12 @@ namespace SpaceShooter
                 timeOfClosestApproach = 0;
         }
 
+        public bool FindCollision(RectangleCollider other, float timeLimit, out float timeOfCollision)
+        {
+            return FindCollisionHorizontally(other, timeLimit, out timeOfCollision)
+                || FindCollisionVertically(other, timeLimit, out timeOfCollision);
+        }
+
         public bool FindCollisionHorizontally(RectangleCollider other, float timeLimit, out float timeOfCollision)
         {
             return FindCollisionFromLeft(other, timeLimit, out timeOfCollision)
