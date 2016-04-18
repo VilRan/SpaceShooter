@@ -74,16 +74,18 @@ namespace SpaceShooter
 
         public bool FindCollisionFromLeft(RectangleCollider other, float timeLimit, out float timeOfCollision)
         {
-            if (Velocity.X > 0)
-                return findLinearCollision(other, other.Bounds.Left - Position.X - Radius, Velocity.X, timeLimit, out timeOfCollision);
+            float distance = other.Bounds.Left - Position.X - Radius;
+            if (distance >= 0 && Velocity.X > 0)
+                return findLinearCollision(other, distance, Velocity.X, timeLimit, out timeOfCollision);
             timeOfCollision = float.NaN;
             return false;
         }
 
         public bool FindCollisionFromRight(RectangleCollider other, float timeLimit, out float timeOfCollision)
         {
-            if (Velocity.X < 0)
-                return findLinearCollision(other, other.Bounds.Right - Position.X - Radius, Velocity.X, timeLimit, out timeOfCollision);
+            float distance = other.Bounds.Right - Position.X - Radius;
+            if (distance <= 0 && Velocity.X < 0)
+                return findLinearCollision(other, distance, Velocity.X, timeLimit, out timeOfCollision);
             timeOfCollision = float.NaN;
             return false;
         }
@@ -104,7 +106,6 @@ namespace SpaceShooter
                     }
                 }
             }
-
             return false;
         }
     }
