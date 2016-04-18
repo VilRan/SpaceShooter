@@ -67,6 +67,7 @@ namespace SpaceShooter
 
         public async void SaveToFile(string name)
         {
+            Task<XmlDocument> xmlTask = Task.Run(() => generateXml());
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
             StorageFile storageFile = await storageFolder.CreateFileAsync(name + ".xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
@@ -77,7 +78,10 @@ namespace SpaceShooter
                 settings.Indent = true;
                 settings.IndentChars = "\t";
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
-                    generateXml().WriteTo(writer);
+                {
+                    XmlDocument xml = await xmlTask;
+                    xml.WriteTo(writer);
+                }
             }
         }
 
