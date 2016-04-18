@@ -100,6 +100,7 @@
     <Compile Include="CircleCollider.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Dynamic\Ships\Ship.cs" />
+    <Compile Include="RectangleCollider.cs" />
     <Compile Include="Session\Difficulty.cs" />
     <Compile Include="Dynamic\Ships\Asteroid.cs" />
     <Compile Include="Dynamic\Projectiles\Bullet.cs" />

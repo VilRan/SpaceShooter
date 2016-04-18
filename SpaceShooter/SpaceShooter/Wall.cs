@@ -10,8 +10,9 @@ namespace SpaceShooter
     public class Wall : GameObject
     {
         public override ObjectCategory Category { get { return ObjectCategory.Tile; } }
+        public RectangleCollider Collider { get { return new RectangleCollider((int)Position.X, (int)Position.Y, 32, 32); } }
 
-        protected override Color Color { get { return Color.White; } }
+        protected override Color Color { get { return Color.Gray; } }
 
         public Wall(AssetManager assets)
             : base(assets.TileTexture)

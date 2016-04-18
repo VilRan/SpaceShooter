@@ -103,7 +103,17 @@ namespace SpaceShooter.Dynamic.Ships
                 isInvincible = true;
             else if (keyboard.IsKeyDown(Keys.U))
                 isInvincible = false;
-
+            
+            float timeOfCollision;
+            foreach (Wall wall in Level.Walls)
+            {
+                if (Collider.FindCollisionHorizontally(wall.Collider, (float)e.ElapsedSeconds, out timeOfCollision))
+                {
+                    Position.X += Velocity.X * timeOfCollision;
+                    Velocity.X = 0;
+                    break;
+                }
+            }
             Position += Velocity * (float)e.ElapsedSeconds;
 
             if (Position.X < PlayArea.Left)
@@ -114,14 +124,6 @@ namespace SpaceShooter.Dynamic.Ships
                 Position.Y = PlayArea.Top;
             if (Position.Y > PlayArea.Bottom)
                 Position.Y = PlayArea.Bottom;
-
-            foreach (Wall wall in Level.Walls)
-            {
-                if ((wall.Position - Position).LengthSquared() < HitRadius)
-                {
-                    Die();
-                }
-            }
         }
 
         public override void OnCollision(CollisionEventArgs e)
