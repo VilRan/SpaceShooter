@@ -42,9 +42,13 @@ namespace SpaceShooter.Xaml
             {
                 difficulty = Difficulty.Nightmare;
             }
-
-            Window.Current.Content = new ShopPage();
-            App.Current.GamePage.Game.StartNewSession(difficulty);
+            int numberOfPlayers = 1;
+            if ((bool)multiPlayerRadioButton.IsChecked)
+            {
+                numberOfPlayers = 2;
+            }
+            App.Current.GamePage.Game.StartNewSession(difficulty, numberOfPlayers);
+            Window.Current.Content = new ShopPage(0);            
         }
     }
 }

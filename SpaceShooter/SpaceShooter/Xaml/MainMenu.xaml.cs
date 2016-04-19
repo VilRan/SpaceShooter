@@ -43,7 +43,7 @@ namespace SpaceShooter.Xaml
             }
             else
             {
-                Window.Current.Content = new ShopPage();
+                Window.Current.Content = new ShopPage(0);
             }
         }
 

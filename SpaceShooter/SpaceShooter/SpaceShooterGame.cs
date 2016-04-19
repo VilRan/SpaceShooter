@@ -37,9 +37,10 @@ namespace SpaceShooter
             IsMouseVisible = true;
         }
 
-        public void StartNewSession(Difficulty difficulty)
+        public void StartNewSession(Difficulty difficulty, int numberOfPlayers)
         {
-            Session = new Session(this, difficulty);
+            Session = new Session(this, difficulty, numberOfPlayers);
+            
         }
 
         /// <summary>
