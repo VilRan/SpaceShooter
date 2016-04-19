@@ -14,14 +14,16 @@ namespace SpaceShooter.Xaml
     {
         InventoryItem draggedItem = null;
 
-        public Player Player { get { return App.Current.GamePage.Game.Session.Players[0]; } }
+        public Player Player { get { return App.Current.GamePage.Game.Session.Players[playerIndex]; } }
         public PlayerShip Ship { get { return Player.Ship; } }
         public Shop Shop { get { return Player.Shop; } }
         public ObservableCollection<InventoryItem> Weapons { get { return Ship.WeaponSlots; } }
+        int playerIndex;
 
-        public ShopPage()
+        public ShopPage(int playerIndex)
         {
             this.InitializeComponent();
+            this.playerIndex = playerIndex;
         }
 
         private void items_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
@@ -92,11 +94,19 @@ namespace SpaceShooter.Xaml
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = App.Current.GamePage;
             SpaceShooterGame game = App.Current.GamePage.Game;
-            game.Session.StartNextLevel();
-            game.State = new LevelGameState(game);
-            game.IsDeactived = false;
+            Session session = game.Session;
+            if (playerIndex < session.Players.Count - 1)
+            {
+                Window.Current.Content = new ShopPage(playerIndex + 1);
+            }
+            else
+            {
+                Window.Current.Content = App.Current.GamePage;
+                session.StartNextLevel();
+                game.State = new LevelGameState(game);
+                game.IsDeactived = false;
+            }
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

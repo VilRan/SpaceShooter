@@ -108,22 +108,17 @@ namespace SpaceShooter.Dynamic.Ships
             
             foreach (Wall wall in Level.Walls)
             {
-                bool doBreak = false;
                 float timeOfCollision;
                 if (Collider.FindCollisionHorizontally(wall.Collider, (float)e.ElapsedSeconds, out timeOfCollision))
                 {
                     Position.X += Velocity.X * timeOfCollision;
                     Velocity.X = 0;
-                    doBreak = true;
                 }
                 if (Collider.FindCollisionVertically(wall.Collider, (float)e.ElapsedSeconds, out timeOfCollision))
                 {
                     Position.Y += Velocity.Y * timeOfCollision;
                     Velocity.Y = 0;
-                    doBreak = true;
                 }
-                if (doBreak)
-                    break;
             }
             Position += Velocity * (float)e.ElapsedSeconds;
 
