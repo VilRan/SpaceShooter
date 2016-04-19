@@ -43,7 +43,7 @@ namespace SpaceShooter.Xaml
             }
             else
             {
-                Window.Current.Content = new ShopPage();
+                Window.Current.Content = new ShopPage(0);
             }
         }
 
@@ -54,7 +54,7 @@ namespace SpaceShooter.Xaml
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = new ShopPage();
+            Window.Current.Content = new ShopPage(0);
             App.Current.GamePage.Game.StartNewSession(Difficulty.Nightmare);
         }
 
