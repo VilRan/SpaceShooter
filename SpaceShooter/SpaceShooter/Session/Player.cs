@@ -7,7 +7,9 @@ namespace SpaceShooter
         public Shop Shop;
         public PlayerShip Ship;
         public Controller Controller;
-        //int money = 1000;
+        double money = 250;
+
+        public double Money { get { return money; } set { money = value; } }
 
         public Player(AssetManager assets, Controller controller)
         {
