@@ -143,7 +143,7 @@ namespace SpaceShooter.Dynamic.Ships
             if (!isInvincible)
             {
                 base.Damage(e);
-                (Application.Current as App).GamePage.HealthbarValue = 100 * CurrentDurability / MaximumDurability;
+                App.Current.GamePage.HealthbarValue = 100 * CurrentDurability / MaximumDurability;
             }
         }
 

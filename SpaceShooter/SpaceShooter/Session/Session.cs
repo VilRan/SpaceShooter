@@ -27,13 +27,17 @@ namespace SpaceShooter
             }
         }
 
-        public Session(SpaceShooterGame game, Difficulty difficulty)
+        public Session(SpaceShooterGame game, Difficulty difficulty, int numberOfPlayers)
         {
             Difficulty = difficulty;
             Game = game;
-            
+                        
             Players.Add(new Player(game.Assets, game.Settings.Controllers["Keyboard1"]));
-            Players.Add(new Player(game.Assets, game.Settings.Controllers["Keyboard2"]));
+
+            if (numberOfPlayers >= 2)
+            {
+                Players.Add(new Player(game.Assets, game.Settings.Controllers["Keyboard2"]));
+            }            
         }
 
         public void StartNextLevel()
