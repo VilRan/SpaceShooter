@@ -15,7 +15,7 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Highscore" Height="75" FontFamily="Showcard Gothic" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" TextAlignment="Center" Grid.Row="0"/>
-            <TextBlock x:Name="ScoreBlock" TextWrapping="Wrap" Margin="0,0,0,0" Width="500" Grid.Row="1"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,0,0,0" Width="500" Grid.Row="1" Text="{x:Bind HighscoreView, Mode=OneWay}"/>
             <Button x:Name="backToMainMenuButton" Content="Back to Main Menu" HorizontalAlignment="Center" VerticalAlignment="Center" Width="175" Margin="0,0,0,0" Click="backToMainMenuButton_Click" Grid.Row="2"/>
         </Grid>
     </Grid>
