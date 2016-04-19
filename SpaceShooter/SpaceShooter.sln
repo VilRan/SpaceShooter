@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceShooter", "SpaceShooter\SpaceShooter.csproj", "{3E29F8C3-7840-4AF3-AA17-4AC38D2F7A08}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceShooter.UWP", "SpaceShooter\SpaceShooter.UWP.csproj", "{3E29F8C3-7840-4AF3-AA17-4AC38D2F7A08}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SpaceShooter.Core", "SpaceShooter.Core\SpaceShooter.Core.shproj", "{F2FCDFAD-2858-4562-B96D-C312A9A16BEC}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SpaceShooter.Core\SpaceShooter.Core.projitems*{3e29f8c3-7840-4af3-aa17-4ac38d2f7a08}*SharedItemsImports = 4
+		SpaceShooter.Core\SpaceShooter.Core.projitems*{f2fcdfad-2858-4562-b96d-c312a9a16bec}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
 		Debug|x64 = Debug|x64

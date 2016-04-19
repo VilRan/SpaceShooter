@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>f2fcdfad-2858-4562-b96d-c312a9a16bec</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SpaceShooter</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AssetManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Camera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CircleCollider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controller.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Durability.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\DynamicObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Bullet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\FlakCannonShell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Fragment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\GuidedMissile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Mine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Projectile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\RailgunProjectile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Rocket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\RepairKit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\AceFighter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Asteroid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Fighter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Kamikaze.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Minelayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\PlayerShip.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Ship.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Level.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LevelBlueprint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LevelEditor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Particles\BackgroundParticle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Particles\DustParticle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Particles\Particle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Particles\TimedParticle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RectangleCollider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session\Difficulty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session\InventoryItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session\Session.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session\Shop.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SpaceShooterGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Spawn.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VectorUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Wall.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\DualMachinegun.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\FlakCannon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\Machinegun.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\MineLauncher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\MissileLauncher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\Railgun.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\RocketLauncher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\Shotgun.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\Weapon.cs" />
+  </ItemGroup>
+</Project>
