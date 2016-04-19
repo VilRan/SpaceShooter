@@ -36,9 +36,7 @@ namespace SpaceShooter
 
         public override DynamicObject CreateObject(Level level)
         {
-            Asteroid asteroid = new Asteroid(level);
-            asteroid.Position = Position;
-            return asteroid;
+            return new Asteroid(level, Position);
         }
 
         public override Texture2D GetTexture(AssetManager assets)
@@ -61,9 +59,7 @@ namespace SpaceShooter
 
         public override DynamicObject CreateObject(Level level)
         {
-            Fighter fighter = new Fighter(level);
-            fighter.Position = Position;
-            return fighter;
+            return new Fighter(level, Position);
         }
 
         public override Texture2D GetTexture(AssetManager assets)
@@ -86,9 +82,7 @@ namespace SpaceShooter
 
         public override DynamicObject CreateObject(Level level)
         {
-            Kamikaze kamikaze = new Kamikaze(level);
-            kamikaze.Position = Position;
-            return kamikaze;
+            return new Kamikaze(level, Position);
         }
 
         public override Texture2D GetTexture(AssetManager assets)
@@ -111,9 +105,7 @@ namespace SpaceShooter
 
         public override DynamicObject CreateObject(Level level)
         {
-            Minelayer minelayer = new Minelayer(level);
-            minelayer.Position = Position;
-            return minelayer;
+            return new Minelayer(level, Position);
         }
 
         public override Texture2D GetTexture(AssetManager assets)
@@ -136,9 +128,7 @@ namespace SpaceShooter
 
         public override DynamicObject CreateObject(Level level)
         {
-            AceFighter acefighter = new AceFighter(level);
-            acefighter.Position = Position;
-            return acefighter;
+            return new AceFighter(level, Position);
         }
 
         public override Texture2D GetTexture(AssetManager assets)

@@ -14,10 +14,9 @@ namespace SpaceShooter.Particles
 
         protected override Color Color { get { return color; } }
 
-        public DustParticle(Texture2D texture, Random random)
-            : base(texture, (float)random.NextDouble())
+        public DustParticle(Texture2D texture, Vector2 position, float distance, float brightness)
+            : base(texture, position, distance)
         {
-            float brightness = (float)random.NextDouble();
             color = new Color(brightness, brightness, brightness);
         }
 

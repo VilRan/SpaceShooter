@@ -14,8 +14,8 @@ namespace SpaceShooter
 
         protected override Color Color { get { return Color.Gray; } }
 
-        public Wall(AssetManager assets)
-            : base(assets.TileTexture)
+        public Wall(AssetManager assets, Vector2 position)
+            : base(assets.TileTexture, position, Vector2.Zero)
         {
 
         }

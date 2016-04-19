@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace SpaceShooter.Dynamic.Ships
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
 
 
-        public Ship(Texture2D texture, Level level, float durability)
-            : base(texture, level, durability)
+        public Ship(Texture2D texture, Level level, Vector2 position, float durability, Faction faction)
+            : base(texture, level, position, Vector2.Zero, durability, faction)
         {
 
         }

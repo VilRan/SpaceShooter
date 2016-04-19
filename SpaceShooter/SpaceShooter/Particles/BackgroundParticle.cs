@@ -15,8 +15,8 @@ namespace SpaceShooter.Particles
         public override bool IsRemoving { get { return false; } }
         public override ObjectCategory Category { get { return ObjectCategory.Particle; } }
 
-        public BackgroundParticle(Texture2D texture, float distance)
-            : base (texture)
+        public BackgroundParticle(Texture2D texture, Vector2 position, float distance)
+            : base(texture, position, Vector2.Zero)
         {
             this.distance = distance;
         }

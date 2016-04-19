@@ -21,6 +21,7 @@ namespace SpaceShooter.Dynamic.Ships
         const float maxSpeed = 256;
         const float alertDistance = 700f;
         const float hysteresis = 15f;
+        const float durability = 500;
         const float collisionDamage = 100;
         const int score = 50;
 
@@ -31,11 +32,9 @@ namespace SpaceShooter.Dynamic.Ships
         public override int Score { get { return score; } }
         protected override float CollisionDamage { get { return collisionDamage; } }
 
-        public Minelayer(Level level)
-            : base(level.Game.Assets.AsteroidTexture, level, 500)
+        public Minelayer(Level level, Vector2 position)
+            : base(level.Game.Assets.AsteroidTexture, level, position, durability, Faction.Enemy)
         {
-            Faction = Faction.Enemy;
-
             activeWeapon = new MineLauncher();
 
             activeWeapon.MagazineSize = 1;

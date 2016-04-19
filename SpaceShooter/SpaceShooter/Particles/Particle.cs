@@ -13,8 +13,8 @@ namespace SpaceShooter.Particles
         protected override Color Color { get { return Color.LightGray; } }
         public abstract bool IsRemoving { get; }
 
-        public Particle(Texture2D texture)
-            : base(texture)
+        public Particle(Texture2D texture, Vector2 position, Vector2 velocity)
+            : base(texture, position, velocity)
         {
 
         }

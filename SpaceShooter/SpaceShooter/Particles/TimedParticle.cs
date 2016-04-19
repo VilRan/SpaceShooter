@@ -20,8 +20,8 @@ namespace SpaceShooter.Particles
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         protected override Color Color { get { return color; } }
 
-        public TimedParticle(Texture2D texture, double lifespan)
-            : base(texture)
+        public TimedParticle(Texture2D texture, Vector2 position, Vector2 velocity, double lifespan)
+            : base(texture, position, velocity)
         {
             this.lifespan = lifespan;
             life = lifespan;
@@ -44,9 +44,7 @@ namespace SpaceShooter.Particles
             SpaceShooterGame game = level.Game;
             Random random = game.Random;
             double particleLifespan = minimumLifespan + (maximumLifespan - minimumLifespan) * random.NextDouble();
-            TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, particleLifespan);
-            particle.Position = position;
-            particle.Velocity = VectorUtility.CreateRandom(random, maxSpeed);
+            TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, position, VectorUtility.CreateRandom(random, maxSpeed), particleLifespan);
             particle.StartColor = startColor;
             level.Particles.Add(particle);
         }

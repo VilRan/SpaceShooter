@@ -32,43 +32,36 @@ namespace SpaceShooter
                 Vector2 playerStartTop = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Height / 4);
                 Vector2 playerStartBottom = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Height - PlayArea.Height / 4);
                 Vector2 playerStartStep = (playerStartBottom - playerStartTop) / (Game.Session.Players.Count - 1);
-                for (int i = 0; i < Session.Players.Count; i++)
-                {
-                    Player player = Session.Players[i];
-                    player.Ship.Level = this;
-                    player.Ship.Position = playerStartTop + playerStartStep * i;
-                    Objects.Add(player.Ship);
-                }
+                for (int playerIndex = 0; playerIndex < Session.Players.Count; playerIndex++)
+                    AddPlayer(playerIndex, playerStartTop + playerStartStep * playerIndex);
             }
             else
             {
-                Player player = Session.Players[0];
-                player.Ship.Level = this;
-                player.Ship.Position = new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Height / 2);
-                Objects.Add(player.Ship);
+                AddPlayer(0, new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Height / 2));
             }
             
             Inactive.AddRange(blueprint.SpawnObjects(this));
             
             for (int x = 512; x < 2000; x += 32)
             {
-                Walls.Add(new Wall(Game.Assets) { Position = new Vector2(x, 128) });
+                Walls.Add(new Wall(Game.Assets, new Vector2(x, 128)));
             }
             for (int y = 0; y < 640; y += 32)
             {
-                Walls.Add(new Wall(Game.Assets) { Position = new Vector2(1000, y) });
+                Walls.Add(new Wall(Game.Assets, new Vector2(1000, y)));
             }
 
-            var earth = new BackgroundParticle(Game.Assets.EarthTexture, 0.9f);
-            earth.Position = new Vector2(PlayArea.Width / 3, PlayArea.Height * 3 / 4);
+            var earth = new BackgroundParticle(Game.Assets.EarthTexture, new Vector2(PlayArea.Width / 3, PlayArea.Height * 3 / 4), 0.9f);
             Particles.Add(earth);
 
             Random random = Game.Random;
             for (int i = 0; i < 1000; i++)
             {
-                var dust = new DustParticle(Game.Assets.PixelTexture, random);
-                dust.Position = new Vector2(random.Next(PlayArea.Width), random.Next(PlayArea.Height));
-                Particles.Add(dust);
+                Particles.Add(new DustParticle(
+                    Game.Assets.PixelTexture,
+                    new Vector2(random.Next(PlayArea.Width), random.Next(PlayArea.Height)),
+                    (float)random.NextDouble(),
+                    (float)random.NextDouble()));
             }
         }
 
@@ -110,6 +103,14 @@ namespace SpaceShooter
             Particles.RemoveAll(particle => particle.IsRemoving);
 
             spriteBatch.End();
+        }
+
+        void AddPlayer(int playerIndex, Vector2 position)
+        {
+            Player player = Session.Players[playerIndex];
+            player.Ship.Level = this;
+            player.Ship.Position = position;
+            Objects.Add(player.Ship);
         }
     }
 }

@@ -41,10 +41,9 @@ namespace SpaceShooter.Dynamic.Ships
         Weapon activeWeapon { get { return WeaponSlots[activeWeaponIndex].Weapon; } }
 
         public PlayerShip(AssetManager assets, Player player)
-            : base(assets.PlayerShipTexture, null, durability)
+            : base(assets.PlayerShipTexture, null, Vector2.Zero, durability, Faction.Player)
         {
             this.player = player;
-            Faction = Faction.Player;
             WeaponSlots.Add(new InventoryItem(new Machinegun(), 50));
         }
 

@@ -10,7 +10,7 @@ namespace SpaceShooter.Weapons
 {
     class MineLauncher : Weapon
     {
-        const float mineSpeed = -32;
+        const float mineSpeed = 32;
         const int magazineSize = 1;
 
         public override string Name { get { return "MineLauncher"; } }
@@ -25,7 +25,7 @@ namespace SpaceShooter.Weapons
 
         public override void OnFire(FireEventArgs e)
         {
-            Mine mine = new Mine(e.Level, e.Position, new Vector2(mineSpeed, 0), e.Shooter.Faction);
+            Mine mine = new Mine(e.Level, e.Position, new Vector2(-mineSpeed, 0), e.Shooter.Faction);
             e.Level.Objects.Add(mine);
         }
     }

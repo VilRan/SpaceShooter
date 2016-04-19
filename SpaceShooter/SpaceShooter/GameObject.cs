@@ -19,9 +19,11 @@ namespace SpaceShooter
         protected abstract Color Color { get; }
 
 
-        public GameObject(Texture2D texture)
+        public GameObject(Texture2D texture, Vector2 position, Vector2 velocity)
         {
             Texture = texture;
+            Position = position;
+            Velocity = velocity;
         }
 
         public virtual void Draw(DrawEventArgs e)

@@ -25,6 +25,7 @@ namespace SpaceShooter.Dynamic.Ships
         const float chaseDistance = 700f;
         const float catchDistance = 5f;
         const float hysteresis = 15f;
+        const float durability = 5000;
         const float collisionDamage = 100;
         const int score = 50;
         float attackTimer = 15;
@@ -42,11 +43,9 @@ namespace SpaceShooter.Dynamic.Ships
         protected override float CollisionDamage { get { return collisionDamage; } }
         
 
-        public AceFighter(Level level)
-            : base(level.Game.Assets.AsteroidTexture, level, 5000)
+        public AceFighter(Level level, Vector2 position)
+            : base(level.Game.Assets.AsteroidTexture, level, position, durability, Faction.Enemy)
         {
-            Faction = Faction.Enemy;
-
             weapons.Add(new Machinegun());
             weapons.Add(new RocketLauncher());
             activeWeapon = weapons[0];

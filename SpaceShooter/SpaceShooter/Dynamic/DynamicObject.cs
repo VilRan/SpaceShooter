@@ -30,10 +30,11 @@ namespace SpaceShooter.Dynamic
         protected override Color Color { get { return Color.White; } }
         protected CircleCollider Collider { get { return new CircleCollider(Position, AbsoluteVelocity, HitRadius); } }
 
-        public DynamicObject(Texture2D texture, Level level, float durability)
-            : base(texture)
+        public DynamicObject(Texture2D texture, Level level, Vector2 position, Vector2 velocity, float durability, Faction faction)
+            : base(texture, position, velocity)
         {
             Level = level;
+            Faction = faction;
             this.durability = new Durability(durability);
         }
 

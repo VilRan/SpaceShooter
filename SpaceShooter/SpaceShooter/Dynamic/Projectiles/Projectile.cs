@@ -14,8 +14,8 @@ namespace SpaceShooter.Dynamic
         public override Vector2 RelativeVelocity { get { return Velocity; } set { Velocity = value - Level.Camera.Velocity; } }
         public override Vector2 AbsoluteVelocity { get { return Velocity + Level.Camera.Velocity; } }
 
-        public Projectile(Texture2D texture, Level level, float durability)
-            : base(texture, level, durability)
+        public Projectile(Texture2D texture, Level level, Vector2 position, Vector2 velocity, float durability, Faction faction)
+            : base(texture, level, position, velocity, durability, faction)
         {
 
         }

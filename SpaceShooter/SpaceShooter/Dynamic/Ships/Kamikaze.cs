@@ -25,6 +25,7 @@ namespace SpaceShooter.Dynamic.Ships
         const float chaseDistance = 700f;
         const float catchDistance = 25f;
         const float hysteresis = 15f;
+        const float durability = 500;
         const float collisionDamage = 100;
         const int score = 50;
 
@@ -34,10 +35,9 @@ namespace SpaceShooter.Dynamic.Ships
         public override int Score { get { return score; } }
         protected override float CollisionDamage { get { return collisionDamage; } }
 
-        public Kamikaze(Level level)
-            : base(level.Game.Assets.AsteroidTexture, level, 500)
+        public Kamikaze(Level level, Vector2 position)
+            : base(level.Game.Assets.AsteroidTexture, level, position, durability, Faction.Enemy)
         {
-            Faction = Faction.Enemy;
             activeWeapon = new Machinegun();
 
             activeWeapon.MagazineSize = 3;
