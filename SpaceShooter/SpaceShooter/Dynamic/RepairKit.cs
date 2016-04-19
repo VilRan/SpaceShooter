@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using SpaceShooter.Dynamic.Ships;
+
+namespace SpaceShooter.Dynamic
+{
+    class RepairKit : DynamicObject
+    {
+        const float hitRadius = 5f;
+        const float collisionDamage = 0f;
+
+        public override float HitRadius { get { return hitRadius; } }
+        protected override float CollisionDamage { get { return collisionDamage; } }
+        public override ObjectCategory Category { get { return ObjectCategory.PowerUp; } }
+        public RepairKit(Level level, Vector2 position, Vector2 velocity)
+            : base(level.Game.Assets.BulletTexture, level, 10)
+        {
+            Position = position;
+            Velocity = velocity;
+            Faction = Faction.Neutral;
+        }
+
+        public override void OnCollision(CollisionEventArgs e)
+        {
+            e.Other.Repair(200);
+        }
+
+        protected override bool CanCollideWith(DynamicObject other)
+        {
+            if (other is PlayerShip)
+                return true;
+
+            return false;
+        }
+    }
+}
