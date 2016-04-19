@@ -22,11 +22,13 @@ namespace SpaceShooter.Dynamic.Ships
         const float alertDistance = 700f;
         const float hysteresis = 15f;
         const float collisionDamage = 100;
+        const int score = 50;
 
         Weapon activeWeapon;
 
         MinelayerAiState aiState = MinelayerAiState.Wander;
-        
+
+        public override int Score { get { return score; } }
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Minelayer(Level level)

@@ -11,8 +11,21 @@ namespace SpaceShooter
         public Difficulty Difficulty;
         public List<Player> Players = new List<Player>();
         public Level ActiveLevel;
-        public int Score = 0;
         public SpaceShooterGame Game;
+        int score = 0;
+
+        public int Score
+        {
+            get
+            {
+                return score;
+            }
+            set
+            {
+                score = value;
+                App.Current.GamePage.ScoreViewValue = value;
+            }
+        }
 
         public Session(SpaceShooterGame game, Difficulty difficulty, int numberOfPlayers)
         {

@@ -18,12 +18,14 @@ namespace SpaceShooter.Dynamic.Ships
         const float maxSpeed = 256;
         const float durability = 2000;
         const float collisionDamage = 1000;
+        const int score = -100;
 
         public ObservableCollection<InventoryItem> WeaponSlots = new ObservableCollection<InventoryItem>();
         int activeWeaponIndex = 0;
         readonly Player player;
         bool isInvincible = false;
-        
+
+        public override int Score { get { return score; } }
         protected override Rectangle PlayArea { get { return Level.PlayArea; } }
         protected override Color Color
         {

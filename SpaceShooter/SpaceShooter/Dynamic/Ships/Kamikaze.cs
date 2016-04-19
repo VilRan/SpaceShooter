@@ -26,10 +26,12 @@ namespace SpaceShooter.Dynamic.Ships
         const float catchDistance = 25f;
         const float hysteresis = 15f;
         const float collisionDamage = 100;
+        const int score = 50;
 
         Weapon activeWeapon;
         KamikazeAiState aiState = KamikazeAiState.Wander;
-        
+
+        public override int Score { get { return score; } }
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Kamikaze(Level level)

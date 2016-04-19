@@ -27,9 +27,22 @@ namespace SpaceShooter
     {
 		public readonly SpaceShooterGame Game;
         double healthbarValue = 100;
+        int score;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public int ScoreViewValue
+        {
+            get
+            {
+                return score;
+            }
+            set
+            {
+                score = value;
+                NotifyPropertyChanged();
+            }
+        }
         public double HealthbarValue
         {
             get

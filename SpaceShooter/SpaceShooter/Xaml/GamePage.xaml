@@ -9,6 +9,7 @@
 
     <SwapChainPanel x:Name="swapChainPanel" >
         <ProgressBar HorizontalAlignment="Left" Height="32" Margin="16" VerticalAlignment="Bottom" Width="256" Value="{x:Bind HealthbarValue, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,0,0,0" TextWrapping="Wrap" Text="{x:Bind ScoreViewValue, Mode=OneWay}" VerticalAlignment="Top" Height="30" Width="256" Foreground="White"/>
     </SwapChainPanel>
 
 </Page>
