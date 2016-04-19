@@ -26,13 +26,15 @@ namespace SpaceShooter.Dynamic.Ships
         const float catchDistance = 5f;
         const float hysteresis = 15f;
         const float collisionDamage = 100;
+        const int score = 50;
 
         Weapon weapon;
         //List<Weapon> weapons = new List<Weapon>();
         FighterAiState aiState = FighterAiState.Wander;
-        
-        protected override float CollisionDamage { get { return collisionDamage; } }
 
+        public override int Score { get { return score; } }
+        protected override float CollisionDamage { get { return collisionDamage; } }
+        
         public Fighter(Level level)
             : base(level.Game.Assets.AsteroidTexture, level, 500)
         {
@@ -141,6 +143,8 @@ namespace SpaceShooter.Dynamic.Ships
             SoundEffectInstance sound = Level.Game.Assets.ExplosionSound.CreateInstance();
             sound.Volume = (float)(0.5 + 0.5 * Level.Game.Random.NextDouble());
             sound.Play();
+
+
         }
     }
 }

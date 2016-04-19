@@ -26,18 +26,21 @@ namespace SpaceShooter.Dynamic.Ships
         const float catchDistance = 5f;
         const float hysteresis = 15f;
         const float collisionDamage = 100;
+        const int score = 50;
         float attackTimer = 15;
 
         Weapon activeWeapon;
         List<Weapon> weapons = new List<Weapon>();
         FighterAiState aiState = FighterAiState.Wander;
 
+        public override int Score { get { return score; } }
         protected override Rectangle PlayArea
         {
             get
             { return new Rectangle(base.PlayArea.Left - base.PlayArea.Width / 2, base.PlayArea.Top - base.PlayArea.Height / 2, base.PlayArea.Width * 2, base.PlayArea.Height * 2); }
         }
         protected override float CollisionDamage { get { return collisionDamage; } }
+        
 
         public AceFighter(Level level)
             : base(level.Game.Assets.AsteroidTexture, level, 5000)

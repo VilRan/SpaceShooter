@@ -14,8 +14,10 @@ namespace SpaceShooter.Dynamic.Ships
     {
         const float durability = 1000;
         const float collisionDamage = 100;
+        const int score = 50;
 
-        protected override float CollisionDamage { get { return collisionDamage; } }
+        public override int Score { get { return score; } }
+        protected override float CollisionDamage { get { return collisionDamage; } }   
 
         public Asteroid(Level level)
             : base(level.Game.Assets.AsteroidTexture, level, durability)
