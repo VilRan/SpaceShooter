@@ -23,8 +23,7 @@ namespace SpaceShooter.Xaml
     /// </summary>
     public sealed partial class HighscorePage : Page
     {
-        int score;
-        public string highcoresToTextBlock { get { return File.ReadAllText("Assets/Higscores.txt"); }}
+        public string highcoresToTextBlock { get { return File.ReadAllText("Assets/Highscore.txt"); }}
 
         public HighscorePage()
         {
