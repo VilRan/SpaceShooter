@@ -35,5 +35,12 @@ namespace SpaceShooter.Dynamic
 
             base.Update(e);
         }
+
+        protected override bool CanCollideWith(DynamicObject other)
+        {
+            if (other.Category == ObjectCategory.Projectile)
+                return false;
+            return base.CanCollideWith(other);
+        }
     }
 }

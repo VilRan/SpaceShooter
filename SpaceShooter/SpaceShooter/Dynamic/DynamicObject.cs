@@ -81,9 +81,7 @@ namespace SpaceShooter.Dynamic
                 return false;
             if (other.Faction == Faction)
                 return false;
-            if (Category == ObjectCategory.Projectile && other.Category == ObjectCategory.Projectile)
-                return false;
-            if (!(this is PlayerShip) && other.Category == ObjectCategory.PowerUp)
+            if (other.Category == ObjectCategory.PowerUp)
                 return false;
             return true;
         }
