@@ -147,6 +147,9 @@
     <Compile Include="Xaml\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Xaml\NewGamePage.xaml.cs">
+      <DependentUpon>NewGamePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Xaml\OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
@@ -256,6 +259,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Xaml\MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Xaml\NewGamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

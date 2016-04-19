@@ -54,8 +54,7 @@ namespace SpaceShooter.Xaml
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = new ShopPage();
-            App.Current.GamePage.Game.StartNewSession(Difficulty.Nightmare);
+            Window.Current.Content = new NewGamePage();            
         }
 
         private void scoresButton_Click(object sender, RoutedEventArgs e)
