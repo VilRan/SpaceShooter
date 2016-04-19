@@ -30,25 +30,17 @@ namespace SpaceShooter.Xaml
         private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
             Difficulty difficulty = Difficulty.Casual;
-            if ((bool)casualRadioButton.IsChecked)
-            {
-                difficulty = Difficulty.Casual;
-            }
             if ((bool)hardcoreRadioButton.IsChecked)
-            {
                 difficulty = Difficulty.Hardcore;
-            }
-            if ((bool)nightmareRadioButton.IsChecked)
-            {
+            else if ((bool)nightmareRadioButton.IsChecked)
                 difficulty = Difficulty.Nightmare;
-            }
             int numberOfPlayers = 1;
             if ((bool)multiPlayerRadioButton.IsChecked)
             {
                 numberOfPlayers = 2;
             }
             App.Current.GamePage.Game.StartNewSession(difficulty, numberOfPlayers);
-            Window.Current.Content = new ShopPage(0);            
+            Window.Current.Content = new ShopPage(0);
         }
     }
 }
