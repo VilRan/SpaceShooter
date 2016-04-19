@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceShooter.Dynamic.Ships;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,13 +75,15 @@ namespace SpaceShooter.Dynamic
             }
         }
 
-        bool CanCollideWith(DynamicObject other)
+        protected virtual bool CanCollideWith(DynamicObject other)
         {
             if (other.IsDying)
                 return false;
             if (other.Faction == Faction)
                 return false;
             if (Category == ObjectCategory.Projectile && other.Category == ObjectCategory.Projectile)
+                return false;
+            if (!(this is PlayerShip) && other.Category == ObjectCategory.PowerUp)
                 return false;
             return true;
         }
@@ -120,6 +123,7 @@ namespace SpaceShooter.Dynamic
     public enum Faction
     {
         Player,
-        Enemy
+        Enemy,
+        Neutral
     }
 }

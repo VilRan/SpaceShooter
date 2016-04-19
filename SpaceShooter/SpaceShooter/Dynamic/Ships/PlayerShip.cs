@@ -15,7 +15,7 @@ namespace SpaceShooter.Dynamic.Ships
 {
     public class PlayerShip : Ship
     {
-        const float maxSpeed = 256;
+        const float maxSpeed = 512;
         const float durability = 2000;
         const float collisionDamage = 1000;
         const int score = -100;
@@ -145,6 +145,11 @@ namespace SpaceShooter.Dynamic.Ships
                 base.Damage(e);
                 (Application.Current as App).GamePage.HealthbarValue = 100 * CurrentDurability / MaximumDurability;
             }
+        }
+        public override void Repair(float amount)
+        {
+            base.Repair(amount);
+            App.Current.GamePage.HealthbarValue = 100 * CurrentDurability / MaximumDurability;
         }
 
         public bool TryRemoveWeapon(InventoryItem weapon)

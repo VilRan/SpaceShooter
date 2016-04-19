@@ -36,6 +36,7 @@ namespace SpaceShooter
         Tile,
         Particle,
         Projectile,
-        Ship
+        Ship,
+        PowerUp
     }
 }
