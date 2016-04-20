@@ -10,11 +10,13 @@ namespace SpaceShooter.Weapons
 {
     public abstract class Weapon
     {
-        double reloadTimer = 0.0;
-        double firerateTimer = 0.0;
+        public const int TileSize = AssetManager.TileSize;
+
         public int MagazineCount;
         public int MagazineSize;
-        
+        double reloadTimer = 0.0;
+        double firerateTimer = 0.0;
+
         public abstract string Name { get; }
         public abstract double ReloadDelay { get; }
         public abstract double FirerateDelay { get; }

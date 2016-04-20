@@ -10,6 +10,8 @@ namespace SpaceShooter
 {
     public abstract class GameObject
     {
+        public const int TileSize = AssetManager.TileSize;
+
         public Vector2 Position;
         public Vector2 Velocity;
         public Texture2D Texture;

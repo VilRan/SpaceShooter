@@ -10,7 +10,7 @@ namespace SpaceShooter.Weapons
 {
     class RocketLauncher : Weapon
     {
-        const float launchSpeed = 512;
+        const float launchSpeed = 16 * TileSize;
         const int magazineSize = 3;
 
         public override string Name { get { return "Rocket Launcher"; } }

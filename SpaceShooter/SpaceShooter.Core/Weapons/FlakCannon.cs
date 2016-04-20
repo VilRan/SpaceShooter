@@ -10,7 +10,7 @@ namespace SpaceShooter.Weapons
 {
     class FlakCannon : Weapon
     {
-        const float bulletSpeed = 1024;
+        const float bulletSpeed = 32 * TileSize;
         const int magazineSize = 50;
 
         public override string Name { get { return "Flak Cannon"; } }

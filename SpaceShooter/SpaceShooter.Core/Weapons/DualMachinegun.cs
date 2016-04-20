@@ -10,7 +10,7 @@ namespace SpaceShooter.Weapons
 {
     class DualMachinegun : Weapon
     {
-        const float bulletSpeed = 1024;
+        const float bulletSpeed = 32 * TileSize;
         const float bulletOffset = 20;
         const int magazineSize = 50;
         

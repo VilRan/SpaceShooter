@@ -10,7 +10,7 @@ namespace SpaceShooter.Weapons
 {
     class MineLauncher : Weapon
     {
-        const float mineSpeed = 32;
+        const float mineSpeed = 1 * TileSize;
         const int magazineSize = 1;
 
         public override string Name { get { return "MineLauncher"; } }

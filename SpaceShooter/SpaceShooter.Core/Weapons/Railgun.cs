@@ -10,7 +10,7 @@ namespace SpaceShooter.Weapons
 {
     class Railgun : Weapon
     {
-        const float bulletSpeed = 4096;
+        const float bulletSpeed = 128 * TileSize;
         const int magazineSize = 1;
 
         public override string Name { get { return "Railgun"; } }

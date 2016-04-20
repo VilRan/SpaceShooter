@@ -18,7 +18,7 @@ namespace SpaceShooter.Dynamic.Ships
             Alert
         }
 
-        const float maxSpeed = 256;
+        const float maxSpeed = 8 * TileSize;
         const float alertDistance = 700f;
         const float hysteresis = 15f;
         const float durability = 500;

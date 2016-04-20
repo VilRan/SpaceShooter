@@ -13,7 +13,7 @@ namespace SpaceShooter.Dynamic
         const float hitRadius = 3f;
         const float durability = 10;
         const float collisionDamage = 500;
-        const float speed = 1024;
+        const float speed = 32 * TileSize;
 
         public override Vector2 AbsoluteVelocity { get { return Velocity; } }
         public override float HitRadius { get { return hitRadius; } }

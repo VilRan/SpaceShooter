@@ -10,7 +10,7 @@ namespace SpaceShooter.Weapons
 {
     class Shotgun : Weapon
     {
-        const float shotSpeed = 1024;
+        const float shotSpeed = 32 * TileSize;
         const float shotSpread = (float)(Math.PI / 8);
         const int shotNumber = 25;
         const int magazineSize = 5;

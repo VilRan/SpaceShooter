@@ -10,8 +10,8 @@ namespace SpaceShooter.Dynamic
 {
     class Rocket : Projectile
     {
-        const float acceleration = 2048f;
-        const float maxVelocity = 2048f;
+        const float acceleration = 64 * TileSize;
+        const float maxVelocity = 64 * TileSize;
         const float maxVelocitySquared = maxVelocity * maxVelocity;
         const float hitRadius = 3f;
         const float durability = 10;

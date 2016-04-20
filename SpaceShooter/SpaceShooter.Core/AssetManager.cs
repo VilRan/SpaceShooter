@@ -17,6 +17,8 @@ namespace SpaceShooter
 {
     public class AssetManager
     {
+        public const int TileSize = 32;
+
         public Texture2D PlayerShipTexture { private set; get; }
         public Texture2D AsteroidTexture { private set; get; }
         public Texture2D BulletTexture { private set; get; }
@@ -38,6 +40,8 @@ namespace SpaceShooter
 
         public AssetManager(ContentManager content)
         {
+            Task loadLevelsTask = Task.Run(() => loadLevels());
+
             PlayerShipTexture = content.Load<Texture2D>("Textures/Ship");
             AsteroidTexture = content.Load<Texture2D>("Textures/Asteroid");
             BulletTexture = content.Load<Texture2D>("Textures/Bullet");
@@ -55,15 +59,8 @@ namespace SpaceShooter
             ShotSound = content.Load<SoundEffect>("Sounds/Shot");
             ExplosionSound = content.Load<SoundEffect>("Sounds/Explosion");
 
-            Task loadLevelsTask = Task.Run(() => loadLevels());
             Task.WaitAll(loadLevelsTask);
         }
-        /*
-        public void CreateTestLevel(SpaceShooterGame game)
-        {
-            TestLevelBlueprint = new LevelBlueprint(game);
-        }
-        */
 
         async void loadLevels()
         {

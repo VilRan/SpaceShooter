@@ -17,6 +17,8 @@ namespace SpaceShooter
         MouseState previousMouse;
         KeyboardState previousKeyboard;
 
+        static int TileSize { get { return AssetManager.TileSize; } }
+
         public LevelEditor(SpaceShooterGame game, LevelBlueprint blueprint)
         {
             this.game = game;
@@ -70,10 +72,10 @@ namespace SpaceShooter
         public void DrawGrid(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.AnisotropicWrap);
-            int gridMinX = (int)-camera.Position.X % 32;
-            int gridMinY = (int)-camera.Position.Y % 32;
-            int gridMaxX = (int)camera.Size.X + 32;
-            int gridMaxY = (int)camera.Size.Y + 32;
+            int gridMinX = (int)-camera.Position.X % TileSize;
+            int gridMinY = (int)-camera.Position.Y % TileSize;
+            int gridMaxX = (int)camera.Size.X + TileSize;
+            int gridMaxY = (int)camera.Size.Y + TileSize;
             Rectangle gridDestination = new Rectangle(gridMinX, gridMinY, gridMaxX, gridMaxY);
             spriteBatch.Draw(game.Assets.GridTexture, gridDestination, SpaceShooterGame.InternalResolution, Color.White * 0.5f, 0f, Vector2.Zero, SpriteEffects.None, 0);
             spriteBatch.End();

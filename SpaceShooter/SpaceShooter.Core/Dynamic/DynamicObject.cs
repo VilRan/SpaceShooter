@@ -29,10 +29,11 @@ namespace SpaceShooter.Dynamic
         protected virtual Rectangle PlayArea { get { return NormalPlayArea; } }
         protected override Color Color { get { return Color.White; } }
         protected CircleCollider Collider { get { return new CircleCollider(Position, AbsoluteVelocity, HitRadius); } }
-        protected Rectangle NormalPlayArea { get { return new Rectangle(Level.PlayArea.Left - 32, Level.PlayArea.Top - 32, Level.PlayArea.Width + 64, Level.PlayArea.Height + 64); } }
+        protected Rectangle NormalPlayArea {
+            get { return new Rectangle(Level.PlayArea.Left - TileSize, Level.PlayArea.Top - TileSize, Level.PlayArea.Width + TileSize * 2, Level.PlayArea.Height + TileSize * 2); } }
         protected Rectangle ExtendedPlayArea {
             get { return new Rectangle(NormalPlayArea.Left - NormalPlayArea.Width / 2, NormalPlayArea.Top - NormalPlayArea.Height / 2, NormalPlayArea.Width * 2, NormalPlayArea.Height * 2); } }
-
+        
         public DynamicObject(Texture2D texture, Level level, Vector2 position, Vector2 velocity, float durability, Faction faction)
             : base(texture, position, velocity)
         {
