@@ -162,12 +162,5 @@ namespace SpaceShooter.Dynamic.Ships
             }
             return false;
         }
-
-        protected override bool CanCollideWith(DynamicObject other)
-        {
-            if (other.Category == ObjectCategory.PowerUp)
-                return true;
-            return base.CanCollideWith(other);
-        }
     }
 }

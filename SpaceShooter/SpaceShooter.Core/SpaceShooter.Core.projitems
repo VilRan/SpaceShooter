@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\RepairKit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\AceFighter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Asteroid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\EnemyShip.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Fighter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Kamikaze.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Minelayer.cs" />

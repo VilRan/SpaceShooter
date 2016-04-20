@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Dynamic.Ships
 {
-    class Minelayer : Ship
+    class Minelayer : EnemyShip
     {
         enum MinelayerAiState
         {
@@ -33,7 +33,7 @@ namespace SpaceShooter.Dynamic.Ships
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Minelayer(Level level, Vector2 position)
-            : base(level.Game.Assets.AsteroidTexture, level, position, durability, Faction.Enemy)
+            : base(level.Game.Assets.AsteroidTexture, level, position, durability)
         {
             activeWeapon = new MineLauncher();
 

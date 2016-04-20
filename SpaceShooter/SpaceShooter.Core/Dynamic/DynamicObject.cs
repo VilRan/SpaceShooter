@@ -86,8 +86,6 @@ namespace SpaceShooter.Dynamic
                 return false;
             if (other.Faction == Faction)
                 return false;
-            if (other.Category == ObjectCategory.PowerUp)
-                return false;
             return true;
         }
 

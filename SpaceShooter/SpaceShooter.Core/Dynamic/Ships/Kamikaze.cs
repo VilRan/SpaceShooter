@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Dynamic.Ships
 {
-    class Kamikaze : Ship
+    class Kamikaze : EnemyShip
     {
         enum KamikazeAiState
         {
@@ -36,7 +36,7 @@ namespace SpaceShooter.Dynamic.Ships
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Kamikaze(Level level, Vector2 position)
-            : base(level.Game.Assets.AsteroidTexture, level, position, durability, Faction.Enemy)
+            : base(level.Game.Assets.AsteroidTexture, level, position, durability)
         {
             activeWeapon = new Machinegun();
 

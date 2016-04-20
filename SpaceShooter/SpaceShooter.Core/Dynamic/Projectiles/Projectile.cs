@@ -40,6 +40,8 @@ namespace SpaceShooter.Dynamic
         {
             if (other.Category == ObjectCategory.Projectile)
                 return false;
+            if (other.Category == ObjectCategory.PowerUp)
+                return false;
             return base.CanCollideWith(other);
         }
     }

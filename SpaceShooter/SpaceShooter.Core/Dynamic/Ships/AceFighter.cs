@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace SpaceShooter.Dynamic.Ships
 {
-    class AceFighter : Ship
+    class AceFighter : EnemyShip
     {
         enum FighterAiState
         {
@@ -40,7 +40,7 @@ namespace SpaceShooter.Dynamic.Ships
         
 
         public AceFighter(Level level, Vector2 position)
-            : base(level.Game.Assets.AsteroidTexture, level, position, durability, Faction.Enemy)
+            : base(level.Game.Assets.AsteroidTexture, level, position, durability)
         {
             weapons.Add(new Machinegun());
             weapons.Add(new RocketLauncher());

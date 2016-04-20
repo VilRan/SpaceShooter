@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShooter.Dynamic.Ships
 {
-    class Fighter : Ship
+    class Fighter : EnemyShip
     {
         enum FighterAiState
         {
@@ -37,7 +37,7 @@ namespace SpaceShooter.Dynamic.Ships
         protected override float CollisionDamage { get { return collisionDamage; } }
         
         public Fighter(Level level, Vector2 position)
-            : base(level.Game.Assets.AsteroidTexture, level, position, durability, Faction.Enemy)
+            : base(level.Game.Assets.AsteroidTexture, level, position, durability)
         {
             /*
             weapons.Add(new Machinegun());
