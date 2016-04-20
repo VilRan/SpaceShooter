@@ -15,7 +15,7 @@ namespace SpaceShooter.Dynamic.Ships
         const double repairKitDropChance = 0.3;
         const float collisionDamage = 100;
 
-        Weapon weapon;
+        protected Weapon weapon;
         protected override float CollisionDamage { get { return collisionDamage; } }
         public Fighter(Level level, Vector2 position)
             : base(level.Game.Assets.AsteroidTexture, level, position, durability)
@@ -27,7 +27,7 @@ namespace SpaceShooter.Dynamic.Ships
         public override void Update(UpdateEventArgs e)
         {            
             weapon.Update(e.GameTime);
-            weapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
+            
 
             base.Update(e);
         }

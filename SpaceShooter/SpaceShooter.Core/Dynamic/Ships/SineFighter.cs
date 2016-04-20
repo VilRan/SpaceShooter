@@ -33,6 +33,8 @@ namespace SpaceShooter.Dynamic.Ships
 
             Velocity = new Vector2(0, sine * maxSpeed);
 
+            weapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
+
             base.Update(e);
         }        
     }

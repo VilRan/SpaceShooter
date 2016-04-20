@@ -27,7 +27,7 @@ namespace SpaceShooter.Dynamic.Ships
         const float hysteresis = 15f;
         const float durability = 500;
         const float collisionDamage = 100;
-        const int score = 50;
+        const int score = 200;
 
         Weapon activeWeapon;
         KamikazeAiState aiState = KamikazeAiState.Wander;

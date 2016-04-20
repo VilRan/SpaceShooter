@@ -185,4 +185,28 @@ namespace SpaceShooter
         }
 
     }
+
+    public class EliteFighterSpawn : Spawn
+    {
+        public const string String = "EliteFighter";
+
+        public override string ObjectName { get { return String; } }
+
+        public EliteFighterSpawn(Difficulty difficulty, Vector2 position)
+            : base(difficulty, position)
+        {
+
+        }
+
+        public override DynamicObject CreateObject(Level level)
+        {
+            return new EliteFighter(level, Position);
+        }
+
+        public override Texture2D GetTexture(AssetManager assets)
+        {
+            return assets.AsteroidTexture;
+        }
+
+    }
 }

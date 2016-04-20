@@ -25,7 +25,8 @@ namespace SpaceShooter.Dynamic.Ships
         public override void Update(UpdateEventArgs e)
         {
             Velocity = new Vector2(0, 0);
-            
+            weapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
+
             base.Update(e);
         }                
     }

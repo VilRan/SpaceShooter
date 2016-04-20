@@ -58,6 +58,9 @@ namespace SpaceShooter
                     case BasicFighterSpawn.String:
                         Spawns.Add(new BasicFighterSpawn(difficulty, position));
                         break;
+                    case EliteFighterSpawn.String:
+                        Spawns.Add(new EliteFighterSpawn(difficulty, position));
+                        break;
                 }
             }
         }
