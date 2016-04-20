@@ -59,6 +59,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)VectorUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Wall.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\DualMachinegun.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\AutomaticRocketLauncher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\FlakCannon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\Machinegun.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\MineLauncher.cs" />
