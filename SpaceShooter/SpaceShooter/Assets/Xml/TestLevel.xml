@@ -23,5 +23,7 @@
   <Spawn Difficulty="0" X="5000" Y="1000" Type="BasicFighter" />
   <Spawn Difficulty="0" X="6000" Y="250" Type="EliteFighter" />
   <Spawn Difficulty="0" X="6000" Y="1000" Type="EliteFighter" />
+  <Spawn Difficulty="0" X="6500" Y="200" Type="BasicBomber" />
+  <Spawn Difficulty="0" X="6500" Y="1000" Type="BasicBomber" />
   <Spawn Difficulty="0" X="7000" Y="500" Type="Acefighter" />
 </Level>

@@ -209,4 +209,28 @@ namespace SpaceShooter
         }
 
     }
+
+    public class BasicBomberSpawn : Spawn
+    {
+        public const string String = "BasicBomber";
+
+        public override string ObjectName { get { return String; } }
+
+        public BasicBomberSpawn(Difficulty difficulty, Vector2 position)
+            : base(difficulty, position)
+        {
+
+        }
+
+        public override DynamicObject CreateObject(Level level)
+        {
+            return new BasicBomber(level, Position);
+        }
+
+        public override Texture2D GetTexture(AssetManager assets)
+        {
+            return assets.AsteroidTexture;
+        }
+
+    }
 }
