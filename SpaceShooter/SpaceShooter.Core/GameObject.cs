@@ -14,7 +14,7 @@ namespace SpaceShooter
         public Vector2 Velocity;
         public Texture2D Texture;
         
-        public Vector2 Origin { get { return Texture.Bounds.Center.ToVector2(); } }
+        public virtual Vector2 Origin { get { return Texture.Bounds.Center.ToVector2(); } }
         public abstract ObjectCategory Category { get; }
         protected abstract Color Color { get; }
 

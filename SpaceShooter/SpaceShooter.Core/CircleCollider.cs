@@ -80,18 +80,18 @@ namespace SpaceShooter
 
         public bool FindCollisionFromLeft(RectangleCollider other, float timeLimit, out float timeOfCollision)
         {
-            float distance = other.Bounds.Left - Position.X - Radius;
-            if (distance >= 0 && Velocity.X > 0)
-                return findLinearCollision(other, distance, Velocity.X, NormalDirection.Vertical, timeLimit, out timeOfCollision);
+            float deltaX = other.Bounds.Left - Position.X - Radius;
+            if (deltaX >= 0 && Velocity.X > 0)
+                return findLinearCollision(other, deltaX, Velocity.X, NormalDirection.Vertical, timeLimit, out timeOfCollision);
             timeOfCollision = float.NaN;
             return false;
         }
 
         public bool FindCollisionFromRight(RectangleCollider other, float timeLimit, out float timeOfCollision)
         {
-            float distance = other.Bounds.Right - Position.X - Radius;
-            if (distance <= 0 && Velocity.X < 0)
-                return findLinearCollision(other, distance, Velocity.X, NormalDirection.Vertical, timeLimit, out timeOfCollision);
+            float deltaX = other.Bounds.Right - Position.X + Radius;
+            if (deltaX <= 0 && Velocity.X < 0)
+                return findLinearCollision(other, deltaX, Velocity.X, NormalDirection.Vertical, timeLimit, out timeOfCollision);
             timeOfCollision = float.NaN;
             return false;
         }
@@ -104,18 +104,18 @@ namespace SpaceShooter
 
         public bool FindCollisionFromTop(RectangleCollider other, float timeLimit, out float timeOfCollision)
         {
-            float distance = other.Bounds.Top - Position.Y - Radius;
-            if (distance >= 0 && Velocity.Y > 0)
-                return findLinearCollision(other, distance, Velocity.Y, NormalDirection.Horizontal, timeLimit, out timeOfCollision);
+            float deltaY = other.Bounds.Top - Position.Y - Radius;
+            if (deltaY >= 0 && Velocity.Y > 0)
+                return findLinearCollision(other, deltaY, Velocity.Y, NormalDirection.Horizontal, timeLimit, out timeOfCollision);
             timeOfCollision = float.NaN;
             return false;
         }
 
         public bool FindCollisionFromBottom(RectangleCollider other, float timeLimit, out float timeOfCollision)
         {
-            float distance = other.Bounds.Bottom - Position.Y - Radius;
-            if (distance <= 0 && Velocity.Y < 0)
-                return findLinearCollision(other, distance, Velocity.Y, NormalDirection.Horizontal, timeLimit, out timeOfCollision);
+            float deltaY = other.Bounds.Bottom - Position.Y + Radius;
+            if (deltaY <= 0 && Velocity.Y < 0)
+                return findLinearCollision(other, deltaY, Velocity.Y, NormalDirection.Horizontal, timeLimit, out timeOfCollision);
             timeOfCollision = float.NaN;
             return false;
         }

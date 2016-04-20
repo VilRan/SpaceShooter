@@ -10,6 +10,7 @@ namespace SpaceShooter
     public class Wall : GameObject
     {
         public override ObjectCategory Category { get { return ObjectCategory.Tile; } }
+        public override Vector2 Origin { get { return Vector2.Zero; } }
         public RectangleCollider Collider { get { return new RectangleCollider((int)Position.X, (int)Position.Y, 32, 32); } }
 
         protected override Color Color { get { return Color.Gray; } }
