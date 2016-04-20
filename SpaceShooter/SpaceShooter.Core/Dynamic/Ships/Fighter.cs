@@ -28,6 +28,7 @@ namespace SpaceShooter.Dynamic.Ships
         const float durability = 500;
         const float collisionDamage = 100;
         const int score = 50;
+        const double repairKitDropChance = 0.3;
 
         Weapon weapon;
         //List<Weapon> weapons = new List<Weapon>();
@@ -138,14 +139,16 @@ namespace SpaceShooter.Dynamic.Ships
         }
 
         public override void OnDeath(DeathEventArgs e)
-        {
+        {            
             base.OnDeath(e);
             SoundEffectInstance sound = Level.Game.Assets.ExplosionSound.CreateInstance();
             sound.Volume = (float)(0.5 + 0.5 * Level.Game.Random.NextDouble());
             sound.Play();
-            RepairKit repairKit = new RepairKit(Level, Position, Vector2.Zero);
-            Level.Objects.Add(repairKit);
-
+            if (random.NextDouble() < repairKitDropChance)
+            {
+                RepairKit repairKit = new RepairKit(Level, Position, Vector2.Zero);
+                Level.Objects.Add(repairKit);
+            }
         }
     }
 }
