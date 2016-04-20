@@ -45,13 +45,13 @@ namespace SpaceShooter
         }
     }
 
-    public class FighterSpawn : Spawn
+    public class AdvancedFighterSpawn : Spawn
     {
-        public const string String = "Fighter";
+        public const string String = "AdvancedFighter";
 
         public override string ObjectName { get { return String; } }
 
-        public FighterSpawn(Difficulty difficulty, Vector2 position)
+        public AdvancedFighterSpawn(Difficulty difficulty, Vector2 position)
             : base(difficulty, position)
         {
 
@@ -59,7 +59,7 @@ namespace SpaceShooter
 
         public override DynamicObject CreateObject(Level level)
         {
-            return new Fighter(level, Position);
+            return new AdvancedFighter(level, Position);
         }
 
         public override Texture2D GetTexture(AssetManager assets)
@@ -129,6 +129,102 @@ namespace SpaceShooter
         public override DynamicObject CreateObject(Level level)
         {
             return new AceFighter(level, Position);
+        }
+
+        public override Texture2D GetTexture(AssetManager assets)
+        {
+            return assets.AsteroidTexture;
+        }
+
+    }
+
+    public class SineFighterSpawn : Spawn
+    {
+        public const string String = "SineFighter";
+
+        public override string ObjectName { get { return String; } }
+
+        public SineFighterSpawn(Difficulty difficulty, Vector2 position)
+            : base(difficulty, position)
+        {
+
+        }
+
+        public override DynamicObject CreateObject(Level level)
+        {
+            return new SineFighter(level, Position);
+        }
+
+        public override Texture2D GetTexture(AssetManager assets)
+        {
+            return assets.AsteroidTexture;
+        }
+
+    }
+
+    public class BasicFighterSpawn : Spawn
+    {
+        public const string String = "BasicFighter";
+
+        public override string ObjectName { get { return String; } }
+
+        public BasicFighterSpawn(Difficulty difficulty, Vector2 position)
+            : base(difficulty, position)
+        {
+
+        }
+
+        public override DynamicObject CreateObject(Level level)
+        {
+            return new BasicFighter(level, Position);
+        }
+
+        public override Texture2D GetTexture(AssetManager assets)
+        {
+            return assets.AsteroidTexture;
+        }
+
+    }
+
+    public class EliteFighterSpawn : Spawn
+    {
+        public const string String = "EliteFighter";
+
+        public override string ObjectName { get { return String; } }
+
+        public EliteFighterSpawn(Difficulty difficulty, Vector2 position)
+            : base(difficulty, position)
+        {
+
+        }
+
+        public override DynamicObject CreateObject(Level level)
+        {
+            return new EliteFighter(level, Position);
+        }
+
+        public override Texture2D GetTexture(AssetManager assets)
+        {
+            return assets.AsteroidTexture;
+        }
+
+    }
+
+    public class BasicBomberSpawn : Spawn
+    {
+        public const string String = "BasicBomber";
+
+        public override string ObjectName { get { return String; } }
+
+        public BasicBomberSpawn(Difficulty difficulty, Vector2 position)
+            : base(difficulty, position)
+        {
+
+        }
+
+        public override DynamicObject CreateObject(Level level)
+        {
+            return new BasicBomber(level, Position);
         }
 
         public override Texture2D GetTexture(AssetManager assets)

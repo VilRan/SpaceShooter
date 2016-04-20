@@ -11,7 +11,7 @@ namespace SpaceShooter.Dynamic
 {
     class RepairKit : DynamicObject
     {
-        const float hitRadius = 5f;
+        const float hitRadius = 10f;
         const float durability = 10;
         const float collisionDamage = 0f;
 

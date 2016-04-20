@@ -40,8 +40,8 @@ namespace SpaceShooter
                     case AsteroidSpawn.String:
                         Spawns.Add(new AsteroidSpawn(difficulty, position));
                         break;
-                    case FighterSpawn.String:
-                        Spawns.Add(new FighterSpawn(difficulty, position));
+                    case AdvancedFighterSpawn.String:
+                        Spawns.Add(new AdvancedFighterSpawn(difficulty, position));
                         break;
                     case KamikazeSpawn.String:
                         Spawns.Add(new KamikazeSpawn(difficulty, position));
@@ -51,6 +51,18 @@ namespace SpaceShooter
                         break;
                     case AceFighterSpawn.String:
                         Spawns.Add(new AceFighterSpawn(difficulty, position));
+                        break;
+                    case SineFighterSpawn.String:
+                        Spawns.Add(new SineFighterSpawn(difficulty, position));
+                        break;
+                    case BasicFighterSpawn.String:
+                        Spawns.Add(new BasicFighterSpawn(difficulty, position));
+                        break;
+                    case EliteFighterSpawn.String:
+                        Spawns.Add(new EliteFighterSpawn(difficulty, position));
+                        break;
+                    case BasicBomberSpawn.String:
+                        Spawns.Add(new BasicBomberSpawn(difficulty, position));
                         break;
                 }
             }
