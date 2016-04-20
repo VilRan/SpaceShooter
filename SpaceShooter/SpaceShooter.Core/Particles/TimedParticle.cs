@@ -40,12 +40,12 @@ namespace SpaceShooter.Particles
             base.Draw(e);
         }
 
-        public static void Emit(Level level, Vector2 position, Color startColor, double minimumLifespan, double maximumLifespan, float maxSpeed)
+        public static void Emit(Level level, Vector2 position, Color startColor, double minimumLifespan, double maximumLifespan, float maxSpeed, float minAngle = 0, float maxAngle = MathHelper.TwoPi)
         {
             SpaceShooterGame game = level.Game;
             Random random = game.Random;
             double particleLifespan = minimumLifespan + (maximumLifespan - minimumLifespan) * random.NextDouble();
-            TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, position, VectorUtility.CreateRandom(random, maxSpeed), startColor, particleLifespan);
+            TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, position, VectorUtility.CreateRandom(random, maxSpeed, 0, maxAngle, minAngle), startColor, particleLifespan);
             level.Particles.Add(particle);
         }
 
