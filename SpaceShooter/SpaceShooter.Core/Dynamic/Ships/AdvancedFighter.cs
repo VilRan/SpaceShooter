@@ -7,17 +7,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 namespace SpaceShooter.Dynamic.Ships
 {
-    class AceFighter : EnemyShip
+    class AdvancedFighter : EnemyShip
     {
         enum FighterAiState
         {
             Wander,
             Alert,
             Chase,
-            Catch,
-            Evade
+            Catch
         }
 
         const float maxSpeed = 8 * TileSize;
@@ -25,35 +25,34 @@ namespace SpaceShooter.Dynamic.Ships
         const float chaseDistance = 700f;
         const float catchDistance = 5f;
         const float hysteresis = 15f;
-        const float durability = 5000;
+        const float durability = 500;
         const float collisionDamage = 100;
-        const int score = 1500;
-        float attackTimer = 15;
-
-        Weapon activeWeapon;
-        List<Weapon> weapons = new List<Weapon>();
+        const int score = 50;
+        const double repairKitDropChance = 0.3;
+        
+        Weapon weapon;
+        //List<Weapon> weapons = new List<Weapon>();
         FighterAiState aiState = FighterAiState.Wander;
 
         public override int Score { get { return score; } }
-        protected override Rectangle PlayArea { get { return ExtendedPlayArea; } }
         protected override float CollisionDamage { get { return collisionDamage; } }
         
-
-        public AceFighter(Level level, Vector2 position)
+        public AdvancedFighter(Level level, Vector2 position)
             : base(level.Game.Assets.AsteroidTexture, level, position, durability)
         {
+            /*
             weapons.Add(new Machinegun());
             weapons.Add(new RocketLauncher());
             activeWeapon = weapons[0];
+            */
+            weapon = new Machinegun();
 
-            activeWeapon.MagazineSize = 3;
-            activeWeapon.MagazineCount = 3;
+            weapon.MagazineSize = 3;
+            weapon.MagazineCount = 3;
         }
 
         public override void Update(UpdateEventArgs e)
         {
-            attackTimer -= (float)e.ElapsedSeconds;
-
             Player nearestPlayer = Level.Session.Players.
                 Where(player => !player.Ship.IsDying).
                 OrderBy(player => (player.Ship.Position - Position).LengthSquared()).
@@ -61,30 +60,17 @@ namespace SpaceShooter.Dynamic.Ships
             if (nearestPlayer == null)
                 return;
 
-            Vector2 closeFightPosition;
-            Vector2 chasingDirection;
+            Vector2 closeFightPosition = nearestPlayer.Ship.Position + new Vector2(200, 0);
+
             Vector2 shootingDirection = nearestPlayer.Ship.Position - Position;
             shootingDirection.Normalize();
-            
+
+            Vector2 chasingDirection = closeFightPosition - Position;
+            chasingDirection.Normalize();
+
             float alertThreshold = alertDistance;
             float chaseThreshold = chaseDistance;
             float catchThreshold = catchDistance;
-
-            if (attackTimer >= 5 && attackTimer <= 15)
-            {
-                closeFightPosition = nearestPlayer.Ship.Position + new Vector2(200, 0);
-                chasingDirection = closeFightPosition - Position;
-                chasingDirection.Normalize();
-            }
-            else
-            {
-                closeFightPosition = PlayArea.Center.ToVector2();                
-                chasingDirection = closeFightPosition - Position;
-                chasingDirection.Normalize();
-
-                chaseThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
-                catchThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;                
-            }
 
             if (aiState == FighterAiState.Wander)
             {
@@ -94,9 +80,9 @@ namespace SpaceShooter.Dynamic.Ships
             }
             else if (aiState == FighterAiState.Alert)
             {
-                activeWeapon = weapons[1];
-                activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(Level, Position, shootingDirection, this));
+                //activeWeapon = weapons[0];
+                weapon.Update(e.GameTime);
+                weapon.TryFire(new FireEventArgs(Level, Position, shootingDirection, this));
 
                 alertThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
                 chaseThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
@@ -104,42 +90,27 @@ namespace SpaceShooter.Dynamic.Ships
             }
             else if (aiState == FighterAiState.Chase)
             {
+                /*
+                activeWeapon = weapons[0];
+                activeWeapon.Update(e.GameTime);
+                activeWeapon.TryFire(new FireEventArgs(e.Level, Position, shootingDirection, this));
+                */
                 Position += chasingDirection * (float)e.ElapsedSeconds * maxSpeed;
 
                 chaseThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
                 catchThreshold -= hysteresis / 2 * (float)e.ElapsedSeconds;
             }
-            else if (attackTimer > 5 && aiState == FighterAiState.Catch)
+            else if (aiState == FighterAiState.Catch)
             {
-                activeWeapon = weapons[0];
-                activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
+                //activeWeapon = weapons[0];
+                weapon.Update(e.GameTime);
+                weapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
 
                 Velocity = Level.Camera.Velocity;
 
                 catchThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
             }
-            else if (attackTimer <= 5 && aiState == FighterAiState.Catch)
-            {
-                activeWeapon = weapons[1];
-                activeWeapon.Update(e.GameTime);
-                activeWeapon.TryFire(new FireEventArgs(Level, Position, shootingDirection, this));
 
-                Velocity = Level.Camera.Velocity;
-
-                catchThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
-            }
-            else if (aiState == FighterAiState.Evade)
-            {
-                Vector2 evadeDirection = new Vector2(0, 256);
-                //Velocity = new Vector2(0, 256);
-                evadeDirection.Normalize();
-
-                Position += evadeDirection * (float)e.ElapsedSeconds * maxSpeed * 2;                                
-            }
-            Controller controller = nearestPlayer.Controller;
-
-            float distanceFromNearestPlayer = Vector2.Distance(Position, nearestPlayer.Ship.Position);
             float distanceFromPlayer = Vector2.Distance(Position, closeFightPosition);
             if (distanceFromPlayer > alertThreshold)
             {
@@ -157,15 +128,6 @@ namespace SpaceShooter.Dynamic.Ships
             {
                 aiState = FighterAiState.Catch;
             }
-            if (distanceFromNearestPlayer < 300 && controller.IsControlDown(Action.Fire))            
-            {
-                aiState = FighterAiState.Evade;
-            }
-
-            if (attackTimer <= 0)
-            {
-                attackTimer = 15;
-            }
 
             base.Update(e);
         }
@@ -177,12 +139,16 @@ namespace SpaceShooter.Dynamic.Ships
         }
 
         public override void OnDeath(DeathEventArgs e)
-        {
+        {            
             base.OnDeath(e);
             SoundEffectInstance sound = Level.Game.Assets.ExplosionSound.CreateInstance();
             sound.Volume = (float)(0.5 + 0.5 * Level.Game.Random.NextDouble());
             sound.Play();
+            if (random.NextDouble() < repairKitDropChance)
+            {
+                RepairKit repairKit = new RepairKit(Level, Position, Vector2.Zero);
+                Level.Objects.Add(repairKit);
+            }
         }
-
     }
 }

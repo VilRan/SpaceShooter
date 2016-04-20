@@ -35,7 +35,7 @@ namespace SpaceShooter
             Controller controller = game.Settings.Controllers["General"];
 
             if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton == ButtonState.Released)
-                blueprint.Spawns.Add(new FighterSpawn(Difficulty.Casual, mouse.Position.ToVector2() + camera.Position));
+                blueprint.Spawns.Add(new AdvancedFighterSpawn(Difficulty.Casual, mouse.Position.ToVector2() + camera.Position));
             if (keyboard.IsKeyDown(Keys.F) && previousKeyboard.IsKeyUp(Keys.F))
                 blueprint.SaveToFile("EditorLevel");
 

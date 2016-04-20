@@ -4,10 +4,10 @@
   <Spawn Difficulty="0" X="1500" Y="500" Type="Asteroid"/>
   <Spawn Difficulty="0" X="1500" Y="750" Type="Asteroid"/>
   <Spawn Difficulty="0" X="1500" Y="1000" Type="Asteroid"/>
-  <Spawn Difficulty="0" X="2000" Y="250" Type="Fighter"/>
-  <Spawn Difficulty="0" X="2000" Y="500" Type="Fighter"/>
-  <Spawn Difficulty="0" X="2000" Y="750" Type="Fighter"/>
-  <Spawn Difficulty="0" X="2000" Y="1000" Type="Fighter"/>
+  <Spawn Difficulty="0" X="2000" Y="250" Type="AdvancedFighter"/>
+  <Spawn Difficulty="0" X="2000" Y="500" Type="AdvancedFighter"/>
+  <Spawn Difficulty="0" X="2000" Y="750" Type="AdvancedFighter"/>
+  <Spawn Difficulty="0" X="2000" Y="1000" Type="AdvancedFighter"/>
   <Spawn Difficulty="0" X="2500" Y="250" Type="Kamikaze" />
   <Spawn Difficulty="0" X="2500" Y="500" Type="Kamikaze" />
   <Spawn Difficulty="0" X="2500" Y="750" Type="Kamikaze" />
@@ -16,5 +16,10 @@
   <Spawn Difficulty="0" X="3000" Y="500" Type="Minelayer" />
   <Spawn Difficulty="0" X="3000" Y="750" Type="Minelayer" />
   <Spawn Difficulty="0" X="3000" Y="1000" Type="Minelayer" />
-  <Spawn Difficulty="0" X="4000" Y="500" Type="Acefighter" />
+  <Spawn Difficulty="0" X="4000" Y="250" Type="SineFighter" />
+  <Spawn Difficulty="0" X="4000" Y="500" Type="SineFighter" />
+  <Spawn Difficulty="0" X="4000" Y="1000" Type="SineFighter" />
+  <Spawn Difficulty="0" X="5000" Y="250" Type="BasicFighter" />
+  <Spawn Difficulty="0" X="5000" Y="1000" Type="BasicFighter" />
+  <Spawn Difficulty="0" X="6500" Y="500" Type="Acefighter" />
 </Level>
