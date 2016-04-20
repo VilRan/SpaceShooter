@@ -22,6 +22,7 @@ namespace SpaceShooter
             Items.Add(new InventoryItem(new DualMachinegun(), 100));
             Items.Add(new InventoryItem(new MissileLauncher(), 150));
             Items.Add(new InventoryItem(new Railgun(), 250));
+            Items.Add(new InventoryItem(new AutomaticRocketLauncher(), 250));
         }
     }
     
