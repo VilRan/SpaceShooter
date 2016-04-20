@@ -18,6 +18,8 @@ namespace SpaceShooter.Dynamic
         Durability durability;
         bool isRemoving = false;
 
+        protected SpaceShooterGame game { get { return Level.Game; } }
+        protected Random random { get { return game.Random; } }
         public virtual Vector2 RelativeVelocity { get { return Velocity - Level.Camera.Velocity; } set { Velocity = value + Level.Camera.Velocity; } }
         public virtual Vector2 AbsoluteVelocity { get { return Velocity; } }
         public virtual float HitRadius { get { return hitRadius; } }
