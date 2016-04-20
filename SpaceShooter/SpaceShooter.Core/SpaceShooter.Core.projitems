@@ -45,6 +45,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)LevelEditor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Particles\BackgroundParticle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Particles\DustParticle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Particles\ExplosionParticle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Particles\Particle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Particles\TimedParticle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RectangleCollider.cs" />

@@ -63,6 +63,10 @@ namespace SpaceShooter
                     (float)random.NextDouble(),
                     (float)random.NextDouble()));
             }
+
+            //Particles.Add(new ExplosionParticle(this,Game.Assets.ParticleTexture,
+            //   new Vector2( 550 , 550 ),
+            //   VectorUtility.CreateRandom(random, 300)));
         }
 
         public void Update(GameTime gameTime)
