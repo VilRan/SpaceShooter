@@ -10,6 +10,13 @@ namespace SpaceShooter.Particles
 {
     public abstract class Particle : GameObject
     {
+        public override ObjectCategory Category
+        {
+            get
+            {
+                return ObjectCategory.Particle;
+            }
+        }
         protected override Color Color { get { return Color.LightGray; } }
         public abstract bool IsRemoving { get; }
 
