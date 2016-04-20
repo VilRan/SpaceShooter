@@ -15,7 +15,7 @@ namespace SpaceShooter.Dynamic.Ships
 {
     public class PlayerShip : Ship
     {
-        const float maxSpeed = 512;
+        const float maxSpeed = 256;
         const float durability = 2000;
         const float collisionDamage = 1000;
         const int score = -100;

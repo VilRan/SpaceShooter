@@ -35,11 +35,7 @@ namespace SpaceShooter.Dynamic.Ships
         FighterAiState aiState = FighterAiState.Wander;
 
         public override int Score { get { return score; } }
-        protected override Rectangle PlayArea
-        {
-            get
-            { return new Rectangle(base.PlayArea.Left - base.PlayArea.Width / 2, base.PlayArea.Top - base.PlayArea.Height / 2, base.PlayArea.Width * 2, base.PlayArea.Height * 2); }
-        }
+        protected override Rectangle PlayArea { get { return ExtendedPlayArea; } }
         protected override float CollisionDamage { get { return collisionDamage; } }
         
 
