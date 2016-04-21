@@ -63,11 +63,11 @@ namespace SpaceShooter.Xaml
 
         private void screenModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((ComboBoxItem)e.AddedItems.First() == fullscreenItem)
+            if (e.AddedItems.First() == fullscreenItem)
             {
                 App.EnterFullscreen();
             }
-            else if ((ComboBoxItem)e.AddedItems.First() == windowedItem)
+            else if (e.AddedItems.First() == windowedItem)
             {
                 App.ExitFullscreen();
             }

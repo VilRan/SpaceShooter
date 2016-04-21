@@ -131,6 +131,7 @@
     <Content Include="Assets\Textures\Bullet.xnb" />
     <Content Include="Assets\Textures\EarthTransparent.png" />
     <Content Include="Assets\Textures\Grid.png" />
+    <Content Include="Assets\Textures\Laser.png" />
     <Content Include="Assets\Textures\Particle.xnb" />
     <Content Include="Assets\Textures\Pixel.xnb" />
     <Content Include="Assets\Textures\Ship.xnb" />

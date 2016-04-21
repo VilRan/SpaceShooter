@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\FlakCannonShell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Fragment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\GuidedMissile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Laser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Mine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Projectile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\RailgunProjectile.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\DualMachinegun.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\AutomaticRocketLauncher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\FlakCannon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weapons\LaserCannon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\Machinegun.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\MineLauncher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\MissileLauncher.cs" />
