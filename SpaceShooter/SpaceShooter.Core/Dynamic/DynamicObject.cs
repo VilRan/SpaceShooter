@@ -44,7 +44,7 @@ namespace SpaceShooter.Dynamic
             this.durability = new Durability(durability);
         }
 
-        public virtual void OnCollision(CollisionEventArgs e)
+        public virtual void OnCollision(Collision e)
         {
             e.Other.Damage(new DamageEventArgs(e, CollisionDamage));
         }
@@ -64,21 +64,25 @@ namespace SpaceShooter.Dynamic
         
         public void CheckCollisions(GameTime gameTime, int startIndex)
         {
-            for (int i = startIndex; i < Level.Objects.Count; i++)
-            {
-                if (IsDying)
-                    return;
+            if (IsDying)
+                return;
 
-                DynamicObject other = Level.Objects[i];
+            List<Collision> collisions = new List<Collision>();
+            for (int index = startIndex; index < Level.Objects.Count; index++)
+            {
+                DynamicObject other = Level.Objects[index];
                 if (!CanCollideWith(other))
                     continue;
 
                 float timeOfCollision;
                 if (Collider.FindCollision(other.Collider, (float)gameTime.ElapsedGameTime.TotalSeconds, out timeOfCollision))
-                {
-                    OnCollision(new CollisionEventArgs(this, other, timeOfCollision));
-                    other.OnCollision(new CollisionEventArgs(other, this, timeOfCollision));
-                }
+                    collisions.Add(new Collision(this, other, timeOfCollision));
+            }
+            foreach (Collision collision in collisions.OrderBy(c => c.TimeOfCollision))
+            {
+                collision.Execute();
+                if (IsDying)
+                    return;
             }
         }
 

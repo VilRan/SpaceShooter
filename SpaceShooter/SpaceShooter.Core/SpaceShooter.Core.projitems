@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CircleCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controller.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Collision.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Durability.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\DynamicObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Bullet.cs" />

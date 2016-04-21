@@ -24,7 +24,7 @@ namespace SpaceShooter.Dynamic
 
         }
 
-        public override void OnCollision(CollisionEventArgs e)
+        public override void OnCollision(Collision e)
         {
             e.Other.Repair(200);
         }

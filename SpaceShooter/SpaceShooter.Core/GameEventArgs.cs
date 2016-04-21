@@ -35,30 +35,12 @@ namespace SpaceShooter
         }
     }
 
-    public class CollisionEventArgs
-    {
-        public readonly DynamicObject Collider;
-        public readonly DynamicObject Other;
-        public readonly float TimeOfCollision;
-
-        public Vector2 ColliderCollisionPosition { get { return Collider.Position + Collider.Velocity * TimeOfCollision; } }
-        public Vector2 OtherCollisionPosition { get { return Other.Position + Other.Velocity * TimeOfCollision; } }
-        public Vector2 CollisionPosition { get { return (ColliderCollisionPosition - OtherCollisionPosition) * (Other.HitRadius / (Collider.HitRadius + Other.HitRadius)) + OtherCollisionPosition; } }
-
-        public CollisionEventArgs(DynamicObject collider, DynamicObject other, float timeOfCollision)
-        {
-            Collider = collider;
-            Other = other;
-            TimeOfCollision = timeOfCollision;
-        }
-    }
-
     public class DamageEventArgs
     {
-        public readonly CollisionEventArgs Collision;
+        public readonly Collision Collision;
         public readonly float DamageAmount;
 
-        public DamageEventArgs(CollisionEventArgs collision, float damageAmount)
+        public DamageEventArgs(Collision collision, float damageAmount)
         {
             Collision = collision;
             DamageAmount = damageAmount;

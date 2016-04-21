@@ -22,10 +22,9 @@ namespace SpaceShooter.Dynamic
         {
 
         }
-
-        public override void OnCollision(CollisionEventArgs e)
+        
+        public override void OnDeath(DeathEventArgs e)
         {
-            base.OnCollision(e);
             Fragment.Emit(Level, Faction, Position, 40, 80);
         }
     }
