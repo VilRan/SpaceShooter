@@ -40,11 +40,11 @@ namespace SpaceShooter.Xaml
             ApplicationView view = ApplicationView.GetForCurrentView();
             if (view.IsFullScreenMode)
             {
-                screenModeComboBox.SelectedItem = screenModeComboBox.Items.Where(item => ((ComboBoxItem)item).Name == "fullscreenItem").First();
+                screenModeComboBox.SelectedItem = fullscreenItem;
             }
             else
             {
-                screenModeComboBox.SelectedItem = screenModeComboBox.Items.Where(item => ((ComboBoxItem)item).Name == "windowedItem").First();
+                screenModeComboBox.SelectedItem = windowedItem;
             }
 
         }
@@ -61,24 +61,22 @@ namespace SpaceShooter.Xaml
 
         }
 
+        private void screenModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((ComboBoxItem)e.AddedItems.First() == fullscreenItem)
+            {
+                App.EnterFullscreen();
+            }
+            else if ((ComboBoxItem)e.AddedItems.First() == windowedItem)
+            {
+                App.ExitFullscreen();
+            }
+        }
+
         void NotifyPropertyChanged([CallerMemberName]string propertyName = null)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void screenModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (((ComboBoxItem)e.AddedItems.First()).Name == "fullscreenItem")
-            {
-                ApplicationView view = ApplicationView.GetForCurrentView();
-                view.TryEnterFullScreenMode();
-            }
-            else if (((ComboBoxItem)e.AddedItems.First()).Name == "windowedItem")
-            {
-                ApplicationView view = ApplicationView.GetForCurrentView();
-                view.ExitFullScreenMode();
-            }
         }
     }
 }

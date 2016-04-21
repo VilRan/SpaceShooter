@@ -86,8 +86,11 @@ namespace SpaceShooter
             // Ensure the current window is active
             Window.Current.Activate();
 
+            // Force the application to enter fullscreen mode if so desired
             if (ApplicationView.PreferredLaunchWindowingMode == ApplicationViewWindowingMode.FullScreen)
-                ToggleFullscreen();
+                EnterFullscreen();
+            else
+                ExitFullscreen();
         }
 
         /// <summary>
@@ -121,6 +124,16 @@ namespace SpaceShooter
                 view.ExitFullScreenMode();
             else
                 view.TryEnterFullScreenMode();
+        }
+
+        public static void EnterFullscreen()
+        {
+            ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+        }
+
+        public static void ExitFullscreen()
+        {
+            ApplicationView.GetForCurrentView().ExitFullScreenMode();
         }
     }
 }
