@@ -54,7 +54,7 @@ namespace SpaceShooter.Dynamic
 
         }
 
-        public virtual void Update(UpdateEventArgs e)
+        public virtual void OnUpdate(UpdateEventArgs e)
         {
             Position += AbsoluteVelocity * (float)e.ElapsedSeconds;
 
@@ -62,7 +62,13 @@ namespace SpaceShooter.Dynamic
                 Remove();
         }
         
-        public void CheckCollisions(GameTime gameTime, int startIndex)
+        public virtual void Update(UpdateEventArgs e, int collisionStartIndex)
+        {
+            CheckCollisions(e, collisionStartIndex);
+            OnUpdate(e);
+        }
+
+        public void CheckCollisions(UpdateEventArgs e, int startIndex)
         {
             if (IsDying)
                 return;
@@ -75,14 +81,14 @@ namespace SpaceShooter.Dynamic
                     continue;
 
                 float timeOfCollision;
-                if (Collider.FindCollision(other.Collider, (float)gameTime.ElapsedGameTime.TotalSeconds, out timeOfCollision))
+                if (Collider.FindCollision(other.Collider, (float)e.ElapsedSeconds, out timeOfCollision))
                     collisions.Add(new Collision(this, other, timeOfCollision));
             }
             foreach (Collision collision in collisions.OrderBy(c => c.TimeOfCollision))
             {
                 collision.Execute();
                 if (IsDying)
-                    return;
+                    break;
             }
         }
 

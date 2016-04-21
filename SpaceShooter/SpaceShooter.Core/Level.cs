@@ -73,22 +73,21 @@ namespace SpaceShooter
         {
             Camera.Update(gameTime);
             
-            for (int i = 0; i < Inactive.Count; i++)
-                if (Inactive[i].TryActivate())
-                    i--;
+            for (int index = 0; index < Inactive.Count; index++)
+                if (Inactive[index].TryActivate())
+                    index--;
 
             UpdateEventArgs updateEventArgs = new UpdateEventArgs(gameTime);
-            for (int i = 0; i < Objects.Count; i++)
+            for (int index = 0; index < Objects.Count; index++)
             {
-                DynamicObject obj = Objects[i];
-                obj.CheckCollisions(gameTime, i + 1);
-                obj.Update(updateEventArgs);
+                DynamicObject obj = Objects[index];
+                obj.Update(updateEventArgs, index + 1);
                 if (obj.IsRemoving)
                 {
                     if (obj.IsDying)
                          obj.OnDeath(new DeathEventArgs());
-                    Objects.RemoveAt(i);
-                    i--;
+                    Objects.RemoveAt(index);
+                    index--;
                 }
             }
         }

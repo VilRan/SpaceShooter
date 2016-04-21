@@ -24,7 +24,7 @@ namespace SpaceShooter.Dynamic
 
         }
 
-        public override void Update(UpdateEventArgs e)
+        public override void OnUpdate(UpdateEventArgs e)
         {
             if (flyingTime > 0)
             {
@@ -34,7 +34,7 @@ namespace SpaceShooter.Dynamic
             {
                 Die();
             }
-            base.Update(e);
+            base.OnUpdate(e);
         }
         
         public override void OnDeath(DeathEventArgs e)

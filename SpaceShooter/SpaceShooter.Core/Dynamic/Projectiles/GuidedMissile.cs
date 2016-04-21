@@ -27,7 +27,7 @@ namespace SpaceShooter.Dynamic
 
         }
 
-        public override void Update(UpdateEventArgs e)
+        public override void OnUpdate(UpdateEventArgs e)
         {
             DynamicObject target = null;
             float nearest = float.MaxValue;
@@ -57,7 +57,7 @@ namespace SpaceShooter.Dynamic
                 }                
             }            
 
-            base.Update(e);
+            base.OnUpdate(e);
         }
     }
 }

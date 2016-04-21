@@ -51,7 +51,7 @@ namespace SpaceShooter.Dynamic.Ships
             weapon.MagazineCount = 3;
         }
 
-        public override void Update(UpdateEventArgs e)
+        public override void OnUpdate(UpdateEventArgs e)
         {
             Player nearestPlayer = Level.Session.Players.
                 Where(player => !player.Ship.IsDying).
@@ -129,7 +129,7 @@ namespace SpaceShooter.Dynamic.Ships
                 aiState = FighterAiState.Catch;
             }
 
-            base.Update(e);
+            base.OnUpdate(e);
         }
 
         public override void OnCollision(Collision e)

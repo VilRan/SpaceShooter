@@ -20,7 +20,7 @@ namespace SpaceShooter.Dynamic
 
         }
 
-        public override void Update(UpdateEventArgs e)
+        public override void OnUpdate(UpdateEventArgs e)
         {
             foreach (Wall wall in Level.Walls)
             {
@@ -33,7 +33,7 @@ namespace SpaceShooter.Dynamic
                 }
             }
 
-            base.Update(e);
+            base.OnUpdate(e);
         }
 
         protected override bool CanCollideWith(DynamicObject other)

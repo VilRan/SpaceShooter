@@ -26,7 +26,7 @@ namespace SpaceShooter.Dynamic.Ships
             
         }
 
-        public override void Update(UpdateEventArgs e)
+        public override void OnUpdate(UpdateEventArgs e)
         {
             phase += Math.PI / 2 * e.ElapsedSeconds;
             float sine = (float)Math.Sin(phase);
@@ -35,7 +35,7 @@ namespace SpaceShooter.Dynamic.Ships
 
             weapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
 
-            base.Update(e);
+            base.OnUpdate(e);
         }        
     }
 }

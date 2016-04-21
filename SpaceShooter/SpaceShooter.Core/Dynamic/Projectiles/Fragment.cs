@@ -24,13 +24,13 @@ namespace SpaceShooter.Dynamic
             Lifespan = lifespan;
         }
 
-        public override void Update(UpdateEventArgs e)
+        public override void OnUpdate(UpdateEventArgs e)
         {
             if (Lifespan <= 0)
                 Die();
             Lifespan -= e.ElapsedSeconds;
 
-            base.Update(e);
+            base.OnUpdate(e);
         }
 
         public static void Emit(Level level, Faction faction, Vector2 position, int minCount, int maxCount)

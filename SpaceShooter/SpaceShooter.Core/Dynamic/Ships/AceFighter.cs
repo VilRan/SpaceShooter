@@ -50,7 +50,7 @@ namespace SpaceShooter.Dynamic.Ships
             activeWeapon.MagazineCount = 3;
         }
 
-        public override void Update(UpdateEventArgs e)
+        public override void OnUpdate(UpdateEventArgs e)
         {
             attackTimer -= (float)e.ElapsedSeconds;
 
@@ -167,7 +167,7 @@ namespace SpaceShooter.Dynamic.Ships
                 attackTimer = 15;
             }
 
-            base.Update(e);
+            base.OnUpdate(e);
         }
 
         public override void OnCollision(Collision e)

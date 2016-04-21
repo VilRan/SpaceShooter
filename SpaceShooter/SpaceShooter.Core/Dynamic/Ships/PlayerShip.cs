@@ -47,7 +47,7 @@ namespace SpaceShooter.Dynamic.Ships
             WeaponSlots.Add(new InventoryItem(new Machinegun(), 50));
         }
 
-        public override void Update(UpdateEventArgs e)
+        public override void OnUpdate(UpdateEventArgs e)
         {
             Controller controller = player.Controller;
             KeyboardState keyboard = Keyboard.GetState();

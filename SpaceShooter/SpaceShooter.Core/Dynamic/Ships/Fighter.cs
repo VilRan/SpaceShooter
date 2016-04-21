@@ -24,12 +24,12 @@ namespace SpaceShooter.Dynamic.Ships
             weapon.MagazineSize = 3;
             weapon.MagazineCount = 3;
         }
-        public override void Update(UpdateEventArgs e)
+        public override void OnUpdate(UpdateEventArgs e)
         {            
             weapon.Update(e.GameTime);
             
 
-            base.Update(e);
+            base.OnUpdate(e);
         }
         public override void OnCollision(Collision e)
         {

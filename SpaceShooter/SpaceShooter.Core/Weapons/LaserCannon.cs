@@ -8,7 +8,7 @@ namespace SpaceShooter.Weapons
 {
     class LaserCannon : Weapon
     {
-        const float laserSpeed = 0 * TileSize;
+        const float speedOfLight = 299792458;
         const int magazineSize = 100;
 
         public override string Name { get { return "Laser Cannon"; } }
@@ -23,7 +23,7 @@ namespace SpaceShooter.Weapons
 
         public override void OnFire(FireEventArgs e)
         {
-            Laser laser = new Laser(e.Level, e.Position, e.Direction * laserSpeed, e.Shooter.Faction);
+            Laser laser = new Laser(e.Level, e.Position, e.Direction * speedOfLight, e.Shooter.Faction);
             e.Level.Objects.Add(laser);
         }
     }

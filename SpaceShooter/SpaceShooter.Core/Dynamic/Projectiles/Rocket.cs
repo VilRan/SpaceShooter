@@ -29,7 +29,7 @@ namespace SpaceShooter.Dynamic
 
         }
 
-        public override void Update(UpdateEventArgs e)
+        public override void OnUpdate(UpdateEventArgs e)
         {
             if (boostTimer > 0)
             {
@@ -46,7 +46,7 @@ namespace SpaceShooter.Dynamic
             }
             
 
-            base.Update(e);
+            base.OnUpdate(e);
         }
     }
 }
