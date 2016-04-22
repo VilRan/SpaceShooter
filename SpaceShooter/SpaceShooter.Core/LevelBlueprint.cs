@@ -89,9 +89,14 @@ namespace SpaceShooter
 
         public async void SaveToFile(string name)
         {
-            Task<XmlDocument> xmlTask = Task.Run(() => generateXml());
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
             StorageFile storageFile = await storageFolder.CreateFileAsync(name + ".xml", CreationCollisionOption.ReplaceExisting);
+            SaveToFile(storageFile);
+        }
+
+        public async void SaveToFile(StorageFile storageFile)
+        {
+            Task<XmlDocument> xmlTask = Task.Run(() => generateXml());
             using (IRandomAccessStream fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
             {
                 Stream stream = fileStream.AsStreamForWrite();
@@ -124,9 +129,9 @@ namespace SpaceShooter
                 XmlAttribute difficulty = xml.CreateAttribute("Difficulty");
                 difficulty.Value = "" + (int)spawn.Difficulty;
                 XmlAttribute x = xml.CreateAttribute("X");
-                x.Value = "" + spawn.Position.X;
+                x.Value = "" + (int)spawn.Position.X;
                 XmlAttribute y = xml.CreateAttribute("Y");
-                y.Value = "" + spawn.Position.Y;
+                y.Value = "" + (int)spawn.Position.Y;
                 XmlAttribute type = xml.CreateAttribute("Type");
                 type.Value = spawn.ObjectName;
                 spawnXml.Attributes.Append(difficulty);

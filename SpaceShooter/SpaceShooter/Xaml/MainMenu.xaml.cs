@@ -22,14 +22,16 @@ namespace SpaceShooter.Xaml
         {
             GamePage gamePage = App.Current.GamePage;
             SpaceShooterGame game = gamePage.Game;
-
-            if (game.Session == null)
-                return;
-
-            if (game.Session.ActiveLevel != null)
+            
+            if (game.State is LevelGameState)
+            {
+                if (game.Session.ActiveLevel != null)
+                    App.Current.GamePage.NavigateTo();
+                else
+                    App.Current.GamePage.NavigateTo(new ShopPage(0));
+            }
+            else if (game.State is EditorGameState)
                 App.Current.GamePage.NavigateTo();
-            else
-                App.Current.GamePage.NavigateTo(new ShopPage(0));
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)

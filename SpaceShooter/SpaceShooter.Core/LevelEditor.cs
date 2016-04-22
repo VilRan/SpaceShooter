@@ -2,6 +2,11 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 
 namespace SpaceShooter
 {
@@ -38,8 +43,18 @@ namespace SpaceShooter
             {
                 blueprint.Spawns.Add(new SineFighterSpawn(Difficulty.Casual, position));
             }
+            if (keyboard.IsKeyDown(Keys.C) && previousKeyboard.IsKeyUp(Keys.O))
+            {
+                blueprint.Spawns.Clear();
+            }
             if (keyboard.IsKeyDown(Keys.F) && previousKeyboard.IsKeyUp(Keys.F))
-                blueprint.SaveToFile("EditorLevel");
+            {
+                SaveBlueprint();
+            }
+            if (keyboard.IsKeyDown(Keys.O) && previousKeyboard.IsKeyUp(Keys.O))
+            {
+                LoadBlueprint();
+            }
             if (keyboard.IsKeyDown(Keys.T) && previousKeyboard.IsKeyDown(Keys.T))
             {
                 game.StartNewSession(Difficulty.Nightmare, 1);
@@ -87,6 +102,30 @@ namespace SpaceShooter
             Rectangle gridDestination = new Rectangle(gridMinX, gridMinY, gridMaxX, gridMaxY);
             spriteBatch.Draw(game.Assets.GridTexture, gridDestination, SpaceShooterGame.InternalResolution, Color.White * 0.5f, 0f, Vector2.Zero, SpriteEffects.None, 0);
             spriteBatch.End();
+        }
+
+        async void SaveBlueprint()
+        {
+            FileSavePicker filePicker = new FileSavePicker();
+            filePicker.SuggestedStartLocation = PickerLocationId.Desktop;
+            filePicker.DefaultFileExtension = ".xml";
+            filePicker.FileTypeChoices.Add("Xml", new List<string>(){ ".xml" });
+            StorageFile storageFile = await filePicker.PickSaveFileAsync();
+            blueprint.SaveToFile(storageFile);
+        }
+
+        async void LoadBlueprint()
+        {
+            FileOpenPicker filePicker = new FileOpenPicker();
+            filePicker.SuggestedStartLocation = PickerLocationId.Desktop;
+            filePicker.FileTypeFilter.Add(".xml");
+            StorageFile storageFile = await filePicker.PickSingleFileAsync();
+
+            XmlDocument xmlDocument = new XmlDocument();
+            using (Stream stream = await storageFile.OpenStreamForReadAsync())
+                xmlDocument.Load(stream);
+
+            blueprint = new LevelBlueprint(xmlDocument.DocumentElement);
         }
     }
 }
