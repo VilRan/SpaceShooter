@@ -34,7 +34,7 @@ namespace SpaceShooter.Xaml
 
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
-            CoreApplication.Exit();
+            App.Current.Exit();
         }
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)

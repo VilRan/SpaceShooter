@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace SpaceShooter
 {
@@ -11,11 +14,8 @@ namespace SpaceShooter
 
         public HighscoreCollection()
         {
-            string fileString = File.ReadAllText("Assets/Highscore.txt");
-            string[] lines = fileString.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-            foreach (var line in lines)
-                items.Add(new Highscore(line));
-            items.Sort();
+            Task loadTask = new Task(() => LoadFromFile());
+            loadTask.RunSynchronously();
         }
 
         public void Add(Highscore highscore)
@@ -24,12 +24,33 @@ namespace SpaceShooter
             items.Sort();
         }
 
-        public void SaveToFile()
+        public async void LoadFromFile()
         {
-            string text = "";
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            IStorageItem storageItem = await storageFolder.TryGetItemAsync("Highscore.txt");
+            StorageFile storageFile = storageItem as StorageFile;
+            if (storageItem != null)
+            {
+                foreach (string line in await FileIO.ReadLinesAsync(storageFile))
+                    items.Add(new Highscore(line));
+                items.Sort();
+            }
+        }
+
+        public async void SaveToFile()
+        {
+            Task<string> stringTask = Task.Run(() => ToString());
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile storageFile = await storageFolder.CreateFileAsync("Highscore.txt", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(storageFile, await stringTask);
+        }
+
+        public override string ToString()
+        {
+            string s = "";
             foreach (var item in items)
-                text += item.Name + ";" + item.Score + Environment.NewLine;
-            File.WriteAllText("Assets/Highscore.txt", text);
+                s += item.Name + ";" + item.Score + Environment.NewLine;
+            return s;
         }
     }
 

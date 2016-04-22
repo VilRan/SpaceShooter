@@ -119,7 +119,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Highscore.txt" />
     <Content Include="Assets\Music\Boss.wma" />
     <Content Include="Assets\Music\Main.wma" />
     <Content Include="Assets\Music\Relax.wma" />

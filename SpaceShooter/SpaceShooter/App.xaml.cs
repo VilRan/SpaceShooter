@@ -2,6 +2,7 @@
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -125,6 +126,12 @@ namespace SpaceShooter
         public static void ExitFullscreen()
         {
             ApplicationView.GetForCurrentView().ExitFullScreenMode();
+        }
+
+        new public void Exit()
+        {
+            GamePage.Game.Highscores.SaveToFile();
+            CoreApplication.Exit();
         }
     }
 }
