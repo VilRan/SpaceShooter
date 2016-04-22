@@ -15,6 +15,7 @@ namespace SpaceShooter
         public List<Wall> Walls = new List<Wall>();
         public List<Particle> Particles = new List<Particle>();
         public Camera Camera { private set; get; }
+        readonly LevelBlueprint blueprint;
         
         public Rectangle PlayArea { get { return Camera.Bounds; } }
         public SpaceShooterGame Game { get { return Session.Game; } }
@@ -23,6 +24,7 @@ namespace SpaceShooter
         {
             Session = session;
             Camera = new Camera(Vector2.Zero, SpaceShooterGame.InternalResolution.Size.ToVector2(), new Vector2(128, 0));
+            this.blueprint = blueprint;
 
             if (Session.Players.Count > 1)
             {
@@ -55,7 +57,7 @@ namespace SpaceShooter
 
         public void Update(GameTime gameTime)
         {
-            Camera.Update(gameTime);
+            Camera.Update(gameTime, blueprint.Bounds);
             
             for (int index = 0; index < Inactive.Count; index++)
                 if (Inactive[index].TryActivate())

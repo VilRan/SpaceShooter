@@ -49,14 +49,14 @@ namespace SpaceShooter
 
             camera.Velocity = Vector2.Zero;
             if (controller.IsControlDown(Action.MoveLeft))
-                camera.Velocity += new Vector2(-256, 0);
+                camera.Velocity += new Vector2(-512, 0);
             if (controller.IsControlDown(Action.MoveRight))
-                camera.Velocity += new Vector2(256, 0);
+                camera.Velocity += new Vector2(512, 0);
             if (controller.IsControlDown(Action.MoveUp))
-                camera.Velocity += new Vector2(0, -256);
+                camera.Velocity += new Vector2(0, -512);
             if (controller.IsControlDown(Action.MoveDown))
-                camera.Velocity += new Vector2(0, 256);
-            camera.Update(gameTime);
+                camera.Velocity += new Vector2(0, 512);
+            camera.Update(gameTime, blueprint.Bounds);
 
             previousMouse = mouse;
             previousKeyboard = keyboard;

@@ -17,6 +17,8 @@ namespace SpaceShooter
         public int Height { private set; get; }
         public List<Spawn> Spawns = new List<Spawn>();
 
+        public Rectangle Bounds { get { return new Rectangle(0, 0, Width, Height); } }
+
         public LevelBlueprint(int width, int height)
         {
             Width = width;
@@ -25,6 +27,9 @@ namespace SpaceShooter
 
         public LevelBlueprint(XmlElement xml)
         {
+            Width = int.Parse(xml.GetAttribute("Width"));
+            Height = int.Parse(xml.GetAttribute("Height"));
+
             foreach (XmlElement spawn in xml)
             {
                 Difficulty difficulty = (Difficulty)int.Parse(spawn.GetAttribute("Difficulty"));

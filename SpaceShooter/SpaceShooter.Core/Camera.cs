@@ -17,9 +17,33 @@ namespace SpaceShooter
             Velocity = velocity;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Rectangle limits)
         {
             Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (Position.X < limits.Left)
+            {
+                Position.X = limits.Left;
+                if (Velocity.X < 0)
+                    Velocity.X = 0;
+            }
+            if (Position.Y < limits.Top)
+            {
+                Position.Y = limits.Top;
+                if (Velocity.Y < 0)
+                    Velocity.Y = 0;
+            }
+            if (Position.X > limits.Right - Bounds.Width)
+            {
+                Position.X = limits.Right - Bounds.Width;
+                if (Velocity.X > 0)
+                    Velocity.X = 0;
+            }
+            if (Position.Y > limits.Bottom - Bounds.Height)
+            {
+                Position.Y = limits.Bottom - Bounds.Height;
+                if (Velocity.Y > 0)
+                    Velocity.Y = 0;
+            }
         }
     }
 }
