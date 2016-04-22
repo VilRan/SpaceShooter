@@ -61,10 +61,10 @@ namespace SpaceShooter
 
         async void loadLevels()
         {
-            var storageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Xml/TestLevel.xml"));
-            var stream = await storageFile.OpenStreamForReadAsync();
-            var xmlDocument = new XmlDocument();
-            xmlDocument.Load(stream);
+            XmlDocument xmlDocument = new XmlDocument();
+            StorageFile storageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Xml/TestLevel.xml"));
+            using (Stream stream = await storageFile.OpenStreamForReadAsync())
+                xmlDocument.Load(stream);
 
             TestLevelBlueprint = new LevelBlueprint(xmlDocument.DocumentElement);
         }

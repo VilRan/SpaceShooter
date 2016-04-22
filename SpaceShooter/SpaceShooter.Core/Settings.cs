@@ -31,10 +31,10 @@ namespace SpaceShooter
 
         async void load()
         {
-            var storageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Xml/Settings.xml"));
-            var stream = await storageFile.OpenStreamForReadAsync();
-            var xmlDocument = new XmlDocument();
-            xmlDocument.Load(stream);
+            XmlDocument xmlDocument = new XmlDocument();
+            StorageFile storageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Xml/Settings.xml"));
+            using (Stream stream = await storageFile.OpenStreamForReadAsync())
+                xmlDocument.Load(stream);
 
             foreach (XmlElement setting in xmlDocument.DocumentElement.ChildNodes.OfType<XmlElement>())
             {

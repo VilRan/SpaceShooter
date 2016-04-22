@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="titleBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" Text="Enter Highscore" TextAlignment="Center" FontSize="21.333"/>
-        <TextBox x:Name="nameBox" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Enter your name" VerticalAlignment="Center"/>
+        <TextBox x:Name="nameBox" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Center" KeyDown="nameBox_KeyDown" PlaceholderText="Enter your name"/>
         <Button x:Name="saveScoreButton" Content="Send your score to Highscore list!" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="2" VerticalAlignment="Top" Click="saveScoreButton_Click"/>
     </Grid>
 </Page>

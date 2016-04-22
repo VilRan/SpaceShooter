@@ -22,6 +22,17 @@ namespace SpaceShooter.Xaml
 
         private void saveScoreButton_Click(object sender, RoutedEventArgs e)
         {
+            SaveAndExit();
+        }
+
+        private void nameBox_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+                SaveAndExit();
+        }
+
+        void SaveAndExit()
+        {
             GamePage gamepage = App.Current.GamePage;
             gamepage.Game.Highscores.Add(new Highscore(nameBox.Text, score));
             gamepage.NavigateTo(new HighscorePage());
