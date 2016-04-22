@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Media;
+using SpaceShooter.Xaml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +27,7 @@ namespace SpaceShooter
     public sealed partial class GamePage : Page, INotifyPropertyChanged
     {
 		public readonly SpaceShooterGame Game;
+        Page subPage;
         double healthbarValue = 100;
         int score;
 
@@ -57,6 +59,8 @@ namespace SpaceShooter
             }
         }
 
+        public UIElementCollection Children { get { return swapChainPanel.Children; } }
+
 		public GamePage()
         {
             this.InitializeComponent();
@@ -64,10 +68,22 @@ namespace SpaceShooter
 			// Create the game.
 			var launchArguments = string.Empty;
             Game = MonoGame.Framework.XamlGame<SpaceShooterGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
-            Game.IsDeactived = true;
             MediaPlayer.Play(Game.Assets.SomethingMusic);
             MediaPlayer.IsRepeating = true;
             MediaPlayer.IsMuted = false;
+        }
+
+        public void NavigateTo()
+        {
+            Children.Remove(subPage);
+            subPage = null;
+        }
+
+        public void NavigateTo(Page page)
+        {
+            Children.Remove(subPage);
+            Children.Add(page);
+            subPage = page;
         }
 
         void NotifyPropertyChanged([CallerMemberName]string propertyName = null)

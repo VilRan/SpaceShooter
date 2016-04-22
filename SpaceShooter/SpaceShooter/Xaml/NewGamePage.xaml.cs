@@ -25,6 +25,8 @@ namespace SpaceShooter.Xaml
         public NewGamePage()
         {
             this.InitializeComponent();
+            HorizontalAlignment = HorizontalAlignment.Center;
+            VerticalAlignment = VerticalAlignment.Center;
         }
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
@@ -40,7 +42,7 @@ namespace SpaceShooter.Xaml
                 numberOfPlayers = 2;
             }
             App.Current.GamePage.Game.StartNewSession(difficulty, numberOfPlayers);
-            Window.Current.Content = new ShopPage(0);
+            App.Current.GamePage.NavigateTo(new ShopPage(0));
         }
     }
 }

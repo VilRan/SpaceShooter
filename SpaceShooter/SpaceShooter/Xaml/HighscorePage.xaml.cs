@@ -34,11 +34,13 @@ namespace SpaceShooter.Xaml
         public HighscorePage()
         {
             this.InitializeComponent();
+            HorizontalAlignment = HorizontalAlignment.Center;
+            VerticalAlignment = VerticalAlignment.Center;
         }    
 
         private void backToMainMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = new MainMenu();
+            App.Current.GamePage.NavigateTo(new MainMenu());
         }
     }
 }

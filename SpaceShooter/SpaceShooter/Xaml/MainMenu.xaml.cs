@@ -26,6 +26,8 @@ namespace SpaceShooter.Xaml
         public MainMenu()
         {
             this.InitializeComponent();
+            HorizontalAlignment = HorizontalAlignment.Center;
+            VerticalAlignment = VerticalAlignment.Center;
         }
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
@@ -38,12 +40,12 @@ namespace SpaceShooter.Xaml
 
             if (game.Session.ActiveLevel != null)
             {
-                Window.Current.Content = gamePage;
-                game.IsDeactived = false;
+                App.Current.GamePage.NavigateTo();
+                game.IsPaused = false;
             }
             else
             {
-                Window.Current.Content = new ShopPage(0);
+                App.Current.GamePage.NavigateTo(new ShopPage(0));
             }
         }
 
@@ -54,18 +56,17 @@ namespace SpaceShooter.Xaml
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = new NewGamePage();            
+            App.Current.GamePage.NavigateTo(new NewGamePage());     
         }
 
         private void scoresButton_Click(object sender, RoutedEventArgs e)
         {
-
-            Window.Current.Content = new HighscorePage();
+            App.Current.GamePage.NavigateTo(new HighscorePage());
         }
 
         private void optionsButton_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = new OptionsPage();
+            App.Current.GamePage.NavigateTo(new OptionsPage());
         }
     }
 }

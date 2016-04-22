@@ -21,7 +21,6 @@ namespace SpaceShooter
         public LevelEditor Editor { private set; get; }
         public Random Random { private set; get; }
         public bool IsPaused = false;
-        public bool IsDeactived = false;
 
         GraphicsDeviceManager graphics;
         RenderTarget2D renderTarget;
@@ -40,8 +39,8 @@ namespace SpaceShooter
 
         public void StartNewSession(Difficulty difficulty, int numberOfPlayers)
         {
+            State = null;
             Session = new Session(this, difficulty, numberOfPlayers);
-            
         }
 
         /// <summary>
@@ -92,8 +91,8 @@ namespace SpaceShooter
             Controller controller = Settings.Controllers["General"];
             if (controller.IsControlPressed(Action.MainMenu))
             {
-                Windows.UI.Xaml.Window.Current.Content = new MainMenu();
-                IsDeactived = true;
+                App.Current.GamePage.NavigateTo(new MainMenu());
+                IsPaused = true;
             }
             if (controller.IsControlPressed(Action.Fullscreen))
             {
@@ -101,16 +100,14 @@ namespace SpaceShooter
             }
             if (controller.IsControlPressed(Action.Editor))
             {
-                Windows.UI.Xaml.Window.Current.Content = App.Current.GamePage;
                 State = new EditorGameState(this);
-                IsDeactived = false;
             }
             if (controller.IsControlPressed(Action.Pause))
             {
                 IsPaused = !IsPaused;
             }
 
-            if (!IsDeactived && State != null)
+            if (State != null)
                 State.Update(gameTime);
 
             controller.Update();
@@ -123,7 +120,7 @@ namespace SpaceShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            if (IsDeactived || State == null)
+            if (State == null)
                 return;
 
             GraphicsDevice.Clear(Color.Black);

@@ -114,9 +114,6 @@
     <Compile Include="Xaml\ShopPage.xaml.cs">
       <DependentUpon>ShopPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Xaml\TestPage.xaml.cs">
-      <DependentUpon>TestPage.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Highscore.txt" />
@@ -222,10 +219,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Xaml\ShopPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Xaml\TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
