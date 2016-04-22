@@ -1,13 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using SpaceShooter.Weapons;
-using Windows.UI.Xaml;
 using System.Collections.ObjectModel;
 using SpaceShooter.Particles;
 using SpaceShooter.Xaml;

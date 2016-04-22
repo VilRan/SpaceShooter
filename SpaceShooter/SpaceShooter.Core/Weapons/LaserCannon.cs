@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework.Audio;
-using SpaceShooter.Dynamic.Projectiles;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SpaceShooter.Dynamic.Projectiles;
 
 namespace SpaceShooter.Weapons
 {
