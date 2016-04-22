@@ -18,18 +18,19 @@ namespace SpaceShooter.Dynamic
         Durability durability;
         bool isRemoving = false;
 
-        protected SpaceShooterGame game { get { return Level.Game; } }
-        protected Random random { get { return game.Random; } }
         public virtual Vector2 RelativeVelocity { get { return Velocity - Level.Camera.Velocity; } set { Velocity = value + Level.Camera.Velocity; } }
         public virtual Vector2 AbsoluteVelocity { get { return Velocity; } }
         public virtual float HitRadius { get { return hitRadius; } }
+        protected abstract float CollisionDamage { get; }
+        protected virtual Rectangle PlayArea { get { return NormalPlayArea; } }
+
         public double CurrentDurability { get { return durability.Current; } }
         public double MaximumDurability { get { return durability.Maximum; } }
         public bool IsRemoving { get { return isRemoving || IsDying; } }
         public bool IsDying { get { return durability.Current <= 0; } }
-        protected abstract float CollisionDamage { get; }
-        protected virtual Rectangle PlayArea { get { return NormalPlayArea; } }
         protected override Color Color { get { return Color.White; } }
+        protected SpaceShooterGame Game { get { return Level.Game; } }
+        protected Random Random { get { return Game.Random; } }
         protected CircleCollider Collider { get { return new CircleCollider(Position, AbsoluteVelocity, HitRadius); } }
         protected Rectangle NormalPlayArea {
             get { return new Rectangle(Level.PlayArea.Left - TileSize, Level.PlayArea.Top - TileSize, Level.PlayArea.Width + TileSize * 2, Level.PlayArea.Height + TileSize * 2); } }

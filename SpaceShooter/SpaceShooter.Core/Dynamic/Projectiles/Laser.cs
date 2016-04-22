@@ -26,7 +26,7 @@ namespace SpaceShooter.Dynamic.Projectiles
         {
             if (beamLength == Vector2.Zero)
                 beamLength = Velocity * (float)e.ElapsedSeconds;
-            BeamParticle beam = new BeamParticle(game.Assets.LaserTexture, Position, beamLength, Color.Red);
+            BeamParticle beam = new BeamParticle(Game.Assets.LaserTexture, Position, beamLength, Color.Red);
             Level.Particles.Add(beam);
             beamLength = Vector2.Zero;
 

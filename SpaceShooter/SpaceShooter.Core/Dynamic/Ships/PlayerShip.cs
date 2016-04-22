@@ -172,7 +172,7 @@ namespace SpaceShooter.Dynamic.Ships
         public override void OnDeath(DeathEventArgs e)
         {
             base.OnDeath(e);
-            App.Current.GamePage.NavigateTo(new EnterHighscorePage(game.Session.Score));
+            App.Current.GamePage.NavigateTo(new EnterHighscorePage(Game.Session.Score));
         }
     }
 }

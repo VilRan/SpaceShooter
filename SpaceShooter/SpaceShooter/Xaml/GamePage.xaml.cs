@@ -59,7 +59,7 @@ namespace SpaceShooter
             }
         }
 
-        public UIElementCollection Children { get { return swapChainPanel.Children; } }
+        UIElementCollection Children { get { return swapChainPanel.Children; } }
 
 		public GamePage()
         {
@@ -77,10 +77,12 @@ namespace SpaceShooter
         {
             Children.Remove(subPage);
             subPage = null;
+            Game.IsPaused = false;
         }
 
         public void NavigateTo(Page page)
         {
+            Game.IsPaused = true;
             Children.Remove(subPage);
             Children.Add(page);
             subPage = page;

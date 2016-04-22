@@ -92,7 +92,6 @@ namespace SpaceShooter
             if (controller.IsControlPressed(Action.MainMenu))
             {
                 App.Current.GamePage.NavigateTo(new MainMenu());
-                IsPaused = true;
             }
             if (controller.IsControlPressed(Action.Fullscreen))
             {
@@ -102,7 +101,6 @@ namespace SpaceShooter
             {
                 App.Current.GamePage.NavigateTo();
                 State = new EditorGameState(this);
-                IsPaused = false;
             }
             if (controller.IsControlPressed(Action.Pause))
             {

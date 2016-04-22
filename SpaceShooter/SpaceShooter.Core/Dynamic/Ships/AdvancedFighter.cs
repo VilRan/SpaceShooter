@@ -144,7 +144,7 @@ namespace SpaceShooter.Dynamic.Ships
             SoundEffectInstance sound = Level.Game.Assets.ExplosionSound.CreateInstance();
             sound.Volume = (float)(0.5 + 0.5 * Level.Game.Random.NextDouble());
             sound.Play();
-            if (random.NextDouble() < repairKitDropChance)
+            if (Random.NextDouble() < repairKitDropChance)
             {
                 RepairKit repairKit = new RepairKit(Level, Position, Vector2.Zero);
                 Level.Objects.Add(repairKit);

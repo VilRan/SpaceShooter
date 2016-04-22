@@ -45,13 +45,13 @@ namespace SpaceShooter.Dynamic.Ships
             SoundEffectInstance sound = Level.Game.Assets.ExplosionSound.CreateInstance();
             sound.Volume = (float)(0.5 + 0.5 * Level.Game.Random.NextDouble());
             sound.Play();
-            ExplosionParticle explosion = new ExplosionParticle(Level, game.Assets.ParticleTexture, Position, Velocity);
-            if (random.NextDouble() < repairKitDropChance)
+            ExplosionParticle explosion = new ExplosionParticle(Level, Game.Assets.ParticleTexture, Position, Velocity);
+            if (Random.NextDouble() < repairKitDropChance)
             {
                 RepairKit repairKit = new RepairKit(Level, Position, Vector2.Zero);
                 Level.Objects.Add(repairKit);
             }
-            if(random.NextDouble() < droneControlDropChance)
+            if(Random.NextDouble() < droneControlDropChance)
             {
                 DroneControl droneControl = new DroneControl(Level, Position, Vector2.Zero);
                 Level.Objects.Add(droneControl);

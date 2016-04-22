@@ -39,14 +39,9 @@ namespace SpaceShooter.Xaml
                 return;
 
             if (game.Session.ActiveLevel != null)
-            {
                 App.Current.GamePage.NavigateTo();
-                game.IsPaused = false;
-            }
             else
-            {
                 App.Current.GamePage.NavigateTo(new ShopPage(0));
-            }
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)

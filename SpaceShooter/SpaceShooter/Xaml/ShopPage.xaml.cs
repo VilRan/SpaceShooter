@@ -127,10 +127,9 @@ namespace SpaceShooter.Xaml
             }
             else
             {
-                App.Current.GamePage.NavigateTo();
                 session.StartNextLevel();
                 game.State = new LevelGameState(game);
-                game.IsPaused = false;
+                App.Current.GamePage.NavigateTo();
             }
         }
 
