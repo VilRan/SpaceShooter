@@ -100,7 +100,9 @@ namespace SpaceShooter
             }
             if (controller.IsControlPressed(Action.Editor))
             {
+                App.Current.GamePage.NavigateTo();
                 State = new EditorGameState(this);
+                IsPaused = false;
             }
             if (controller.IsControlPressed(Action.Pause))
             {

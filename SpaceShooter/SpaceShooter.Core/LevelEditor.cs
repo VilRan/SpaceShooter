@@ -34,10 +34,22 @@ namespace SpaceShooter
             KeyboardState keyboard = Keyboard.GetState();
             Controller controller = game.Settings.Controllers["General"];
 
+            Vector2 position = mouse.Position.ToVector2();
+            position.X /= Math.Min(game.WidthScale, game.HeightScale);
+            position.Y /= Math.Min(game.WidthScale, game.HeightScale);
+            position += camera.Position;
             if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton == ButtonState.Released)
-                blueprint.Spawns.Add(new AdvancedFighterSpawn(Difficulty.Casual, mouse.Position.ToVector2() + camera.Position));
+            {
+                blueprint.Spawns.Add(new SineFighterSpawn(Difficulty.Casual, position));
+            }
             if (keyboard.IsKeyDown(Keys.F) && previousKeyboard.IsKeyUp(Keys.F))
                 blueprint.SaveToFile("EditorLevel");
+            if (keyboard.IsKeyDown(Keys.T) && previousKeyboard.IsKeyDown(Keys.T))
+            {
+                game.StartNewSession(Difficulty.Nightmare, 1);
+                game.Session.ActiveLevel = new Level(game.Session, blueprint);
+                game.State = new LevelGameState(game);
+            }
 
             camera.Velocity = Vector2.Zero;
             if (controller.IsControlDown(Action.MoveLeft))
