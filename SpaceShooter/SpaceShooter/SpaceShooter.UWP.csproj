@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UWPInterface.cs" />
     <Compile Include="Xaml\EnterHighscorePage.xaml.cs">
       <DependentUpon>EnterHighscorePage.xaml</DependentUpon>
     </Compile>

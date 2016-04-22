@@ -12,10 +12,11 @@ namespace SpaceShooter
         public List<Highscore> items = new List<Highscore>();
         public IEnumerable<Highscore> Items { get { return items; } }
 
+        static IPlatformAsync Platform { get { return SpaceShooterGame.Platform; } }
+
         public HighscoreCollection()
         {
-            Task loadTask = new Task(() => LoadFromFile());
-            loadTask.RunSynchronously();
+            LoadFromFile();
         }
 
         public void Add(Highscore highscore)
@@ -26,23 +27,15 @@ namespace SpaceShooter
 
         public async void LoadFromFile()
         {
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            IStorageItem storageItem = await storageFolder.TryGetItemAsync("Highscore.txt");
-            StorageFile storageFile = storageItem as StorageFile;
-            if (storageItem != null)
-            {
-                foreach (string line in await FileIO.ReadLinesAsync(storageFile))
-                    items.Add(new Highscore(line));
-                items.Sort();
-            }
+            IList<string> lines = await Platform.ReadLinesAsync("Highscore.txt");
+            foreach (string line in lines)
+                items.Add(new Highscore(line));
+            items.Sort();
         }
 
         public async void SaveToFile()
         {
-            Task<string> stringTask = Task.Run(() => ToString());
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            StorageFile storageFile = await storageFolder.CreateFileAsync("Highscore.txt", CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(storageFile, await stringTask);
+            await Platform.WriteTextAsync("Highscore.txt", ToString());
         }
 
         public override string ToString()

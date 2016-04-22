@@ -10,6 +10,8 @@ namespace SpaceShooter
     /// </summary>
     public class SpaceShooterGame : Game
     {
+        public static IPlatformAsync Platform;
+
         public GameState State;
         public Settings Settings { private set; get; }
         public AssetManager Assets { private set; get; }
@@ -33,13 +35,7 @@ namespace SpaceShooter
             Content.RootDirectory = "Assets";
             IsMouseVisible = true;
         }
-
-        public void StartNewSession(Difficulty difficulty, int numberOfPlayers)
-        {
-            State = null;
-            Session = new Session(this, difficulty, numberOfPlayers);
-        }
-
+        
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -131,6 +127,12 @@ namespace SpaceShooter
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void StartNewSession(Difficulty difficulty, int numberOfPlayers)
+        {
+            State = null;
+            Session = new Session(this, difficulty, numberOfPlayers);
         }
 
         void ToggleFullscreen()

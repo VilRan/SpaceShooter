@@ -1,5 +1,6 @@
 ﻿using SpaceShooter.Xaml;
 using System;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
@@ -27,6 +28,7 @@ namespace SpaceShooter
         /// </summary>
         public App()
         {
+            SpaceShooterGame.Platform = new UWPInterface();
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
@@ -130,7 +132,8 @@ namespace SpaceShooter
 
         new public void Exit()
         {
-            GamePage.Game.Highscores.SaveToFile();
+            Task saveScoresTask = Task.Run(() => GamePage.Game.Highscores.SaveToFile());
+            saveScoresTask.Wait();
             CoreApplication.Exit();
         }
     }
