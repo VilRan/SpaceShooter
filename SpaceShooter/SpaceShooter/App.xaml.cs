@@ -81,7 +81,8 @@ namespace SpaceShooter
                 // configuring the new page by passing required information as a navigation
                 // parameter
                 GamePage = new GamePage();
-                Window.Current.Content = new MainMenu();
+                GamePage.NavigateTo(new MainMenu());
+                Window.Current.Content = GamePage;
             }
             // Ensure the current window is active
             Window.Current.Activate();

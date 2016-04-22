@@ -36,6 +36,8 @@ namespace SpaceShooter.Xaml
         public OptionsPage()
         {
             this.InitializeComponent();
+            HorizontalAlignment = HorizontalAlignment.Center;
+            VerticalAlignment = VerticalAlignment.Center;
 
             ApplicationView view = ApplicationView.GetForCurrentView();
             if (view.IsFullScreenMode)
@@ -46,14 +48,13 @@ namespace SpaceShooter.Xaml
             {
                 screenModeComboBox.SelectedItem = windowedItem;
             }
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void backToMainMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = new MainMenu();
+            App.Current.GamePage.NavigateTo(new MainMenu());
         }
 
         private void masterVolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)

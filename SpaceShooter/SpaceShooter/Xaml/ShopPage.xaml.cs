@@ -33,6 +33,8 @@ namespace SpaceShooter.Xaml
         {
             this.InitializeComponent();
             this.playerIndex = playerIndex;
+            HorizontalAlignment = HorizontalAlignment.Center;
+            VerticalAlignment = VerticalAlignment.Center;
         }
 
         private void shop_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
@@ -121,20 +123,20 @@ namespace SpaceShooter.Xaml
             Session session = game.Session;
             if (playerIndex < session.Players.Count - 1)
             {
-                Window.Current.Content = new ShopPage(playerIndex + 1);
+                App.Current.GamePage.NavigateTo(new ShopPage(playerIndex + 1));
             }
             else
             {
-                Window.Current.Content = App.Current.GamePage;
+                App.Current.GamePage.NavigateTo();
                 session.StartNextLevel();
                 game.State = new LevelGameState(game);
-                game.IsDeactived = false;
+                game.IsPaused = false;
             }
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = new MainMenu();
+            App.Current.GamePage.NavigateTo(new MainMenu());
         }
         
         void NotifyPropertyChanged([CallerMemberName]string propertyName = null)
