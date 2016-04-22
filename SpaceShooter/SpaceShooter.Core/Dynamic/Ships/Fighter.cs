@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
 using SpaceShooter.Particles;
 using SpaceShooter.Weapons;
 using System;
@@ -43,6 +44,7 @@ namespace SpaceShooter.Dynamic.Ships
             SoundEffectInstance sound = Level.Game.Assets.ExplosionSound.CreateInstance();
             sound.Volume = (float)(0.5 + 0.5 * Level.Game.Random.NextDouble());
             sound.Play();
+            ExplosionParticle explosion = new ExplosionParticle(Level, game.Assets.ParticleTexture, Position, Velocity);
             if (random.NextDouble() < repairKitDropChance)
             {
                 RepairKit repairKit = new RepairKit(Level, Position, Vector2.Zero);
