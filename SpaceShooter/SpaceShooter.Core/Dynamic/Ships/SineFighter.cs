@@ -18,7 +18,7 @@ namespace SpaceShooter.Dynamic.Ships
                 
         public override int Score { get { return score; } }
         
-        protected override Rectangle PlayArea { get { return ExtendedPlayArea; } }
+        protected override Rectangle PlayArea { get { return ExtendedVerticalPlayArea; } }
 
         public SineFighter(Level level, Vector2 position)
             : base(level, position)

@@ -8,28 +8,29 @@ namespace SpaceShooter
 {
     public class HighscoreCollection
     {
-        public List<Highscore> Items = new List<Highscore>();
-        
+        public List<Highscore> items = new List<Highscore>();
+        public IEnumerable<Highscore> Items { get { return items; } }
+
         public HighscoreCollection()
         {
             string fileString = File.ReadAllText("Assets/Highscore.txt");
-
             string[] lines = fileString.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-
             foreach (var line in lines)
-            {
-                Items.Add(new Highscore(line));
-            }
-
-            Items.Sort();
+                items.Add(new Highscore(line));
+            items.Sort();
         }
+
+        public void Add(Highscore highscore)
+        {
+            items.Add(highscore);
+            items.Sort();
+        }
+
         public void SaveToFile()
         {
             string text = "";
-            foreach (var item in Items)
-            {
+            foreach (var item in items)
                 text += item.Name + ";" + item.Score + Environment.NewLine;
-            }
             File.WriteAllText("Assets/Highscore.txt", text);
         }
     }

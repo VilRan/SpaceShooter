@@ -36,7 +36,9 @@ namespace SpaceShooter.Dynamic
             get { return new Rectangle(Level.PlayArea.Left - TileSize, Level.PlayArea.Top - TileSize, Level.PlayArea.Width + TileSize * 2, Level.PlayArea.Height + TileSize * 2); } }
         protected Rectangle ExtendedPlayArea {
             get { return new Rectangle(NormalPlayArea.Left - NormalPlayArea.Width / 2, NormalPlayArea.Top - NormalPlayArea.Height / 2, NormalPlayArea.Width * 2, NormalPlayArea.Height * 2); } }
-        
+        protected Rectangle ExtendedVerticalPlayArea {
+            get { return new Rectangle(NormalPlayArea.Left, NormalPlayArea.Top - NormalPlayArea.Height / 2, NormalPlayArea.Width, NormalPlayArea.Height * 2); } }
+
         public DynamicObject(Texture2D texture, Level level, Vector2 position, Vector2 velocity, float durability, Faction faction)
             : base(texture, position, velocity)
         {

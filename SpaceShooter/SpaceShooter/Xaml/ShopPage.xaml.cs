@@ -60,7 +60,7 @@ namespace SpaceShooter.Xaml
             }
         }
 
-        private void items_Drop(object sender, DragEventArgs e)
+        private void shop_Drop(object sender, DragEventArgs e)
         {
             if (draggedItem != null && !shop.Items.Contains(draggedItem))
             {
@@ -88,7 +88,7 @@ namespace SpaceShooter.Xaml
 
         private void weapons_Drop(object sender, DragEventArgs e)
         {
-            if (draggedItem != null && !inventory.Items.Contains(draggedItem))
+            if (draggedItem != null && !weapons.Items.Contains(draggedItem))
             {
                 if (draggedItemOrigin == ItemOrigin.Shop)
                     Money -= draggedItem.Price;

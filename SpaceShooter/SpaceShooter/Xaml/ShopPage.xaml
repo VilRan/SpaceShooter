@@ -35,7 +35,7 @@
             </Grid>
             
             <GridView x:Name="shop" ItemsSource="{x:Bind Shop.Items}" Margin="32" Grid.Row="1" Grid.Column="1" Background="#FF82CEDE" 
-                       CanDragItems="True" AllowDrop="True" DragItemsStarting="shop_DragItemsStarting" Drop="items_Drop" DragOver="items_DragOver">
+                       CanDragItems="True" AllowDrop="True" DragItemsStarting="shop_DragItemsStarting" Drop="shop_Drop" DragOver="items_DragOver">
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="data:InventoryItem">
                         <StackPanel Margin="8">
