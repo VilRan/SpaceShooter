@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,11 +24,12 @@ namespace SpaceShooter.Xaml
     /// </summary>
     public sealed partial class HighscorePage : Page
     {
-        public HighscoreCollection Highscores
+        ObservableCollection<Highscore> highscores = new ObservableCollection<Highscore>(App.Current.GamePage.Game.Highscores.Items);
+        public ObservableCollection<Highscore> Highscores
         {
             get
             {
-                return App.Current.GamePage.Game.Highscores;
+                return highscores;
             }
         }
 
