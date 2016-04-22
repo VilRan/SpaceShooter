@@ -14,8 +14,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)CircleCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Collision.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\DroneControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Durability.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\DynamicObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\MachinegunDrone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Bullet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\FlakCannonShell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Projectiles\Fragment.cs" />
@@ -37,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Kamikaze.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Minelayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\PlayerShip.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\RepairDrone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Ship.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\SineFighter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEventArgs.cs" />

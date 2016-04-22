@@ -26,4 +26,10 @@
   <Spawn Difficulty="0" X="6500" Y="200" Type="BasicBomber" />
   <Spawn Difficulty="0" X="6500" Y="1000" Type="BasicBomber" />
   <Spawn Difficulty="0" X="7000" Y="500" Type="Acefighter" />
+<Spawn Difficulty="0" X="3000" Y="200" Type="RepairDrone" />
+<Spawn Difficulty="0" X="3000" Y="1050" Type="RepairDrone" />
+<Spawn Difficulty="0" X="4000" Y="200" Type="RepairDrone" />
+<Spawn Difficulty="0" X="4000" Y="1050" Type="RepairDrone" />
+<Spawn Difficulty="0" X="5000" Y="200" Type="RepairDrone" />
+<Spawn Difficulty="0" X="5000" Y="1050" Type="RepairDrone" />
 </Level>

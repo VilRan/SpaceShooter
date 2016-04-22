@@ -64,6 +64,9 @@ namespace SpaceShooter
                     case BasicBomberSpawn.String:
                         Spawns.Add(new BasicBomberSpawn(difficulty, position));
                         break;
+                    case RepairDroneSpawn.String:
+                        Spawns.Add(new RepairDroneSpawn(difficulty, position));
+                        break;
                 }
             }
         }

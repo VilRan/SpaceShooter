@@ -233,4 +233,28 @@ namespace SpaceShooter
         }
 
     }
+
+    public class RepairDroneSpawn : Spawn
+    {
+        public const string String = "RepairDrone";
+
+        public override string ObjectName { get { return String; } }
+
+        public RepairDroneSpawn(Difficulty difficulty, Vector2 position)
+            : base(difficulty, position)
+        {
+
+        }
+
+        public override DynamicObject CreateObject(Level level)
+        {
+            return new RepairDrone(level, Position);
+        }
+
+        public override Texture2D GetTexture(AssetManager assets)
+        {
+            return assets.AsteroidTexture;
+        }
+
+    }
 }
