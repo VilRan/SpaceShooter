@@ -10,6 +10,7 @@ using SpaceShooter.Weapons;
 using Windows.UI.Xaml;
 using System.Collections.ObjectModel;
 using SpaceShooter.Particles;
+using SpaceShooter.Xaml;
 
 namespace SpaceShooter.Dynamic.Ships
 {
@@ -167,6 +168,11 @@ namespace SpaceShooter.Dynamic.Ships
                 return true;
             }
             return false;
+        }
+        public override void OnDeath(DeathEventArgs e)
+        {
+            base.OnDeath(e);
+            App.Current.GamePage.NavigateTo(new EnterHighscorePage(game.Session.Score));
         }
     }
 }

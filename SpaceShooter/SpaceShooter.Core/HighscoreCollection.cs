@@ -23,6 +23,15 @@ namespace SpaceShooter
 
             Items.Sort();
         }
+        public void SaveToFile()
+        {
+            string text = "";
+            foreach (var item in Items)
+            {
+                text += item.Name + ";" + item.Score + Environment.NewLine;
+            }
+            File.WriteAllText("Assets/Highscore.txt", text);
+        }
     }
 
     public class Highscore : IComparable<Highscore>
@@ -35,6 +44,12 @@ namespace SpaceShooter
             string[] items = line.Split(';');
             Name = items[0];
             Score = int.Parse(items[1]);
+        }
+
+        public Highscore(string name, int score)
+        {
+            Name = name;
+            Score = score;
         }
 
         public int CompareTo(Highscore other)

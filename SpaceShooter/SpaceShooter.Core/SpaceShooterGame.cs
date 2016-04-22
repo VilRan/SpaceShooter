@@ -140,5 +140,11 @@ namespace SpaceShooter
         {
             App.ToggleFullscreen();
         }
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            base.OnExiting(sender, args);
+
+            Highscores.SaveToFile();
+        }
     }
 }
