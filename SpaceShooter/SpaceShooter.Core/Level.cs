@@ -41,15 +41,6 @@ namespace SpaceShooter
             }
             
             Inactive.AddRange(blueprint.SpawnObjects(this));
-            
-            for (int x = 512; x < 2000; x += AssetManager.TileSize)
-            {
-                Walls.Add(new Wall(Game.Assets, new Vector2(x, 128)));
-            }
-            for (int y = 0; y < 640; y += AssetManager.TileSize)
-            {
-                Walls.Add(new Wall(Game.Assets, new Vector2(1000, y)));
-            }
 
             var earth = new BackgroundParticle(Game.Assets.EarthTexture, new Vector2(PlayArea.Width / 3, PlayArea.Height * 3 / 4), 0.9f);
             Particles.Add(earth);

@@ -7,17 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="64,32">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="159*"/>
-                <RowDefinition Height="386*"/>
-                <RowDefinition Height="175*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="75*"/>
-                <ColumnDefinition Width="105*"/>
-                <ColumnDefinition Width="75*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1" Grid.Row="1">
                 <Button x:Name="continueButton" Content="Continue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15" Click="continueButton_Click"/>
