@@ -16,6 +16,7 @@ namespace SpaceShooter
         public GameState State;
         public Settings Settings { private set; get; }
         public AssetManager Assets { private set; get; }
+        public HighscoreCollection Highscores { private set; get; }
         public Session Session { private set; get; }
         public LevelEditor Editor { private set; get; }
         public Random Random { private set; get; }
@@ -52,6 +53,7 @@ namespace SpaceShooter
         protected override void Initialize()
         {
             Settings = new Settings();
+            Highscores = new HighscoreCollection();
             Random = new Random();
             Editor = new LevelEditor(this, new LevelBlueprint(10240, 1080));
             renderTarget = new RenderTarget2D(GraphicsDevice, InternalResolution.Width, InternalResolution.Height);

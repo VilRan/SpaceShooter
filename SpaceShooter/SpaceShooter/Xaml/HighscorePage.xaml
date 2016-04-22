@@ -5,6 +5,7 @@
     xmlns:local="using:SpaceShooter.Xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:SpaceShooter"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -15,7 +16,20 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Highscore" Height="75" FontFamily="Showcard Gothic" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" TextAlignment="Center" Grid.Row="0"/>
-            <TextBlock TextWrapping="Wrap" Margin="0,0,0,0" Width="500" Grid.Row="1" Text="{x:Bind HighscoreView, Mode=OneWay}"/>
+            <ListView Grid.Row="1" ItemsSource="{x:Bind Highscores.Items}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="data:Highscore">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{x:Bind Name}" HorizontalAlignment="Left"></TextBlock>
+                            <TextBlock Text="{x:Bind Score}" HorizontalAlignment="Right" Grid.Column="1"></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Button x:Name="backToMainMenuButton" Content="Back to Main Menu" HorizontalAlignment="Center" VerticalAlignment="Center" Width="175" Margin="0,0,0,0" Click="backToMainMenuButton_Click" Grid.Row="2"/>
         </Grid>
     </Grid>

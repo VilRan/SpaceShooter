@@ -42,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HighscoreCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Level.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LevelBlueprint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LevelEditor.cs" />

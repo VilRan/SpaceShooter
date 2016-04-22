@@ -23,20 +23,18 @@ namespace SpaceShooter.Xaml
     /// </summary>
     public sealed partial class HighscorePage : Page
     {
-        public string highcoresToTextBlock { get { return File.ReadAllText("Assets/Highscore.txt"); }}
+        public HighscoreCollection Highscores
+        {
+            get
+            {
+                return App.Current.GamePage.Game.Highscores;
+            }
+        }
 
         public HighscorePage()
         {
             this.InitializeComponent();
-        }
-
-        public string HighscoreView
-        {
-            get
-            {
-                return highcoresToTextBlock;
-            }
-        }
+        }    
 
         private void backToMainMenuButton_Click(object sender, RoutedEventArgs e)
         {
