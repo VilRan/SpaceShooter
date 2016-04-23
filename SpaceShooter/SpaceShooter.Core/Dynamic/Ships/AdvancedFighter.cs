@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using SpaceShooter.Dynamic.PowerUps;
 using SpaceShooter.Particles;
 using SpaceShooter.Weapons;
 using System;

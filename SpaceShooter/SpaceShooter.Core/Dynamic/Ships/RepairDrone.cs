@@ -4,7 +4,7 @@ using SpaceShooter.Particles;
 
 namespace SpaceShooter.Dynamic.Ships
 {
-    class RepairDrone : Ship
+    class RepairDrone : EnemyShip
     {
         enum DroneAiState
         {
@@ -26,29 +26,16 @@ namespace SpaceShooter.Dynamic.Ships
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public RepairDrone(Level level, Vector2 position)
-            : base(level.Game.Assets.AsteroidTexture, level, position, durability, Faction.Neutral)
+            : base(level.Game.Assets.AsteroidTexture, level, position, durability)
         {
 
         }
-
-
+        
         public override void OnUpdate(UpdateEventArgs e)
         {
             Velocity = new Vector2(80, 0);
 
-            DynamicObject target = null;
-            float nearest = float.MaxValue;
-            foreach (DynamicObject obj in Level.Objects)
-            {
-                if (obj.Faction == Faction || obj.Category != ObjectCategory.Ship || obj.Faction == Faction.Player)
-                    continue;
-                float distance = (obj.Position - Position).LengthSquared();
-                if (obj.CurrentDurability < obj.MaximumDurability && distance < nearest)
-                {
-                    target = obj;
-                    nearest = distance;
-                }
-            }
+            DynamicObject target = getTarget();
 
             float seekingThreshold = seekingDistance;
             float repairThreshold = repairDistance;
@@ -73,7 +60,7 @@ namespace SpaceShooter.Dynamic.Ships
                 }
                 else if (aiState == DroneAiState.Repair)
                 {
-                    Velocity = target.Velocity;                    
+                    Velocity = target.Velocity;
                     target.Repair(50 * (float)e.ElapsedSeconds);
                     repairThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
                 }
@@ -92,8 +79,33 @@ namespace SpaceShooter.Dynamic.Ships
                     aiState = DroneAiState.Wander;
                 }
             }
-                        
+
             base.OnUpdate(e);
+        }
+
+        private DynamicObject getTarget()
+        {
+            DynamicObject target = null;
+            float nearest = float.MaxValue;
+            foreach (DynamicObject obj in Level.Objects)
+            {
+                if (!canTarget(obj))
+                    continue;
+                float distance = (obj.Position - Position).LengthSquared();
+                if (obj.CurrentDurability < obj.MaximumDurability && distance < nearest)
+                {
+                    target = obj;
+                    nearest = distance;
+                }
+            }
+            return target;
+        }
+
+        private bool canTarget(DynamicObject obj)
+        {
+            return obj.Faction == Faction 
+                && obj.Category == ObjectCategory.Ship
+                && obj.CurrentDurability < obj.MaximumDurability;
         }
 
         public override void OnCollision(Collision collision)

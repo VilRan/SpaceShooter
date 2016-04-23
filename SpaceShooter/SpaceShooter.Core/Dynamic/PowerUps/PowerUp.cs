@@ -1,9 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using SpaceShooter.Dynamic.Ships;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace SpaceShooter.Dynamic
+namespace SpaceShooter.Dynamic.PowerUps
 {
-    class RepairKit : DynamicObject
+    abstract class PowerUp : DynamicObject
     {
         const float hitRadius = 10f;
         const float durability = 10;
@@ -12,15 +16,11 @@ namespace SpaceShooter.Dynamic
         public override float HitRadius { get { return hitRadius; } }
         protected override float CollisionDamage { get { return collisionDamage; } }
         public override ObjectCategory Category { get { return ObjectCategory.PowerUp; } }
-        public RepairKit(Level level, Vector2 position, Vector2 velocity)
-            : base(level.Game.Assets.BulletTexture, level, position, velocity, durability, Faction.Neutral)
+
+        public PowerUp(Texture2D texture, Level level, Vector2 position, Vector2 velocity)
+            : base(texture, level, position, velocity, durability, Faction.Neutral)
         {
 
-        }
-
-        public override void OnCollision(Collision e)
-        {
-            e.Other.Repair(200);
         }
 
         protected override bool CanCollideWith(DynamicObject other)
