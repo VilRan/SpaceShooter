@@ -25,53 +25,18 @@ namespace SpaceShooter
             Height = height;
         }
 
-        public LevelBlueprint(XmlElement xml)
+        public LevelBlueprint(int width, int height, Random random)
+            : this(width, height)
         {
-            Width = int.Parse(xml.GetAttribute("Width"));
-            Height = int.Parse(xml.GetAttribute("Height"));
 
+        }
+
+        public LevelBlueprint(XmlElement xml)
+            : this(int.Parse(xml.GetAttribute("Width")), int.Parse(xml.GetAttribute("Height")))
+        {
             foreach (XmlElement spawn in xml)
             {
-                Difficulty difficulty = (Difficulty)int.Parse(spawn.GetAttribute("Difficulty"));
-                
-                int x = int.Parse(spawn.GetAttribute("X"));
-                int y = int.Parse(spawn.GetAttribute("Y"));
-                Vector2 position = new Vector2(x, y);
-
-                string spawnType = spawn.GetAttribute("Type");
-                switch (spawnType)
-                {
-                    case AsteroidSpawn.String:
-                        Spawns.Add(new AsteroidSpawn(difficulty, position));
-                        break;
-                    case AdvancedFighterSpawn.String:
-                        Spawns.Add(new AdvancedFighterSpawn(difficulty, position));
-                        break;
-                    case KamikazeSpawn.String:
-                        Spawns.Add(new KamikazeSpawn(difficulty, position));
-                        break;
-                    case MinelayerSpawn.String:
-                        Spawns.Add(new MinelayerSpawn(difficulty, position));
-                        break;
-                    case AceFighterSpawn.String:
-                        Spawns.Add(new AceFighterSpawn(difficulty, position));
-                        break;
-                    case SineFighterSpawn.String:
-                        Spawns.Add(new SineFighterSpawn(difficulty, position));
-                        break;
-                    case BasicFighterSpawn.String:
-                        Spawns.Add(new BasicFighterSpawn(difficulty, position));
-                        break;
-                    case EliteFighterSpawn.String:
-                        Spawns.Add(new EliteFighterSpawn(difficulty, position));
-                        break;
-                    case BasicBomberSpawn.String:
-                        Spawns.Add(new BasicBomberSpawn(difficulty, position));
-                        break;
-                    case RepairDroneSpawn.String:
-                        Spawns.Add(new RepairDroneSpawn(difficulty, position));
-                        break;
-                }
+                Spawns.Add(Spawn.Create(spawn));
             }
         }
 
@@ -86,32 +51,6 @@ namespace SpaceShooter
                 }
             }
         }
-        /*
-        public async void SaveToFile(string name)
-        {
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            StorageFile storageFile = await storageFolder.CreateFileAsync(name + ".xml", CreationCollisionOption.ReplaceExisting);
-            SaveToFile(storageFile);
-        }
-
-        public async void SaveToFile(StorageFile storageFile)
-        {
-            Task<XmlDocument> xmlTask = Task.Run(() => generateXml());
-            using (IRandomAccessStream fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
-            {
-                Stream stream = fileStream.AsStreamForWrite();
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Encoding = new UTF8Encoding(false);
-                settings.Indent = true;
-                settings.IndentChars = "\t";
-                using (XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    XmlDocument xml = await xmlTask;
-                    xml.WriteTo(writer);
-                }
-            }
-        }
-        */
 
         public XmlDocument ToXml()
         {

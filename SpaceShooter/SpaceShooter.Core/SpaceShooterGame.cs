@@ -18,6 +18,7 @@ namespace SpaceShooter
         public HighscoreCollection Highscores { private set; get; }
         public Session Session { private set; get; }
         public LevelEditor Editor { private set; get; }
+        public Level BackgroundLevel { private set; get; }
         public Random Random { private set; get; }
         public bool IsPaused = false;
 

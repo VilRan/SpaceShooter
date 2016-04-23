@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using SpaceShooter.Dynamic;
 using SpaceShooter.Dynamic.Ships;
+using System;
+using System.Xml;
 
 namespace SpaceShooter
 {
@@ -20,6 +22,42 @@ namespace SpaceShooter
 
         public abstract DynamicObject CreateObject(Level level);
         public abstract Texture2D GetTexture(AssetManager assets);
+
+        public static Spawn Create(XmlElement spawn)
+        {
+            Difficulty difficulty = (Difficulty)int.Parse(spawn.GetAttribute("Difficulty"));
+
+            int x = int.Parse(spawn.GetAttribute("X"));
+            int y = int.Parse(spawn.GetAttribute("Y"));
+            Vector2 position = new Vector2(x, y);
+
+            string type = spawn.GetAttribute("Type");
+            switch (type)
+            {
+                case AsteroidSpawn.String:
+                    return new AsteroidSpawn(difficulty, position);
+                case AdvancedFighterSpawn.String:
+                    return new AdvancedFighterSpawn(difficulty, position);
+                case KamikazeSpawn.String:
+                    return new KamikazeSpawn(difficulty, position);
+                case MinelayerSpawn.String:
+                    return new MinelayerSpawn(difficulty, position);
+                case AceFighterSpawn.String:
+                    return new AceFighterSpawn(difficulty, position);
+                case SineFighterSpawn.String:
+                    return new SineFighterSpawn(difficulty, position);
+                case BasicFighterSpawn.String:
+                    return new BasicFighterSpawn(difficulty, position);
+                case EliteFighterSpawn.String:
+                    return new EliteFighterSpawn(difficulty, position);
+                case BasicBomberSpawn.String:
+                    return new BasicBomberSpawn(difficulty, position);
+                case RepairDroneSpawn.String:
+                    return new RepairDroneSpawn(difficulty, position);
+                default:
+                    throw new Exception("Unknown spawn type!");
+            }
+        }
     }
 
     public class AsteroidSpawn : Spawn
