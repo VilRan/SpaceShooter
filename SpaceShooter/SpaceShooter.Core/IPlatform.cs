@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace SpaceShooter
 {
@@ -16,6 +17,15 @@ namespace SpaceShooter
     {
         Task<IList<string>> ReadLinesAsync(string fileName);
         Task<string> ReadTextAsync(string fileName);
+        Task<XmlDocument> ReadXmlAsync(string fileName);
+        Task<XmlDocument> ReadXmlAsync(IPlatformFile file);
         Task WriteTextAsync(string fileName, string text);
+        Task WriteXmlAsync(IPlatformFile file, XmlDocument xml);
+        Task<IPlatformFile> PickSaveFileAsync(params string[] fileTypes);
+        Task<IPlatformFile> PickOpenFileAsync(params string[] fileTypes);
+    }
+
+    public interface IPlatformFile
+    {
     }
 }

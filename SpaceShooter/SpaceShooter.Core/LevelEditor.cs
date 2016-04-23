@@ -18,6 +18,7 @@ namespace SpaceShooter
         MouseState previousMouse;
         KeyboardState previousKeyboard;
 
+        static IPlatformAsync Platform { get { return SpaceShooterGame.Platform; } }
         static int TileSize { get { return AssetManager.TileSize; } }
 
         public LevelEditor(SpaceShooterGame game, LevelBlueprint blueprint)
@@ -106,25 +107,14 @@ namespace SpaceShooter
 
         async void SaveBlueprint()
         {
-            FileSavePicker filePicker = new FileSavePicker();
-            filePicker.SuggestedStartLocation = PickerLocationId.Desktop;
-            filePicker.DefaultFileExtension = ".xml";
-            filePicker.FileTypeChoices.Add("Xml", new List<string>(){ ".xml" });
-            StorageFile storageFile = await filePicker.PickSaveFileAsync();
-            blueprint.SaveToFile(storageFile);
+            IPlatformFile file = await Platform.PickSaveFileAsync(".xml");
+            await Platform.WriteXmlAsync(file, blueprint.ToXml());
         }
 
         async void LoadBlueprint()
         {
-            FileOpenPicker filePicker = new FileOpenPicker();
-            filePicker.SuggestedStartLocation = PickerLocationId.Desktop;
-            filePicker.FileTypeFilter.Add(".xml");
-            StorageFile storageFile = await filePicker.PickSingleFileAsync();
-
-            XmlDocument xmlDocument = new XmlDocument();
-            using (Stream stream = await storageFile.OpenStreamForReadAsync())
-                xmlDocument.Load(stream);
-
+            IPlatformFile file = await Platform.PickOpenFileAsync(".xml");
+            XmlDocument xmlDocument = await Platform.ReadXmlAsync(file);
             blueprint = new LevelBlueprint(xmlDocument.DocumentElement);
         }
     }

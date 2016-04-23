@@ -86,7 +86,7 @@ namespace SpaceShooter
                 }
             }
         }
-
+        /*
         public async void SaveToFile(string name)
         {
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
@@ -111,8 +111,9 @@ namespace SpaceShooter
                 }
             }
         }
+        */
 
-        XmlDocument generateXml()
+        public XmlDocument ToXml()
         {
             XmlDocument xml = new XmlDocument();
             XmlElement level = xml.CreateElement("Level");
