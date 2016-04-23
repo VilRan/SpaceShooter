@@ -5,7 +5,7 @@ namespace SpaceShooter.Dynamic.Ships
 {
     class BasicFighter : Fighter
     {
-        const float maxSpeed = 8 * TileSize;        
+        const float maxSpeed = 16 * TileSize;        
         const int score = 50;        
         public override int Score { get { return score; } }
         

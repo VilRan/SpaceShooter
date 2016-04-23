@@ -16,7 +16,7 @@ namespace SpaceShooter.Dynamic.Ships
             Catch
         }
 
-        const float maxSpeed = 8 * TileSize;
+        const float maxSpeed = 16 * TileSize;
         const float alertDistance = 900f;
         const float chaseDistance = 700f;
         const float catchDistance = 25f;

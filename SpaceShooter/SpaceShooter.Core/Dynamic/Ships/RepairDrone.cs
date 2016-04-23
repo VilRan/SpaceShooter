@@ -13,7 +13,7 @@ namespace SpaceShooter.Dynamic.Ships
             Repair
         }
 
-        const float maxSpeed = 8 * TileSize;
+        const float maxSpeed = 24 * TileSize;
         const float durability = 500;
         const int score = 50;
         const float collisionDamage = 50;

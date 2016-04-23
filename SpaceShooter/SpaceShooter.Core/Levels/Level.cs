@@ -9,6 +9,8 @@ namespace SpaceShooter
 {
     public class Level
     {
+        public const int TileSize = AssetManager.TileSize;
+
         public readonly Session Session;
         public List<DynamicObject> Objects = new List<DynamicObject>();
         public List<DynamicObject> Inactive = new List<DynamicObject>();
@@ -23,7 +25,7 @@ namespace SpaceShooter
         public Level(Session session, LevelBlueprint blueprint)
         {
             Session = session;
-            Camera = new Camera(Vector2.Zero, SpaceShooterGame.InternalResolution.Size.ToVector2(), new Vector2(128, 0));
+            Camera = new Camera(Vector2.Zero, SpaceShooterGame.InternalResolution.Size.ToVector2(), new Vector2(8 * TileSize, 0));
             this.blueprint = blueprint;
 
             if (Session.Players.Count > 1)

@@ -5,7 +5,7 @@ namespace SpaceShooter
 {
     public abstract class GameObject
     {
-        public const int TileSize = AssetManager.TileSize;
+        public const int TileSize = Level.TileSize;
 
         public Vector2 Position;
         public Vector2 Velocity;
