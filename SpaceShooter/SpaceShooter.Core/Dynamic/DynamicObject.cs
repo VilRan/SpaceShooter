@@ -28,6 +28,7 @@ namespace SpaceShooter.Dynamic
         public bool IsAlive { get { return !IsDying; } }
         protected override Color Color { get { return Color.White; } }
         protected SpaceShooterGame Game { get { return Level.Game; } }
+        protected ISpaceShooterUI UI { get { return SpaceShooterGame.UI; } }
         protected Session Session { get { return Level.Session; } }
         protected Random Random { get { return Game.Random; } }
         protected CircleCollider Collider { get { return new CircleCollider(Position, AbsoluteVelocity, HitRadius); } }

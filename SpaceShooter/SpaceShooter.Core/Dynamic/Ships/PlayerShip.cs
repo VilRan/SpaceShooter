@@ -124,22 +124,9 @@ namespace SpaceShooter.Dynamic.Ships
                 if (activeWeaponIndex >= WeaponSlots.Count)
                     activeWeaponIndex = 0;
             }
-            if (controller.IsControlPressed(Action.Weapon1))
-                activeWeaponIndex = 0;
-            else if (WeaponSlots.Count > 1 && controller.IsControlPressed(Action.Weapon2))
-                activeWeaponIndex = 1;
-            else if (WeaponSlots.Count > 2 && controller.IsControlPressed(Action.Weapon3))
-                activeWeaponIndex = 2;
-            else if (WeaponSlots.Count > 3 && controller.IsControlPressed(Action.Weapon4))
-                activeWeaponIndex = 3;
-            else if (WeaponSlots.Count > 4 && controller.IsControlPressed(Action.Weapon5))
-                activeWeaponIndex = 4;
-            else if (WeaponSlots.Count > 5 && controller.IsControlPressed(Action.Weapon6))
-                activeWeaponIndex = 5;
-            else if (WeaponSlots.Count > 6 && controller.IsControlPressed(Action.Weapon7))
-                activeWeaponIndex = 6;
-            else if (WeaponSlots.Count > 7 && controller.IsControlPressed(Action.Weapon8))
-                activeWeaponIndex = 7;
+            for (int index = 0; index < WeaponSlots.Count; index++)
+                if (controller.IsControlDown(Action.Weapon1 + index))
+                    activeWeaponIndex = index;
         }
 
         public override void OnCollision(Collision e)
@@ -153,13 +140,13 @@ namespace SpaceShooter.Dynamic.Ships
             if (!isInvincible)
             {
                 base.Damage(e);
-                App.Current.GamePage.HealthbarValue = 100 * CurrentDurability / MaximumDurability;
+                UI.SetHealthbar(100 * CurrentDurability / MaximumDurability);
             }
         }
         public override void Repair(float amount)
         {
             base.Repair(amount);
-            App.Current.GamePage.HealthbarValue = 100 * CurrentDurability / MaximumDurability;
+            UI.SetHealthbar(100 * CurrentDurability / MaximumDurability);
         }
 
         public bool TryRemoveWeapon(InventoryItem weapon)
@@ -179,7 +166,7 @@ namespace SpaceShooter.Dynamic.Ships
             base.OnDeath(e);
             if (Session.Players.Where(p => p.IsAlive).Count() == 0)
             {
-                SpaceShooterGame.UI.NavigateToHighscoreEntry();
+                UI.NavigateToHighscoreEntry();
             }
         }
     }

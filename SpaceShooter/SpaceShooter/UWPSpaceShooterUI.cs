@@ -1,23 +1,30 @@
-﻿using SpaceShooter.Xaml;
+﻿using System;
+using SpaceShooter.Xaml;
 
 namespace SpaceShooter
 {
     class UWPSpaceShooterUI : ISpaceShooterUI
     {
+        GamePage gamePage { get { return App.Current.GamePage; } }
+
         public void NavigateToGame()
         {
-            App.Current.GamePage.NavigateTo();
+            gamePage.NavigateTo();
         }
 
         public void NavigateToHighscoreEntry()
         {
-            GamePage gamePage = App.Current.GamePage;
             gamePage.NavigateTo(new EnterHighscorePage(gamePage.Game.Session.Score));
         }
 
         public void NavigateToMainMenu()
         {
-            App.Current.GamePage.NavigateTo(new MainMenu());
+            gamePage.NavigateTo(new MainMenu());
+        }
+
+        public void SetHealthbar(double value)
+        {
+            gamePage.HealthbarValue = value;
         }
     }
 }
