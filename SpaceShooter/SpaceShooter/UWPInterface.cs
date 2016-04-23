@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -121,6 +120,11 @@ namespace SpaceShooter
                 filePicker.FileTypeFilter.Add(fileType);
             StorageFile storageFile = await filePicker.PickSingleFileAsync();
             return new UWPFile(storageFile);
+        }
+
+        public void ToggleFullscreen()
+        {
+            App.ToggleFullscreen();
         }
     }
 

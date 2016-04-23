@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using SpaceShooter.Weapons;
 using System.Collections.ObjectModel;
 using SpaceShooter.Particles;
-using SpaceShooter.Xaml;
+using System.Linq;
 
 namespace SpaceShooter.Dynamic.Ships
 {
@@ -165,7 +165,10 @@ namespace SpaceShooter.Dynamic.Ships
         public override void OnDeath(DeathEventArgs e)
         {
             base.OnDeath(e);
-            App.Current.GamePage.NavigateTo(new EnterHighscorePage(Game.Session.Score));
+            if (Session.Players.Where(p => p.IsAlive).Count() == 0)
+            {
+                SpaceShooterGame.UI.NavigateToHighscoreEntry();
+            }
         }
     }
 }

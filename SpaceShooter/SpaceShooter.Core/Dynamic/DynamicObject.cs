@@ -25,8 +25,10 @@ namespace SpaceShooter.Dynamic
         public double MaximumDurability { get { return durability.Maximum; } }
         public bool IsRemoving { get { return isRemoving || IsDying; } }
         public bool IsDying { get { return durability.Current <= 0; } }
+        public bool IsAlive { get { return !IsDying; } }
         protected override Color Color { get { return Color.White; } }
         protected SpaceShooterGame Game { get { return Level.Game; } }
+        protected Session Session { get { return Level.Session; } }
         protected Random Random { get { return Game.Random; } }
         protected CircleCollider Collider { get { return new CircleCollider(Position, AbsoluteVelocity, HitRadius); } }
         protected Rectangle NormalPlayArea {

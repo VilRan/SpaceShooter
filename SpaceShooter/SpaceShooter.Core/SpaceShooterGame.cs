@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SpaceShooter.Xaml;
 using System;
 
 namespace SpaceShooter
@@ -11,6 +10,7 @@ namespace SpaceShooter
     public class SpaceShooterGame : Game
     {
         public static IPlatformAsync Platform;
+        public static ISpaceShooterUI UI;
 
         public GameState State;
         public Settings Settings { private set; get; }
@@ -45,6 +45,7 @@ namespace SpaceShooter
         protected override void Initialize()
         {
             Settings = new Settings();
+            Assets = new AssetManager();
             Highscores = new HighscoreCollection();
             Random = new Random();
             Editor = new LevelEditor(this, new LevelBlueprint(10240, 1080));
@@ -61,8 +62,7 @@ namespace SpaceShooter
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-            Assets = new AssetManager(Content);
+            Assets.LoadAll(Content);
         }
 
         /// <summary>
@@ -84,15 +84,15 @@ namespace SpaceShooter
             Controller controller = Settings.Controllers["General"];
             if (controller.IsControlPressed(Action.MainMenu))
             {
-                App.Current.GamePage.NavigateTo(new MainMenu());
+                UI.NavigateToMainMenu();
             }
             if (controller.IsControlPressed(Action.Fullscreen))
             {
-                ToggleFullscreen();
+                Platform.ToggleFullscreen();
             }
             if (controller.IsControlPressed(Action.Editor))
             {
-                App.Current.GamePage.NavigateTo();
+                UI.NavigateToGame();
                 State = new EditorGameState(this);
             }
             if (controller.IsControlPressed(Action.Pause))
@@ -133,11 +133,6 @@ namespace SpaceShooter
         {
             State = null;
             Session = new Session(this, difficulty, numberOfPlayers);
-        }
-
-        void ToggleFullscreen()
-        {
-            App.ToggleFullscreen();
         }
     }
 }

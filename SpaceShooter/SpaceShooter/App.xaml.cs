@@ -29,6 +29,7 @@ namespace SpaceShooter
         public App()
         {
             SpaceShooterGame.Platform = new UWPInterface();
+            SpaceShooterGame.UI = new UWPSpaceShooterUI();
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }

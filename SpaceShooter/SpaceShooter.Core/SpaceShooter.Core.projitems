@@ -46,6 +46,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HighscoreCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPlatform.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISpaceShooterUI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Levels\Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Levels\GameEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Levels\GameObject.cs" />

@@ -10,6 +10,7 @@ namespace SpaceShooter
         double money = 250;
 
         public double Money { get { return money; } set { money = value; } }
+        public bool IsAlive { get { return Ship.IsAlive; } }
 
         public Player(AssetManager assets, Controller controller)
         {

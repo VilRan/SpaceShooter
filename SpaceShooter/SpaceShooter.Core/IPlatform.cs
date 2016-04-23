@@ -11,6 +11,7 @@ namespace SpaceShooter
         IList<string> ReadLines(string fileName);
         string ReadText(string fileName);
         void WriteText(string fileName, string text);
+        void ToggleFullscreen();
     }
 
     public interface IPlatformAsync : IPlatform

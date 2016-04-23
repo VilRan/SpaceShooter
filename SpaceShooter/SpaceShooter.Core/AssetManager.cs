@@ -34,7 +34,12 @@ namespace SpaceShooter
 
         public LevelBlueprint TestLevelBlueprint { private set; get; }
 
-        public AssetManager(ContentManager content)
+        public AssetManager()
+        {
+
+        }
+
+        public void LoadAll(ContentManager content)
         {
             Task loadLevelsTask = Task.Run(() => loadLevels());
 
