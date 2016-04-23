@@ -1,5 +1,4 @@
 ﻿using SpaceShooter.Xaml;
-using System;
 
 namespace SpaceShooter
 {

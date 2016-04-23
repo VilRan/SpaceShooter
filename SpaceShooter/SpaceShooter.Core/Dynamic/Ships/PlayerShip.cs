@@ -46,6 +46,24 @@ namespace SpaceShooter.Dynamic.Ships
             Controller controller = player.Controller;
             KeyboardState keyboard = Keyboard.GetState();
 
+            TryMove(e);
+
+            activeWeapon.Update(e.GameTime);
+            if (controller.IsControlDown(Action.Fire))
+                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(1, 0), this));
+
+            TrySwitchWeapon();
+
+            if (keyboard.IsKeyDown(Keys.I))
+                isInvincible = true;
+            else if (keyboard.IsKeyDown(Keys.U))
+                isInvincible = false;
+        }
+        
+        private void TryMove(UpdateEventArgs e)
+        {
+            Controller controller = player.Controller;
+
             Velocity = Level.Camera.Velocity;
             Vector2 thrust = Vector2.Zero;
             if (controller.IsControlDown(Action.MoveUp))
@@ -55,55 +73,21 @@ namespace SpaceShooter.Dynamic.Ships
             if (controller.IsControlDown(Action.MoveLeft))
                 thrust += new Vector2(-1, 0);
             if (controller.IsControlDown(Action.MoveRight))
-            {
                 thrust += new Vector2(1, 0);
-                TimedParticle.Emit(Level, Position, Color.White, 0.1, 0.5, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
-                TimedParticle.Emit(Level, Position, Color.LightBlue, 0.5, 1, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
-                TimedParticle.Emit(Level, Position, Color.Blue, 0.5, 0.8, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
-            }
             if (thrust != Vector2.Zero)
             {
                 thrust.Normalize();
                 thrust *= maxSpeed;
                 Velocity += thrust;
+
+                if (thrust.X > 0)
+                {
+                    TimedParticle.Emit(Level, Position, Color.White, 0.1, 0.5, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
+                    TimedParticle.Emit(Level, Position, Color.LightBlue, 0.5, 1, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
+                    TimedParticle.Emit(Level, Position, Color.Blue, 0.5, 0.8, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
+                }
             }
 
-            activeWeapon.Update(e.GameTime);
-            if (controller.IsControlDown(Action.Fire))
-                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(1,0), this));
-            if (controller.IsControlPressed(Action.PreviousWeapon))
-            {
-                activeWeaponIndex--;
-                if (activeWeaponIndex < 0)
-                    activeWeaponIndex = WeaponSlots.Count - 1;
-            }
-            if (controller.IsControlPressed(Action.NextWeapon))
-            {
-                activeWeaponIndex++;
-                if (activeWeaponIndex >= WeaponSlots.Count)
-                    activeWeaponIndex = 0;
-            }
-
-            if (controller.IsControlPressed(Action.Weapon1))
-                activeWeaponIndex = 0;
-            else if (WeaponSlots.Count > 1 && controller.IsControlPressed(Action.Weapon2))
-                activeWeaponIndex = 1;
-            else if (WeaponSlots.Count > 2 && controller.IsControlPressed(Action.Weapon3))
-                activeWeaponIndex = 2;
-            else if (WeaponSlots.Count > 3 && controller.IsControlPressed(Action.Weapon4))
-                activeWeaponIndex = 3;
-            else if (WeaponSlots.Count > 4 && controller.IsControlPressed(Action.Weapon5))
-                activeWeaponIndex = 4;
-            else if (WeaponSlots.Count > 5 && controller.IsControlPressed(Action.Weapon6))
-                activeWeaponIndex = 5;
-            else if (WeaponSlots.Count > 6 && controller.IsControlPressed(Action.Weapon7))
-                activeWeaponIndex = 6;
-
-            if (keyboard.IsKeyDown(Keys.I))
-                isInvincible = true;
-            else if (keyboard.IsKeyDown(Keys.U))
-                isInvincible = false;
-            
             foreach (Wall wall in Level.Walls)
             {
                 float timeOfCollision;
@@ -118,17 +102,44 @@ namespace SpaceShooter.Dynamic.Ships
                     Velocity.Y = 0;
                 }
             }
+
             Position += Velocity * (float)e.ElapsedSeconds;
+            Position.X = MathHelper.Clamp(Position.X, PlayArea.Left, PlayArea.Right);
+            Position.Y = MathHelper.Clamp(Position.Y, PlayArea.Top, PlayArea.Bottom);
+        }
 
-            if (Position.X < PlayArea.Left)
-                Position.X = PlayArea.Left;
-            if (Position.X > PlayArea.Right)
-                Position.X = PlayArea.Right;
-            if (Position.Y < PlayArea.Top)
-                Position.Y = PlayArea.Top;
-            if (Position.Y > PlayArea.Bottom)
-                Position.Y = PlayArea.Bottom;
+        private void TrySwitchWeapon()
+        {
+            Controller controller = player.Controller;
 
+            if (controller.IsControlPressed(Action.PreviousWeapon))
+            {
+                activeWeaponIndex--;
+                if (activeWeaponIndex < 0)
+                    activeWeaponIndex = WeaponSlots.Count - 1;
+            }
+            if (controller.IsControlPressed(Action.NextWeapon))
+            {
+                activeWeaponIndex++;
+                if (activeWeaponIndex >= WeaponSlots.Count)
+                    activeWeaponIndex = 0;
+            }
+            if (controller.IsControlPressed(Action.Weapon1))
+                activeWeaponIndex = 0;
+            else if (WeaponSlots.Count > 1 && controller.IsControlPressed(Action.Weapon2))
+                activeWeaponIndex = 1;
+            else if (WeaponSlots.Count > 2 && controller.IsControlPressed(Action.Weapon3))
+                activeWeaponIndex = 2;
+            else if (WeaponSlots.Count > 3 && controller.IsControlPressed(Action.Weapon4))
+                activeWeaponIndex = 3;
+            else if (WeaponSlots.Count > 4 && controller.IsControlPressed(Action.Weapon5))
+                activeWeaponIndex = 4;
+            else if (WeaponSlots.Count > 5 && controller.IsControlPressed(Action.Weapon6))
+                activeWeaponIndex = 5;
+            else if (WeaponSlots.Count > 6 && controller.IsControlPressed(Action.Weapon7))
+                activeWeaponIndex = 6;
+            else if (WeaponSlots.Count > 7 && controller.IsControlPressed(Action.Weapon8))
+                activeWeaponIndex = 7;
         }
 
         public override void OnCollision(Collision e)
@@ -162,6 +173,7 @@ namespace SpaceShooter.Dynamic.Ships
             }
             return false;
         }
+
         public override void OnDeath(DeathEventArgs e)
         {
             base.OnDeath(e);
