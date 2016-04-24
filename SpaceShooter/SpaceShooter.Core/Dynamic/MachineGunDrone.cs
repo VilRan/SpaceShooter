@@ -25,6 +25,8 @@ namespace SpaceShooter.Dynamic
 
         public override void OnUpdate(UpdateEventArgs e)
         {
+            weapon.Update(e.GameTime);
+
             DynamicObject target = null;
             float nearest = float.MaxValue;
             foreach (DynamicObject obj in Level.Objects)
@@ -38,14 +40,12 @@ namespace SpaceShooter.Dynamic
                     nearest = distance;
                 }
             }
-            Vector2 direction = new Vector2(0, 0);
             if (target != null)
             {
-                direction = target.Position - Position;
-                direction.Normalize();
+                Vector2? direction = VectorUtility.FindInterceptDirection(Position, Camera.Velocity, target.Position, target.AbsoluteVelocity, weapon.ProjectileSpeed);
+                if (direction != null)
+                    weapon.TryFire(new FireEventArgs(Level, Position, direction.Value, this));
             }
-            weapon.Update(e.GameTime);
-            weapon.TryFire(new FireEventArgs(Level, Position, direction, this));
 
             base.OnUpdate(e);
         }

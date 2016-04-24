@@ -12,6 +12,7 @@ namespace SpaceShooter.Weapons
         public override string Name { get { return "Machinegun"; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.05; } }
+        public override float ProjectileSpeed { get { return bulletSpeed; } }
 
         public Machinegun()
             : base(magazineSize)

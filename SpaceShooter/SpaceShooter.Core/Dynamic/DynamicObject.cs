@@ -31,6 +31,7 @@ namespace SpaceShooter.Dynamic
         protected ISpaceShooterUI UI { get { return SpaceShooterGame.UI; } }
         protected Session Session { get { return Level.Session; } }
         protected Random Random { get { return Game.Random; } }
+        protected Camera Camera { get { return Level.Camera; } }
         protected CircleCollider Collider { get { return new CircleCollider(Position, AbsoluteVelocity, HitRadius); } }
         protected Rectangle NormalPlayArea {
             get { return new Rectangle(Level.PlayArea.Left - TileSize, Level.PlayArea.Top - TileSize, Level.PlayArea.Width + TileSize * 2, Level.PlayArea.Height + TileSize * 2); } }

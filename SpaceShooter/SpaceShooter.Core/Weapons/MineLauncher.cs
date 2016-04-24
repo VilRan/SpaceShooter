@@ -11,6 +11,7 @@ namespace SpaceShooter.Weapons
         public override string Name { get { return "MineLauncher"; } }
         public override double ReloadDelay { get { return 7.0; } }
         public override double FirerateDelay { get { return 0.05; } }
+        public override float ProjectileSpeed { get { return mineSpeed; } }
 
         public MineLauncher()
             : base(magazineSize)

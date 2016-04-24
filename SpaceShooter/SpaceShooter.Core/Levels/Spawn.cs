@@ -71,6 +71,7 @@ namespace SpaceShooter
             types.Add(BasicFighterSpawn.String, 100);
             types.Add(SineFighterSpawn.String, 50);
             types.Add(EliteFighterSpawn.String, 25);
+            types.Add(BasicBomberSpawn.String, 25);
             return types;
         }
     }

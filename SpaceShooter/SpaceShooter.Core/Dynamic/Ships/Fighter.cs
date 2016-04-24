@@ -11,7 +11,7 @@ namespace SpaceShooter.Dynamic.Ships
     {
         const float durability = 500;
         const double repairKitDropChance = 0.3;
-        const double droneControlDropChance = 0.1;
+        const double droneControlDropChance = 0.9;
         const float collisionDamage = 100;
 
         protected Weapon weapon;

@@ -10,6 +10,7 @@ namespace SpaceShooter.Weapons
         public override string Name { get { return "Rocket Launcher"; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.3; } }
+        public override float ProjectileSpeed { get { return launchSpeed; } }
 
         public RocketLauncher()
             : base(magazineSize)

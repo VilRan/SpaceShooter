@@ -14,6 +14,7 @@ namespace SpaceShooter.Weapons
         public override string Name { get { return "Shotgun"; } }
         public override double ReloadDelay { get { return 1.25; } }
         public override double FirerateDelay { get { return 0.5; } }
+        public override float ProjectileSpeed { get { return shotSpeed; } }
 
         public Shotgun()
             :base(magazineSize)

@@ -11,6 +11,7 @@ namespace SpaceShooter.Weapons
         public override string Name { get { return "Flak Cannon"; } }
         public override double ReloadDelay { get { return 2; } }
         public override double FirerateDelay { get { return 0.35; } }
+        public override float ProjectileSpeed { get { return bulletSpeed; } }
 
         public FlakCannon()
             : base(magazineSize)

@@ -27,5 +27,13 @@ namespace SpaceShooter
             }
             return null;
         }
+
+        public static Vector2? FindInterceptDirection(Vector2 shooterPosition, Vector2 shooterVelocity, Vector2 targetPosition, Vector2 targetVelocity, float projectileSpeed)
+        {
+            Vector2? point = FindInterceptPoint(shooterPosition, shooterVelocity, targetPosition, targetVelocity, projectileSpeed);
+            if (point != null)
+                return Vector2.Normalize(point.Value - shooterPosition);
+            return null;
+        }
     }
 }

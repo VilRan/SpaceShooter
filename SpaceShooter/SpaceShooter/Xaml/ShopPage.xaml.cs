@@ -37,6 +37,9 @@ namespace SpaceShooter.Xaml
             this.playerIndex = playerIndex;
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Center;
+
+            if (Game.State is LevelGameState)
+                backButton.IsEnabled = false;
         }
 
         private void shop_DragItemsStarting(object sender, DragItemsStartingEventArgs e)

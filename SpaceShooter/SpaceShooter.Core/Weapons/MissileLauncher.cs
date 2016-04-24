@@ -11,6 +11,7 @@ namespace SpaceShooter.Weapons
         public override string Name { get { return "Missile Launcher"; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.5; } }
+        public override float ProjectileSpeed { get { return launchSpeed; } }
 
         public MissileLauncher()
             : base(magazineSize)

@@ -10,6 +10,7 @@ namespace SpaceShooter.Weapons
         public override string Name { get { return "Laser Cannon"; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.00; } }
+        public override float ProjectileSpeed { get { return speedOfLight; } }
 
         public LaserCannon()
             : base(magazineSize)

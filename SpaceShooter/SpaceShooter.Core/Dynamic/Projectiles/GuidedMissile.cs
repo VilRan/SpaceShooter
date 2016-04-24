@@ -40,15 +40,11 @@ namespace SpaceShooter.Dynamic
 
             if (target != null)
             {                
-                Vector2? intercept = VectorUtility.FindInterceptPoint(Position, Vector2.Zero, target.Position, target.Velocity, speed);
-                if(intercept != null)
+                Vector2? direction = VectorUtility.FindInterceptDirection(Position, Vector2.Zero, target.Position, target.AbsoluteVelocity, speed);
+                if(direction != null)
                 {
-                    Vector2 direction = intercept.Value - Position;                    
-                    direction.Normalize();
-
-                    Vector2 velocity = direction * speed;
-
-                    Velocity = Vector2.Lerp(Velocity, velocity, 0.03f);
+                    Vector2 targetVelocity = direction.Value * speed;
+                    Velocity = Vector2.Lerp(Velocity, targetVelocity, 0.03f);
                 }                
             }            
 

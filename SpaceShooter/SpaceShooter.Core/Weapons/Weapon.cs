@@ -16,6 +16,7 @@ namespace SpaceShooter.Weapons
         public abstract string Name { get; }
         public abstract double ReloadDelay { get; }
         public abstract double FirerateDelay { get; }
+        public abstract float ProjectileSpeed { get; }
         public bool CanFire { get { return firerateTimer <= 0 && MagazineCount > 0; } }
 
         public Weapon(int magazineSize)
