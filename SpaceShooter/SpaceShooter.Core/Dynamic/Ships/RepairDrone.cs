@@ -35,7 +35,10 @@ namespace SpaceShooter.Dynamic.Ships
         {
             Velocity = new Vector2(80, 0);
 
-            DynamicObject target = getTarget();
+            DynamicObject target = GetNearest(obj =>
+                obj.Faction == Faction
+                && obj.Category == ObjectCategory.Ship
+                && obj.CurrentDurability < obj.MaximumDurability);
 
             float seekingThreshold = seekingDistance;
             float repairThreshold = repairDistance;
@@ -82,32 +85,7 @@ namespace SpaceShooter.Dynamic.Ships
 
             base.OnUpdate(e);
         }
-
-        private DynamicObject getTarget()
-        {
-            DynamicObject target = null;
-            float nearest = float.MaxValue;
-            foreach (DynamicObject obj in Level.Objects)
-            {
-                if (!canTarget(obj))
-                    continue;
-                float distance = (obj.Position - Position).LengthSquared();
-                if (obj.CurrentDurability < obj.MaximumDurability && distance < nearest)
-                {
-                    target = obj;
-                    nearest = distance;
-                }
-            }
-            return target;
-        }
-
-        private bool canTarget(DynamicObject obj)
-        {
-            return obj.Faction == Faction 
-                && obj.Category == ObjectCategory.Ship
-                && obj.CurrentDurability < obj.MaximumDurability;
-        }
-
+        
         public override void OnCollision(Collision collision)
         {
             base.OnCollision(collision);

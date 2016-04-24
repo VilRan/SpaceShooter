@@ -42,17 +42,14 @@ namespace SpaceShooter.Dynamic.Ships
 
         public override void OnUpdate(UpdateEventArgs e)
         {
-            Player nearestPlayer = Level.Session.Players.
-                Where(player => !player.Ship.IsDying).
-                OrderBy(player => (player.Ship.Position - Position).LengthSquared()).
-                FirstOrDefault();
-            if (nearestPlayer == null)
+            DynamicObject target = GetNearestPlayer();
+            if (target == null)
                 return;
 
-            Vector2 shootingDirection = nearestPlayer.Ship.Position - Position;
+            Vector2 shootingDirection = target.Position - Position;
             shootingDirection.Normalize();
 
-            Vector2 chasingDirection = nearestPlayer.Ship.Position - Position;
+            Vector2 chasingDirection = target.Position - Position;
             chasingDirection.Normalize();
 
             float alertThreshold = alertDistance;
@@ -88,16 +85,16 @@ namespace SpaceShooter.Dynamic.Ships
                 catchThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
             }
 
-            float distanceFromPlayer = Vector2.Distance(Position, nearestPlayer.Ship.Position);
-            if (distanceFromPlayer > alertThreshold)
+            float distanceFromTarget = Vector2.Distance(Position, target.Position);
+            if (distanceFromTarget > alertThreshold)
             {
                 aiState = KamikazeAiState.Wander;
             }
-            else if (distanceFromPlayer > chaseThreshold)
+            else if (distanceFromTarget > chaseThreshold)
             {
                 aiState = KamikazeAiState.Alert;
             }
-            else if (distanceFromPlayer > catchThreshold)
+            else if (distanceFromTarget > catchThreshold)
             {
                 aiState = KamikazeAiState.Chase;
             }

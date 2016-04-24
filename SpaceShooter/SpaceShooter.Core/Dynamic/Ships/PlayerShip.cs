@@ -14,9 +14,9 @@ namespace SpaceShooter.Dynamic.Ships
         const float collisionDamage = 1000;
         const int score = -100;
 
+        public readonly Player Player;
         public ObservableCollection<InventoryItem> WeaponSlots = new ObservableCollection<InventoryItem>();
         int activeWeaponIndex = 0;
-        readonly Player player;
         bool isInvincible = false;
 
         public override int Score { get { return score; } }
@@ -30,7 +30,7 @@ namespace SpaceShooter.Dynamic.Ships
         public PlayerShip(AssetManager assets, Player player)
             : base(assets.PlayerShipTexture, null, Vector2.Zero, durability, Faction.Player)
         {
-            this.player = player;
+            Player = player;
             WeaponSlots.Add(new InventoryItem(new Machinegun(), 50));
         }
 
@@ -51,7 +51,7 @@ namespace SpaceShooter.Dynamic.Ships
 
         public override void OnUpdate(UpdateEventArgs e)
         {
-            Controller controller = player.Controller;
+            Controller controller = Player.Controller;
             KeyboardState keyboard = Keyboard.GetState();
 
             TryMove(e);
@@ -66,9 +66,9 @@ namespace SpaceShooter.Dynamic.Ships
 
         private void TryMove(UpdateEventArgs e)
         {
-            Controller controller = player.Controller;
+            Controller controller = Player.Controller;
 
-            Velocity = Level.Camera.Velocity;
+            Velocity = Camera.Velocity;
             Vector2 thrust = Vector2.Zero;
             if (controller.IsControlDown(Action.MoveUp))
                 thrust += new Vector2(0, -1);
@@ -115,13 +115,13 @@ namespace SpaceShooter.Dynamic.Ships
         private void TryFire(UpdateEventArgs e)
         {
             activeWeapon.Update(e.GameTime);
-            if (player.Controller.IsControlDown(Action.Fire))
+            if (Player.Controller.IsControlDown(Action.Fire))
                 activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(1, 0), this));
         }
 
         private void TrySwitchWeapon()
         {
-            Controller controller = player.Controller;
+            Controller controller = Player.Controller;
 
             if (controller.IsControlPressed(Action.PreviousWeapon))
             {

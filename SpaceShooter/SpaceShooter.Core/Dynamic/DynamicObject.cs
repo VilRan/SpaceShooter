@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceShooter.Dynamic.Ships;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace SpaceShooter.Dynamic
         Durability durability;
         bool isRemoving = false;
 
-        public virtual Vector2 RelativeVelocity { get { return Velocity - Level.Camera.Velocity; } set { Velocity = value + Level.Camera.Velocity; } }
+        public virtual Vector2 RelativeVelocity { get { return Velocity - Camera.Velocity; } set { Velocity = value + Camera.Velocity; } }
         public virtual Vector2 AbsoluteVelocity { get { return Velocity; } }
         public virtual float HitRadius { get { return hitRadius; } }
         protected abstract float CollisionDamage { get; }
@@ -139,6 +140,35 @@ namespace SpaceShooter.Dynamic
         public void Remove()
         {
             isRemoving = true;
+        }
+
+        protected DynamicObject GetNearest(Func<DynamicObject, bool> meetsCondition)
+        {
+            DynamicObject nearestObject = null;
+            float nearestDistance = float.MaxValue;
+            foreach (DynamicObject obj in Level.Objects)
+            {
+                if (!meetsCondition(obj))
+                    continue;
+                float distance = (obj.Position - Position).LengthSquared();
+                if (distance < nearestDistance)
+                {
+                    nearestObject = obj;
+                    nearestDistance = distance;
+                }
+            }
+            return nearestObject;
+        }
+
+        protected PlayerShip GetNearestPlayer()
+        {
+            Player nearestPlayer = Level.Session.Players.
+                Where(player => !player.Ship.IsDying).
+                OrderBy(player => (player.Ship.Position - Position).LengthSquared()).
+                FirstOrDefault();
+            if (nearestPlayer != null)
+                return nearestPlayer.Ship;
+            return null;
         }
     }
 

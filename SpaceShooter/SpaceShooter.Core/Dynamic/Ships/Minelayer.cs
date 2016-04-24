@@ -39,11 +39,8 @@ namespace SpaceShooter.Dynamic.Ships
 
         public override void OnUpdate(UpdateEventArgs e)
         {
-            Player nearestPlayer = Level.Session.Players.
-                Where(player => !player.Ship.IsDying).
-                OrderBy(player => (player.Ship.Position - Position).LengthSquared()).
-                FirstOrDefault();
-            if (nearestPlayer == null)
+            DynamicObject target = GetNearestPlayer();
+            if (target == null)
                 return;
 
             float alertThreshold = alertDistance;
@@ -62,7 +59,7 @@ namespace SpaceShooter.Dynamic.Ships
                 alertThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
             }
 
-            float distanceFromPlayer = Vector2.Distance(Position, nearestPlayer.Ship.Position);
+            float distanceFromPlayer = Vector2.Distance(Position, target.Position);
             if (distanceFromPlayer > alertThreshold)
             {
                 aiState = MinelayerAiState.Wander;

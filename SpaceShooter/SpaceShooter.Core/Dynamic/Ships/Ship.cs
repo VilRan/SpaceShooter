@@ -9,7 +9,7 @@ namespace SpaceShooter.Dynamic.Ships
         public override ObjectCategory Category { get { return ObjectCategory.Ship; } }
         protected virtual bool IsHealthbarVisible { get { return CurrentDurability < MaximumDurability; } }
         protected Point HealthbarSize { get { return new Vector2(HitRadius * 4, HitRadius / 4).ToPoint(); } }
-        protected Point HealthbarPosition { get { return (Position + new Vector2(-HealthbarSize.X / 2, HitRadius * 2) - Level.Camera.Position).ToPoint(); } }
+        protected Point HealthbarPosition { get { return (Position + new Vector2(-HealthbarSize.X / 2, HitRadius * 2) - Camera.Position).ToPoint(); } }
 
         public Ship(Texture2D texture, Level level, Vector2 position, float durability, Faction faction)
             : base(texture, level, position, Vector2.Zero, durability, faction)

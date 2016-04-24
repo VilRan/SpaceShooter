@@ -16,19 +16,13 @@ namespace SpaceShooter.Dynamic.Ships
 
         public override void OnUpdate(UpdateEventArgs e)
         {
-            Player nearestPlayer = Level.Session.Players.
-                Where(player => !player.Ship.IsDying).
-                OrderBy(player => (player.Ship.Position - Position).LengthSquared()).
-                FirstOrDefault();            
-
-            if (nearestPlayer != null)
+            DynamicObject target = GetNearestPlayer();
+            if (target != null)
             {
-                Vector2 shootingDirection = nearestPlayer.Ship.Position - Position;
+                Vector2 shootingDirection = target.Position - Position;
                 shootingDirection.Normalize();
                 weapon.TryFire(new FireEventArgs(Level, Position, shootingDirection, this));
-            }                
-
-            Velocity = new Vector2(0, 0);
+            }
             
             base.OnUpdate(e);
         }

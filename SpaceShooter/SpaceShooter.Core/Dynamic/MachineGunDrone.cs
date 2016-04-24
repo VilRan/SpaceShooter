@@ -27,19 +27,7 @@ namespace SpaceShooter.Dynamic
         {
             weapon.Update(e.GameTime);
 
-            DynamicObject target = null;
-            float nearest = float.MaxValue;
-            foreach (DynamicObject obj in Level.Objects)
-            {
-                if (obj.Faction == Faction || obj.Category != ObjectCategory.Ship)
-                    continue;
-                float distance = (obj.Position - Position).LengthSquared();
-                if (distance < nearest)
-                {
-                    target = obj;
-                    nearest = distance;
-                }
-            }
+            DynamicObject target = GetNearest(obj => obj.Faction != Faction && obj.Category == ObjectCategory.Ship);
             if (target != null)
             {
                 Vector2? direction = VectorUtility.FindInterceptDirection(Position, Camera.Velocity, target.Position, target.AbsoluteVelocity, weapon.ProjectileSpeed);

@@ -29,7 +29,6 @@ namespace SpaceShooter.Dynamic.Ships
         const double repairKitDropChance = 0.3;
         
         Weapon weapon;
-        //List<Weapon> weapons = new List<Weapon>();
         FighterAiState aiState = FighterAiState.Wander;
 
         public override int Score { get { return score; } }
@@ -38,29 +37,20 @@ namespace SpaceShooter.Dynamic.Ships
         public AdvancedFighter(Level level, Vector2 position)
             : base(level.Game.Assets.AsteroidTexture, level, position, durability)
         {
-            /*
-            weapons.Add(new Machinegun());
-            weapons.Add(new RocketLauncher());
-            activeWeapon = weapons[0];
-            */
             weapon = new Machinegun();
-
             weapon.MagazineSize = 3;
             weapon.MagazineCount = 3;
         }
 
         public override void OnUpdate(UpdateEventArgs e)
         {
-            Player nearestPlayer = Level.Session.Players.
-                Where(player => !player.Ship.IsDying).
-                OrderBy(player => (player.Ship.Position - Position).LengthSquared()).
-                FirstOrDefault();
-            if (nearestPlayer == null)
+            DynamicObject target = GetNearestPlayer();
+            if (target == null)
                 return;
 
-            Vector2 closeFightPosition = nearestPlayer.Ship.Position + new Vector2(200, 0);
+            Vector2 closeFightPosition = target.Position + new Vector2(200, 0);
 
-            Vector2 shootingDirection = nearestPlayer.Ship.Position - Position;
+            Vector2 shootingDirection = target.Position - Position;
             shootingDirection.Normalize();
 
             Vector2 chasingDirection = closeFightPosition - Position;
@@ -104,7 +94,7 @@ namespace SpaceShooter.Dynamic.Ships
                 weapon.Update(e.GameTime);
                 weapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
 
-                Velocity = Level.Camera.Velocity;
+                Velocity = Camera.Velocity;
 
                 catchThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
             }

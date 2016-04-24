@@ -52,16 +52,13 @@ namespace SpaceShooter.Dynamic.Ships
         {
             attackTimer -= (float)e.ElapsedSeconds;
 
-            Player nearestPlayer = Level.Session.Players.
-                Where(player => !player.Ship.IsDying).
-                OrderBy(player => (player.Ship.Position - Position).LengthSquared()).
-                FirstOrDefault();
-            if (nearestPlayer == null)
+            PlayerShip target = GetNearestPlayer();
+            if (target == null)
                 return;
 
             Vector2 closeFightPosition;
             Vector2 chasingDirection;
-            Vector2 shootingDirection = nearestPlayer.Ship.Position - Position;
+            Vector2 shootingDirection = target.Position - Position;
             shootingDirection.Normalize();
             
             float alertThreshold = alertDistance;
@@ -70,7 +67,7 @@ namespace SpaceShooter.Dynamic.Ships
 
             if (attackTimer >= 5 && attackTimer <= 15)
             {
-                closeFightPosition = nearestPlayer.Ship.Position + new Vector2(200, 0);
+                closeFightPosition = target.Position + new Vector2(200, 0);
                 chasingDirection = closeFightPosition - Position;
                 chasingDirection.Normalize();
             }
@@ -113,7 +110,7 @@ namespace SpaceShooter.Dynamic.Ships
                 activeWeapon.Update(e.GameTime);
                 activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
 
-                Velocity = Level.Camera.Velocity;
+                Velocity = Camera.Velocity;
 
                 catchThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
             }
@@ -123,7 +120,7 @@ namespace SpaceShooter.Dynamic.Ships
                 activeWeapon.Update(e.GameTime);
                 activeWeapon.TryFire(new FireEventArgs(Level, Position, shootingDirection, this));
 
-                Velocity = Level.Camera.Velocity;
+                Velocity = Camera.Velocity;
 
                 catchThreshold += hysteresis / 2 * (float)e.ElapsedSeconds;
             }
@@ -135,9 +132,9 @@ namespace SpaceShooter.Dynamic.Ships
 
                 Position += evadeDirection * (float)e.ElapsedSeconds * maxSpeed * 2;                                
             }
-            Controller controller = nearestPlayer.Controller;
+            Controller controller = target.Player.Controller;
 
-            float distanceFromNearestPlayer = Vector2.Distance(Position, nearestPlayer.Ship.Position);
+            float distanceFromNearestPlayer = Vector2.Distance(Position, target.Position);
             float distanceFromPlayer = Vector2.Distance(Position, closeFightPosition);
             if (distanceFromPlayer > alertThreshold)
             {

@@ -21,7 +21,7 @@ namespace SpaceShooter.Dynamic.PowerUps
         public override void OnDeath(DeathEventArgs e)
         {
             base.OnDeath(e);
-            MachinegunDrone machinegunDrone = new MachinegunDrone(Level, Position, Level.Camera.Velocity);
+            MachinegunDrone machinegunDrone = new MachinegunDrone(Level, Position, Camera.Velocity);
             Level.Objects.Add(machinegunDrone);
         }
     }
