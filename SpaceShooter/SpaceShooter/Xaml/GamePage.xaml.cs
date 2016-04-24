@@ -14,15 +14,11 @@ namespace SpaceShooter
     {
 		public readonly SpaceShooterGame Game;
         Page subPage;
-        double healthbarValue = 100;
-        double ammobarValue = 100;
         int score = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int ScoreViewValue { get { return score; } set { score = value; NotifyPropertyChanged(); } }
-        public double HealthbarValue  { get { return healthbarValue; } set { healthbarValue = value; NotifyPropertyChanged(); } }
-        public double AmmobarValue { get { return ammobarValue; } set { ammobarValue = value; NotifyPropertyChanged(); } }
 
         UIElementCollection Children { get { return swapChainPanel.Children; } }
 

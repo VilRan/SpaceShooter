@@ -9,6 +9,5 @@ namespace SpaceShooter
         void NavigateToGame();
         void NavigateToMainMenu();
         void NavigateToHighscoreEntry();
-        void SetHealthbar(double value);
     }
 }

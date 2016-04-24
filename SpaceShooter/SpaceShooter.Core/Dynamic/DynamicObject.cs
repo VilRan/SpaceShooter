@@ -64,6 +64,11 @@ namespace SpaceShooter.Dynamic
             if (!PlayArea.Contains(Position))
                 Remove();
         }
+
+        public override void Draw(DrawEventArgs e)
+        {
+            base.Draw(e);
+        }
         
         public virtual void Update(UpdateEventArgs e, int collisionStartIndex)
         {

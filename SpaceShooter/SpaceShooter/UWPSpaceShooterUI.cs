@@ -21,10 +21,5 @@ namespace SpaceShooter
         {
             gamePage.NavigateTo(new MainMenu());
         }
-
-        public void SetHealthbar(double value)
-        {
-            gamePage.HealthbarValue = value;
-        }
     }
 }

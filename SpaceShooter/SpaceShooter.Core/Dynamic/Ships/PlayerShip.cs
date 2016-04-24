@@ -141,15 +141,7 @@ namespace SpaceShooter.Dynamic.Ships
         public override void Damage(DamageEventArgs e)
         {
             if (!isInvincible)
-            {
                 base.Damage(e);
-                UI.SetHealthbar(100 * CurrentDurability / MaximumDurability);
-            }
-        }
-        public override void Repair(float amount)
-        {
-            base.Repair(amount);
-            UI.SetHealthbar(100 * CurrentDurability / MaximumDurability);
         }
 
         public bool TryRemoveWeapon(InventoryItem weapon)
