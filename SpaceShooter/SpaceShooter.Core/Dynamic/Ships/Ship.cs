@@ -56,8 +56,11 @@ namespace SpaceShooter.Dynamic.Ships
         {
             base.OnDamageEffects(e);
             int minParticles = (int)Math.Round(Math.Min(e.DamageAmount, CurrentDurability) / 10);
-            int maxParticles = minParticles * 2;
-            TimedParticle.Emit(Level, e.Collision.CollisionPosition, Color.White, 0.25, 1.0, 1024, minParticles, maxParticles);
+            if (minParticles > 0)
+            {
+                int maxParticles = minParticles * 2;
+                TimedParticle.Emit(Level, e.Collision.CollisionPosition, Color.White, 0.25, 1.0, 1024, minParticles, maxParticles);
+            }
         }
     }
 }
