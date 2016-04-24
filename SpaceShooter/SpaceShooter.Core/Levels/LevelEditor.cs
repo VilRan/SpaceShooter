@@ -40,6 +40,17 @@ namespace SpaceShooter
             {
                 blueprint.Spawns.Add(new SineFighterSpawn(Difficulty.Casual, position));
             }
+            if (mouse.RightButton == ButtonState.Pressed)
+            {
+                for (int i = 0; i < blueprint.Spawns.Count; i++)
+                {
+                    Spawn spawn = blueprint.Spawns[i];
+                    if ((position - spawn.Position).LengthSquared() <= 16 * 16)
+                        blueprint.Spawns.Remove(spawn);
+                }
+            }
+
+            // TODO: Replace temporary hotkeys.
             if (keyboard.IsKeyDown(Keys.C) && previousKeyboard.IsKeyUp(Keys.O))
             {
                 blueprint.Spawns.Clear();
