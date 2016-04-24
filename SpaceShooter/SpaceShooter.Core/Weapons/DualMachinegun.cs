@@ -1,12 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using SpaceShooter.Dynamic;
+using SpaceShooter.Dynamic.Ships;
 
 namespace SpaceShooter.Weapons
 {
     class DualMachinegun : Weapon
     {
         const float bulletSpeed = 32 * TileSize;
-        const float bulletOffset = 20;
+        const float bulletOffset = 12;
         const int magazineSize = 50;
         
         public override string Name { get { return "Dual Machinegun"; } }
@@ -28,6 +30,13 @@ namespace SpaceShooter.Weapons
 
             Bullet secondBullet = new Bullet(e.Level, e.Position + firingPosition, new Vector2(bulletSpeed, 0),e.Shooter.Faction);
             e.Level.Objects.Add(secondBullet);
+
+            if (e.Shooter is PlayerShip)
+            {
+                SoundEffectInstance sound = e.Assets.ShotSound.CreateInstance();
+                sound.Volume = 0.25f * (float)(0.5 + 0.5 * e.Random.NextDouble());
+                sound.Play();
+            }
         }
     }
 }

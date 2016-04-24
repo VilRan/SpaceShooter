@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceShooter.Dynamic;
+using SpaceShooter.Dynamic.Ships;
 using SpaceShooter.Particles;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SpaceShooter
 {
@@ -21,6 +23,7 @@ namespace SpaceShooter
         
         public Rectangle PlayArea { get { return Camera.Bounds; } }
         public SpaceShooterGame Game { get { return Session.Game; } }
+        public ISpaceShooterUI UI { get { return SpaceShooterGame.UI; } }
 
         public Level(Session session, LevelBlueprint blueprint)
         {
@@ -75,6 +78,7 @@ namespace SpaceShooter
                     if (obj.IsDying)
                          obj.OnDeath(new DeathEventArgs());
                     Objects.RemoveAt(index);
+                    OnObjectRemoved(obj);
                     index--;
                 }
             }
@@ -102,6 +106,18 @@ namespace SpaceShooter
             player.Ship.Level = this;
             player.Ship.Position = position;
             Objects.Add(player.Ship);
+        }
+
+        void OnObjectRemoved(DynamicObject obj)
+        {
+            if (obj is EnemyShip)
+            {
+                int enemyCount = Inactive.Where(o => o is EnemyShip).Count() + Objects.Where(o => o is EnemyShip).Count();
+                if (enemyCount == 0)
+                {
+                    UI.NavigateToShop();
+                }
+            }
         }
     }
 }

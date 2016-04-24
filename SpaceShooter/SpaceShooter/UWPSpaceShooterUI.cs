@@ -21,5 +21,10 @@ namespace SpaceShooter
         {
             gamePage.NavigateTo(new MainMenu());
         }
+
+        public void NavigateToShop()
+        {
+            gamePage.NavigateTo(new ShopPage(0));
+        }
     }
 }

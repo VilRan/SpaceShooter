@@ -28,29 +28,32 @@ namespace SpaceShooter
         public LevelBlueprint(int width, int height, Random random, int challengeRating)
             : this(width, height)
         {
-            int minX = SpaceShooterGame.InternalResolution.Right;
-            int maxX = Width;
-
-            WeightedList<string> spawnTypes = Spawn.GetWeightedListOfTypes(challengeRating);
+            if (width < 5000)
+                throw new Exception("A random level must be at least 5000 pixels wide.");
             
-            for (int i = 0; i < 100; i++)
-            {
-                Vector2 position = new Vector2(random.Next(minX, maxX), random.Next(0, Height));
-                Spawn spawn = Spawn.Create(Difficulty.Casual, position, spawnTypes.SelectRandom(random));
-                Spawns.Add(spawn);
-            }
-            for (int i = 0; i < 100; i++)
-            {
-                Vector2 position = new Vector2(random.Next(minX, maxX), random.Next(0, Height));
-                Spawn spawn = Spawn.Create(Difficulty.Hardcore, position, spawnTypes.SelectRandom(random));
-                Spawns.Add(spawn);
-            }
-            for (int i = 0; i < 100; i++)
-            {
-                Vector2 position = new Vector2(random.Next(minX, maxX), random.Next(0, Height));
-                Spawn spawn = Spawn.Create(Difficulty.Nightmare, position, spawnTypes.SelectRandom(random));
-                Spawns.Add(spawn);
-            }
+            WeightedList<string> spawnTypes = Spawn.GetWeightedListOfTypes(challengeRating);
+
+            int minX = SpaceShooterGame.InternalResolution.Right;
+            int maxX = Width - minX - AssetManager.TileSize * 2;
+
+            int casualEnemies = 20 + 20 * challengeRating;
+            for (int i = 0; i < casualEnemies; i++)
+                AddSpawn(Difficulty.Casual, random, minX, maxX, spawnTypes);
+
+            int hardcoreEnemies = 20 + 20 * challengeRating;
+            for (int i = 0; i < hardcoreEnemies; i++)
+                AddSpawn(Difficulty.Hardcore, random, minX, maxX, spawnTypes);
+
+            int nightmareEnemies = 20 + 20 * challengeRating;
+            for (int i = 0; i < nightmareEnemies; i++)
+                AddSpawn(Difficulty.Nightmare, random, minX, maxX, spawnTypes);
+        }
+
+        private void AddSpawn(Difficulty difficulty, Random random, int minX, int maxX, WeightedList<string> spawnTypes)
+        {
+            Vector2 position = new Vector2(random.Next(minX, maxX), random.Next(0, Height));
+            Spawn spawn = Spawn.Create(difficulty, position, spawnTypes.SelectRandom(random));
+            Spawns.Add(spawn);
         }
 
         public LevelBlueprint(XmlElement xml)

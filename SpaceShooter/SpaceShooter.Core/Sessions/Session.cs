@@ -9,6 +9,7 @@ namespace SpaceShooter
         public Level ActiveLevel;
         public SpaceShooterGame Game;
         int score = 0;
+        int level = 0;
 
         public int Score
         {
@@ -36,9 +37,10 @@ namespace SpaceShooter
 
         public void StartNextLevel()
         {
+            level++;
             foreach (Player player in Players)
                 player.Ship.Repair(10000);
-            ActiveLevel = new Level(this, new LevelBlueprint(25600, 1080, Game.Random, 0));
+            ActiveLevel = new Level(this, new LevelBlueprint(16000, 1080, Game.Random, level));
         }
     }
 }

@@ -6,10 +6,10 @@ namespace SpaceShooter.Weapons
 {
     class Shotgun : Weapon
     {
-        const float shotSpeed = 32 * TileSize;
-        const float shotSpread = (float)(Math.PI / 8);
-        const int shotNumber = 25;
-        const int magazineSize = 5;
+        const float shotSpeed = 28 * TileSize;
+        const float shotSpread = (float)(Math.PI / 16);
+        const int shotNumber = 20;
+        const int magazineSize = 4;
 
         public override string Name { get { return "Shotgun"; } }
         public override double ReloadDelay { get { return 1.25; } }

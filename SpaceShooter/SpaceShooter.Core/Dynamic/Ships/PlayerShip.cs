@@ -24,7 +24,7 @@ namespace SpaceShooter.Dynamic.Ships
         protected override Color Color { get { return isInvincible ? Color.Yellow : base.Color; } }
         protected override float CollisionDamage { get { return collisionDamage; } }
         Weapon activeWeapon { get { return WeaponSlots[activeWeaponIndex].Weapon; } }
-        Point ammobarPosition { get { return HealthbarPosition + new Point(0, HealthbarSize.Y); } }
+        Point ammobarPosition { get { return HealthbarPosition + new Point(0, HealthbarSize.Y * 3 / 2); } }
         Point ammobarSize { get { return new Point(HealthbarSize.X, HealthbarSize.Y); } }
 
         public PlayerShip(AssetManager assets, Player player)

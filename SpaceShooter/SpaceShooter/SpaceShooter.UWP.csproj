@@ -107,8 +107,8 @@
     <Compile Include="Xaml\HighscorePage.xaml.cs">
       <DependentUpon>HighscorePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Xaml\MainMenu.xaml.cs">
-      <DependentUpon>MainMenu.xaml</DependentUpon>
+    <Compile Include="Xaml\MainMenuPage.xaml.cs">
+      <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Xaml\NewGamePage.xaml.cs">
       <DependentUpon>NewGamePage.xaml</DependentUpon>
@@ -214,7 +214,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Xaml\MainMenu.xaml">
+    <Page Include="Xaml\MainMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

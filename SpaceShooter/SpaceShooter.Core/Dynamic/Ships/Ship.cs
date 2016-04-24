@@ -29,9 +29,8 @@ namespace SpaceShooter.Dynamic.Ships
             Point coloredSize = new Point((int)(HealthbarSize.X * CurrentDurability / MaximumDurability), HealthbarSize.Y);
             Rectangle destination = new Rectangle(HealthbarPosition, HealthbarSize);
             Rectangle coloredDestination = new Rectangle(HealthbarPosition, coloredSize);
-            Color color = Color.Lerp(Color.Red, Color.Green, (float)(CurrentDurability / MaximumDurability));
             e.SpriteBatch.Draw(Game.Assets.PixelTexture, destination, Color.DarkGray);
-            e.SpriteBatch.Draw(Game.Assets.PixelTexture, coloredDestination, color);
+            e.SpriteBatch.Draw(Game.Assets.PixelTexture, coloredDestination, Color.Red);
         }
 
         public override void OnDeath(DeathEventArgs e)

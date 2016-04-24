@@ -9,5 +9,6 @@ namespace SpaceShooter
         void NavigateToGame();
         void NavigateToMainMenu();
         void NavigateToHighscoreEntry();
+        void NavigateToShop();
     }
 }
