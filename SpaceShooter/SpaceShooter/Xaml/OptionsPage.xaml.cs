@@ -15,12 +15,11 @@ namespace SpaceShooter.Xaml
     /// </summary>
     public sealed partial class OptionsPage : Page, INotifyPropertyChanged
     {
-        public Settings Settings { get { return App.Current.GamePage.Game.Settings; }}
-
+        GamePage GamePage { get { return App.Current.GamePage; } }
+        SpaceShooterGame Game { get { return GamePage.Game; } }
+        Settings Settings { get { return Game.Settings; } }
         public double MasterVolume { get { return Settings.MasterVolume * 100; } set { Settings.MasterVolume = (float)value / 100; NotifyPropertyChanged(); } }
-
         public double MusicVolume { get { return Settings.MusicVolume * 100; } set { Settings.MusicVolume = (float)value / 100; NotifyPropertyChanged(); } }
-
         public double SoundVolume { get { return Settings.SoundVolume * 100; } set { Settings.SoundVolume = (float)value / 100; NotifyPropertyChanged(); } }
 
         public OptionsPage()
@@ -31,37 +30,24 @@ namespace SpaceShooter.Xaml
 
             ApplicationView view = ApplicationView.GetForCurrentView();
             if (view.IsFullScreenMode)
-            {
                 screenModeComboBox.SelectedItem = fullscreenItem;
-            }
             else
-            {
                 screenModeComboBox.SelectedItem = windowedItem;
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void backToMainMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.GamePage.NavigateTo(new MainMenu());
-        }
-
-        private void masterVolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-
+            GamePage.NavigateTo(new MainMenu());
         }
 
         private void screenModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.First() == fullscreenItem)
-            {
                 App.EnterFullscreen();
-            }
             else if (e.AddedItems.First() == windowedItem)
-            {
                 App.ExitFullscreen();
-            }
         }
 
         void NotifyPropertyChanged([CallerMemberName]string propertyName = null)

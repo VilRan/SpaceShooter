@@ -22,12 +22,14 @@ namespace SpaceShooter.Xaml
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Player Player { get { return App.Current.GamePage.Game.Session.Players[playerIndex]; } }
-        public PlayerShip Ship { get { return Player.Ship; } }
-        public Shop Shop { get { return Player.Shop; } }
-        public ObservableCollection<InventoryItem> Weapons { get { return Ship.WeaponSlots; } }
-        public string PlayerString { get { return "Player " + (playerIndex + 1); } }
-        public double Money { get { return Player.Money; } set { Player.Money = value; NotifyPropertyChanged(); } }
+        GamePage GamePage { get { return App.Current.GamePage; } }
+        SpaceShooterGame Game { get { return GamePage.Game; } }
+        Player Player { get { return Game.Session.Players[playerIndex]; } }
+        PlayerShip Ship { get { return Player.Ship; } }
+        Shop Shop { get { return Player.Shop; } }
+        ObservableCollection<InventoryItem> Weapons { get { return Ship.WeaponSlots; } }
+        string PlayerString { get { return "Player " + (playerIndex + 1); } }
+        double Money { get { return Player.Money; } set { Player.Money = value; NotifyPropertyChanged(); } }
 
         public ShopPage(int playerIndex)
         {
@@ -119,23 +121,22 @@ namespace SpaceShooter.Xaml
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
-            SpaceShooterGame game = App.Current.GamePage.Game;
-            Session session = game.Session;
+            Session session = Game.Session;
             if (playerIndex < session.Players.Count - 1)
             {
-                App.Current.GamePage.NavigateTo(new ShopPage(playerIndex + 1));
+                GamePage.NavigateTo(new ShopPage(playerIndex + 1));
             }
             else
             {
                 session.StartNextLevel();
-                game.State = new LevelGameState(game);
+                Game.State = new LevelGameState(Game);
                 App.Current.GamePage.NavigateTo();
             }
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.GamePage.NavigateTo(new MainMenu());
+            GamePage.NavigateTo(new MainMenu());
         }
         
         void NotifyPropertyChanged([CallerMemberName]string propertyName = null)

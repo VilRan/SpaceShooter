@@ -11,26 +11,23 @@ namespace SpaceShooter.Xaml
     /// </summary>
     public sealed partial class HighscorePage : Page
     {
-        ObservableCollection<Highscore> highscores = new ObservableCollection<Highscore>(App.Current.GamePage.Game.Highscores.Items);
+        ObservableCollection<Highscore> highscores;
 
-        public ObservableCollection<Highscore> Highscores
-        {
-            get
-            {
-                return highscores;
-            }
-        }
+        public ObservableCollection<Highscore> Highscores { get { return highscores; } }
+        GamePage GamePage { get { return App.Current.GamePage; } }
+        SpaceShooterGame Game { get { return GamePage.Game; } }
 
         public HighscorePage()
         {
             this.InitializeComponent();
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Center;
+            highscores = new ObservableCollection<Highscore>(Game.Highscores.Items);
         }    
 
         private void backToMainMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.GamePage.NavigateTo(new MainMenu());
+            GamePage.NavigateTo(new MainMenu());
         }
     }
 }

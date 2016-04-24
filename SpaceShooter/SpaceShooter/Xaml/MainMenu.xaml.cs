@@ -11,6 +11,9 @@ namespace SpaceShooter.Xaml
     /// </summary>
     public sealed partial class MainMenu : Page
     {
+        GamePage GamePage { get { return App.Current.GamePage; } }
+        SpaceShooterGame Game { get { return GamePage.Game; } }
+
         public MainMenu()
         {
             this.InitializeComponent();
@@ -20,18 +23,15 @@ namespace SpaceShooter.Xaml
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
-            GamePage gamePage = App.Current.GamePage;
-            SpaceShooterGame game = gamePage.Game;
-            
-            if (game.State is LevelGameState)
+            if (Game.State is LevelGameState)
             {
-                if (game.Session.ActiveLevel != null)
-                    App.Current.GamePage.NavigateTo();
+                if (Game.Session.ActiveLevel != null)
+                    GamePage.NavigateTo();
                 else
-                    App.Current.GamePage.NavigateTo(new ShopPage(0));
+                    GamePage.NavigateTo(new ShopPage(0));
             }
-            else if (game.State is EditorGameState)
-                App.Current.GamePage.NavigateTo();
+            else if (Game.State is EditorGameState)
+                GamePage.NavigateTo();
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)
@@ -41,17 +41,17 @@ namespace SpaceShooter.Xaml
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.GamePage.NavigateTo(new NewGamePage());     
+            GamePage.NavigateTo(new NewGamePage());     
         }
 
         private void scoresButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.GamePage.NavigateTo(new HighscorePage());
+            GamePage.NavigateTo(new HighscorePage());
         }
 
         private void optionsButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.GamePage.NavigateTo(new OptionsPage());
+            GamePage.NavigateTo(new OptionsPage());
         }
     }
 }

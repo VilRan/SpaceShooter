@@ -13,6 +13,8 @@ namespace SpaceShooter.Xaml
         int score;
 
         string scoreString { get { return "Score: " + score; } }
+        GamePage GamePage { get { return App.Current.GamePage; } }
+        SpaceShooterGame Game { get { return GamePage.Game; } }
 
         public EnterHighscorePage(int score)
         {
@@ -35,9 +37,8 @@ namespace SpaceShooter.Xaml
 
         void SaveAndExit()
         {
-            GamePage gamepage = App.Current.GamePage;
-            gamepage.Game.Highscores.Add(new Highscore(nameBox.Text, score));
-            gamepage.NavigateTo(new HighscorePage());
+            Game.Highscores.Add(new Highscore(nameBox.Text, score));
+            GamePage.NavigateTo(new HighscorePage());
         }
     }
 }

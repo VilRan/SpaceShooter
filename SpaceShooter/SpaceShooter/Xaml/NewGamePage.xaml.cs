@@ -10,6 +10,9 @@ namespace SpaceShooter.Xaml
     /// </summary>
     public sealed partial class NewGamePage : Page
     {
+        GamePage GamePage { get { return App.Current.GamePage; } }
+        SpaceShooterGame Game { get { return GamePage.Game; } }
+
         public NewGamePage()
         {
             this.InitializeComponent();
@@ -24,13 +27,13 @@ namespace SpaceShooter.Xaml
                 difficulty = Difficulty.Hardcore;
             else if ((bool)nightmareRadioButton.IsChecked)
                 difficulty = Difficulty.Nightmare;
+
             int numberOfPlayers = 1;
             if ((bool)multiPlayerRadioButton.IsChecked)
-            {
                 numberOfPlayers = 2;
-            }
-            App.Current.GamePage.Game.StartNewSession(difficulty, numberOfPlayers);
-            App.Current.GamePage.NavigateTo(new ShopPage(0));
+
+            Game.StartNewSession(difficulty, numberOfPlayers);
+            GamePage.NavigateTo(new ShopPage(0));
         }
     }
 }
