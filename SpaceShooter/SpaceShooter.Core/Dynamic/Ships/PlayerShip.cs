@@ -21,24 +21,32 @@ namespace SpaceShooter.Dynamic.Ships
 
         public override int Score { get { return score; } }
         protected override Rectangle PlayArea { get { return Level.PlayArea; } }
-        protected override Color Color
-        {
-            get
-            {
-                if (!isInvincible)
-                    return base.Color;
-                else
-                    return Color.Yellow;
-            }
-        }
+        protected override Color Color { get { return isInvincible ? Color.Yellow : base.Color; } }
         protected override float CollisionDamage { get { return collisionDamage; } }
         Weapon activeWeapon { get { return WeaponSlots[activeWeaponIndex].Weapon; } }
+        Point ammobarPosition { get { return HealthbarPosition + new Point(0, HealthbarSize.Y); } }
+        Point ammobarSize { get { return new Point(HealthbarSize.X, HealthbarSize.Y); } }
 
         public PlayerShip(AssetManager assets, Player player)
             : base(assets.PlayerShipTexture, null, Vector2.Zero, durability, Faction.Player)
         {
             this.player = player;
             WeaponSlots.Add(new InventoryItem(new Machinegun(), 50));
+        }
+
+        public override void Draw(DrawEventArgs e)
+        {
+            base.Draw(e);
+            DrawAmmobar(e);
+        }
+
+        private void DrawAmmobar(DrawEventArgs e)
+        {
+            Point coloredSize = new Point(ammobarSize.X * activeWeapon.MagazineCount / activeWeapon.MagazineSize, ammobarSize.Y);
+            Rectangle destination = new Rectangle(ammobarPosition, ammobarSize);
+            Rectangle coloredDestination = new Rectangle(ammobarPosition, coloredSize);
+            e.SpriteBatch.Draw(Game.Assets.PixelTexture, destination, Color.DarkGray);
+            e.SpriteBatch.Draw(Game.Assets.PixelTexture, coloredDestination, Color.Yellow);
         }
 
         public override void OnUpdate(UpdateEventArgs e)
