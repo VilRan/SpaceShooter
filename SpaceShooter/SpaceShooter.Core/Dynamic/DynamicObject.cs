@@ -56,7 +56,7 @@ namespace SpaceShooter.Dynamic
 
         public virtual void OnDeath(DeathEventArgs e)
         {
-
+            OnDeathEffects(e);
         }
 
         public virtual void OnUpdate(UpdateEventArgs e)
@@ -76,6 +76,17 @@ namespace SpaceShooter.Dynamic
         {
             CheckCollisions(e, collisionStartIndex);
             OnUpdate(e);
+        }
+
+        public virtual void Repair(float amount)
+        {
+            durability.Current += amount;
+        }
+
+        public virtual void Damage(DamageEventArgs e)
+        {
+            durability.Current -= e.DamageAmount;
+            OnDamageEffects(e);
         }
 
         public void CheckCollisions(UpdateEventArgs e, int startIndex)
@@ -111,6 +122,16 @@ namespace SpaceShooter.Dynamic
             return true;
         }
 
+        protected virtual void OnDeathEffects(DeathEventArgs e)
+        {
+
+        }
+
+        protected virtual void OnDamageEffects(DamageEventArgs e)
+        {
+
+        }
+
         public bool TryActivate()
         {
             if (Level.PlayArea.Contains(Position))
@@ -120,16 +141,6 @@ namespace SpaceShooter.Dynamic
                 return true;
             }
             return false;
-        }
-
-        public virtual void Repair(float amount)
-        {
-            durability.Current += amount;
-        }
-
-        public virtual void Damage(DamageEventArgs e)
-        {
-            durability.Current -= e.DamageAmount;
         }
 
         public void Die()

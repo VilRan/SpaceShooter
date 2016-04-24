@@ -120,18 +120,10 @@ namespace SpaceShooter.Dynamic.Ships
             base.OnUpdate(e);
         }
 
-        public override void OnCollision(Collision e)
-        {
-            base.OnCollision(e);
-            TimedParticle.Emit(Level, e.CollisionPosition, Color.White, 0.25, 1.0, 1024, 20, 40);
-        }
-
         public override void OnDeath(DeathEventArgs e)
         {            
             base.OnDeath(e);
-            SoundEffectInstance sound = Level.Game.Assets.ExplosionSound.CreateInstance();
-            sound.Volume = (float)(0.5 + 0.5 * Level.Game.Random.NextDouble());
-            sound.Play();
+
             if (Random.NextDouble() < repairKitDropChance)
             {
                 RepairKit repairKit = new RepairKit(Level, Position, Vector2.Zero);

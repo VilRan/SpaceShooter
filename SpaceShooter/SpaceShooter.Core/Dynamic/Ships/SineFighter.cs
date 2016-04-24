@@ -30,6 +30,6 @@ namespace SpaceShooter.Dynamic.Ships
             weapon.TryFire(new FireEventArgs(Level, Position, new Vector2(-1, 0), this));
 
             base.OnUpdate(e);
-        }        
+        }
     }
 }

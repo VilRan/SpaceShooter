@@ -16,31 +16,25 @@ namespace SpaceShooter.Dynamic.Ships
 
         protected Weapon weapon;
         protected override float CollisionDamage { get { return collisionDamage; } }
+
         public Fighter(Level level, Vector2 position)
             : base(level.Game.Assets.AsteroidTexture, level, position, durability)
         {
             weapon = new Machinegun();
             weapon.MagazineCount = weapon.MagazineSize = 3;
         }
+
         public override void OnUpdate(UpdateEventArgs e)
         {            
             weapon.Update(e.GameTime);
             
             base.OnUpdate(e);
         }
-        public override void OnCollision(Collision e)
-        {
-            base.OnCollision(e);
-            TimedParticle.Emit(Level, e.CollisionPosition, Color.White, 0.25, 1.0, 1024, 20, 40);
-        }
 
         public override void OnDeath(DeathEventArgs e)
         {
             base.OnDeath(e);
-            SoundEffectInstance sound = Level.Game.Assets.ExplosionSound.CreateInstance();
-            sound.Volume = (float)(0.5 + 0.5 * Level.Game.Random.NextDouble());
-            sound.Play();
-            ExplosionParticle explosion = new ExplosionParticle(Level, Game.Assets.ParticleTexture, Position, Velocity);
+
             if (Random.NextDouble() < repairKitDropChance)
             {
                 RepairKit repairKit = new RepairKit(Level, Position, Vector2.Zero);

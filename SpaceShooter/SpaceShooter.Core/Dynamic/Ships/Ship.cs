@@ -1,5 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceShooter.Particles;
+using System;
 
 namespace SpaceShooter.Dynamic.Ships
 {
@@ -37,6 +40,24 @@ namespace SpaceShooter.Dynamic.Ships
         {
             base.OnDeath(e);
             Level.Session.Score += Score;
+        }
+
+        protected override void OnDeathEffects(DeathEventArgs e)
+        {
+            base.OnDeathEffects(e);
+            SoundEffectInstance sound = Level.Game.Assets.ExplosionSound.CreateInstance();
+            sound.Volume = (float)(0.5 + 0.5 * Level.Game.Random.NextDouble());
+            sound.Play();
+            ExplosionParticle explosion = new ExplosionParticle(Level, Game.Assets.ParticleTexture, Position, Velocity);
+            Level.Particles.Add(explosion);
+        }
+
+        protected override void OnDamageEffects(DamageEventArgs e)
+        {
+            base.OnDamageEffects(e);
+            int minParticles = (int)Math.Round(Math.Min(e.DamageAmount, CurrentDurability) / 10);
+            int maxParticles = minParticles * 2;
+            TimedParticle.Emit(Level, e.Collision.CollisionPosition, Color.White, 0.25, 1.0, 1024, minParticles, maxParticles);
         }
     }
 }
