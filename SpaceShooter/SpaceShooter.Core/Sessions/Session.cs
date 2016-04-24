@@ -40,7 +40,7 @@ namespace SpaceShooter
         {
             foreach (Player player in Players)
                 player.Ship.Repair(10000);
-            ActiveLevel = new Level(this, Game.Assets.TestLevelBlueprint);
+            ActiveLevel = new Level(this, new LevelBlueprint(25600, 1080, Game.Random, 0));
         }
     }
 }

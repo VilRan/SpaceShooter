@@ -25,10 +25,32 @@ namespace SpaceShooter
             Height = height;
         }
 
-        public LevelBlueprint(int width, int height, Random random)
+        public LevelBlueprint(int width, int height, Random random, int challengeRating)
             : this(width, height)
         {
+            int minX = SpaceShooterGame.InternalResolution.Right;
+            int maxX = Width;
 
+            WeightedList<string> spawnTypes = Spawn.GetWeightedListOfTypes(challengeRating);
+            
+            for (int i = 0; i < 100; i++)
+            {
+                Vector2 position = new Vector2(random.Next(minX, maxX), random.Next(0, Height));
+                Spawn spawn = Spawn.Create(Difficulty.Casual, position, spawnTypes.SelectRandom(random));
+                Spawns.Add(spawn);
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                Vector2 position = new Vector2(random.Next(minX, maxX), random.Next(0, Height));
+                Spawn spawn = Spawn.Create(Difficulty.Hardcore, position, spawnTypes.SelectRandom(random));
+                Spawns.Add(spawn);
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                Vector2 position = new Vector2(random.Next(minX, maxX), random.Next(0, Height));
+                Spawn spawn = Spawn.Create(Difficulty.Nightmare, position, spawnTypes.SelectRandom(random));
+                Spawns.Add(spawn);
+            }
         }
 
         public LevelBlueprint(XmlElement xml)
@@ -80,7 +102,6 @@ namespace SpaceShooter
                 spawnXml.Attributes.Append(type);
                 level.AppendChild(spawnXml);
             }
-
             return xml;
         }
     }

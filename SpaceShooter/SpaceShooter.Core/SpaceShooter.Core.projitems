@@ -80,5 +80,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\RocketLauncher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\Shotgun.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\Weapon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WeightedList.cs" />
   </ItemGroup>
 </Project>

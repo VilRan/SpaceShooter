@@ -23,9 +23,9 @@ namespace SpaceShooter.Weapons
             Bullet bullet = new Bullet(e.Level, e.Position, e.Direction * bulletSpeed, e.Shooter.Faction);
             e.Level.Objects.Add(bullet);
             
-            SoundEffectInstance sound = e.Assets.ShotSound.CreateInstance();
-            sound.Volume = 0.25f * (float)(0.5 + 0.5 * e.Random.NextDouble());
-            sound.Play();
+            //SoundEffectInstance sound = e.Assets.ShotSound.CreateInstance();
+            //sound.Volume = 0.25f * (float)(0.5 + 0.5 * e.Random.NextDouble());
+            //sound.Play();
         }
     }
 }

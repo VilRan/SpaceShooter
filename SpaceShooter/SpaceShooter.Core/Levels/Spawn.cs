@@ -32,6 +32,12 @@ namespace SpaceShooter
             Vector2 position = new Vector2(x, y);
 
             string type = spawn.GetAttribute("Type");
+
+            return Create(difficulty, position, type);
+        }
+
+        public static Spawn Create(Difficulty difficulty, Vector2 position, string type)
+        {
             switch (type)
             {
                 case AsteroidSpawn.String:
@@ -57,6 +63,15 @@ namespace SpaceShooter
                 default:
                     throw new Exception("Unknown spawn type!");
             }
+        }
+
+        public static WeightedList<string> GetWeightedListOfTypes(int challengeRating)
+        {
+            WeightedList<string> types = new WeightedList<string>();
+            types.Add(BasicFighterSpawn.String, 100);
+            types.Add(SineFighterSpawn.String, 50);
+            types.Add(EliteFighterSpawn.String, 25);
+            return types;
         }
     }
 
