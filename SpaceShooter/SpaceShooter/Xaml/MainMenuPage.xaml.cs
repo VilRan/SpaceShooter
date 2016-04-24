@@ -19,19 +19,17 @@ namespace SpaceShooter.Xaml
             this.InitializeComponent();
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Center;
+
+            if (Game.State is BackgroundGameState)
+                continueButton.IsEnabled = false;
         }
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Game.State is LevelGameState)
-            {
-                if (Game.Session.ActiveLevel != null)
-                    GamePage.NavigateTo();
-                else
-                    GamePage.NavigateTo(new ShopPage(0));
-            }
-            else if (Game.State is EditorGameState)
+            if (Game.State is EditorGameState || Game.Session.ActiveLevel != null)
                 GamePage.NavigateTo();
+            else
+                GamePage.NavigateTo(new ShopPage(0));
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)

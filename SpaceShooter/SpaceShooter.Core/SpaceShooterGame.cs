@@ -88,21 +88,15 @@ namespace SpaceShooter
         {
             Controller controller = Settings.Controllers["General"];
             if (controller.IsControlPressed(Action.MainMenu))
-            {
                 UI.NavigateToMainMenu();
-            }
             if (controller.IsControlPressed(Action.Fullscreen))
-            {
                 Platform.ToggleFullscreen();
-            }
+            if (controller.IsControlPressed(Action.Pause))
+                IsPaused = !IsPaused;
             if (controller.IsControlPressed(Action.Editor))
             {
                 UI.NavigateToGame();
                 State = new EditorGameState(this);
-            }
-            if (controller.IsControlPressed(Action.Pause))
-            {
-                IsPaused = !IsPaused;
             }
 
             if (State != null)
