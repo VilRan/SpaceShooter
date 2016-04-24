@@ -12,6 +12,8 @@ namespace SpaceShooter.Xaml
     {
         int score;
 
+        string scoreString { get { return "Score: " + score; } }
+
         public EnterHighscorePage(int score)
         {
             this.InitializeComponent();

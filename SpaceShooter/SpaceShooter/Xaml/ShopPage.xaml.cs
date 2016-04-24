@@ -26,7 +26,7 @@ namespace SpaceShooter.Xaml
         public PlayerShip Ship { get { return Player.Ship; } }
         public Shop Shop { get { return Player.Shop; } }
         public ObservableCollection<InventoryItem> Weapons { get { return Ship.WeaponSlots; } }
-        public string PlayerString { get { return "Player " + playerIndex; } }
+        public string PlayerString { get { return "Player " + (playerIndex + 1); } }
         public double Money { get { return Player.Money; } set { Player.Money = value; NotifyPropertyChanged(); } }
 
         public ShopPage(int playerIndex)

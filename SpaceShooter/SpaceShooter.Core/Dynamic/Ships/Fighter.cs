@@ -11,7 +11,7 @@ namespace SpaceShooter.Dynamic.Ships
     {
         const float durability = 500;
         const double repairKitDropChance = 0.3;
-        const double droneControlDropChance = 0.8;
+        const double droneControlDropChance = 0.1;
         const float collisionDamage = 100;
 
         protected Weapon weapon;
@@ -20,14 +20,12 @@ namespace SpaceShooter.Dynamic.Ships
             : base(level.Game.Assets.AsteroidTexture, level, position, durability)
         {
             weapon = new Machinegun();
-            weapon.MagazineSize = 3;
-            weapon.MagazineCount = 3;
+            weapon.MagazineCount = weapon.MagazineSize = 3;
         }
         public override void OnUpdate(UpdateEventArgs e)
         {            
             weapon.Update(e.GameTime);
             
-
             base.OnUpdate(e);
         }
         public override void OnCollision(Collision e)

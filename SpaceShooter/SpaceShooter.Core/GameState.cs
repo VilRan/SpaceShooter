@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace SpaceShooter
 {
@@ -43,7 +44,12 @@ namespace SpaceShooter
         public LevelGameState(SpaceShooterGame game)
             : base(game)
         {
-
+            if (MediaPlayer.Queue.ActiveSong != game.Assets.SomethingMusic)
+            {
+                MediaPlayer.Play(game.Assets.SomethingMusic);
+                MediaPlayer.IsRepeating = true;
+                MediaPlayer.IsMuted = false;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -72,7 +78,12 @@ namespace SpaceShooter
         public BackgroundGameState(SpaceShooterGame game)
             : base(game)
         {
-
+            if (MediaPlayer.Queue.ActiveSong != game.Assets.MainMusic)
+            {
+                MediaPlayer.Play(game.Assets.MainMusic);
+                MediaPlayer.IsRepeating = true;
+                MediaPlayer.IsMuted = false;
+            }
         }
 
         public override void Update(GameTime gameTime)

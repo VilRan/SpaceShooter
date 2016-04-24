@@ -47,11 +47,7 @@ namespace SpaceShooter.Dynamic.Ships
             KeyboardState keyboard = Keyboard.GetState();
 
             TryMove(e);
-
-            activeWeapon.Update(e.GameTime);
-            if (controller.IsControlDown(Action.Fire))
-                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(1, 0), this));
-
+            TryFire(e);
             TrySwitchWeapon();
 
             if (keyboard.IsKeyDown(Keys.I))
@@ -59,7 +55,7 @@ namespace SpaceShooter.Dynamic.Ships
             else if (keyboard.IsKeyDown(Keys.U))
                 isInvincible = false;
         }
-        
+
         private void TryMove(UpdateEventArgs e)
         {
             Controller controller = player.Controller;
@@ -106,6 +102,13 @@ namespace SpaceShooter.Dynamic.Ships
             Position += Velocity * (float)e.ElapsedSeconds;
             Position.X = MathHelper.Clamp(Position.X, PlayArea.Left, PlayArea.Right);
             Position.Y = MathHelper.Clamp(Position.Y, PlayArea.Top, PlayArea.Bottom);
+        }
+
+        private void TryFire(UpdateEventArgs e)
+        {
+            activeWeapon.Update(e.GameTime);
+            if (player.Controller.IsControlDown(Action.Fire))
+                activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(1, 0), this));
         }
 
         private void TrySwitchWeapon()

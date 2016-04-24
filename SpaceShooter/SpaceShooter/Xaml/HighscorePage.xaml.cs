@@ -12,6 +12,7 @@ namespace SpaceShooter.Xaml
     public sealed partial class HighscorePage : Page
     {
         ObservableCollection<Highscore> highscores = new ObservableCollection<Highscore>(App.Current.GamePage.Game.Highscores.Items);
+
         public ObservableCollection<Highscore> Highscores
         {
             get

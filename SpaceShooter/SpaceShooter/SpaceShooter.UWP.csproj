@@ -97,8 +97,8 @@
     </Compile>
     <Compile Include="UWPInterface.cs" />
     <Compile Include="UWPSpaceShooterUI.cs" />
-    <Compile Include="Xaml\EnterHighscorePage.xaml.cs">
-      <DependentUpon>EnterHighscorePage.xaml</DependentUpon>
+    <Compile Include="Xaml\HighscoreEntryPage.xaml.cs">
+      <DependentUpon>HighscoreEntryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Xaml\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
@@ -202,7 +202,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Xaml\EnterHighscorePage.xaml">
+    <Page Include="Xaml\HighscoreEntryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

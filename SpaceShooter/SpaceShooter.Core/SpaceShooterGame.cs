@@ -49,7 +49,7 @@ namespace SpaceShooter
             Assets = new AssetManager();
             Highscores = new HighscoreCollection();
             Random = new Random();
-            Editor = new LevelEditor(this, new LevelBlueprint(10240, 1080));
+            Editor = new LevelEditor(this, new LevelBlueprint(10240, InternalResolution.Height));
             renderTarget = new RenderTarget2D(GraphicsDevice, InternalResolution.Width, InternalResolution.Height);
 
             base.Initialize();

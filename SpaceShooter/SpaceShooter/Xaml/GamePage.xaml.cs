@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework.Media;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -16,35 +15,14 @@ namespace SpaceShooter
 		public readonly SpaceShooterGame Game;
         Page subPage;
         double healthbarValue = 100;
-        int score;
+        double ammobarValue = 100;
+        int score = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public int ScoreViewValue
-        {
-            get
-            {
-                return score;
-            }
-            set
-            {
-                score = value;
-                NotifyPropertyChanged();
-            }
-        }
-        public double HealthbarValue
-        {
-            get
-            {
-                return healthbarValue;
-            }
-
-            set
-            {
-                healthbarValue = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public int ScoreViewValue { get { return score; } set { score = value; NotifyPropertyChanged(); } }
+        public double HealthbarValue  { get { return healthbarValue; } set { healthbarValue = value; NotifyPropertyChanged(); } }
+        public double AmmobarValue { get { return ammobarValue; } set { ammobarValue = value; NotifyPropertyChanged(); } }
 
         UIElementCollection Children { get { return swapChainPanel.Children; } }
 
@@ -55,9 +33,6 @@ namespace SpaceShooter
 			// Create the game.
 			var launchArguments = string.Empty;
             Game = MonoGame.Framework.XamlGame<SpaceShooterGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
-            MediaPlayer.Play(Game.Assets.SomethingMusic);
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.IsMuted = false;
         }
 
         public void NavigateTo()
