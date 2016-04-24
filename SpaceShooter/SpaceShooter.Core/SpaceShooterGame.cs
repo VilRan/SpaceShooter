@@ -17,8 +17,8 @@ namespace SpaceShooter
         public AssetManager Assets { private set; get; }
         public HighscoreCollection Highscores { private set; get; }
         public Session Session { private set; get; }
+        public Session BackgroundSession { private set; get; }
         public LevelEditor Editor { private set; get; }
-        public Level BackgroundLevel { private set; get; }
         public Random Random { private set; get; }
         public bool IsPaused = false;
 
@@ -64,6 +64,10 @@ namespace SpaceShooter
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Assets.LoadAll(Content);
+            BackgroundSession = new Session(this, Difficulty.Casual, 0);
+            BackgroundSession.ActiveLevel = new Level(BackgroundSession, new LevelBlueprint(int.MaxValue, InternalResolution.Height));
+
+            State = new BackgroundGameState(this);
         }
 
         /// <summary>
@@ -132,7 +136,7 @@ namespace SpaceShooter
 
         public void StartNewSession(Difficulty difficulty, int numberOfPlayers)
         {
-            State = null;
+            State = new BackgroundGameState(this);
             Session = new Session(this, difficulty, numberOfPlayers);
         }
     }

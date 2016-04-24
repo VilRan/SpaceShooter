@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceShooter
@@ -61,6 +62,27 @@ namespace SpaceShooter
                 Session.ActiveLevel.Draw(new GameTime(), spriteBatch);
             else
                 Session.ActiveLevel.Draw(gameTime, spriteBatch);
+        }
+    }
+
+    public class BackgroundGameState : GameState
+    {
+        protected Session BackgroundSession { get { return game.BackgroundSession; } }
+
+        public BackgroundGameState(SpaceShooterGame game)
+            : base(game)
+        {
+
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            BackgroundSession.ActiveLevel.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            BackgroundSession.ActiveLevel.Draw(gameTime, spriteBatch);
         }
     }
 }

@@ -27,13 +27,11 @@ namespace SpaceShooter
         {
             Difficulty = difficulty;
             Game = game;
-                        
-            Players.Add(new Player(game.Assets, game.Settings.Controllers["Keyboard1"]));
 
+            if (numberOfPlayers >= 1)
+                Players.Add(new Player(game.Assets, game.Settings.Controllers["Keyboard1"]));
             if (numberOfPlayers >= 2)
-            {
                 Players.Add(new Player(game.Assets, game.Settings.Controllers["Keyboard2"]));
-            }            
         }
 
         public void StartNextLevel()

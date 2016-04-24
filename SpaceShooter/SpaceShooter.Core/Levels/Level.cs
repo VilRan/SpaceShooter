@@ -36,7 +36,7 @@ namespace SpaceShooter
                 for (int playerIndex = 0; playerIndex < Session.Players.Count; playerIndex++)
                     AddPlayer(playerIndex, playerStartTop + playerStartStep * playerIndex);
             }
-            else
+            else if (Session.Players.Count == 1)
             {
                 AddPlayer(0, new Vector2(PlayArea.Left + PlayArea.Width / 8, PlayArea.Height / 2));
             }
