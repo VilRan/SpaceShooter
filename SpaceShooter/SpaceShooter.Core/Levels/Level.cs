@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using SpaceShooter.Dynamic;
 using SpaceShooter.Dynamic.Ships;
 using SpaceShooter.Particles;
+using SpaceShooter.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -113,6 +114,7 @@ namespace SpaceShooter
                 int enemyCount = Inactive.Where(o => o is EnemyShip).Count() + Objects.Where(o => o is EnemyShip).Count();
                 if (enemyCount == 0)
                 {
+                    Game.State = new ShopGameState(Game);
                     UI.NavigateToShop();
                 }
             }

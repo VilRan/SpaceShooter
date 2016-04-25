@@ -178,8 +178,7 @@ namespace SpaceShooter.Dynamic
 
         protected PlayerShip GetNearestPlayer()
         {
-            Player nearestPlayer = Level.Session.Players.
-                Where(player => !player.Ship.IsDying).
+            Player nearestPlayer = Level.Session.PlayersAlive.
                 OrderBy(player => (player.Ship.Position - Position).LengthSquared()).
                 FirstOrDefault();
             if (nearestPlayer != null)

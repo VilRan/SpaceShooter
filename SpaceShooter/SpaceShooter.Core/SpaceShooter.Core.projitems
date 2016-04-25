@@ -43,7 +43,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\RepairDrone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\Ship.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Ships\SineFighter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HighscoreCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPlatform.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ISpaceShooterUI.cs" />
@@ -68,6 +67,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sessions\Shop.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SpaceShooterGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)States\BackgroundGameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)States\EditorGameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)States\GameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)States\LevelGameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)States\MenuGameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)States\ShopGameState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VectorUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\DualMachinegun.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weapons\AutomaticRocketLauncher.cs" />

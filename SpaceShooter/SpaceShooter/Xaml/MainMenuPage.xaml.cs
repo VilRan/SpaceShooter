@@ -1,4 +1,5 @@
-﻿using Windows.ApplicationModel.Core;
+﻿using SpaceShooter.States;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -20,16 +21,16 @@ namespace SpaceShooter.Xaml
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Center;
 
-            if (Game.State is BackgroundGameState)
+            if (Game.State is MenuGameState || Game.Session.PlayersAlive.Count() == 0)
                 continueButton.IsEnabled = false;
         }
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Game.State is EditorGameState || Game.Session.ActiveLevel != null)
-                GamePage.NavigateTo();
-            else
+            if (Game.State is ShopGameState)
                 GamePage.NavigateTo(new ShopPage(0));
+            else
+                GamePage.NavigateTo();
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)

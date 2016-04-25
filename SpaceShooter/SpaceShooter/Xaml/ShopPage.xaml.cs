@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using SpaceShooter.Dynamic.Ships;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using SpaceShooter.States;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 

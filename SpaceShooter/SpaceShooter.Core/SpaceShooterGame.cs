@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceShooter.States;
 using System;
 using System.Threading.Tasks;
 
@@ -13,7 +14,6 @@ namespace SpaceShooter
         public static IPlatformAsync Platform;
         public static ISpaceShooterUI UI;
 
-        public GameState State;
         public Settings Settings { private set; get; }
         public AssetManager Assets { private set; get; }
         public HighscoreCollection Highscores { private set; get; }
@@ -22,11 +22,18 @@ namespace SpaceShooter
         public Random Random { private set; get; }
         public bool IsPaused = false;
 
+        GameState state;
         GraphicsDeviceManager graphics;
         RenderTarget2D renderTarget;
         SpriteBatch spriteBatch;
 
         public static Rectangle InternalResolution { get { return new Rectangle(0, 0, 1920, 1080); } }
+        public GameState State
+        {
+            get { return state; }
+            set { state = value; state.OnActivated(); }
+        }
+
         public float WidthScale { get { return Window.ClientBounds.Width / (float)InternalResolution.Width; } }
         public float HeightScale { get { return Window.ClientBounds.Height / (float)InternalResolution.Height; } }
         public bool IsFullscreen { get { return graphics.IsFullScreen; } }
@@ -70,7 +77,7 @@ namespace SpaceShooter
             Settings.Initialize();
             loadHighscoresTask.Wait();
 
-            State = new BackgroundGameState(this);
+            State = new MenuGameState(this);
         }
 
         /// <summary>
@@ -133,7 +140,7 @@ namespace SpaceShooter
 
         public void StartNewSession(Difficulty difficulty, int numberOfPlayers)
         {
-            State = new BackgroundGameState(this);
+            State = new ShopGameState(this);
             Session = new Session(this, difficulty, numberOfPlayers);
         }
 

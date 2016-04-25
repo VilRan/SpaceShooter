@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using SpaceShooter.States;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -39,6 +40,7 @@ namespace SpaceShooter.Xaml
         {
             Game.Highscores.Add(new Highscore(nameBox.Text, score));
             GamePage.NavigateTo(new HighscorePage());
+            Game.State = new MenuGameState(Game);
         }
     }
 }
