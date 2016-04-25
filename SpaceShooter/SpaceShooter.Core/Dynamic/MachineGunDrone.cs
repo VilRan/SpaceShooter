@@ -2,6 +2,7 @@
 using SpaceShooter.Weapons;
 using Microsoft.Xna.Framework.Audio;
 using SpaceShooter.Particles;
+using SpaceShooter.Dynamic.Ships;
 
 namespace SpaceShooter.Dynamic
 {
@@ -10,6 +11,7 @@ namespace SpaceShooter.Dynamic
         const float durability = 200;
         const float collisionDamage = 100;
         const float speed = 32 * TileSize;
+        float droneRotation = MathHelper.ToRadians(0);
 
         Weapon weapon;
         protected override float CollisionDamage { get { return collisionDamage; } }
@@ -19,14 +21,24 @@ namespace SpaceShooter.Dynamic
             : base(level.Game.Assets.AsteroidTexture, level, position, velocity, durability, Faction.Player)
         {
             weapon = new Machinegun();
-            weapon.MagazineSize = 3;
-            weapon.MagazineCount = 3;
+            weapon.MagazineSize = 5;
+            weapon.MagazineCount = 5;
         }
 
         public override void OnUpdate(UpdateEventArgs e)
         {
             weapon.Update(e.GameTime);
 
+            PlayerShip nearestPlayer = GetNearestPlayer();
+            if (nearestPlayer == null)
+                return;
+
+            droneRotation += MathHelper.ToRadians(90f) * (float)e.ElapsedSeconds;
+            Matrix playerMatrix = Matrix.CreateTranslation(new Vector3(nearestPlayer.Position, 0f));
+            Vector2 droneDistance = new Vector2(0, 100);
+            Matrix droneMatrix = Matrix.CreateRotationZ(droneRotation) * playerMatrix;
+            Position = Vector2.Transform(droneDistance, droneMatrix);
+            
             DynamicObject target = GetNearest(obj => obj.Faction != Faction && obj.Category == ObjectCategory.Ship);
             if (target != null)
             {
