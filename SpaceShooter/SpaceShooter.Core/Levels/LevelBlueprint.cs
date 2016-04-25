@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using SpaceShooter.Dynamic;
+using SpaceShooter.Particles;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,7 @@ namespace SpaceShooter
         public int Width { private set; get; }
         public int Height { private set; get; }
         public List<Spawn> Spawns = new List<Spawn>();
+        public List<BackgroundParticle> Background = new List<BackgroundParticle>();
 
         public Rectangle Bounds { get { return new Rectangle(0, 0, Width, Height); } }
 
@@ -74,6 +76,14 @@ namespace SpaceShooter
                 {
                     yield return spawn.CreateObject(level);
                 }
+            }
+        }
+
+        public IEnumerable<BackgroundParticle> CloneBackground()
+        {
+            foreach (BackgroundParticle particle in Background)
+            {
+                yield return (BackgroundParticle)particle.Clone();
             }
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using SpaceShooter.Particles;
 
 namespace SpaceShooter
 {
@@ -73,11 +74,18 @@ namespace SpaceShooter
 
     public class BackgroundGameState : GameState
     {
-        protected Session BackgroundSession { get { return game.BackgroundSession; } }
+        Session backgroundSession;
+
+        protected Session BackgroundSession { get { return backgroundSession; } }
 
         public BackgroundGameState(SpaceShooterGame game)
             : base(game)
         {
+            var blueprint = new LevelBlueprint(int.MaxValue, SpaceShooterGame.InternalResolution.Height);
+            var earth = new BackgroundParticle(game.Assets.EarthTexture, new Vector2(640, 810), 0.9f);
+            blueprint.Background.Add(earth);
+            backgroundSession = new Session(game, Difficulty.Casual, 0);
+            backgroundSession.ActiveLevel = new Level(BackgroundSession, blueprint);
             if (MediaPlayer.Queue.ActiveSong != game.Assets.MainMusic)
             {
                 MediaPlayer.Play(game.Assets.MainMusic);

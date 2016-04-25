@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace SpaceShooter
 {
@@ -14,6 +15,11 @@ namespace SpaceShooter
             : base(assets.TileTexture, position, Vector2.Zero)
         {
 
+        }
+
+        public override GameObject Clone()
+        {
+            throw new NotImplementedException();
         }
     }
 }

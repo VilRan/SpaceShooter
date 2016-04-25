@@ -28,6 +28,8 @@ namespace SpaceShooter
             Vector2 screenPosition = Position - Origin - e.Level.Camera.Position;
             e.SpriteBatch.Draw(Texture, screenPosition, Color);
         }
+
+        public abstract GameObject Clone();
     }
 
     public enum ObjectCategory

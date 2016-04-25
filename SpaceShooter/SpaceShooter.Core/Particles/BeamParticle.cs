@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceShooter.Particles
@@ -23,6 +24,11 @@ namespace SpaceShooter.Particles
             Rectangle destination = new Rectangle(start, size);
             Rectangle source = new Rectangle(Point.Zero, size);
             e.SpriteBatch.Draw(Texture, destination, source, color);
+        }
+
+        public override GameObject Clone()
+        {
+            throw new NotImplementedException();
         }
     }
 }

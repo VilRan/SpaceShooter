@@ -36,6 +36,11 @@ namespace SpaceShooter.Particles
             base.Draw(e);
         }
 
+        public override GameObject Clone()
+        {
+            throw new NotImplementedException();
+        }
+
         public static void Emit(Level level, Vector2 position, Color startColor, double minimumLifespan, double maximumLifespan, float maxSpeed, float minAngle = 0, float maxAngle = MathHelper.TwoPi)
         {
             SpaceShooterGame game = level.Game;

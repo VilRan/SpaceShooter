@@ -18,7 +18,6 @@ namespace SpaceShooter
         public AssetManager Assets { private set; get; }
         public HighscoreCollection Highscores { private set; get; }
         public Session Session { private set; get; }
-        public Session BackgroundSession { private set; get; }
         public LevelEditor Editor { private set; get; }
         public Random Random { private set; get; }
         public bool IsPaused = false;
@@ -68,8 +67,6 @@ namespace SpaceShooter
 
             Task loadHighscoresTask = Task.Run(() => Highscores.LoadFromFile());
             Assets.LoadAll(Content);
-            BackgroundSession = new Session(this, Difficulty.Casual, 0);
-            BackgroundSession.ActiveLevel = new Level(BackgroundSession, new LevelBlueprint(int.MaxValue, InternalResolution.Height));
             Settings.Initialize();
             loadHighscoresTask.Wait();
 

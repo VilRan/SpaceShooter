@@ -1,9 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceShooter.Particles
 {
-    class BackgroundParticle : Particle
+    public class BackgroundParticle : Particle
     {
         float distance;
 
@@ -20,6 +21,11 @@ namespace SpaceShooter.Particles
         {
             Velocity = e.Level.Camera.Velocity * distance;
             base.Draw(e);
+        }
+
+        public override GameObject Clone()
+        {
+            return (BackgroundParticle)MemberwiseClone();
         }
     }
 }

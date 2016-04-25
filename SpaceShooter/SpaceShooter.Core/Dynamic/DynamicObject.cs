@@ -113,6 +113,11 @@ namespace SpaceShooter.Dynamic
             }
         }
 
+        public override GameObject Clone()
+        {
+            throw new NotImplementedException();
+        }
+
         protected virtual bool CanCollideWith(DynamicObject other)
         {
             if (other.IsDying)

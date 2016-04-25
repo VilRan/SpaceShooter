@@ -45,9 +45,7 @@ namespace SpaceShooter
             }
             
             Inactive.AddRange(blueprint.SpawnObjects(this));
-
-            var earth = new BackgroundParticle(Game.Assets.EarthTexture, new Vector2(PlayArea.Width / 3, PlayArea.Height * 3 / 4), 0.9f);
-            Particles.Add(earth);
+            Particles.AddRange(blueprint.CloneBackground());
 
             Random random = Game.Random;
             for (int i = 0; i < 1000; i++)
