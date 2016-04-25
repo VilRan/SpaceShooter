@@ -129,9 +129,14 @@
     <None Include="Assets\Sounds\Shot.wav" />
     <None Include="Assets\Sounds\Explosion.wav" />
     <Content Include="Assets\Textures\Asteroid.xnb" />
+    <Content Include="Assets\Textures\Asteroid2.png" />
     <Content Include="Assets\Textures\Bullet.xnb" />
     <Content Include="Assets\Textures\EarthTransparent.png" />
+    <Content Include="Assets\Textures\Bomber.png" />
+    <Content Include="Assets\Textures\Enemy1.png" />
+    <Content Include="Assets\Textures\Fighter.png" />
     <Content Include="Assets\Textures\Grid.png" />
+    <Content Include="Assets\Textures\HealCross.png" />
     <Content Include="Assets\Textures\Laser.png" />
     <Content Include="Assets\Textures\Particle.xnb" />
     <Content Include="Assets\Textures\Pixel.xnb" />
