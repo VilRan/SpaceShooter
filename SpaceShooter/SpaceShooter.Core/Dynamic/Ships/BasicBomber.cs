@@ -15,7 +15,7 @@ namespace SpaceShooter.Dynamic.Ships
         public override int Score { get { return score; } }
         protected override float CollisionDamage { get { return collisionDamage; } }
         public BasicBomber(Level level, Vector2 position)
-            : base(level.Game.Assets.AsteroidTexture, level, position, durability)
+            : base(level.Game.Assets.BomberTexture, level, position, durability)
         {
             weapon = new RocketLauncher();
             weapon.MagazineSize = 1;

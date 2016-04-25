@@ -18,7 +18,7 @@ namespace SpaceShooter.Dynamic.Ships
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Fighter(Level level, Vector2 position)
-            : base(level.Game.Assets.AsteroidTexture, level, position, durability)
+            : base(level.Game.Assets.FighterTexture, level, position, durability)
         {
             weapon = new Machinegun();
             weapon.MagazineCount = weapon.MagazineSize = 3;
