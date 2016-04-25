@@ -65,10 +65,13 @@ namespace SpaceShooter
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            Task loadHighscoresTask = Task.Run(() => Highscores.LoadFromFile());
             Assets.LoadAll(Content);
             BackgroundSession = new Session(this, Difficulty.Casual, 0);
             BackgroundSession.ActiveLevel = new Level(BackgroundSession, new LevelBlueprint(int.MaxValue, InternalResolution.Height));
             Settings.Initialize();
+            loadHighscoresTask.Wait();
 
             State = new BackgroundGameState(this);
         }
@@ -139,8 +142,8 @@ namespace SpaceShooter
 
         public async Task OnExit()
         {
-            Task saveScoresTask = Task.Run(() => Highscores.SaveToFile());
-            Task saveSettingsTask = Task.Run(() => Settings.SaveToFile());
+            Task saveScoresTask = Highscores.SaveToFile();
+            Task saveSettingsTask = Settings.SaveToFile();
             await saveScoresTask;
             await saveSettingsTask;
         }

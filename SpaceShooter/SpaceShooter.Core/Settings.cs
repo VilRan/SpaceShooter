@@ -80,7 +80,7 @@ namespace SpaceShooter
             }
         }
 
-        public async void SaveToFile()
+        public async Task SaveToFile()
         {
             await platform.WriteXmlAsync("Settings.xml", ToXml());
         }

@@ -16,7 +16,7 @@ namespace SpaceShooter
 
         public HighscoreCollection()
         {
-            LoadFromFile();
+
         }
 
         public void Add(Highscore highscore)
@@ -25,7 +25,7 @@ namespace SpaceShooter
             items.Sort();
         }
 
-        public async void LoadFromFile()
+        public async Task LoadFromFile()
         {
             IList<string> lines = await Platform.ReadLinesAsync("Highscore.txt");
             foreach (string line in lines)
@@ -33,7 +33,7 @@ namespace SpaceShooter
             items.Sort();
         }
 
-        public async void SaveToFile()
+        public async Task SaveToFile()
         {
             await Platform.WriteTextAsync("Highscore.txt", ToString());
         }
