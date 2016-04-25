@@ -52,7 +52,7 @@ namespace SpaceShooter
             Random random = Game.Random;
             for (int i = 0; i < 1000; i++)
             {
-                Particles.Add(new DustParticle(
+                Particles.Add(new RepeatingBackgroundParticle(
                     Game.Assets.PixelTexture,
                     new Vector2(random.Next(PlayArea.Width), random.Next(PlayArea.Height)),
                     (float)random.NextDouble(),
