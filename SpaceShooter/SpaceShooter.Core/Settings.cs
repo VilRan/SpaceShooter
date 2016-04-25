@@ -39,12 +39,17 @@ namespace SpaceShooter
 
         async void LoadFromFile()
         {
-            XmlDocument xmlDocument;
-            IPlatformFile file = await platform.TryGetPlatformFile("Settings.xml");
-            if (file != null)
-                xmlDocument = await platform.ReadXmlAsync(file);
-            else
+            XmlDocument xmlDocument = null;
+            try
+            {
+                IPlatformFile file = await platform.TryGetPlatformFile("Settings.xml");
+                if (file != null)
+                    xmlDocument = await platform.ReadXmlAsync(file);
+            }
+            catch
+            {
                 xmlDocument = await platform.ReadXmlAsync("Assets/Xml/DefaultSettings.xml");
+            }
 
             foreach (XmlElement setting in xmlDocument.DocumentElement.ChildNodes.OfType<XmlElement>())
             {

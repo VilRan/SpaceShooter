@@ -15,14 +15,15 @@ namespace SpaceShooter.Dynamic.PowerUps
         public override void OnCollision(Collision e)
         {
             base.OnCollision(e);
-            TimedParticle.Emit(Level, e.CollisionPosition, Color.White, 0.25, 1.0, 1024, 20, 40);            
+            TimedParticle.Emit(Level, e.CollisionPosition, Color.White, 0.25, 1.0, 1024, 20, 40);
+            MachinegunDrone machinegunDrone = new MachinegunDrone(Level, Position, Camera.Velocity, e.Other);
+            Level.Objects.Add(machinegunDrone);
         }
 
         public override void OnDeath(DeathEventArgs e)
         {
             base.OnDeath(e);
-            MachinegunDrone machinegunDrone = new MachinegunDrone(Level, Position, Camera.Velocity);
-            Level.Objects.Add(machinegunDrone);
+            
         }
     }
 }
