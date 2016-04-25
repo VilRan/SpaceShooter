@@ -21,7 +21,9 @@ namespace SpaceShooter
         Task<XmlDocument> ReadXmlAsync(string fileName);
         Task<XmlDocument> ReadXmlAsync(IPlatformFile file);
         Task WriteTextAsync(string fileName, string text);
+        Task WriteXmlAsync(string fileName, XmlDocument xml);
         Task WriteXmlAsync(IPlatformFile file, XmlDocument xml);
+        Task<IPlatformFile> TryGetPlatformFile(string fileName);
         Task<IPlatformFile> PickSaveFileAsync(params string[] fileTypes);
         Task<IPlatformFile> PickOpenFileAsync(params string[] fileTypes);
     }

@@ -30,16 +30,16 @@
                 <Grid Grid.Row="0">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="15">
                         <TextBlock x:Name="textBlock1" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Select Difficulty" VerticalAlignment="Top" FontSize="24"/>
-                        <RadioButton x:Name="casualRadioButton" Content="Casual" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Stretch" FontSize="18.667" GroupName="Difficulty"/>
+                        <RadioButton x:Name="casualRadioButton" Content="Casual" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Stretch" FontSize="18.667" GroupName="Difficulty" IsChecked="True"/>
                         <RadioButton x:Name="hardcoreRadioButton" Content="Hardcore" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Stretch" FontSize="18.667" GroupName="Difficulty"/>
                         <RadioButton x:Name="nightmareRadioButton" Content="Nightmare" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Stretch" FontSize="18.667" GroupName="Difficulty"/>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="1">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="15" Grid.RowSpan="2">
-                        <RadioButton x:Name="singlePlayerRadioButton" Content="Singleplayer" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Stretch" GroupName="Players" FontSize="18.667"/>
+                        <RadioButton x:Name="singlePlayerRadioButton" Content="Singleplayer" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Stretch" GroupName="Players" FontSize="18.667" IsChecked="True"/>
                         <RadioButton x:Name="multiPlayerRadioButton" Content="Multiplayer" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Stretch" GroupName="Players" FontSize="18.667"/>
-                        <Button x:Name="newGameButton" Content="Play Game" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Stretch" Click="newGameButton_Click" Margin="15"/>
+                        <Button x:Name="newGameButton" Content="Start" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Stretch" Click="newGameButton_Click" Margin="15"/>
                     </StackPanel>
                 </Grid>
                 

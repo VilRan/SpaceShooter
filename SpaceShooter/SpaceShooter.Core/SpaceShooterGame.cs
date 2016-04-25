@@ -29,6 +29,7 @@ namespace SpaceShooter
         public static Rectangle InternalResolution { get { return new Rectangle(0, 0, 1920, 1080); } }
         public float WidthScale { get { return Window.ClientBounds.Width / (float)InternalResolution.Width; } }
         public float HeightScale { get { return Window.ClientBounds.Height / (float)InternalResolution.Height; } }
+        public bool IsFullscreen { get { return graphics.IsFullScreen; } }
 
         public SpaceShooterGame()
         {
@@ -45,7 +46,7 @@ namespace SpaceShooter
         /// </summary>
         protected override void Initialize()
         {
-            Settings = new Settings();
+            Settings = new Settings(this);
             Assets = new AssetManager();
             Highscores = new HighscoreCollection();
             Random = new Random();
@@ -66,6 +67,7 @@ namespace SpaceShooter
             Assets.LoadAll(Content);
             BackgroundSession = new Session(this, Difficulty.Casual, 0);
             BackgroundSession.ActiveLevel = new Level(BackgroundSession, new LevelBlueprint(int.MaxValue, InternalResolution.Height));
+            Settings.Initialize();
 
             State = new BackgroundGameState(this);
         }

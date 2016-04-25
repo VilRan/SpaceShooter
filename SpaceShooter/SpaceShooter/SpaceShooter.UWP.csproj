@@ -165,7 +165,7 @@
     </Content>
     <None Include="Assets\DLLs\MonoGame.Framework.xml" />
     <Content Include="Assets\Textures\Tile.png" />
-    <Content Include="Assets\Xml\Settings.xml" />
+    <Content Include="Assets\Xml\DefaultSettings.xml" />
     <Content Include="Assets\Xml\TestLevel.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\Logos\LockScreenLogo.scale-200.png" />

@@ -83,9 +83,21 @@ namespace SpaceShooter
             await FileIO.WriteTextAsync(storageFile, text);
         }
 
+        public async Task WriteXmlAsync(string fileName, XmlDocument xml)
+        {
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile storageFile = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+            await WriteXmlAsync(storageFile, xml);
+        }
+
         public async Task WriteXmlAsync(IPlatformFile file, XmlDocument xml)
         {
             StorageFile storageFile = ((UWPFile)file).StorageFile;
+            await WriteXmlAsync(storageFile, xml);
+        }
+
+        async Task WriteXmlAsync(StorageFile storageFile, XmlDocument xml)
+        {
             using (IRandomAccessStream fileStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
             {
                 Stream stream = fileStream.AsStreamForWrite();
@@ -98,6 +110,16 @@ namespace SpaceShooter
                     xml.WriteTo(writer);
                 }
             }
+        }
+
+        public async Task<IPlatformFile> TryGetPlatformFile(string fileName)
+        {
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            IStorageItem storageItem = await storageFolder.TryGetItemAsync(fileName);
+            StorageFile storageFile = storageItem as StorageFile;
+            if (storageFile != null) 
+                return new UWPFile(storageFile);
+            return null;
         }
 
         public async Task<IPlatformFile> PickSaveFileAsync(params string[] fileTypes)

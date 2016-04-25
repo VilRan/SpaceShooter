@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace SpaceShooter
     public class Settings
     {
         public Dictionary<string, Controller> Controllers = new Dictionary<string, Controller>();
+        SpaceShooterGame game;
         float masterVolume = 1;
         float musicVolume = 1;
         float soundVolume = 1;
@@ -21,20 +23,28 @@ namespace SpaceShooter
         public float MasterVolume { get { return masterVolume; } set { masterVolume = value; MusicVolume = musicVolume; SoundVolume = soundVolume; } }
         public float MusicVolume { get { return musicVolume; } set { musicVolume = value; MediaPlayer.Volume = musicVolume * MasterVolume; } }
         public float SoundVolume { get { return soundVolume; } set { soundVolume = value; SoundEffect.MasterVolume = soundVolume * MasterVolume; } }
+        IPlatformAsync platform { get { return SpaceShooterGame.Platform; } }
 
-
-        public Settings()
+        public Settings(SpaceShooterGame game)
         {
-            Task loadTask = Task.Run(() => load());
+            this.game = game;
+            Task loadTask = Task.Run(() => LoadFromFile());
             Task.WaitAll(loadTask);
         }
 
-        async void load()
+        public void Initialize()
         {
-            XmlDocument xmlDocument = new XmlDocument();
-            StorageFile storageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Xml/Settings.xml"));
-            using (Stream stream = await storageFile.OpenStreamForReadAsync())
-                xmlDocument.Load(stream);
+            MasterVolume = masterVolume;
+        }
+
+        async void LoadFromFile()
+        {
+            XmlDocument xmlDocument;
+            IPlatformFile file = await platform.TryGetPlatformFile("Settings.xml");
+            if (file != null)
+                xmlDocument = await platform.ReadXmlAsync(file);
+            else
+                xmlDocument = await platform.ReadXmlAsync("Assets/Xml/DefaultSettings.xml");
 
             foreach (XmlElement setting in xmlDocument.DocumentElement.ChildNodes.OfType<XmlElement>())
             {
@@ -48,6 +58,12 @@ namespace SpaceShooter
                             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
                         break;
 
+                    case "Volume":
+                        masterVolume = float.Parse(setting.GetAttribute("Master"), CultureInfo.InvariantCulture);
+                        musicVolume = float.Parse(setting.GetAttribute("Music"), CultureInfo.InvariantCulture);
+                        soundVolume = float.Parse(setting.GetAttribute("Sound"), CultureInfo.InvariantCulture);
+                        break;
+
                     case "KeyBindings":
                         foreach (XmlElement controller in setting.ChildNodes.OfType<XmlElement>())
                         {
@@ -57,6 +73,48 @@ namespace SpaceShooter
                         break;
                 }
             }
+        }
+
+        public async void SaveToFile()
+        {
+            await platform.WriteXmlAsync("Settings.xml", ToXml());
+        }
+
+        public XmlDocument ToXml()
+        {
+            XmlDocument xml = new XmlDocument();
+            XmlElement settings = xml.CreateElement("Settings");
+            xml.AppendChild(settings);
+
+            XmlElement display = xml.CreateElement("Display");
+            XmlAttribute mode = xml.CreateAttribute("Mode");
+            if (game.IsFullscreen)
+                mode.Value = "Fullscreen";
+            else
+                mode.Value = "Windowed";
+            display.Attributes.Append(mode);
+            settings.AppendChild(display);
+
+            XmlElement volume = xml.CreateElement("Volume");
+            XmlAttribute master = xml.CreateAttribute("Master");
+            master.Value = "" + MasterVolume;
+            XmlAttribute music = xml.CreateAttribute("Music");
+            music.Value = "" + MusicVolume;
+            XmlAttribute sound = xml.CreateAttribute("Sound");
+            sound.Value = "" + SoundVolume;
+            volume.Attributes.Append(master);
+            volume.Attributes.Append(music);
+            volume.Attributes.Append(sound);
+            settings.AppendChild(volume);
+            
+            XmlElement keyBindings = xml.CreateElement("KeyBindings");
+            foreach (KeyValuePair<string, Controller> controller in Controllers)
+            {
+                keyBindings.AppendChild(controller.Value.ToXml(xml, controller.Key));
+            }
+            settings.AppendChild(keyBindings);
+
+            return xml;
         }
     }
 }

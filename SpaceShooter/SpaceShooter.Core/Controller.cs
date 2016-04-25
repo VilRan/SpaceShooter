@@ -8,7 +8,6 @@ namespace SpaceShooter
 {
     public enum Action
     {
-        Invalid,
         MoveUp,
         MoveDown,
         MoveLeft,
@@ -28,6 +27,7 @@ namespace SpaceShooter
         MainMenu,
         Fullscreen,
         Editor,
+        Invalid,
     }
 
     public class Controller
@@ -90,6 +90,39 @@ namespace SpaceShooter
             KeyboardState keyboard = Keyboard.GetState();
             return Bindings[(int)control].Any(
                 key => keyboard.IsKeyUp(key) && previousKeyboard.IsKeyDown(key));
+        }
+
+        public XmlElement ToXml(XmlDocument xml, string id)
+        {
+            XmlElement element = xml.CreateElement("Controller");
+            XmlAttribute controllerID = xml.CreateAttribute("ID");
+            controllerID.Value = id;
+            element.Attributes.Append(controllerID);
+
+            for (Action action = 0; action < Action.Invalid; action++)
+            {
+                if (Bindings[(int)action].Count == 0)
+                    continue;
+
+                XmlElement actionElement = xml.CreateElement("Action");
+                XmlAttribute actionID = xml.CreateAttribute("ID");
+                actionID.Value = action.ToString();
+                actionElement.Attributes.Append(actionID);
+
+                foreach (Keys key in Bindings[(int)action])
+                {
+                    XmlElement keyElement = xml.CreateElement("Key");
+                    XmlAttribute keyID = xml.CreateAttribute("ID");
+                    keyID.Value = "" + (int)key;
+                    keyElement.Attributes.Append(keyID);
+
+                    actionElement.AppendChild(keyElement);
+                }
+
+                element.AppendChild(actionElement);
+            }
+
+            return element;
         }
     }
 }

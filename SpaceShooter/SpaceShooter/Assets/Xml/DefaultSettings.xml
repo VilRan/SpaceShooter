@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
   <Display Mode="Fullscreen"/>
+  <Volume Master="1.00" Music="1.00" Sound="1.00"/>
   
   <KeyBindings>
     

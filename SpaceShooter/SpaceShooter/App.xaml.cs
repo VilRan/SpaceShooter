@@ -21,6 +21,7 @@ namespace SpaceShooter
         public GamePage GamePage;
 
         new public static App Current { get { return (App)Application.Current; } }
+        public bool IsFullscreen { get { return ApplicationView.GetForCurrentView().IsFullScreenMode; } }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -114,11 +115,10 @@ namespace SpaceShooter
 
         public static void ToggleFullscreen()
         {
-            ApplicationView view = ApplicationView.GetForCurrentView();
-            if (view.IsFullScreenMode)
-                view.ExitFullScreenMode();
+            if (Current.IsFullscreen)
+                ExitFullscreen();
             else
-                view.TryEnterFullScreenMode();
+                EnterFullscreen();
         }
 
         public static void EnterFullscreen()
@@ -134,7 +134,8 @@ namespace SpaceShooter
         new public void Exit()
         {
             Task saveScoresTask = Task.Run(() => GamePage.Game.Highscores.SaveToFile());
-            saveScoresTask.Wait();
+            Task saveSettingsTask = Task.Run(() => GamePage.Game.Settings.SaveToFile());
+            Task.WaitAll(saveScoresTask, saveSettingsTask);
             CoreApplication.Exit();
         }
     }
