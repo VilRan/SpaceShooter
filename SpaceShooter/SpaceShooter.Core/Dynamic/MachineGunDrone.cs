@@ -12,6 +12,7 @@ namespace SpaceShooter.Dynamic
         const float collisionDamage = 100;
         float rotationPhase = 0;
         float rotationSpeed = MathHelper.PiOver2;
+        float rotationDistance = 100;
 
         Weapon weapon;
         protected override float CollisionDamage { get { return collisionDamage; } }
@@ -41,7 +42,7 @@ namespace SpaceShooter.Dynamic
             {
                 rotationPhase += rotationSpeed * (float)e.ElapsedSeconds;
                 Matrix playerMatrix = Matrix.CreateTranslation(new Vector3(nearestPlayer.Position, 0f));
-                Vector2 droneDistance = new Vector2(0, 100);
+                Vector2 droneDistance = new Vector2(rotationDistance, 0);
                 Matrix droneMatrix = Matrix.CreateRotationZ(rotationPhase) * playerMatrix;
                 Vector2 nextPosition = Vector2.Transform(droneDistance, droneMatrix);
                 if (e.ElapsedSeconds != 0)
