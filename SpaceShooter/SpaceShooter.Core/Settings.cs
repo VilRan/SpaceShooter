@@ -43,8 +43,7 @@ namespace SpaceShooter
             try
             {
                 IPlatformFile file = await platform.TryGetPlatformFile("Settings.xml");
-                if (file != null)
-                    xmlDocument = await platform.ReadXmlAsync(file);
+                xmlDocument = await platform.ReadXmlAsync(file);
             }
             catch
             {
