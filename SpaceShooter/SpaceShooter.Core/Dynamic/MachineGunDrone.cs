@@ -10,7 +10,6 @@ namespace SpaceShooter.Dynamic
     {
         const float durability = 200;
         const float collisionDamage = 100;
-        const float speed = 32 * TileSize;
         float droneRotation = MathHelper.ToRadians(0);
 
         Weapon weapon;
@@ -37,7 +36,10 @@ namespace SpaceShooter.Dynamic
             Matrix playerMatrix = Matrix.CreateTranslation(new Vector3(nearestPlayer.Position, 0f));
             Vector2 droneDistance = new Vector2(0, 100);
             Matrix droneMatrix = Matrix.CreateRotationZ(droneRotation) * playerMatrix;
-            Position = Vector2.Transform(droneDistance, droneMatrix);
+            Vector2 nextPosition = Vector2.Transform(droneDistance, droneMatrix);
+            if (e.ElapsedSeconds != 0)
+                Velocity = (nextPosition - Position) / (float)e.ElapsedSeconds;
+            Position = nextPosition;
             
             DynamicObject target = GetNearest(obj => obj.Faction != Faction && obj.Category == ObjectCategory.Ship);
             if (target != null)
@@ -46,8 +48,6 @@ namespace SpaceShooter.Dynamic
                 if (direction != null)
                     weapon.TryFire(new FireEventArgs(Level, Position, direction.Value, this));
             }
-
-            base.OnUpdate(e);
         }
 
         public override void OnCollision(Collision collision)
