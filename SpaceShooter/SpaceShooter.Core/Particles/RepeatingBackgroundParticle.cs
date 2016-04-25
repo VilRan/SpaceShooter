@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SpaceShooter.Particles
 {
-    class DustParticle : BackgroundParticle
+    class RepeatingBackgroundParticle : BackgroundParticle
     {
         protected Color color;
 
         protected override Color Color { get { return color; } }
 
-        public DustParticle(Texture2D texture, Vector2 position, float distance, float brightness)
+        public RepeatingBackgroundParticle(Texture2D texture, Vector2 position, float distance, float brightness)
             : base(texture, position, distance)
         {
             color = new Color(brightness, brightness, brightness);
