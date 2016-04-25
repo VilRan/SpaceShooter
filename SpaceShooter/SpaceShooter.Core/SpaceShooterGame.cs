@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Threading.Tasks;
 
 namespace SpaceShooter
 {
@@ -134,6 +135,14 @@ namespace SpaceShooter
         {
             State = new BackgroundGameState(this);
             Session = new Session(this, difficulty, numberOfPlayers);
+        }
+
+        public async Task OnExit()
+        {
+            Task saveScoresTask = Task.Run(() => Highscores.SaveToFile());
+            Task saveSettingsTask = Task.Run(() => Settings.SaveToFile());
+            await saveScoresTask;
+            await saveSettingsTask;
         }
     }
 }

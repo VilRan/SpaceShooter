@@ -131,11 +131,9 @@ namespace SpaceShooter
             ApplicationView.GetForCurrentView().ExitFullScreenMode();
         }
 
-        new public void Exit()
+        new public async void Exit()
         {
-            Task saveScoresTask = Task.Run(() => GamePage.Game.Highscores.SaveToFile());
-            Task saveSettingsTask = Task.Run(() => GamePage.Game.Settings.SaveToFile());
-            Task.WaitAll(saveScoresTask, saveSettingsTask);
+            await GamePage.Game.OnExit();
             CoreApplication.Exit();
         }
     }
