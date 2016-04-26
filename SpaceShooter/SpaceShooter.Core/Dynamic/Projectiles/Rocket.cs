@@ -10,7 +10,7 @@ namespace SpaceShooter.Dynamic
         const float maxVelocitySquared = maxVelocity * maxVelocity;
         const float hitRadius = 3f;
         const float durability = 10;
-        const float collisionDamage = 500;
+        const float collisionDamage = 1000;
 
         double boostTimer = 0.2;
 

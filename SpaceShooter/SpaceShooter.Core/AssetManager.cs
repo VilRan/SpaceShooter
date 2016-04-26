@@ -15,7 +15,7 @@ namespace SpaceShooter
         public const int TileSize = 32;
 
         public Texture2D PlayerShipTexture { private set; get; }
-        public Texture2D MachineGunDroneTexture { private set; get; }
+        public Texture2D DroneTexture { private set; get; }
         public Texture2D FighterTexture { private set; get; }
         public Texture2D BomberTexture { private set; get; }
         public Texture2D AsteroidTexture { private set; get; }
@@ -51,10 +51,10 @@ namespace SpaceShooter
             Task loadLevelsTask = Task.Run(() => loadLevels());
 
             PlayerShipTexture = content.Load<Texture2D>("Textures/PlayerShip.png");
-            MachineGunDroneTexture = content.Load<Texture2D>("Textures/Drone.png");
+            DroneTexture = content.Load<Texture2D>("Textures/Drone.png");
             FighterTexture = content.Load<Texture2D>("Textures/Fighter.png");
             BomberTexture = content.Load<Texture2D>("Textures/Bomber.png");
-            AsteroidTexture = content.Load<Texture2D>("Textures/Asteroid");
+            AsteroidTexture = content.Load<Texture2D>("Textures/Asteroid2.png");
             MachineGunBulletTexture = content.Load<Texture2D>("Textures/MachineGunBullet.png");
             RocketBulletTexture = content.Load<Texture2D>("Textures/RocketBullet.png");
             BulletTexture = content.Load<Texture2D>("Textures/Bullet");

@@ -39,7 +39,7 @@ namespace SpaceShooter
             position += camera.Position;
             if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton == ButtonState.Released)
             {
-                blueprint.Spawns.Add(new SineFighterSpawn(Difficulty.Casual, position));
+                blueprint.Spawns.Add(new BasicFighterSpawn(Difficulty.Casual, position));
             }
             if (mouse.RightButton == ButtonState.Pressed)
             {

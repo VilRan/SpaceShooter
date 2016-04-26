@@ -68,6 +68,7 @@ namespace SpaceShooter
         public static WeightedList<string> GetWeightedListOfTypes(int challengeRating)
         {
             WeightedList<string> types = new WeightedList<string>();
+            types.Add(AsteroidSpawn.String, 100);
             types.Add(BasicFighterSpawn.String, 100);
             types.Add(SineFighterSpawn.String, 50);
             types.Add(EliteFighterSpawn.String, 25);
@@ -117,7 +118,7 @@ namespace SpaceShooter
 
         public override Texture2D GetTexture(AssetManager assets)
         {
-            return assets.AsteroidTexture;
+            return assets.FighterTexture;
         }
     }
 
@@ -140,7 +141,7 @@ namespace SpaceShooter
 
         public override Texture2D GetTexture(AssetManager assets)
         {
-            return assets.AsteroidTexture;
+            return assets.FighterTexture;
         }
     }
 
@@ -163,7 +164,7 @@ namespace SpaceShooter
 
         public override Texture2D GetTexture(AssetManager assets)
         {
-            return assets.AsteroidTexture;
+            return assets.BomberTexture;
         }
     }
 
@@ -186,7 +187,7 @@ namespace SpaceShooter
 
         public override Texture2D GetTexture(AssetManager assets)
         {
-            return assets.AsteroidTexture;
+            return assets.FighterTexture;
         }
 
     }
@@ -210,7 +211,7 @@ namespace SpaceShooter
 
         public override Texture2D GetTexture(AssetManager assets)
         {
-            return assets.AsteroidTexture;
+            return assets.FighterTexture;
         }
 
     }
@@ -234,7 +235,7 @@ namespace SpaceShooter
 
         public override Texture2D GetTexture(AssetManager assets)
         {
-            return assets.AsteroidTexture;
+            return assets.FighterTexture;
         }
 
     }
@@ -258,7 +259,7 @@ namespace SpaceShooter
 
         public override Texture2D GetTexture(AssetManager assets)
         {
-            return assets.AsteroidTexture;
+            return assets.FighterTexture;
         }
 
     }
@@ -282,7 +283,7 @@ namespace SpaceShooter
 
         public override Texture2D GetTexture(AssetManager assets)
         {
-            return assets.AsteroidTexture;
+            return assets.BomberTexture;
         }
 
     }
@@ -306,7 +307,7 @@ namespace SpaceShooter
 
         public override Texture2D GetTexture(AssetManager assets)
         {
-            return assets.AsteroidTexture;
+            return assets.DroneTexture;
         }
 
     }

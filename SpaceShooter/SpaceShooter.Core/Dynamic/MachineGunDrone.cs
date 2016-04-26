@@ -21,7 +21,7 @@ namespace SpaceShooter.Dynamic
         public override ObjectCategory Category { get { return ObjectCategory.PowerUp; } }
 
         public MachinegunDrone(Level level, Vector2 position, Vector2 velocity, DynamicObject parent)
-            : base(level.Game.Assets.MachineGunDroneTexture, level, position, velocity, durability, Faction.Player)
+            : base(level.Game.Assets.DroneTexture, level, position, velocity, durability, Faction.Player)
         {
             weapon = new Machinegun();
             weapon.MagazineSize = 5;

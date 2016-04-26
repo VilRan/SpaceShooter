@@ -8,9 +8,11 @@ namespace SpaceShooter.Dynamic
     {
         public override ObjectCategory Category { get { return ObjectCategory.Projectile; } }
         public float Rotation { get { return (float)Math.Atan2(Velocity.Y, Velocity.X); } }
+        public override Vector2 AbsoluteVelocity { get { return Velocity + Level.Camera.Velocity; } }
+        public override Vector2 RelativeVelocity { get { return Velocity; } set  { Velocity = value; } }
 
         public Projectile(Texture2D texture, Level level, Vector2 position, Vector2 velocity, float durability, Faction faction)
-            : base(texture, level, position, velocity + level.Camera.Velocity, durability, faction)
+            : base(texture, level, position, velocity, durability, faction)
         {
 
         }

@@ -10,7 +10,7 @@ namespace SpaceShooter.Dynamic.Ships
     public class PlayerShip : Ship
     {
         const float maxSpeed = 16 * TileSize;
-        const float durability = 2000;
+        const float durability = 5000;
         const float collisionDamage = 1000;
         const int score = -100;
 
