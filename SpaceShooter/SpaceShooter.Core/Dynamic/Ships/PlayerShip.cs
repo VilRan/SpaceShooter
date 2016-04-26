@@ -55,7 +55,7 @@ namespace SpaceShooter.Dynamic.Ships
             KeyboardState keyboard = Keyboard.GetState();
 
             TryMove(e);
-            TryFire(e);
+            TryUseWeapon(e);
             TrySwitchWeapon();
 
             if (keyboard.IsKeyDown(Keys.I))
@@ -112,11 +112,13 @@ namespace SpaceShooter.Dynamic.Ships
             Position.Y = MathHelper.Clamp(Position.Y, PlayArea.Top, PlayArea.Bottom);
         }
 
-        private void TryFire(UpdateEventArgs e)
+        private void TryUseWeapon(UpdateEventArgs e)
         {
             activeWeapon.Update(e.GameTime);
             if (Player.Controller.IsControlDown(Action.Fire))
                 activeWeapon.TryFire(new FireEventArgs(Level, Position, new Vector2(1, 0), this));
+            if (Player.Controller.IsControlDown(Action.Reload))
+                activeWeapon.TryReload();
         }
 
         private void TrySwitchWeapon()

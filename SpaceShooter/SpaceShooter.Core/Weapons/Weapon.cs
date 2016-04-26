@@ -60,6 +60,15 @@ namespace SpaceShooter.Weapons
                     firerateTimer += FirerateDelay;
             }
         }
+
+        public void TryReload()
+        {
+            if (MagazineCount < MagazineSize)
+            {
+                MagazineCount = 0;
+                reloadTimer = ReloadDelay;
+            }
+        }
     }
 
     public class FireEventArgs
