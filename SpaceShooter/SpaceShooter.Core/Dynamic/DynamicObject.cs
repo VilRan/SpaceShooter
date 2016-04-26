@@ -9,7 +9,7 @@ namespace SpaceShooter.Dynamic
 {
     public abstract class DynamicObject : GameObject
     {
-        const float hitRadius = 12;
+        const float hitRadius = 16;
 
         public Level Level;
         public Faction Faction = Faction.Enemy;
@@ -22,8 +22,9 @@ namespace SpaceShooter.Dynamic
         protected abstract float CollisionDamage { get; }
         protected virtual Rectangle PlayArea { get { return NormalPlayArea; } }
 
-        public double CurrentDurability { get { return durability.Current; } }
-        public double MaximumDurability { get { return durability.Maximum; } }
+        public float Durability { set { durability.Both = value; } }
+        public float CurrentDurability { get { return durability.Current; } }
+        public float MaximumDurability { get { return durability.Maximum; } set { durability.Maximum = value; } }
         public bool IsRemoving { get { return isRemoving || IsDying; } }
         public bool IsDying { get { return durability.Current <= 0; } }
         public bool IsAlive { get { return !IsDying; } }

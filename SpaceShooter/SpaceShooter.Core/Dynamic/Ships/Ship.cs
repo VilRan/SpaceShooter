@@ -15,7 +15,13 @@ namespace SpaceShooter.Dynamic.Ships
         protected Point HealthbarPosition { get { return (Position + new Vector2(-HealthbarSize.X / 2, HitRadius * 2) - Camera.Position).ToPoint(); } }
 
         public Ship(Texture2D texture, Level level, Vector2 position, float durability, Faction faction)
-            : base(texture, level, position, Vector2.Zero, durability, faction)
+            : this(texture, level, position, Vector2.Zero, durability, faction)
+        {
+
+        }
+
+        public Ship(Texture2D texture, Level level, Vector2 position, Vector2 velocity, float durability, Faction faction)
+            : base(texture, level, position, velocity, durability, faction)
         {
 
         }

@@ -6,20 +6,21 @@ using SpaceShooter.Dynamic.Ships;
 
 namespace SpaceShooter.Dynamic
 {
-    class MachinegunDrone : DynamicObject
+    class MachinegunDrone : Ship
     {
         const float durability = 200;
         const float collisionDamage = 100;        
-        const float rotationSpeed = MathHelper.PiOver2;
-        const float rotationDistance = 100;
+        const float orbitSpeed = MathHelper.PiOver2;
+        const float orbitDistance = 100;
+        const int score = 0;
 
         Weapon weapon;
-        float rotationPhase = 0;
+        float orbitPhase = 0;
         DynamicObject parent;
 
         protected override float CollisionDamage { get { return collisionDamage; } }
-        public override ObjectCategory Category { get { return ObjectCategory.PowerUp; } }
-
+        public override int Score { get { return score; } }
+        
         public MachinegunDrone(Level level, Vector2 position, Vector2 velocity, DynamicObject parent)
             : base(level.Game.Assets.DroneTexture, level, position, velocity, durability, Faction.Player)
         {
@@ -42,10 +43,10 @@ namespace SpaceShooter.Dynamic
                         
             if (parent != null)
             {
-                rotationPhase += rotationSpeed * (float)e.ElapsedSeconds;
+                orbitPhase += orbitSpeed * (float)e.ElapsedSeconds;
                 Matrix parentMatrix = Matrix.CreateTranslation(new Vector3(parent.Position, 0f));
-                Vector2 droneDistance = new Vector2(rotationDistance, 0);
-                Matrix droneMatrix = Matrix.CreateRotationZ(rotationPhase) * parentMatrix;
+                Vector2 droneDistance = new Vector2(orbitDistance, 0);
+                Matrix droneMatrix = Matrix.CreateRotationZ(orbitPhase) * parentMatrix;
                 Vector2 nextPosition = Vector2.Transform(droneDistance, droneMatrix);
                 if (e.ElapsedSeconds != 0)
                     Velocity = (nextPosition - Position) / (float)e.ElapsedSeconds;

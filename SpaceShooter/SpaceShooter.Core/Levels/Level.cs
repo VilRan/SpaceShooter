@@ -99,9 +99,9 @@ namespace SpaceShooter
 
         void OnObjectRemoved(DynamicObject obj)
         {
-            if (obj is EnemyShip)
+            if (obj.Faction != Faction.Player)
             {
-                int enemyCount = Inactive.Where(o => o is EnemyShip).Count() + Objects.Where(o => o is EnemyShip).Count();
+                int enemyCount = Inactive.Where(o => o.Faction != Faction.Player).Count() + Objects.Where(o => o.Faction != Faction.Player).Count();
                 if (enemyCount == 0)
                 {
                     Game.State = new ShopGameState(Game);

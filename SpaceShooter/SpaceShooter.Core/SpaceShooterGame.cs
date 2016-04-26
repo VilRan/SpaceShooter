@@ -146,8 +146,8 @@ namespace SpaceShooter
 
         public async Task OnExit()
         {
-            Task saveScoresTask = Highscores.SaveToFile();
-            Task saveSettingsTask = Settings.SaveToFile();
+            Task saveScoresTask = Task.Run(() => Highscores.SaveToFile());
+            Task saveSettingsTask = Task.Run(() => Settings.SaveToFile());
             await saveScoresTask;
             await saveSettingsTask;
         }
