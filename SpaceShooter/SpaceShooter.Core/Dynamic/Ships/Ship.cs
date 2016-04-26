@@ -65,7 +65,7 @@ namespace SpaceShooter.Dynamic.Ships
             if (minParticles > 0)
             {
                 int maxParticles = minParticles * 2;
-                TimedParticle.Emit(Level, e.Collision.CollisionPosition, Color.White, 0.25, 1.0, 1024, minParticles, maxParticles);
+                TimedParticle.Emit(Level, Assets.ParticleTexture, e.Collision.CollisionPosition, Color.White, 0.25, 1.0, 1024, minParticles, maxParticles);
             }
         }
     }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using SpaceShooter.Dynamic.Ships;
+using SpaceShooter.Particles;
 
 namespace SpaceShooter.Dynamic.PowerUps
 {
@@ -14,6 +16,7 @@ namespace SpaceShooter.Dynamic.PowerUps
         public override void OnCollision(Collision e)
         {
             e.Other.Repair(1000);
+            TimedParticle.Emit(Level, Game.Assets.HealCrossTexture, Position, Color.LightGreen, 0.7, 1 , 200, 10, 20);
         }
     }
 }

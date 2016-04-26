@@ -37,7 +37,7 @@ namespace SpaceShooter.Dynamic
                 if (Velocity.LengthSquared() > maxVelocitySquared)
                     Velocity = direction * maxVelocity;
                 else
-                    TimedParticle.Emit(Level, Position, Color.OrangeRed, 0.25, 0.5, 32, 3, 6);
+                    TimedParticle.Emit(Level, Assets.ParticleTexture, Position, Color.OrangeRed, 0.25, 0.5, 32, 3, 6);
             }
             
 

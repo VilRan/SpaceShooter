@@ -41,7 +41,7 @@ namespace SpaceShooter.Dynamic
                     {
                         Vector2 targetVelocity = direction.Value * speed;
                         Velocity = Vector2.Lerp(Velocity, targetVelocity, 0.03f);
-                        TimedParticle.Emit(Level, Position, Color.OrangeRed, 0.25, 0.5, 32, 3, 6);
+                        TimedParticle.Emit(Level, Assets.ParticleTexture, Position, Color.OrangeRed, 0.25, 0.5, 32, 3, 6);
                         fuel -= e.ElapsedSeconds;
                     }
                 }

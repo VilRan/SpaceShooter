@@ -31,6 +31,7 @@ namespace SpaceShooter.Dynamic
         protected override Color Color { get { return Color.White; } }
         protected SpaceShooterGame Game { get { return Level.Game; } }
         protected ISpaceShooterUI UI { get { return SpaceShooterGame.UI; } }
+        protected AssetManager Assets { get { return Game.Assets; } }
         protected Session Session { get { return Level.Session; } }
         protected Random Random { get { return Game.Random; } }
         protected Camera Camera { get { return Level.Camera; } }

@@ -86,9 +86,9 @@ namespace SpaceShooter.Dynamic.Ships
 
                 if (thrust.X > 0)
                 {
-                    TimedParticle.Emit(Level, Position, Color.White, 0.1, 0.5, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
-                    TimedParticle.Emit(Level, Position, Color.LightBlue, 0.5, 1, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
-                    TimedParticle.Emit(Level, Position, Color.Blue, 0.5, 0.8, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
+                    TimedParticle.Emit(Level, Assets.ParticleTexture, Position, Color.White, 0.1, 0.5, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
+                    TimedParticle.Emit(Level, Assets.ParticleTexture, Position, Color.LightBlue, 0.5, 1, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
+                    TimedParticle.Emit(Level, Assets.ParticleTexture, Position, Color.Blue, 0.5, 0.8, 200, MathHelper.Pi - MathHelper.Pi / 6, MathHelper.Pi + MathHelper.Pi / 6);
                 }
             }
 
