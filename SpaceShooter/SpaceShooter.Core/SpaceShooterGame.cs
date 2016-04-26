@@ -58,6 +58,7 @@ namespace SpaceShooter
             Highscores = new HighscoreCollection();
             Random = new Random();
             Editor = new LevelEditor(this, new LevelBlueprint(10240, InternalResolution.Height));
+            spriteBatch = new SpriteBatch(GraphicsDevice);
             renderTarget = new RenderTarget2D(GraphicsDevice, InternalResolution.Width, InternalResolution.Height);
 
             base.Initialize();
@@ -69,13 +70,11 @@ namespace SpaceShooter
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            Task loadSettingsTask = Task.Run(() => Settings.LoadFromFile());
             Task loadHighscoresTask = Task.Run(() => Highscores.LoadFromFile());
             Assets.LoadAll(Content);
+            Task.WaitAll(loadSettingsTask, loadHighscoresTask);
             Settings.Initialize();
-            loadHighscoresTask.Wait();
 
             State = new MenuGameState(this);
         }

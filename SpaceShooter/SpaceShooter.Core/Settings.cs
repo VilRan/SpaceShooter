@@ -28,8 +28,6 @@ namespace SpaceShooter
         public Settings(SpaceShooterGame game)
         {
             this.game = game;
-            Task loadTask = Task.Run(() => LoadFromFile());
-            Task.WaitAll(loadTask);
         }
 
         public void Initialize()
@@ -37,7 +35,7 @@ namespace SpaceShooter
             MasterVolume = masterVolume;
         }
 
-        async void LoadFromFile()
+        public async void LoadFromFile()
         {
             XmlDocument xmlDocument = null;
             try
