@@ -11,18 +11,20 @@
     <Page.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Linux Biolinum G"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Linux Biolinum G"/>
         </Style>
         <DataTemplate x:Key="ItemGridTemplate" x:DataType="data:InventoryItem">
             <StackPanel Margin="8" Background="#33FFFFFF" Padding="8" Width="160">
-                <TextBlock Text="{x:Bind Weapon.Name}" Foreground="White"/>
-                <TextBlock Text="{x:Bind Price}" Foreground="White"/>
+                <TextBlock Text="{x:Bind Weapon.Name}" Foreground="White" FontFamily="Linux Biolinum G"/>
+                <TextBlock Text="{x:Bind Price}" Foreground="White" FontFamily="Linux Biolinum G"/>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
-    <Grid Background="#FF666666">
+    <Grid Background="#DD666666">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>

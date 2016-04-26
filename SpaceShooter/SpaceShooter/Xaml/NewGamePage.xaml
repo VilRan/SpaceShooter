@@ -9,12 +9,18 @@
     <Page.Resources>
         <Style TargetType="RadioButton">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Linux Biolinum G"/>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Linux Biolinum G"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Linux Biolinum G"/>
         </Style>
     </Page.Resources>
-    <Grid Background="#FF666666" Padding="64,32">
+    <Grid Background="#DD666666" Padding="64,32">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>

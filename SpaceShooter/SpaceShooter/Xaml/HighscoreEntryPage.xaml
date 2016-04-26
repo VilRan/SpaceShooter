@@ -9,16 +9,19 @@
     <Page.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Linux Biolinum G"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Linux Biolinum G"/>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#FF3A3A3A"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Linux Biolinum G"/>
         </Style>
     </Page.Resources>
-    <Grid Background="#FF666666">
+    <Grid Background="#DD666666">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>

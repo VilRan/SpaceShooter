@@ -10,23 +10,27 @@
     <Page.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Linux Biolinum G"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Linux Biolinum G"/>
         </Style>
     </Page.Resources>
-    <Grid Background="#FF666666">
+    <Grid Background="#DD666666">
         <Grid Margin="0,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Highscores" Height="75" FontFamily="Showcard Gothic" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" TextAlignment="Center" Grid.Row="0"/>
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Highscores" Height="75" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" TextAlignment="Center" Grid.Row="0"/>
             <ListView Grid.Row="1" ItemsSource="{x:Bind Highscores}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="Linux Biolinum G"/>
+                        <Setter Property="Foreground" Value="White"/>
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
