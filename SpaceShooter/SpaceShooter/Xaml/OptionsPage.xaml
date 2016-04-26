@@ -32,12 +32,12 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="OptionsTitle" TextWrapping="Wrap" Text="Options" Height="70" FontFamily="Showcard Gothic" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="1" Margin="0,0,0,0" Width="200"/>
+            <TextBlock x:Name="OptionsTitle" TextWrapping="Wrap" Text="Options" Height="70" FontFamily="Showcard Gothic" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="1" Margin="0,0,0,0"/>
             <Button x:Name="button1" Content="Button" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Margin="0,0,0,0" Grid.Row="2" Grid.Column="1"/>
             <Button x:Name="backToMainMenuButton" Content="Back To Main Menu" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Margin="0,0,0,0" Grid.Row="2" Grid.Column="1" Click="backToMainMenuButton_Click"/>
             <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="500" Grid.Row="1" Grid.Column="1">
                 <Slider x:Name="masterVolumeSlider" Header="Master Volume:" Width="200"
-                        Value="{x:Bind MasterVolume, Mode=TwoWay}" Foreground="#FFFBFBFB" ValueChanged="masterVolumeSlider_ValueChanged" RequestedTheme="Dark"/>
+                        Value="{x:Bind MasterVolume, Mode=TwoWay}" Foreground="#FFFBFBFB" RequestedTheme="Dark"/>
                 <Slider x:Name="musicVolumeSlider" Header="Music Volume:" Width="200"
                         Value="{x:Bind MusicVolume, Mode=TwoWay}" RequestedTheme="Dark"/>
                 <Slider x:Name="soundEffectSlider" Header="Sound Effects Volume:" Width="200"
