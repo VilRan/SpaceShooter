@@ -27,29 +27,34 @@ namespace SpaceShooter
 
         public void FindClosestApproach(CircleCollider other, out float timeOfClosestApproach, out bool isCollision)
         {
+            Vector2 relativePosition = Position - other.Position;
+            float distance = Vector2.Dot(relativePosition, relativePosition) - (Radius + other.Radius) * (Radius + other.Radius);
+            if (distance <= 0)
+            {
+                timeOfClosestApproach = 0;
+                isCollision = true;
+            }
+
             Vector2 relativeVelocity = Velocity - other.Velocity;
-            float a = Vector2.Dot(relativeVelocity, relativeVelocity);
-            if (a == 0)
+            float speed = Vector2.Dot(relativeVelocity, relativeVelocity);
+            if (speed == 0)
             {
                 timeOfClosestApproach = float.NaN;
                 isCollision = false;
                 return;
             }
 
-            Vector2 relativePosition = Position - other.Position;
             float b = 2 * Vector2.Dot(relativePosition, relativeVelocity);
-            float c = Vector2.Dot(relativePosition, relativePosition) - (Radius + other.Radius) * (Radius + other.Radius);
-            float discriminant = b * b - 4 * a * c;
-
+            float discriminant = b * b - 4 * speed * distance;
             if (discriminant < 0)
             {
-                timeOfClosestApproach = -b / (2 * a);
+                timeOfClosestApproach = -b / (2 * speed);
                 isCollision = false;
             }
             else
             {
-                float time1 = (-b + (float)Math.Sqrt(discriminant)) / (2 * a);
-                float time2 = (-b - (float)Math.Sqrt(discriminant)) / (2 * a);
+                float time1 = (-b + (float)Math.Sqrt(discriminant)) / (2 * speed);
+                float time2 = (-b - (float)Math.Sqrt(discriminant)) / (2 * speed);
                 timeOfClosestApproach = Math.Min(time1, time2);
 
                 if (timeOfClosestApproach < 0)
