@@ -144,6 +144,7 @@
     <Content Include="Assets\Textures\Particle.xnb" />
     <Content Include="Assets\Textures\Pixel.xnb" />
     <Content Include="Assets\Textures\PlayerShip.png" />
+    <Content Include="Assets\Textures\PowerUp.png" />
     <Content Include="Assets\Textures\RepairKit.png" />
     <Content Include="Assets\Textures\RocketBullet.png" />
     <Content Include="Assets\Textures\Ship.xnb" />

@@ -7,7 +7,7 @@ namespace SpaceShooter.Dynamic.PowerUps
     class DroneControl : PowerUp
     {
         public DroneControl(Level level, Vector2 position, Vector2 velocity)
-            : base(level.Game.Assets.BulletTexture, level, position, velocity)
+            : base(level.Game.Assets.PowerUpTexture, level, position, velocity)
         {
 
         }
