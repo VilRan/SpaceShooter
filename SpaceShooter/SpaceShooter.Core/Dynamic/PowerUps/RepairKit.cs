@@ -6,7 +6,7 @@ namespace SpaceShooter.Dynamic.PowerUps
     class RepairKit : PowerUp
     {
         public RepairKit(Level level, Vector2 position, Vector2 velocity)
-            : base(level.Game.Assets.BulletTexture, level, position, velocity)
+            : base(level.Game.Assets.RepairKitTexture, level, position, velocity)
         {
 
         }

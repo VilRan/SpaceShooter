@@ -121,6 +121,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Logos\SplashScreen2.png" />
     <Content Include="Assets\Music\Boss.wma" />
     <Content Include="Assets\Music\Main.wma" />
     <Content Include="Assets\Music\Relax.wma" />
@@ -131,6 +132,7 @@
     <Content Include="Assets\Textures\Asteroid.xnb" />
     <Content Include="Assets\Textures\Asteroid2.png" />
     <Content Include="Assets\Textures\Bullet.xnb" />
+    <Content Include="Assets\Textures\Drone.png" />
     <Content Include="Assets\Textures\EarthTransparent.png" />
     <Content Include="Assets\Textures\Bomber.png" />
     <Content Include="Assets\Textures\Enemy1.png" />
@@ -138,8 +140,12 @@
     <Content Include="Assets\Textures\Grid.png" />
     <Content Include="Assets\Textures\HealCross.png" />
     <Content Include="Assets\Textures\Laser.png" />
+    <Content Include="Assets\Textures\MachineGunBullet.png" />
     <Content Include="Assets\Textures\Particle.xnb" />
     <Content Include="Assets\Textures\Pixel.xnb" />
+    <Content Include="Assets\Textures\PlayerShip.png" />
+    <Content Include="Assets\Textures\RepairKit.png" />
+    <Content Include="Assets\Textures\RocketBullet.png" />
     <Content Include="Assets\Textures\Ship.xnb" />
     <None Include="Assets\Music\Boss.ogg" />
     <None Include="Assets\Music\Main.ogg" />

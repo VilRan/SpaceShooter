@@ -19,7 +19,7 @@ namespace SpaceShooter.Dynamic
         protected override float CollisionDamage { get { return collisionDamage; } }
         
         public Rocket(Level level, Vector2 position, Vector2 velocity, Faction faction)
-            : base(level.Game.Assets.BulletTexture, level, position, velocity, durability, faction)
+            : base(level.Game.Assets.RocketBulletTexture, level, position, velocity, durability, faction)
         {
 
         }
