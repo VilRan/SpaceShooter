@@ -44,10 +44,8 @@ namespace SpaceShooter.Particles
         public static void Emit(Level level, Vector2 position, Color startColor, double minimumLifespan, double maximumLifespan, float maxSpeed, float minAngle = 0, float maxAngle = MathHelper.TwoPi)
         {
             SpaceShooterGame game = level.Game;
-            Random random = game.Random;
-            double particleLifespan = minimumLifespan + (maximumLifespan - minimumLifespan) * random.NextDouble();
-            TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, position, VectorUtility.CreateRandom(random, maxSpeed, 0, maxAngle, minAngle), startColor, particleLifespan);
-            level.Particles.Add(particle);
+            if (game.Random.NextDouble() < game.Settings.ParticleDensity)
+                emit(level, position, startColor, minimumLifespan, maximumLifespan, maxSpeed, minAngle, maxAngle);
         }
 
         public static void Emit(Level level, Vector2 position, Color startColor, double minimumLifespan, double maximumLifespan, float maxSpeed, int minCount, int maxCount)
@@ -56,7 +54,16 @@ namespace SpaceShooter.Particles
             maxCount = (int)Math.Round(maxCount * level.Game.Settings.ParticleDensity);
             int n = level.Game.Random.Next(minCount, maxCount + 1);
             for (int i = 0; i < n; i++)
-                Emit(level, position, startColor, minimumLifespan, maximumLifespan, maxSpeed);
+                emit(level, position, startColor, minimumLifespan, maximumLifespan, maxSpeed);
+        }
+
+        static void emit(Level level, Vector2 position, Color startColor, double minimumLifespan, double maximumLifespan, float maxSpeed, float minAngle = 0, float maxAngle = MathHelper.TwoPi)
+        {
+            SpaceShooterGame game = level.Game;
+            Random random = game.Random;
+            double particleLifespan = minimumLifespan + (maximumLifespan - minimumLifespan) * random.NextDouble();
+            TimedParticle particle = new TimedParticle(game.Assets.ParticleTexture, position, VectorUtility.CreateRandom(random, maxSpeed, 0, maxAngle, minAngle), startColor, particleLifespan);
+            level.Particles.Add(particle);
         }
     }
 }
