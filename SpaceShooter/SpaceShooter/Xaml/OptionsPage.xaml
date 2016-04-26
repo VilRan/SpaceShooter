@@ -47,6 +47,8 @@
                         Value="{x:Bind MusicVolume, Mode=TwoWay}" RequestedTheme="Dark"/>
                 <Slider x:Name="soundEffectSlider" Header="Sound Effects Volume:" Width="200"
                         Value="{x:Bind SoundVolume, Mode=TwoWay}" RequestedTheme="Dark"/>
+                <Slider x:Name="particleSlider" Header="Particle Density" Width="200"
+                        Value="{x:Bind ParticleDensity, Mode=TwoWay}" RequestedTheme="Dark"/>
                 <ComboBox x:Name="screenModeComboBox" Header="Display Mode:" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="screenModeComboBox_SelectionChanged">
                     <ComboBoxItem x:Name="fullscreenItem" Content="Fullscreen"/>
                     <ComboBoxItem x:Name="windowedItem" Content="Windowed"/>

@@ -19,10 +19,12 @@ namespace SpaceShooter
         float masterVolume = 1;
         float musicVolume = 1;
         float soundVolume = 1;
+        float particleDensity = 1;
 
         public float MasterVolume { get { return masterVolume; } set { masterVolume = value; MusicVolume = musicVolume; SoundVolume = soundVolume; } }
         public float MusicVolume { get { return musicVolume; } set { musicVolume = value; MediaPlayer.Volume = musicVolume * MasterVolume; } }
         public float SoundVolume { get { return soundVolume; } set { soundVolume = value; SoundEffect.MasterVolume = soundVolume * MasterVolume; } }
+        public float ParticleDensity { get { return particleDensity; } set { particleDensity = value; } }
         IPlatformAsync platform { get { return SpaceShooterGame.Platform; } }
 
         public Settings(SpaceShooterGame game)
@@ -64,6 +66,10 @@ namespace SpaceShooter
                         masterVolume = float.Parse(setting.GetAttribute("Master"), CultureInfo.InvariantCulture);
                         musicVolume = float.Parse(setting.GetAttribute("Music"), CultureInfo.InvariantCulture);
                         soundVolume = float.Parse(setting.GetAttribute("Sound"), CultureInfo.InvariantCulture);
+                        break;
+
+                    case "Particles":
+                        particleDensity = float.Parse(setting.GetAttribute("Density"), CultureInfo.InvariantCulture);
                         break;
 
                     case "KeyBindings":
@@ -108,6 +114,12 @@ namespace SpaceShooter
             volume.Attributes.Append(music);
             volume.Attributes.Append(sound);
             settings.AppendChild(volume);
+
+            XmlElement particles = xml.CreateElement("Particles");
+            XmlAttribute density = xml.CreateAttribute("Density");
+            density.Value = "" + ParticleDensity;
+            particles.Attributes.Append(density);
+            settings.AppendChild(particles);
             
             XmlElement keyBindings = xml.CreateElement("KeyBindings");
             foreach (KeyValuePair<string, Controller> controller in Controllers)

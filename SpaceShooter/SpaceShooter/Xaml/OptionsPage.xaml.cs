@@ -21,6 +21,7 @@ namespace SpaceShooter.Xaml
         public double MasterVolume { get { return Settings.MasterVolume * 100; } set { Settings.MasterVolume = (float)value / 100; NotifyPropertyChanged(); } }
         public double MusicVolume { get { return Settings.MusicVolume * 100; } set { Settings.MusicVolume = (float)value / 100; NotifyPropertyChanged(); } }
         public double SoundVolume { get { return Settings.SoundVolume * 100; } set { Settings.SoundVolume = (float)value / 100; NotifyPropertyChanged(); } }
+        public double ParticleDensity { get { return Settings.ParticleDensity * 100; } set { Settings.ParticleDensity = (float)value / 100; NotifyPropertyChanged(); } }
 
         public OptionsPage()
         {

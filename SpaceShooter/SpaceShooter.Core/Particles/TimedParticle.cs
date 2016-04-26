@@ -52,6 +52,8 @@ namespace SpaceShooter.Particles
 
         public static void Emit(Level level, Vector2 position, Color startColor, double minimumLifespan, double maximumLifespan, float maxSpeed, int minCount, int maxCount)
         {
+            minCount = (int)Math.Round(minCount * level.Game.Settings.ParticleDensity);
+            maxCount = (int)Math.Round(maxCount * level.Game.Settings.ParticleDensity);
             int n = level.Game.Random.Next(minCount, maxCount + 1);
             for (int i = 0; i < n; i++)
                 Emit(level, position, startColor, minimumLifespan, maximumLifespan, maxSpeed);

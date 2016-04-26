@@ -2,6 +2,7 @@
 <Settings>
   <Display Mode="Fullscreen"/>
   <Volume Master="1.00" Music="1.00" Sound="1.00"/>
+  <Particles Density="1.00"/>
   
   <KeyBindings>
     
