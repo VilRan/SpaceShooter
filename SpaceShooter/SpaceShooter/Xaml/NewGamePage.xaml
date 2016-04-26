@@ -6,8 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="64,32">
+    <Page.Resources>
+        <Style TargetType="RadioButton">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+    <Grid Background="#FF666666" Padding="64,32">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
@@ -39,7 +46,7 @@
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="15" Grid.RowSpan="2">
                         <RadioButton x:Name="singlePlayerRadioButton" Content="Singleplayer" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Stretch" GroupName="Players" FontSize="18.667" IsChecked="True"/>
                         <RadioButton x:Name="multiPlayerRadioButton" Content="Multiplayer" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Stretch" GroupName="Players" FontSize="18.667"/>
-                        <Button x:Name="newGameButton" Content="Start" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Stretch" Click="newGameButton_Click" Margin="15"/>
+                        <Button x:Name="newGameButton" Content="Start" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Stretch" Click="newGameButton_Click" Margin="15" Foreground="White"/>
                     </StackPanel>
                 </Grid>
                 

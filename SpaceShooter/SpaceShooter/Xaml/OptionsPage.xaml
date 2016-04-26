@@ -6,8 +6,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="Slider">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+    <Grid Background="#FF666666">
         <Grid Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -24,7 +37,7 @@
             <Button x:Name="backToMainMenuButton" Content="Back To Main Menu" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Margin="0,0,0,0" Grid.Row="2" Grid.Column="1" Click="backToMainMenuButton_Click"/>
             <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="500" Grid.Row="1" Grid.Column="1">
                 <Slider x:Name="masterVolumeSlider" Header="Master Volume:" Width="200"
-                        Value="{x:Bind MasterVolume, Mode=TwoWay}"/>
+                        Value="{x:Bind MasterVolume, Mode=TwoWay}" Foreground="#FFFBFBFB"/>
                 <Slider x:Name="musicVolumeSlider" Header="Music Volume:" Width="200"
                         Value="{x:Bind MusicVolume, Mode=TwoWay}"/>
                 <Slider x:Name="soundEffectSlider" Header="Sound Effects Volume:" Width="200"

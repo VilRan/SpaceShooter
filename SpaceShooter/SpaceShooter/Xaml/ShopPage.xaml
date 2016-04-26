@@ -8,7 +8,12 @@
     xmlns:data="using:SpaceShooter"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+    <Grid Background="#FF666666">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
@@ -34,7 +39,7 @@
                 </StackPanel>
             </Grid>
             
-            <GridView x:Name="shop" ItemsSource="{x:Bind Shop.Items}" Margin="32" Grid.Row="1" Grid.Column="1" Background="#FF82CEDE" 
+            <GridView x:Name="shop" ItemsSource="{x:Bind Shop.Items}" Margin="32" Grid.Row="1" Grid.Column="1" Background="#FF3A3A3A" 
                        CanDragItems="True" AllowDrop="True" DragItemsStarting="shop_DragItemsStarting" Drop="shop_Drop" DragOver="items_DragOver">
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="data:InventoryItem">
@@ -46,7 +51,7 @@
                 </GridView.ItemTemplate>
             </GridView>
 
-            <GridView Name="inventory" ItemsSource="{x:Bind Shop.Inventory}" Margin="32" Grid.Row="2" Grid.Column="1" Background="#FF82CEDE" 
+            <GridView Name="inventory" ItemsSource="{x:Bind Shop.Inventory}" Margin="32" Grid.Row="2" Grid.Column="1" Background="#FF3A3A3A" 
                       CanDragItems="True" AllowDrop="True" Drop="inventory_Drop" DragItemsStarting="inventory_DragItemsStarting" DragOver="inventory_DragOver">
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="data:InventoryItem">
@@ -58,7 +63,7 @@
                 </GridView.ItemTemplate>
             </GridView>
 
-            <GridView Name="weapons" ItemsSource="{x:Bind Weapons}" Margin="32" Grid.Row="3" Grid.Column="1" Background="#FF82CEDE" 
+            <GridView Name="weapons" ItemsSource="{x:Bind Weapons}" Margin="32" Grid.Row="3" Grid.Column="1" Background="#FF3A3A3A" 
                       CanDragItems="True" AllowDrop="True" Drop="weapons_Drop" DragItemsStarting="weapons_DragItemsStarting" DragOver="weapons_DragOver">
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="data:InventoryItem">
