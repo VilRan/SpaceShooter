@@ -36,7 +36,7 @@ namespace SpaceShooter.Dynamic
         protected Camera Camera { get { return Level.Camera; } }
         protected CircleCollider Collider { get { return new CircleCollider(Position, AbsoluteVelocity, HitRadius); } }
         protected Rectangle NormalPlayArea {
-            get { return new Rectangle(Level.PlayArea.Left - TileSize, Level.PlayArea.Top - TileSize, Level.PlayArea.Width + TileSize * 2, Level.PlayArea.Height + TileSize * 2); } }
+            get { return new Rectangle(Level.PlayArea.Left - (int)HitRadius, Level.PlayArea.Top - (int)HitRadius, Level.PlayArea.Width + (int)HitRadius * 2, Level.PlayArea.Height + (int)HitRadius * 2); } }
         protected Rectangle ExtendedPlayArea {
             get { return new Rectangle(NormalPlayArea.Left - NormalPlayArea.Width / 2, NormalPlayArea.Top - NormalPlayArea.Height / 2, NormalPlayArea.Width * 2, NormalPlayArea.Height * 2); } }
         protected Rectangle ExtendedVerticalPlayArea {

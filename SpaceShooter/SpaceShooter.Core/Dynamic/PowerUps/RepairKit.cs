@@ -13,7 +13,7 @@ namespace SpaceShooter.Dynamic.PowerUps
 
         public override void OnCollision(Collision e)
         {
-            e.Other.Repair(200);
+            e.Other.Repair(1000);
         }
     }
 }

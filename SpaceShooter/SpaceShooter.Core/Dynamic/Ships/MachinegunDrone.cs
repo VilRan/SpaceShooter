@@ -12,14 +12,17 @@ namespace SpaceShooter.Dynamic
         const float collisionDamage = 100;        
         const float orbitSpeed = MathHelper.PiOver2;
         const float orbitDistance = 100;
+        const float hitRadius = 8;
         const int score = 0;
 
         Weapon weapon;
         float orbitPhase = 0;
         DynamicObject parent;
 
-        protected override float CollisionDamage { get { return collisionDamage; } }
         public override int Score { get { return score; } }
+        public override float HitRadius { get { return hitRadius; } }
+        protected override float CollisionDamage { get { return collisionDamage; } }
+        protected override float Scale { get { return 0.5f; } }
         
         public MachinegunDrone(Level level, Vector2 position, Vector2 velocity, DynamicObject parent)
             : base(level.Game.Assets.DroneTexture, level, position, velocity, durability, Faction.Player)
