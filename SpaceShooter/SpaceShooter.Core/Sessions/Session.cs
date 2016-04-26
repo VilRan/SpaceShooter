@@ -17,6 +17,7 @@ namespace SpaceShooter
             get { return score; }
             set { score = value; App.Current.GamePage.ScoreViewValue = value; }
         }
+        public int LevelNumber { get { return level; } }
         public IEnumerable<Player> PlayersAlive { get { return Players.Where(p => p.Ship.IsAlive); } }
 
         public Session(SpaceShooterGame game, Difficulty difficulty, int numberOfPlayers)
@@ -38,7 +39,7 @@ namespace SpaceShooter
                 player.Ship.Repair(10000);
                 player.Money += 50;
             }
-            ActiveLevel = new Level(this, new LevelBlueprint(16000, 1080, Game.Random, level));
+            ActiveLevel = new Level(this, new LevelBlueprint(16000, 1080, Game.Random, this));
         }
     }
 }

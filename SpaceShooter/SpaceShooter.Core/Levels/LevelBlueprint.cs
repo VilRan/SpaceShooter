@@ -27,26 +27,30 @@ namespace SpaceShooter
             Height = height;
         }
 
-        public LevelBlueprint(int width, int height, Random random, int challengeRating)
+        public LevelBlueprint(int width, int height, Random random, Session session)
             : this(width, height)
         {
             if (width < 5000)
                 throw new Exception("A random level must be at least 5000 pixels wide.");
-            
+
+            int challengeRating = session.LevelNumber;
             WeightedList<string> spawnTypes = Spawn.GetWeightedListOfTypes(challengeRating);
 
             int minX = SpaceShooterGame.InternalResolution.Right;
             int maxX = Width - minX - AssetManager.TileSize * 2;
 
             int casualEnemies = 20 + 20 * challengeRating;
+            casualEnemies *= session.Players.Count;
             for (int i = 0; i < casualEnemies; i++)
                 AddSpawn(Difficulty.Casual, random, minX, maxX, spawnTypes);
 
             int hardcoreEnemies = 20 + 20 * challengeRating;
+            hardcoreEnemies *= session.Players.Count;
             for (int i = 0; i < hardcoreEnemies; i++)
                 AddSpawn(Difficulty.Hardcore, random, minX, maxX, spawnTypes);
 
             int nightmareEnemies = 20 + 20 * challengeRating;
+            nightmareEnemies *= session.Players.Count;
             for (int i = 0; i < nightmareEnemies; i++)
                 AddSpawn(Difficulty.Nightmare, random, minX, maxX, spawnTypes);
         }
