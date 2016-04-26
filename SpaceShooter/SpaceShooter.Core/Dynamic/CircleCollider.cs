@@ -33,13 +33,14 @@ namespace SpaceShooter
             {
                 timeOfClosestApproach = 0;
                 isCollision = true;
+                return;
             }
 
             Vector2 relativeVelocity = Velocity - other.Velocity;
             float speed = Vector2.Dot(relativeVelocity, relativeVelocity);
             if (speed == 0)
             {
-                timeOfClosestApproach = float.NaN;
+                timeOfClosestApproach = 0;
                 isCollision = false;
                 return;
             }
