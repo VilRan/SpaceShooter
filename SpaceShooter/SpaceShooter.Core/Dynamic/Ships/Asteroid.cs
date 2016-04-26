@@ -12,6 +12,7 @@ namespace SpaceShooter.Dynamic.Ships
         const float baseHitRadius = 23;
         const int score = 50;
 
+        Color color;
         float rotationPhase = 0;
         float rotationSpeed = 0;
         float size = 1;
@@ -21,13 +22,17 @@ namespace SpaceShooter.Dynamic.Ships
         protected override float CollisionDamage { get { return baseCollisionDamage * size * size; } }
         protected override float Rotation { get { return rotationPhase; } }
         protected override float Scale { get { return size; } }
-
+        protected override Color Color { get { return color; } }
+        
         public Asteroid(Level level, Vector2 position)
             : base(level.Game.Assets.AsteroidTexture, level, position, baseDurability, Faction.Neutral)
         {
             rotationSpeed = (float)(Random.NextDouble() - Random.NextDouble());
             size += (float)Math.Abs(2 * (Random.NextDouble() - Random.NextDouble()));
             Durability = baseDurability * size * size;
+
+            int brightness = Random.Next(100, 200);
+            color = new Color(brightness, brightness, brightness);
         }
 
         public override void OnUpdate(UpdateEventArgs e)
