@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Collision.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\Durability.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\DynamicObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dynamic\PowerUps\Coin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\PowerUps\DroneControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\PowerUps\PowerUp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dynamic\PowerUps\RepairKit.cs" />

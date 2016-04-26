@@ -11,6 +11,7 @@ namespace SpaceShooter.Dynamic.Ships
     {
         const float durability = 500;
         const double repairKitDropChance = 0.3;
+        const double moneyDropChance = 0.4;
         const double droneControlDropChance = 0.1;
         const float collisionDamage = 100;
 
@@ -44,6 +45,11 @@ namespace SpaceShooter.Dynamic.Ships
             {
                 DroneControl droneControl = new DroneControl(Level, Position, Vector2.Zero);
                 Level.Objects.Add(droneControl);
+            }
+            if (Random.NextDouble() < moneyDropChance)
+            {
+                Coin coins = new Coin(Level, Position, Vector2.Zero);
+                Level.Objects.Add(coins);
             }
         }
     }
