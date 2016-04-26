@@ -79,8 +79,21 @@ namespace SpaceShooter
             }
         }
 
-        public IEnumerable<BackgroundParticle> CloneBackground()
+        public IEnumerable<BackgroundParticle> CloneBackground(Level level)
         {
+            SpaceShooterGame game = level.Game;
+            Random random = game.Random;
+            int maxX = level.PlayArea.Width;
+            int maxY = level.PlayArea.Height;
+            for (int i = 0; i < 1000; i++)
+            {
+                yield return new RepeatingBackgroundParticle(
+                    game.Assets.PixelTexture,
+                    new Vector2(random.Next(maxX), random.Next(maxY)),
+                    (float)random.NextDouble(),
+                    (float)random.NextDouble());
+            }
+
             foreach (BackgroundParticle particle in Background)
             {
                 yield return (BackgroundParticle)particle.Clone();

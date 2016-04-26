@@ -46,17 +46,7 @@ namespace SpaceShooter
             }
             
             Inactive.AddRange(blueprint.SpawnObjects(this));
-            Particles.AddRange(blueprint.CloneBackground());
-
-            Random random = Game.Random;
-            for (int i = 0; i < 1000; i++)
-            {
-                Particles.Add(new RepeatingBackgroundParticle(
-                    Game.Assets.PixelTexture,
-                    new Vector2(random.Next(PlayArea.Width), random.Next(PlayArea.Height)),
-                    (float)random.NextDouble(),
-                    (float)random.NextDouble()));
-            }
+            Particles.AddRange(blueprint.CloneBackground(this));
         }
 
         public void Update(GameTime gameTime)
