@@ -7,7 +7,7 @@ namespace SpaceShooter.Weapons
         const float launchSpeed = 16 * TileSize;
         const int magazineSize = 10;
 
-        public override string Name { get { return "Automatic Rocket Launcher"; } }
+        public override string Name { get { return "Fast Rocket Launcher"; } }
         public override double ReloadDelay { get { return 1.0; } }
         public override double FirerateDelay { get { return 0.2; } }
         public override float ProjectileSpeed { get { return launchSpeed; } }

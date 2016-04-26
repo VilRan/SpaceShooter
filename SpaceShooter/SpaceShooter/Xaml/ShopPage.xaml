@@ -16,7 +16,7 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <DataTemplate x:Key="ItemGridTemplate" x:DataType="data:InventoryItem">
-            <StackPanel Margin="8">
+            <StackPanel Margin="8" Background="#33FFFFFF" Padding="8" Width="160">
                 <TextBlock Text="{x:Bind Weapon.Name}" Foreground="White"/>
                 <TextBlock Text="{x:Bind Price}" Foreground="White"/>
             </StackPanel>
