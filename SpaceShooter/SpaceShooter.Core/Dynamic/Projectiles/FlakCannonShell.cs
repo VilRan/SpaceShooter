@@ -13,7 +13,7 @@ namespace SpaceShooter.Dynamic
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public FlakCannonShell(Level level, Vector2 position, Vector2 velocity)
-            : base(level.Game.Assets.BulletTexture, level, position, velocity, durability, Faction.Player)
+            : base(level.Game.Assets.RocketTexture, level, position, velocity, durability, Faction.Player)
         {
 
         }

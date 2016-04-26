@@ -15,7 +15,7 @@ namespace SpaceShooter.Dynamic
         protected override float CollisionDamage { get { return collisionDamage; } }
 
         public Fragment(Level level, Vector2 position, Vector2 velocity, Faction faction, double lifespan)
-            : base(level.Game.Assets.BulletTexture, level, position, velocity, durability, faction)
+            : base(level.Game.Assets.MachineGunBulletTexture, level, position, velocity, durability, faction)
         {
             Lifespan = lifespan;
         }
