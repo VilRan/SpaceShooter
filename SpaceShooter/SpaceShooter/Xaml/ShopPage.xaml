@@ -12,10 +12,13 @@
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
         <DataTemplate x:Key="ItemGridTemplate" x:DataType="data:InventoryItem">
-            <StackPanel Margin="8">
-                <TextBlock Text="{x:Bind Weapon.Name}"/>
-                <TextBlock Text="{x:Bind Price}"/>
+            <StackPanel Margin="8" Background="#33FFFFFF" Padding="8" Width="160">
+                <TextBlock Text="{x:Bind Weapon.Name}" Foreground="White"/>
+                <TextBlock Text="{x:Bind Price}" Foreground="White"/>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
