@@ -19,7 +19,7 @@ namespace SpaceShooter.Dynamic
         protected override float CollisionDamage { get { return collisionDamage; } }
         
         public Rocket(Level level, Vector2 position, Vector2 velocity, Faction faction)
-            : base(level.Game.Assets.RocketBulletTexture, level, position, velocity, durability, faction)
+            : base(level.Game.Assets.RocketTexture, level, position, velocity, durability, faction)
         {
 
         }
@@ -37,7 +37,7 @@ namespace SpaceShooter.Dynamic
                 if (Velocity.LengthSquared() > maxVelocitySquared)
                     Velocity = direction * maxVelocity;
                 else
-                    TimedParticle.Emit(Level, Position, Color.OrangeRed, 0.25, 0.5, 32);
+                    TimedParticle.Emit(Level, Position, Color.OrangeRed, 0.25, 0.5, 32, 3, 6);
             }
             
 

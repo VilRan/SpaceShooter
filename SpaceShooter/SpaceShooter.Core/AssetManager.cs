@@ -21,7 +21,7 @@ namespace SpaceShooter
         public Texture2D AsteroidTexture { private set; get; }
         public Texture2D BulletTexture { private set; get; }
         public Texture2D MachineGunBulletTexture { private set; get; }
-        public Texture2D RocketBulletTexture { private set; get; }
+        public Texture2D RocketTexture { private set; get; }
         public Texture2D LaserTexture { private set; get; }
         public Texture2D ParticleTexture { private set; get; }
         public Texture2D PixelTexture { private set; get; }
@@ -56,7 +56,7 @@ namespace SpaceShooter
             BomberTexture = content.Load<Texture2D>("Textures/Bomber.png");
             AsteroidTexture = content.Load<Texture2D>("Textures/Asteroid2.png");
             MachineGunBulletTexture = content.Load<Texture2D>("Textures/MachineGunBullet.png");
-            RocketBulletTexture = content.Load<Texture2D>("Textures/RocketBullet.png");
+            RocketTexture = content.Load<Texture2D>("Textures/RocketBullet.png");
             BulletTexture = content.Load<Texture2D>("Textures/Bullet");
             LaserTexture = content.Load<Texture2D>("Textures/Laser.png");
             ParticleTexture = content.Load<Texture2D>("Textures/Particle");
