@@ -48,13 +48,13 @@
                 </StackPanel>
             </Grid>
 
-            <GridView x:Name="shop" ItemsSource="{x:Bind Shop.Items}" ItemTemplate="{StaticResource ItemGridTemplate}" Margin="32" Grid.Row="1" Grid.Column="1" Background="#FF3A3A3A" 
+            <GridView x:Name="shop" ItemsSource="{x:Bind Shop.Items}" ItemTemplate="{StaticResource ItemGridTemplate}" Margin="32" Grid.Row="1" Grid.Column="1" Background="#FF3A3A3A" MinHeight="86"
                        CanDragItems="True" AllowDrop="True" DragItemsStarting="shop_DragItemsStarting" Drop="shop_Drop" DragOver="items_DragOver"/>
 
-            <GridView Name="inventory" ItemsSource="{x:Bind Shop.Inventory}" ItemTemplate="{StaticResource ItemGridTemplate}" Margin="32" Grid.Row="2" Grid.Column="1" Background="#FF3A3A3A" 
+            <GridView Name="inventory" ItemsSource="{x:Bind Shop.Inventory}" ItemTemplate="{StaticResource ItemGridTemplate}" Margin="32" Grid.Row="2" Grid.Column="1" Background="#FF3A3A3A" MinHeight="86"
                       CanDragItems="True" AllowDrop="True" Drop="inventory_Drop" DragItemsStarting="inventory_DragItemsStarting" DragOver="inventory_DragOver"/>
 
-            <GridView Name="weapons" ItemsSource="{x:Bind Weapons}" ItemTemplate="{StaticResource ItemGridTemplate}" Margin="32" Grid.Row="3" Grid.Column="1" Background="#FF3A3A3A" 
+            <GridView Name="weapons" ItemsSource="{x:Bind Weapons}" ItemTemplate="{StaticResource ItemGridTemplate}" Margin="32" Grid.Row="3" Grid.Column="1" Background="#FF3A3A3A" MinHeight="86"
                       CanDragItems="True" AllowDrop="True" Drop="weapons_Drop" DragItemsStarting="weapons_DragItemsStarting" DragOver="weapons_DragOver"/>
 
             <Button x:Name="continueButton" Content="Continue" Grid.Column="2" HorizontalAlignment="Left" Margin="70,32,0,0" Grid.Row="3" VerticalAlignment="Top" Click="continueButton_Click"/>
