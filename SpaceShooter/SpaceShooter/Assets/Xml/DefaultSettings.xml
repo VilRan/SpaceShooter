@@ -62,6 +62,10 @@
         <Key ID="32"/>
         <Key ID="13"/>
       </Action>
+      <Action ID="Reload">
+        <Key ID="96"/>
+        <Key ID="8"/>
+      </Action>
       <Action ID="PreviousWeapon">
         <Key ID="103"/>
       </Action>
@@ -109,6 +113,12 @@
       </Action>
       <Action ID="Fire">
         <Key ID="162"/>
+      </Action>
+      <Action ID="Fire">
+        <Key ID="162"/>
+      </Action>
+      <Action ID="Reload">
+        <Key ID="82"/>
       </Action>
       <Action ID="PreviousWeapon">
         <Key ID="81"/>

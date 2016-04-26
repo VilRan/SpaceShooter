@@ -13,6 +13,7 @@ namespace SpaceShooter
         MoveLeft,
         MoveRight,
         Fire,
+        Reload,
         PreviousWeapon,
         NextWeapon,
         Weapon1,
