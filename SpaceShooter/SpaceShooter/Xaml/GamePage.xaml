@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <SwapChainPanel x:Name="swapChainPanel" >
-        <TextBlock HorizontalAlignment="Right" Margin="0,0,0,0" TextWrapping="Wrap" Text="{x:Bind ScoreViewValue, Mode=OneWay}" VerticalAlignment="Top" Height="30" Width="256" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" Text="{x:Bind ScoreViewValue, Mode=OneWay}" VerticalAlignment="Top" FontSize="32" Foreground="White"/>
     </SwapChainPanel>
 
 </Page>
