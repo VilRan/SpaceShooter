@@ -86,10 +86,14 @@ namespace SpaceShooter
         public IEnumerable<BackgroundParticle> CloneBackground(Level level)
         {
             SpaceShooterGame game = level.Game;
+            Settings settings = game.Settings;
             Random random = game.Random;
+            int minParticles = (int)(500 * settings.ParticleDensity);
+            int maxParticles = (int)(1000 * settings.ParticleDensity);
+            int numberOfParticles = random.Next(minParticles, maxParticles);
             int maxX = level.PlayArea.Width;
             int maxY = level.PlayArea.Height;
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < numberOfParticles; i++)
             {
                 yield return new RepeatingBackgroundParticle(
                     game.Assets.PixelTexture,
