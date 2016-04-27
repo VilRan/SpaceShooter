@@ -21,7 +21,7 @@
             <Setter Property="FontFamily" Value="Linux Biolinum G"/>
         </Style>
     </Page.Resources>
-    <Grid Background="#DD666666">
+    <Grid Background="#DD666666" Padding="32">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
