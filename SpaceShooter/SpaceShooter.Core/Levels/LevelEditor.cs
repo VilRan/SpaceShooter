@@ -116,7 +116,7 @@ namespace SpaceShooter
         async void SaveBlueprint()
         {
             IPlatformFile file = await Platform.PickSaveFileAsync(".xml");
-            await Platform.WriteXmlAsync(file, blueprint.ToXml());
+            await Platform.WriteXmlAsync(file, blueprint.ToXmlDocument());
         }
 
         async void LoadBlueprint()

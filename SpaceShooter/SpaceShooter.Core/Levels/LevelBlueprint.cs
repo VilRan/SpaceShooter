@@ -21,12 +21,24 @@ namespace SpaceShooter
 
         public Rectangle Bounds { get { return new Rectangle(0, 0, Width, Height); } }
 
+        /// <summary>
+        /// Generates a new empty blueprint.
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public LevelBlueprint(int width, int height)
         {
             Width = width;
             Height = height;
         }
 
+        /// <summary>
+        /// Generates a new random level.
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="random"></param>
+        /// <param name="session"></param>
         public LevelBlueprint(int width, int height, Random random, Session session)
             : this(width, height)
         {
@@ -62,6 +74,10 @@ namespace SpaceShooter
             Spawns.Add(spawn);
         }
 
+        /// <summary>
+        /// Generates a blueprint based on a "Level" xml element.
+        /// </summary>
+        /// <param name="xml"></param>
         public LevelBlueprint(XmlElement xml)
             : this(int.Parse(xml.GetAttribute("Width")), int.Parse(xml.GetAttribute("Height")))
         {
@@ -71,6 +87,11 @@ namespace SpaceShooter
             }
         }
 
+        /// <summary>
+        /// Returns all objects matching the current session's difficulty level.
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
         public IEnumerable<DynamicObject> SpawnObjects(Level level)
         {
             Difficulty difficulty = level.Session.Difficulty;
@@ -83,7 +104,12 @@ namespace SpaceShooter
             }
         }
 
-        public IEnumerable<BackgroundParticle> CloneBackground(Level level)
+        /// <summary>
+        /// Returns the static background particles, as well as creating and returning dynamically generated particles.
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        public IEnumerable<BackgroundParticle> CreateBackground(Level level)
         {
             SpaceShooterGame game = level.Game;
             Settings settings = game.Settings;
@@ -108,7 +134,11 @@ namespace SpaceShooter
             }
         }
 
-        public XmlDocument ToXml()
+        /// <summary>
+        /// Stores all relevant data about the blueprint into an XML document.
+        /// </summary>
+        /// <returns></returns>
+        public XmlDocument ToXmlDocument()
         {
             XmlDocument xml = new XmlDocument();
             XmlElement level = xml.CreateElement("Level");

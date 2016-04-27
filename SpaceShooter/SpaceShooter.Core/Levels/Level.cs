@@ -26,6 +26,11 @@ namespace SpaceShooter
         public SpaceShooterGame Game { get { return Session.Game; } }
         public ISpaceShooterUI UI { get { return SpaceShooterGame.UI; } }
 
+        /// <summary>
+        /// Creates a new level for the specified session, based on the specified blueprint.
+        /// </summary>
+        /// <param name="session"></param>
+        /// <param name="blueprint"></param>
         public Level(Session session, LevelBlueprint blueprint)
         {
             Session = session;
@@ -46,9 +51,13 @@ namespace SpaceShooter
             }
             
             Inactive.AddRange(blueprint.SpawnObjects(this));
-            Particles.AddRange(blueprint.CloneBackground(this));
+            Particles.AddRange(blueprint.CreateBackground(this));
         }
 
+        /// <summary>
+        /// Tries to active inactive objects, and then updates all active objects.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             Camera.Update(gameTime, blueprint.Bounds);
@@ -73,6 +82,11 @@ namespace SpaceShooter
             }
         }
 
+        /// <summary>
+        /// Draws all visible objects on the level.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.AnisotropicClamp);
@@ -89,6 +103,11 @@ namespace SpaceShooter
             spriteBatch.End();
         }
 
+        /// <summary>
+        /// Adds the specified player's ship onto the level, making sure to update the ship's Level reference to this one.
+        /// </summary>
+        /// <param name="playerIndex"></param>
+        /// <param name="position"></param>
         void AddPlayer(int playerIndex, Vector2 position)
         {
             Player player = Session.Players[playerIndex];
@@ -97,6 +116,10 @@ namespace SpaceShooter
             Objects.Add(player.Ship);
         }
 
+        /// <summary>
+        /// Currently used for detecting the victory condition and triggering the victory.
+        /// </summary>
+        /// <param name="obj"></param>
         void OnObjectRemoved(DynamicObject obj)
         {
             if (obj.Faction != Faction.Player)
