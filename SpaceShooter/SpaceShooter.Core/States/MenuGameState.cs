@@ -16,11 +16,22 @@ namespace SpaceShooter.States
             backgroundSession.ActiveLevel = new Level(backgroundSession, blueprint);
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            Controller controller = Settings.Controllers["General"];
+            if (controller.IsControlPressed(Action.Editor))
+            {
+                UI.NavigateToGame();
+                Game.State = new EditorGameState(Game);
+            }
+        }
+
         public override void OnActivated()
         {
-            if (MediaPlayer.Queue.ActiveSong != game.Assets.MainMusic)
+            if (MediaPlayer.Queue.ActiveSong != Game.Assets.MainMusic)
             {
-                MediaPlayer.Play(game.Assets.MainMusic);
+                MediaPlayer.Play(Game.Assets.MainMusic);
                 MediaPlayer.IsRepeating = true;
             }
         }

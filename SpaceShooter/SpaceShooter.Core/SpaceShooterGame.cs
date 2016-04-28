@@ -100,13 +100,6 @@ namespace SpaceShooter
                 UI.NavigateToMainMenu();
             if (controller.IsControlPressed(Action.Fullscreen))
                 Platform.ToggleFullscreen();
-            if (controller.IsControlPressed(Action.Pause))
-                IsPaused = !IsPaused;
-            if (controller.IsControlPressed(Action.Editor))
-            {
-                UI.NavigateToGame();
-                State = new EditorGameState(this);
-            }
 
             if (State != null)
                 State.Update(gameTime);
@@ -143,6 +136,10 @@ namespace SpaceShooter
             Session = new Session(this, difficulty, numberOfPlayers);
         }
 
+        /// <summary>
+        /// Game.Exit() fails to call OnExiting for some reason, so this method must be called on exit instead.
+        /// </summary>
+        /// <returns></returns>
         public async Task OnExit()
         {
             Task saveScoresTask = Task.Run(() => Highscores.SaveToFile());

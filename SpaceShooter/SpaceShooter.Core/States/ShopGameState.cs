@@ -14,9 +14,9 @@ namespace SpaceShooter.States
 
         public override void OnActivated()
         {
-            if (MediaPlayer.Queue.ActiveSong != game.Assets.RelaxMusic)
+            if (MediaPlayer.Queue.ActiveSong != Game.Assets.RelaxMusic)
             {
-                MediaPlayer.Play(game.Assets.RelaxMusic);
+                MediaPlayer.Play(Game.Assets.RelaxMusic);
                 MediaPlayer.IsRepeating = true;
             }
         }

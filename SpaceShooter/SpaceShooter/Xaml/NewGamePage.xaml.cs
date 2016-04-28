@@ -23,13 +23,13 @@ namespace SpaceShooter.Xaml
         private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
             Difficulty difficulty = Difficulty.Casual;
-            if ((bool)hardcoreRadioButton.IsChecked)
+            if (hardcoreRadioButton.IsChecked.Value)
                 difficulty = Difficulty.Hardcore;
-            else if ((bool)nightmareRadioButton.IsChecked)
+            else if (nightmareRadioButton.IsChecked.Value)
                 difficulty = Difficulty.Nightmare;
 
             int numberOfPlayers = 1;
-            if ((bool)multiPlayerRadioButton.IsChecked)
+            if (multiPlayerRadioButton.IsChecked.Value)
                 numberOfPlayers = 2;
 
             Game.StartNewSession(difficulty, numberOfPlayers);

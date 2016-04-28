@@ -134,7 +134,7 @@ namespace SpaceShooter
         new public async void Exit()
         {
             await GamePage.Game.OnExit();
-            CoreApplication.Exit();
+            GamePage.Game.Exit();
         }
     }
 }

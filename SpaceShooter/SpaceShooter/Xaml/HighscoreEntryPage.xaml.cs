@@ -1,4 +1,5 @@
 ﻿using SpaceShooter.States;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -27,16 +28,16 @@ namespace SpaceShooter.Xaml
 
         private void saveScoreButton_Click(object sender, RoutedEventArgs e)
         {
-            SaveAndExit();
+            SaveAndLeave();
         }
 
         private void nameBox_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter)
-                SaveAndExit();
+            if (e.Key == VirtualKey.Enter)
+                SaveAndLeave();
         }
 
-        void SaveAndExit()
+        void SaveAndLeave()
         {
             Game.Highscores.Add(new Highscore(nameBox.Text, score));
             GamePage.NavigateTo(new HighscorePage());

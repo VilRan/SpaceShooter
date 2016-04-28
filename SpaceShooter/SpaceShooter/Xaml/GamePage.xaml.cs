@@ -25,23 +25,33 @@ namespace SpaceShooter
 		public GamePage()
         {
             this.InitializeComponent();
-
-			// Create the game.
+            
 			var launchArguments = string.Empty;
             Game = MonoGame.Framework.XamlGame<SpaceShooterGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
         }
 
+        /// <summary>
+        /// Removes any sub-page and unpauses the game.
+        /// </summary>
         public void NavigateTo()
         {
-            Children.Remove(subPage);
-            subPage = null;
+            if (subPage != null)
+            {
+                Children.Remove(subPage);
+                subPage = null;
+            }
             Game.IsPaused = false;
         }
 
+        /// <summary>
+        /// Pauses the game and overlays a new sup-page.
+        /// </summary>
+        /// <param name="page"></param>
         public void NavigateTo(Page page)
         {
             Game.IsPaused = true;
-            Children.Remove(subPage);
+            if (subPage != null)
+                Children.Remove(subPage);
             Children.Add(page);
             subPage = page;
         }

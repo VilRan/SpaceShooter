@@ -6,7 +6,7 @@ namespace SpaceShooter.States
 {
     public class LevelGameState : GameState
     {
-        protected Session Session { get { return game.Session; } }
+        protected Session Session { get { return Game.Session; } }
 
         public LevelGameState(SpaceShooterGame game)
             : base(game)
@@ -16,7 +16,10 @@ namespace SpaceShooter.States
 
         public override void Update(GameTime gameTime)
         {
-            if (!game.IsPaused)
+            Controller controller = Settings.Controllers["General"];
+            if (controller.IsControlPressed(Action.Pause))
+                Game.IsPaused = !Game.IsPaused;
+            if (!Game.IsPaused)
             {
                 Session.ActiveLevel.Update(gameTime);
                 foreach (Player player in Session.Players)
@@ -26,7 +29,7 @@ namespace SpaceShooter.States
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (game.IsPaused)
+            if (Game.IsPaused)
                 Session.ActiveLevel.Draw(new GameTime(), spriteBatch);
             else
                 Session.ActiveLevel.Draw(gameTime, spriteBatch);
@@ -34,9 +37,9 @@ namespace SpaceShooter.States
 
         public override void OnActivated()
         {
-            if (MediaPlayer.Queue.ActiveSong != game.Assets.SomethingMusic)
+            if (MediaPlayer.Queue.ActiveSong != Game.Assets.SomethingMusic)
             {
-                MediaPlayer.Play(game.Assets.SomethingMusic);
+                MediaPlayer.Play(Game.Assets.SomethingMusic);
                 MediaPlayer.IsRepeating = true;
             }
         }

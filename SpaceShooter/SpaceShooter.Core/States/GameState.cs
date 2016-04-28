@@ -5,11 +5,14 @@ namespace SpaceShooter.States
 {
     public abstract class GameState
     {
-        protected readonly SpaceShooterGame game;
+        protected readonly SpaceShooterGame Game;
+
+        protected ISpaceShooterUI UI { get { return SpaceShooterGame.UI; } }
+        protected Settings Settings { get { return Game.Settings; } }
 
         public GameState(SpaceShooterGame game)
         {
-            this.game = game;
+            this.Game = game;
         }
 
         public abstract void Update(GameTime gameTime);
