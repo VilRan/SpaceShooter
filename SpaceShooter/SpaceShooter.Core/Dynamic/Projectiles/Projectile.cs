@@ -19,6 +19,7 @@ namespace SpaceShooter.Dynamic
 
         public override void OnUpdate(UpdateEventArgs e)
         {
+            // TODO: Wall collisions should be detected together with object collisions, so that they can be properly ordered.
             foreach (Wall wall in Level.Walls)
             {
                 float timeOfCollision;

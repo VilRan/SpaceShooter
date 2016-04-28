@@ -68,15 +68,10 @@ namespace SpaceShooter.Dynamic
             if (!PlayArea.Contains(Position))
                 Remove();
         }
-
-        public override void Draw(DrawEventArgs e)
-        {
-            base.Draw(e);
-        }
         
         public virtual void Update(UpdateEventArgs e, int collisionStartIndex)
         {
-            CheckCollisions(e, collisionStartIndex);
+            DetectCollisions(e, collisionStartIndex);
             OnUpdate(e);
         }
 
@@ -91,12 +86,13 @@ namespace SpaceShooter.Dynamic
             OnDamageEffects(e);
         }
 
-        public void CheckCollisions(UpdateEventArgs e, int startIndex)
+        public override GameObject Clone()
         {
-            if (IsDying)
-                return;
+            throw new NotImplementedException();
+        }
 
-            List<Collision> collisions = new List<Collision>();
+        protected virtual IEnumerable<Collision> FindCollisions(UpdateEventArgs e, int startIndex)
+        {
             for (int index = startIndex; index < Level.Objects.Count; index++)
             {
                 DynamicObject other = Level.Objects[index];
@@ -105,19 +101,8 @@ namespace SpaceShooter.Dynamic
 
                 float timeOfCollision;
                 if (Collider.FindCollision(other.Collider, (float)e.ElapsedSeconds, out timeOfCollision))
-                    collisions.Add(new Collision(this, other, timeOfCollision));
+                    yield return new Collision(this, other, timeOfCollision);
             }
-            foreach (Collision collision in collisions.OrderBy(c => c.TimeOfCollision))
-            {
-                collision.Execute();
-                if (IsDying)
-                    break;
-            }
-        }
-
-        public override GameObject Clone()
-        {
-            throw new NotImplementedException();
         }
 
         protected virtual bool CanCollideWith(DynamicObject other)
@@ -186,6 +171,19 @@ namespace SpaceShooter.Dynamic
             if (nearestPlayer != null)
                 return nearestPlayer.Ship;
             return null;
+        }
+
+        void DetectCollisions(UpdateEventArgs e, int startIndex)
+        {
+            if (IsDying)
+                return;
+            IEnumerable<Collision> collisions = FindCollisions(e, startIndex);
+            foreach (Collision collision in collisions.OrderBy(c => c.TimeOfCollision))
+            {
+                collision.Execute();
+                if (IsDying)
+                    break;
+            }
         }
     }
 

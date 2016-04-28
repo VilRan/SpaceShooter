@@ -2,11 +2,8 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-using System;
-using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
-using Windows.Storage;
 
 namespace SpaceShooter
 {

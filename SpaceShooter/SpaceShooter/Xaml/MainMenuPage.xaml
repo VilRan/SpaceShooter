@@ -31,7 +31,7 @@
             <StackPanel Grid.Column="1" Grid.Row="1">
                 <Button x:Name="continueButton" Content="Continue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15" Click="continueButton_Click"/>
                 <Button x:Name="newGameButton" Content="New Game" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15" Click="newGameButton_Click"/>
-                <Button x:Name="scoresButton" Content="High Score" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15" Click="scoresButton_Click"/>
+                <Button x:Name="scoresButton" Content="Highscores" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15" Click="scoresButton_Click"/>
                 <Button x:Name="optionsButton" Content="Options" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15" Click="optionsButton_Click"/>
                 <Button x:Name="exitButton" Content="Quit Game" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15" Click="exitButton_Click"/>
             </StackPanel>
